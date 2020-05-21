@@ -1,0 +1,2352 @@
+{
+    "items": [
+        {
+            "item_name": "Weeds",
+            "item_id": 0
+        },
+        {
+            "item_name": "Stone",
+            "item_id": 2
+        },
+        {
+            "item_name": "Stone",
+            "item_id": 4
+        },
+        {
+            "item_name": "Wild Horseradish",
+            "item_id": 16
+        },
+        {
+            "item_name": "Daffodil",
+            "item_id": 18
+        },
+        {
+            "item_name": "Leek",
+            "item_id": 20
+        },
+        {
+            "item_name": "Dandelion",
+            "item_id": 22
+        },
+        {
+            "item_name": "Parsnip",
+            "item_id": 24
+        },
+        {
+            "item_name": "Lumber",
+            "item_id": 30
+        },
+        {
+            "item_name": "Emerald",
+            "item_id": 60
+        },
+        {
+            "item_name": "Aquamarine",
+            "item_id": 62
+        },
+        {
+            "item_name": "Ruby",
+            "item_id": 64
+        },
+        {
+            "item_name": "Amethyst",
+            "item_id": 66
+        },
+        {
+            "item_name": "Topaz",
+            "item_id": 68
+        },
+        {
+            "item_name": "Jade",
+            "item_id": 70
+        },
+        {
+            "item_name": "Trimmed Lucky Purple Shorts",
+            "item_id": 71
+        },
+        {
+            "item_name": "Diamond",
+            "item_id": 72
+        },
+        {
+            "item_name": "Prismatic Shard",
+            "item_id": 74
+        },
+        {
+            "item_name": "Stone",
+            "item_id": 75
+        },
+        {
+            "item_name": "Stone",
+            "item_id": 76
+        },
+        {
+            "item_name": "Stone",
+            "item_id": 77
+        },
+        {
+            "item_name": "Cave Carrot",
+            "item_id": 78
+        },
+        {
+            "item_name": "Secret Note",
+            "item_id": 79
+        },
+        {
+            "item_name": "Quartz",
+            "item_id": 80
+        },
+        {
+            "item_name": "Fire Quartz",
+            "item_id": 82
+        },
+        {
+            "item_name": "Frozen Tear",
+            "item_id": 84
+        },
+        {
+            "item_name": "Earth Crystal",
+            "item_id": 86
+        },
+        {
+            "item_name": "Coconut",
+            "item_id": 88
+        },
+        {
+            "item_name": "Cactus Fruit",
+            "item_id": 90
+        },
+        {
+            "item_name": "Sap",
+            "item_id": 92
+        },
+        {
+            "item_name": "Torch",
+            "item_id": 93
+        },
+        {
+            "item_name": "Spirit Torch",
+            "item_id": 94
+        },
+        {
+            "item_name": "Dwarf Scroll I",
+            "item_id": 96
+        },
+        {
+            "item_name": "Dwarf Scroll II",
+            "item_id": 97
+        },
+        {
+            "item_name": "Dwarf Scroll III",
+            "item_id": 98
+        },
+        {
+            "item_name": "Dwarf Scroll IV",
+            "item_id": 99
+        },
+        {
+            "item_name": "Chipped Amphora",
+            "item_id": 100
+        },
+        {
+            "item_name": "Arrowhead",
+            "item_id": 101
+        },
+        {
+            "item_name": "Lost Book",
+            "item_id": 102
+        },
+        {
+            "item_name": "Ancient Doll",
+            "item_id": 103
+        },
+        {
+            "item_name": "Elvish Jewelry",
+            "item_id": 104
+        },
+        {
+            "item_name": "Chewing Stick",
+            "item_id": 105
+        },
+        {
+            "item_name": "Ornamental Fan",
+            "item_id": 106
+        },
+        {
+            "item_name": "Dinosaur Egg",
+            "item_id": 107
+        },
+        {
+            "item_name": "Rare Disc",
+            "item_id": 108
+        },
+        {
+            "item_name": "Ancient Sword",
+            "item_id": 109
+        },
+        {
+            "item_name": "Rusty Spoon",
+            "item_id": 110
+        },
+        {
+            "item_name": "Rusty Spur",
+            "item_id": 111
+        },
+        {
+            "item_name": "Rusty Cog",
+            "item_id": 112
+        },
+        {
+            "item_name": "Chicken Statue",
+            "item_id": 113
+        },
+        {
+            "item_name": "Ancient Seed",
+            "item_id": 114
+        },
+        {
+            "item_name": "Prehistoric Tool",
+            "item_id": 115
+        },
+        {
+            "item_name": "Dried Starfish",
+            "item_id": 116
+        },
+        {
+            "item_name": "Anchor",
+            "item_id": 117
+        },
+        {
+            "item_name": "Glass Shards",
+            "item_id": 118
+        },
+        {
+            "item_name": "Bone Flute",
+            "item_id": 119
+        },
+        {
+            "item_name": "Prehistoric Handaxe",
+            "item_id": 120
+        },
+        {
+            "item_name": "Dwarvish Helm",
+            "item_id": 121
+        },
+        {
+            "item_name": "Dwarf Gadget",
+            "item_id": 122
+        },
+        {
+            "item_name": "Ancient Drum",
+            "item_id": 123
+        },
+        {
+            "item_name": "Golden Mask",
+            "item_id": 124
+        },
+        {
+            "item_name": "Golden Relic",
+            "item_id": 125
+        },
+        {
+            "item_name": "Strange Doll",
+            "item_id": 126
+        },
+        {
+            "item_name": "Strange Doll",
+            "item_id": 127
+        },
+        {
+            "item_name": "Pufferfish",
+            "item_id": 128
+        },
+        {
+            "item_name": "Anchovy",
+            "item_id": 129
+        },
+        {
+            "item_name": "Tuna",
+            "item_id": 130
+        },
+        {
+            "item_name": "Sardine",
+            "item_id": 131
+        },
+        {
+            "item_name": "Bream",
+            "item_id": 132
+        },
+        {
+            "item_name": "Largemouth Bass",
+            "item_id": 136
+        },
+        {
+            "item_name": "Smallmouth Bass",
+            "item_id": 137
+        },
+        {
+            "item_name": "Rainbow Trout",
+            "item_id": 138
+        },
+        {
+            "item_name": "Salmon",
+            "item_id": 139
+        },
+        {
+            "item_name": "Walleye",
+            "item_id": 140
+        },
+        {
+            "item_name": "Perch",
+            "item_id": 141
+        },
+        {
+            "item_name": "Carp",
+            "item_id": 142
+        },
+        {
+            "item_name": "Catfish",
+            "item_id": 143
+        },
+        {
+            "item_name": "Pike",
+            "item_id": 144
+        },
+        {
+            "item_name": "Sunfish",
+            "item_id": 145
+        },
+        {
+            "item_name": "Red Mullet",
+            "item_id": 146
+        },
+        {
+            "item_name": "Herring",
+            "item_id": 147
+        },
+        {
+            "item_name": "Eel",
+            "item_id": 148
+        },
+        {
+            "item_name": "Octopus",
+            "item_id": 149
+        },
+        {
+            "item_name": "Red Snapper",
+            "item_id": 150
+        },
+        {
+            "item_name": "Squid",
+            "item_id": 151
+        },
+        {
+            "item_name": "Seaweed",
+            "item_id": 152
+        },
+        {
+            "item_name": "Green Algae",
+            "item_id": 153
+        },
+        {
+            "item_name": "Sea Cucumber",
+            "item_id": 154
+        },
+        {
+            "item_name": "Super Cucumber",
+            "item_id": 155
+        },
+        {
+            "item_name": "Ghostfish",
+            "item_id": 156
+        },
+        {
+            "item_name": "White Algae",
+            "item_id": 157
+        },
+        {
+            "item_name": "Stonefish",
+            "item_id": 158
+        },
+        {
+            "item_name": "Crimsonfish",
+            "item_id": 159
+        },
+        {
+            "item_name": "Angler",
+            "item_id": 160
+        },
+        {
+            "item_name": "Ice Pip",
+            "item_id": 161
+        },
+        {
+            "item_name": "Lava Eel",
+            "item_id": 162
+        },
+        {
+            "item_name": "Legend Fish",
+            "item_id": 163
+        },
+        {
+            "item_name": "Sandfish",
+            "item_id": 164
+        },
+        {
+            "item_name": "Scorpion Carp",
+            "item_id": 165
+        },
+        {
+            "item_name": "Treasure Chest",
+            "item_id": 166
+        },
+        {
+            "item_name": "Joja Cola",
+            "item_id": 167
+        },
+        {
+            "item_name": "Trash",
+            "item_id": 168
+        },
+        {
+            "item_name": "Driftwood",
+            "item_id": 169
+        },
+        {
+            "item_name": "Broken Glasses",
+            "item_id": 170
+        },
+        {
+            "item_name": "Broken CD",
+            "item_id": 171
+        },
+        {
+            "item_name": "Soggy Newspaper",
+            "item_id": 172
+        },
+        {
+            "item_name": "Large Egg",
+            "item_id": 174
+        },
+        {
+            "item_name": "Egg",
+            "item_id": 176
+        },
+        {
+            "item_name": "Hay",
+            "item_id": 178
+        },
+        {
+            "item_name": "Egg",
+            "item_id": 180
+        },
+        {
+            "item_name": "Large Egg",
+            "item_id": 182
+        },
+        {
+            "item_name": "Milk",
+            "item_id": 184
+        },
+        {
+            "item_name": "Large Milk",
+            "item_id": 186
+        },
+        {
+            "item_name": "Green Bean",
+            "item_id": 188
+        },
+        {
+            "item_name": "Cauliflower",
+            "item_id": 190
+        },
+        {
+            "item_name": "Ornate Necklace",
+            "item_id": 191
+        },
+        {
+            "item_name": "Potato",
+            "item_id": 192
+        },
+        {
+            "item_name": "Fried Egg",
+            "item_id": 194
+        },
+        {
+            "item_name": "Omelet",
+            "item_id": 195
+        },
+        {
+            "item_name": "Salad",
+            "item_id": 196
+        },
+        {
+            "item_name": "Cheese Cauliflower",
+            "item_id": 197
+        },
+        {
+            "item_name": "Baked Fish",
+            "item_id": 198
+        },
+        {
+            "item_name": "Parsnip Soup",
+            "item_id": 199
+        },
+        {
+            "item_name": "Vegetable Medley",
+            "item_id": 200
+        },
+        {
+            "item_name": "Complete Breakfast",
+            "item_id": 201
+        },
+        {
+            "item_name": "Fried Calamari",
+            "item_id": 202
+        },
+        {
+            "item_name": "Strange Bun",
+            "item_id": 203
+        },
+        {
+            "item_name": "Lucky Lunch",
+            "item_id": 204
+        },
+        {
+            "item_name": "Fried Mushroom",
+            "item_id": 205
+        },
+        {
+            "item_name": "Pizza",
+            "item_id": 206
+        },
+        {
+            "item_name": "Bean Hotpot",
+            "item_id": 207
+        },
+        {
+            "item_name": "Glazed Yams",
+            "item_id": 208
+        },
+        {
+            "item_name": "Carp Surprise",
+            "item_id": 209
+        },
+        {
+            "item_name": "Hashbrowns",
+            "item_id": 210
+        },
+        {
+            "item_name": "Pancakes",
+            "item_id": 211
+        },
+        {
+            "item_name": "Salmon Dinner",
+            "item_id": 212
+        },
+        {
+            "item_name": "Fish Taco",
+            "item_id": 213
+        },
+        {
+            "item_name": "Crispy Bass",
+            "item_id": 214
+        },
+        {
+            "item_name": "Pepper Poppers",
+            "item_id": 215
+        },
+        {
+            "item_name": "Bread",
+            "item_id": 216
+        },
+        {
+            "item_name": "Tom Kha Soup",
+            "item_id": 218
+        },
+        {
+            "item_name": "Trout Soup",
+            "item_id": 219
+        },
+        {
+            "item_name": "Chocolate Cake",
+            "item_id": 220
+        },
+        {
+            "item_name": "Pink Cake",
+            "item_id": 221
+        },
+        {
+            "item_name": "Rhubarb Pie",
+            "item_id": 222
+        },
+        {
+            "item_name": "Cookie",
+            "item_id": 223
+        },
+        {
+            "item_name": "Spaghetti",
+            "item_id": 224
+        },
+        {
+            "item_name": "Fried Eel",
+            "item_id": 225
+        },
+        {
+            "item_name": "Spicy Eel",
+            "item_id": 226
+        },
+        {
+            "item_name": "Sashimi",
+            "item_id": 227
+        },
+        {
+            "item_name": "Maki Roll",
+            "item_id": 228
+        },
+        {
+            "item_name": "Tortilla",
+            "item_id": 229
+        },
+        {
+            "item_name": "Red Plate",
+            "item_id": 230
+        },
+        {
+            "item_name": "Eggplant Parmesan",
+            "item_id": 231
+        },
+        {
+            "item_name": "Rice Pudding",
+            "item_id": 232
+        },
+        {
+            "item_name": "Ice Cream",
+            "item_id": 233
+        },
+        {
+            "item_name": "Blueberry Tart",
+            "item_id": 234
+        },
+        {
+            "item_name": "Autumn's Bounty",
+            "item_id": 235
+        },
+        {
+            "item_name": "Pumpkin Soup",
+            "item_id": 236
+        },
+        {
+            "item_name": "Super Meal",
+            "item_id": 237
+        },
+        {
+            "item_name": "Cranberry Sauce",
+            "item_id": 238
+        },
+        {
+            "item_name": "Stuffing",
+            "item_id": 239
+        },
+        {
+            "item_name": "Farmer's Lunch",
+            "item_id": 240
+        },
+        {
+            "item_name": "Survival Burger",
+            "item_id": 241
+        },
+        {
+            "item_name": "Dish O' The Sea",
+            "item_id": 242
+        },
+        {
+            "item_name": "Miner's Treat",
+            "item_id": 243
+        },
+        {
+            "item_name": "Roots Platter",
+            "item_id": 244
+        },
+        {
+            "item_name": "Sugar",
+            "item_id": 245
+        },
+        {
+            "item_name": "Wheat Flour",
+            "item_id": 246
+        },
+        {
+            "item_name": "Oil",
+            "item_id": 247
+        },
+        {
+            "item_name": "Garlic",
+            "item_id": 248
+        },
+        {
+            "item_name": "Kale",
+            "item_id": 250
+        },
+        {
+            "item_name": "Tea Sapling",
+            "item_id": 251
+        },
+        {
+            "item_name": "Rhubarb",
+            "item_id": 252
+        },
+        {
+            "item_name": "Triple Shot Espresso",
+            "item_id": 253
+        },
+        {
+            "item_name": "Melon",
+            "item_id": 254
+        },
+        {
+            "item_name": "Tomato",
+            "item_id": 256
+        },
+        {
+            "item_name": "Morel",
+            "item_id": 257
+        },
+        {
+            "item_name": "Blueberry",
+            "item_id": 258
+        },
+        {
+            "item_name": "Fiddlehead Fern",
+            "item_id": 259
+        },
+        {
+            "item_name": "Hot Pepper",
+            "item_id": 260
+        },
+        {
+            "item_name": "Warp Totem: Desert",
+            "item_id": 261
+        },
+        {
+            "item_name": "Wheat",
+            "item_id": 262
+        },
+        {
+            "item_name": "Radish",
+            "item_id": 264
+        },
+        {
+            "item_name": "Seafoam Pudding",
+            "item_id": 265
+        },
+        {
+            "item_name": "Red Cabbage",
+            "item_id": 266
+        },
+        {
+            "item_name": "Flounder",
+            "item_id": 267
+        },
+        {
+            "item_name": "Starfruit",
+            "item_id": 268
+        },
+        {
+            "item_name": "Midnight Carp",
+            "item_id": 269
+        },
+        {
+            "item_name": "Corn",
+            "item_id": 270
+        },
+        {
+            "item_name": "Unmilled Rice",
+            "item_id": 271
+        },
+        {
+            "item_name": "Eggplant",
+            "item_id": 272
+        },
+        {
+            "item_name": "Rice Shoot",
+            "item_id": 273
+        },
+        {
+            "item_name": "Artichoke",
+            "item_id": 274
+        },
+        {
+            "item_name": "Artifact Trove",
+            "item_id": 275
+        },
+        {
+            "item_name": "Pumpkin",
+            "item_id": 276
+        },
+        {
+            "item_name": "Wilted Bouquet",
+            "item_id": 277
+        },
+        {
+            "item_name": "Bok Choy",
+            "item_id": 278
+        },
+        {
+            "item_name": "Magic Rock Candy",
+            "item_id": 279
+        },
+        {
+            "item_name": "Yam",
+            "item_id": 280
+        },
+        {
+            "item_name": "Chanterelle",
+            "item_id": 281
+        },
+        {
+            "item_name": "Cranberries",
+            "item_id": 282
+        },
+        {
+            "item_name": "Holly",
+            "item_id": 283
+        },
+        {
+            "item_name": "Beet",
+            "item_id": 284
+        },
+        {
+            "item_name": "Cherry Bomb",
+            "item_id": 286
+        },
+        {
+            "item_name": "Bomb",
+            "item_id": 287
+        },
+        {
+            "item_name": "Mega Bomb",
+            "item_id": 288
+        },
+        {
+            "item_name": "Stone",
+            "item_id": 290
+        },
+        {
+            "item_name": "Brick Floor",
+            "item_id": 293
+        },
+        {
+            "item_name": "Twig",
+            "item_id": 294
+        },
+        {
+            "item_name": "Twig",
+            "item_id": 295
+        },
+        {
+            "item_name": "Salmonberry",
+            "item_id": 296
+        },
+        {
+            "item_name": "Grass Starter",
+            "item_id": 297
+        },
+        {
+            "item_name": "Hardwood Fence",
+            "item_id": 298
+        },
+        {
+            "item_name": "Amaranth Seeds",
+            "item_id": 299
+        },
+        {
+            "item_name": "Amaranth",
+            "item_id": 300
+        },
+        {
+            "item_name": "Grape Starter",
+            "item_id": 301
+        },
+        {
+            "item_name": "Hops Starter",
+            "item_id": 302
+        },
+        {
+            "item_name": "Pale Ale",
+            "item_id": 303
+        },
+        {
+            "item_name": "Hops",
+            "item_id": 304
+        },
+        {
+            "item_name": "Void Egg",
+            "item_id": 305
+        },
+        {
+            "item_name": "Mayonnaise",
+            "item_id": 306
+        },
+        {
+            "item_name": "Duck Mayonnaise",
+            "item_id": 307
+        },
+        {
+            "item_name": "Void Mayonnaise",
+            "item_id": 308
+        },
+        {
+            "item_name": "Acorn",
+            "item_id": 309
+        },
+        {
+            "item_name": "Maple Seed",
+            "item_id": 310
+        },
+        {
+            "item_name": "Pine Cone",
+            "item_id": 311
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 313
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 314
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 315
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 316
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 317
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 318
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 319
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 320
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 321
+        },
+        {
+            "item_name": "Wood Fence",
+            "item_id": 322
+        },
+        {
+            "item_name": "Stone Fence",
+            "item_id": 323
+        },
+        {
+            "item_name": "Iron Fence",
+            "item_id": 324
+        },
+        {
+            "item_name": "Gate",
+            "item_id": 325
+        },
+        {
+            "item_name": "Dwarvish Translation Guide",
+            "item_id": 326
+        },
+        {
+            "item_name": "Wood Floor",
+            "item_id": 328
+        },
+        {
+            "item_name": "Stone Floor",
+            "item_id": 329
+        },
+        {
+            "item_name": "Clay",
+            "item_id": 330
+        },
+        {
+            "item_name": "Weathered Floor",
+            "item_id": 331
+        },
+        {
+            "item_name": "Crystal Floor",
+            "item_id": 333
+        },
+        {
+            "item_name": "Copper Bar",
+            "item_id": 334
+        },
+        {
+            "item_name": "Iron Bar",
+            "item_id": 335
+        },
+        {
+            "item_name": "Gold Bar",
+            "item_id": 336
+        },
+        {
+            "item_name": "Iridium Bar",
+            "item_id": 337
+        },
+        {
+            "item_name": "Refined Quartz",
+            "item_id": 338
+        },
+        {
+            "item_name": "Honey",
+            "item_id": 340
+        },
+        {
+            "item_name": "Tea Set",
+            "item_id": 341
+        },
+        {
+            "item_name": "Pickles",
+            "item_id": 342
+        },
+        {
+            "item_name": "Stone",
+            "item_id": 343
+        },
+        {
+            "item_name": "Jelly",
+            "item_id": 344
+        },
+        {
+            "item_name": "Beer",
+            "item_id": 346
+        },
+        {
+            "item_name": "Rare Seed",
+            "item_id": 347
+        },
+        {
+            "item_name": "Wine",
+            "item_id": 348
+        },
+        {
+            "item_name": "Energy Tonic",
+            "item_id": 349
+        },
+        {
+            "item_name": "Juice",
+            "item_id": 350
+        },
+        {
+            "item_name": "Muscle Remedy",
+            "item_id": 351
+        },
+        {
+            "item_name": "Basic Fertilizer",
+            "item_id": 368
+        },
+        {
+            "item_name": "Quality Fertilizer",
+            "item_id": 369
+        },
+        {
+            "item_name": "Basic Retaining Soil",
+            "item_id": 370
+        },
+        {
+            "item_name": "Quality Retaining Soil",
+            "item_id": 371
+        },
+        {
+            "item_name": "Clam",
+            "item_id": 372
+        },
+        {
+            "item_name": "Golden Pumpkin",
+            "item_id": 373
+        },
+        {
+            "item_name": "Poppy",
+            "item_id": 376
+        },
+        {
+            "item_name": "Copper Ore",
+            "item_id": 378
+        },
+        {
+            "item_name": "Iron Ore",
+            "item_id": 380
+        },
+        {
+            "item_name": "Coal",
+            "item_id": 382
+        },
+        {
+            "item_name": "Gold Ore",
+            "item_id": 384
+        },
+        {
+            "item_name": "Iridium Ore",
+            "item_id": 386
+        },
+        {
+            "item_name": "Wood",
+            "item_id": 388
+        },
+        {
+            "item_name": "Stone",
+            "item_id": 390
+        },
+        {
+            "item_name": "Nautilus Shell",
+            "item_id": 392
+        },
+        {
+            "item_name": "Coral",
+            "item_id": 393
+        },
+        {
+            "item_name": "Rainbow Shell",
+            "item_id": 394
+        },
+        {
+            "item_name": "Coffee",
+            "item_id": 395
+        },
+        {
+            "item_name": "Spice Berry",
+            "item_id": 396
+        },
+        {
+            "item_name": "Sea Urchin",
+            "item_id": 397
+        },
+        {
+            "item_name": "Grape",
+            "item_id": 398
+        },
+        {
+            "item_name": "Spring Onion",
+            "item_id": 399
+        },
+        {
+            "item_name": "Strawberry",
+            "item_id": 400
+        },
+        {
+            "item_name": "Straw Floor",
+            "item_id": 401
+        },
+        {
+            "item_name": "Sweet Pea",
+            "item_id": 402
+        },
+        {
+            "item_name": "Field Snack",
+            "item_id": 403
+        },
+        {
+            "item_name": "Common Mushroom",
+            "item_id": 404
+        },
+        {
+            "item_name": "Wood Path",
+            "item_id": 405
+        },
+        {
+            "item_name": "Wild Plum",
+            "item_id": 406
+        },
+        {
+            "item_name": "Gravel Path",
+            "item_id": 407
+        },
+        {
+            "item_name": "Hazelnut",
+            "item_id": 408
+        },
+        {
+            "item_name": "Crystal Path",
+            "item_id": 409
+        },
+        {
+            "item_name": "Blackberry",
+            "item_id": 410
+        },
+        {
+            "item_name": "Cobblestone Path",
+            "item_id": 411
+        },
+        {
+            "item_name": "Winter Root",
+            "item_id": 412
+        },
+        {
+            "item_name": "Blue Slime Egg",
+            "item_id": 413
+        },
+        {
+            "item_name": "Crystal Fruit",
+            "item_id": 414
+        },
+        {
+            "item_name": "Stepping Stone Path",
+            "item_id": 415
+        },
+        {
+            "item_name": "Snow Yam",
+            "item_id": 416
+        },
+        {
+            "item_name": "Sweet Gem Berry",
+            "item_id": 417
+        },
+        {
+            "item_name": "Crocus",
+            "item_id": 418
+        },
+        {
+            "item_name": "Vinegar",
+            "item_id": 419
+        },
+        {
+            "item_name": "Red Mushroom",
+            "item_id": 420
+        },
+        {
+            "item_name": "Sunflower",
+            "item_id": 421
+        },
+        {
+            "item_name": "Purple Mushroom",
+            "item_id": 422
+        },
+        {
+            "item_name": "Rice",
+            "item_id": 423
+        },
+        {
+            "item_name": "Cheese",
+            "item_id": 424
+        },
+        {
+            "item_name": "Fairy Seeds",
+            "item_id": 425
+        },
+        {
+            "item_name": "Goat Cheese",
+            "item_id": 426
+        },
+        {
+            "item_name": "Tulip Bulb",
+            "item_id": 427
+        },
+        {
+            "item_name": "Cloth",
+            "item_id": 428
+        },
+        {
+            "item_name": "Jazz Seeds",
+            "item_id": 429
+        },
+        {
+            "item_name": "Truffle",
+            "item_id": 430
+        },
+        {
+            "item_name": "Sunflower Seeds",
+            "item_id": 431
+        },
+        {
+            "item_name": "Truffle Oil",
+            "item_id": 432
+        },
+        {
+            "item_name": "Coffee Bean",
+            "item_id": 433
+        },
+        {
+            "item_name": "Stardrop",
+            "item_id": 434
+        },
+        {
+            "item_name": "Goat Milk",
+            "item_id": 436
+        },
+        {
+            "item_name": "Red Slime Egg",
+            "item_id": 437
+        },
+        {
+            "item_name": "L. Goat Milk",
+            "item_id": 438
+        },
+        {
+            "item_name": "Purple Slime Egg",
+            "item_id": 439
+        },
+        {
+            "item_name": "Wool",
+            "item_id": 440
+        },
+        {
+            "item_name": "Explosive Ammo",
+            "item_id": 441
+        },
+        {
+            "item_name": "Duck Egg",
+            "item_id": 442
+        },
+        {
+            "item_name": "Duck Feather",
+            "item_id": 444
+        },
+        {
+            "item_name": "Caviar",
+            "item_id": 445
+        },
+        {
+            "item_name": "Rabbit's Foot",
+            "item_id": 446
+        },
+        {
+            "item_name": "Aged Roe",
+            "item_id": 447
+        },
+        {
+            "item_name": "Stone Base",
+            "item_id": 449
+        },
+        {
+            "item_name": "Stone",
+            "item_id": 450
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 452
+        },
+        {
+            "item_name": "Poppy Seeds",
+            "item_id": 453
+        },
+        {
+            "item_name": "Ancient Fruit",
+            "item_id": 454
+        },
+        {
+            "item_name": "Spangle Seeds",
+            "item_id": 455
+        },
+        {
+            "item_name": "Algae Soup",
+            "item_id": 456
+        },
+        {
+            "item_name": "Pale Broth",
+            "item_id": 457
+        },
+        {
+            "item_name": "Bouquet",
+            "item_id": 458
+        },
+        {
+            "item_name": "Mead",
+            "item_id": 459
+        },
+        {
+            "item_name": "Mermaid's Pendant",
+            "item_id": 460
+        },
+        {
+            "item_name": "Decorative Pot",
+            "item_id": 461
+        },
+        {
+            "item_name": "Drum Block",
+            "item_id": 463
+        },
+        {
+            "item_name": "Flute Block",
+            "item_id": 464
+        },
+        {
+            "item_name": "Speed-Gro",
+            "item_id": 465
+        },
+        {
+            "item_name": "Deluxe Speed-Gro",
+            "item_id": 466
+        },
+        {
+            "item_name": "Parsnip Seeds",
+            "item_id": 472
+        },
+        {
+            "item_name": "Bean Starter",
+            "item_id": 473
+        },
+        {
+            "item_name": "Cauliflower Seeds",
+            "item_id": 474
+        },
+        {
+            "item_name": "Potato Seeds",
+            "item_id": 475
+        },
+        {
+            "item_name": "Garlic Seeds",
+            "item_id": 476
+        },
+        {
+            "item_name": "Kale Seeds",
+            "item_id": 477
+        },
+        {
+            "item_name": "Rhubarb Seeds",
+            "item_id": 478
+        },
+        {
+            "item_name": "Melon Seeds",
+            "item_id": 479
+        },
+        {
+            "item_name": "Tomato Seeds",
+            "item_id": 480
+        },
+        {
+            "item_name": "Blueberry Seeds",
+            "item_id": 481
+        },
+        {
+            "item_name": "Pepper Seeds",
+            "item_id": 482
+        },
+        {
+            "item_name": "Wheat Seeds",
+            "item_id": 483
+        },
+        {
+            "item_name": "Radish Seeds",
+            "item_id": 484
+        },
+        {
+            "item_name": "Red Cabbage Seeds",
+            "item_id": 485
+        },
+        {
+            "item_name": "Starfruit Seeds",
+            "item_id": 486
+        },
+        {
+            "item_name": "Corn Seeds",
+            "item_id": 487
+        },
+        {
+            "item_name": "Eggplant Seeds",
+            "item_id": 488
+        },
+        {
+            "item_name": "Artichoke Seeds",
+            "item_id": 489
+        },
+        {
+            "item_name": "Pumpkin Seeds",
+            "item_id": 490
+        },
+        {
+            "item_name": "Bok Choy Seeds",
+            "item_id": 491
+        },
+        {
+            "item_name": "Yam Seeds",
+            "item_id": 492
+        },
+        {
+            "item_name": "Cranberry Seeds",
+            "item_id": 493
+        },
+        {
+            "item_name": "Beet Seeds",
+            "item_id": 494
+        },
+        {
+            "item_name": "Spring Seeds",
+            "item_id": 495
+        },
+        {
+            "item_name": "Summer Seeds",
+            "item_id": 496
+        },
+        {
+            "item_name": "Fall Seeds",
+            "item_id": 497
+        },
+        {
+            "item_name": "Winter Seeds",
+            "item_id": 498
+        },
+        {
+            "item_name": "Ancient Seeds",
+            "item_id": 499
+        },
+        {
+            "item_name": "Small Glow Ring",
+            "item_id": 516
+        },
+        {
+            "item_name": "Glow Ring",
+            "item_id": 517
+        },
+        {
+            "item_name": "Small Magnet Ring",
+            "item_id": 518
+        },
+        {
+            "item_name": "Magnet Ring",
+            "item_id": 519
+        },
+        {
+            "item_name": "Slime Charmer Ring",
+            "item_id": 520
+        },
+        {
+            "item_name": "Warrior Ring",
+            "item_id": 521
+        },
+        {
+            "item_name": "Vampire Ring",
+            "item_id": 522
+        },
+        {
+            "item_name": "Savage Ring",
+            "item_id": 523
+        },
+        {
+            "item_name": "Ring of Yoba",
+            "item_id": 524
+        },
+        {
+            "item_name": "Sturdy Ring",
+            "item_id": 525
+        },
+        {
+            "item_name": "Burglar's Ring",
+            "item_id": 526
+        },
+        {
+            "item_name": "Iridium Band",
+            "item_id": 527
+        },
+        {
+            "item_name": "Jukebox Ring",
+            "item_id": 528
+        },
+        {
+            "item_name": "Amethyst Ring",
+            "item_id": 529
+        },
+        {
+            "item_name": "Topaz Ring",
+            "item_id": 530
+        },
+        {
+            "item_name": "Aquamarine Ring",
+            "item_id": 531
+        },
+        {
+            "item_name": "Jade Ring",
+            "item_id": 532
+        },
+        {
+            "item_name": "Emerald Ring",
+            "item_id": 533
+        },
+        {
+            "item_name": "Ruby Ring",
+            "item_id": 534
+        },
+        {
+            "item_name": "Geode",
+            "item_id": 535
+        },
+        {
+            "item_name": "Frozen Geode",
+            "item_id": 536
+        },
+        {
+            "item_name": "Magma Geode",
+            "item_id": 537
+        },
+        {
+            "item_name": "Alamite",
+            "item_id": 538
+        },
+        {
+            "item_name": "Bixite",
+            "item_id": 539
+        },
+        {
+            "item_name": "Baryte",
+            "item_id": 540
+        },
+        {
+            "item_name": "Aerinite",
+            "item_id": 541
+        },
+        {
+            "item_name": "Calcite",
+            "item_id": 542
+        },
+        {
+            "item_name": "Dolomite",
+            "item_id": 543
+        },
+        {
+            "item_name": "Esperite",
+            "item_id": 544
+        },
+        {
+            "item_name": "Fluorapatite",
+            "item_id": 545
+        },
+        {
+            "item_name": "Geminite",
+            "item_id": 546
+        },
+        {
+            "item_name": "Helvite",
+            "item_id": 547
+        },
+        {
+            "item_name": "Jamborite",
+            "item_id": 548
+        },
+        {
+            "item_name": "Jagoite",
+            "item_id": 549
+        },
+        {
+            "item_name": "Kyanite",
+            "item_id": 550
+        },
+        {
+            "item_name": "Lunarite",
+            "item_id": 551
+        },
+        {
+            "item_name": "Malachite",
+            "item_id": 552
+        },
+        {
+            "item_name": "Neptunite",
+            "item_id": 553
+        },
+        {
+            "item_name": "Lemon Stone",
+            "item_id": 554
+        },
+        {
+            "item_name": "Nekoite",
+            "item_id": 555
+        },
+        {
+            "item_name": "Orpiment",
+            "item_id": 556
+        },
+        {
+            "item_name": "Petrified Slime",
+            "item_id": 557
+        },
+        {
+            "item_name": "Thunder Egg",
+            "item_id": 558
+        },
+        {
+            "item_name": "Pyrite",
+            "item_id": 559
+        },
+        {
+            "item_name": "Ocean Stone",
+            "item_id": 560
+        },
+        {
+            "item_name": "Ghost Crystal",
+            "item_id": 561
+        },
+        {
+            "item_name": "Tigerseye",
+            "item_id": 562
+        },
+        {
+            "item_name": "Jasper",
+            "item_id": 563
+        },
+        {
+            "item_name": "Opal",
+            "item_id": 564
+        },
+        {
+            "item_name": "Fire Opal",
+            "item_id": 565
+        },
+        {
+            "item_name": "Celestine",
+            "item_id": 566
+        },
+        {
+            "item_name": "Marble",
+            "item_id": 567
+        },
+        {
+            "item_name": "Sandstone",
+            "item_id": 568
+        },
+        {
+            "item_name": "Granite",
+            "item_id": 569
+        },
+        {
+            "item_name": "Basalt",
+            "item_id": 570
+        },
+        {
+            "item_name": "Limestone",
+            "item_id": 571
+        },
+        {
+            "item_name": "Soapstone",
+            "item_id": 572
+        },
+        {
+            "item_name": "Hematite",
+            "item_id": 573
+        },
+        {
+            "item_name": "Mudstone",
+            "item_id": 574
+        },
+        {
+            "item_name": "Obsidian",
+            "item_id": 575
+        },
+        {
+            "item_name": "Slate",
+            "item_id": 576
+        },
+        {
+            "item_name": "Fairy Stone",
+            "item_id": 577
+        },
+        {
+            "item_name": "Star Shards",
+            "item_id": 578
+        },
+        {
+            "item_name": "Prehistoric Scapula",
+            "item_id": 579
+        },
+        {
+            "item_name": "Prehistoric Tibia",
+            "item_id": 580
+        },
+        {
+            "item_name": "Prehistoric Skull",
+            "item_id": 581
+        },
+        {
+            "item_name": "Skeletal Hand",
+            "item_id": 582
+        },
+        {
+            "item_name": "Prehistoric Rib",
+            "item_id": 583
+        },
+        {
+            "item_name": "Prehistoric Vertebra",
+            "item_id": 584
+        },
+        {
+            "item_name": "Skeletal Tail",
+            "item_id": 585
+        },
+        {
+            "item_name": "Nautilus Fossil",
+            "item_id": 586
+        },
+        {
+            "item_name": "Amphibian Fossil",
+            "item_id": 587
+        },
+        {
+            "item_name": "Palm Fossil",
+            "item_id": 588
+        },
+        {
+            "item_name": "Trilobite",
+            "item_id": 589
+        },
+        {
+            "item_name": "Artifact Spot",
+            "item_id": 590
+        },
+        {
+            "item_name": "Tulip",
+            "item_id": 591
+        },
+        {
+            "item_name": "Summer Spangle",
+            "item_id": 593
+        },
+        {
+            "item_name": "Fairy Rose",
+            "item_id": 595
+        },
+        {
+            "item_name": "Blue Jazz",
+            "item_id": 597
+        },
+        {
+            "item_name": "Sprinkler",
+            "item_id": 599
+        },
+        {
+            "item_name": "Plum Pudding",
+            "item_id": 604
+        },
+        {
+            "item_name": "Artichoke Dip",
+            "item_id": 605
+        },
+        {
+            "item_name": "Stir Fry",
+            "item_id": 606
+        },
+        {
+            "item_name": "Roasted Hazelnuts",
+            "item_id": 607
+        },
+        {
+            "item_name": "Pumpkin Pie",
+            "item_id": 608
+        },
+        {
+            "item_name": "Radish Salad",
+            "item_id": 609
+        },
+        {
+            "item_name": "Fruit Salad",
+            "item_id": 610
+        },
+        {
+            "item_name": "Blackberry Cobbler",
+            "item_id": 611
+        },
+        {
+            "item_name": "Cranberry Candy",
+            "item_id": 612
+        },
+        {
+            "item_name": "Apple",
+            "item_id": 613
+        },
+        {
+            "item_name": "Green Tea",
+            "item_id": 614
+        },
+        {
+            "item_name": "Bruschetta",
+            "item_id": 618
+        },
+        {
+            "item_name": "Quality Sprinkler",
+            "item_id": 621
+        },
+        {
+            "item_name": "Cherry Sapling",
+            "item_id": 628
+        },
+        {
+            "item_name": "Apricot Sapling",
+            "item_id": 629
+        },
+        {
+            "item_name": "Orange Sapling",
+            "item_id": 630
+        },
+        {
+            "item_name": "Peach Sapling",
+            "item_id": 631
+        },
+        {
+            "item_name": "Pomegranate Sapling",
+            "item_id": 632
+        },
+        {
+            "item_name": "Apple Sapling",
+            "item_id": 633
+        },
+        {
+            "item_name": "Apricot",
+            "item_id": 634
+        },
+        {
+            "item_name": "Orange",
+            "item_id": 635
+        },
+        {
+            "item_name": "Peach",
+            "item_id": 636
+        },
+        {
+            "item_name": "Pomegranate",
+            "item_id": 637
+        },
+        {
+            "item_name": "Cherry",
+            "item_id": 638
+        },
+        {
+            "item_name": "Iridium Sprinkler",
+            "item_id": 645
+        },
+        {
+            "item_name": "Coleslaw",
+            "item_id": 648
+        },
+        {
+            "item_name": "Fiddlehead Risotto",
+            "item_id": 649
+        },
+        {
+            "item_name": "Poppyseed Muffin",
+            "item_id": 651
+        },
+        {
+            "item_name": "Stone",
+            "item_id": 668
+        },
+        {
+            "item_name": "Stone",
+            "item_id": 670
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 674
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 675
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 676
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 677
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 678
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 679
+        },
+        {
+            "item_name": "Green Slime Egg",
+            "item_id": 680
+        },
+        {
+            "item_name": "Rain Totem",
+            "item_id": 681
+        },
+        {
+            "item_name": "Mutant Carp",
+            "item_id": 682
+        },
+        {
+            "item_name": "Bug Meat",
+            "item_id": 684
+        },
+        {
+            "item_name": "Bait",
+            "item_id": 685
+        },
+        {
+            "item_name": "Spinner",
+            "item_id": 686
+        },
+        {
+            "item_name": "Dressed Spinner",
+            "item_id": 687
+        },
+        {
+            "item_name": "Warp Totem Farm",
+            "item_id": 688
+        },
+        {
+            "item_name": "Warp Totem Mountains",
+            "item_id": 689
+        },
+        {
+            "item_name": "Warp Totem Beach",
+            "item_id": 690
+        },
+        {
+            "item_name": "Barbed Hook",
+            "item_id": 691
+        },
+        {
+            "item_name": "Lead Bobber",
+            "item_id": 692
+        },
+        {
+            "item_name": "Treasure Hunter",
+            "item_id": 693
+        },
+        {
+            "item_name": "Trap Bobber",
+            "item_id": 694
+        },
+        {
+            "item_name": "Cork Bobber",
+            "item_id": 695
+        },
+        {
+            "item_name": "Sturgeon",
+            "item_id": 698
+        },
+        {
+            "item_name": "Tiger Trout",
+            "item_id": 699
+        },
+        {
+            "item_name": "Bullhead",
+            "item_id": 700
+        },
+        {
+            "item_name": "Tilapia",
+            "item_id": 701
+        },
+        {
+            "item_name": "Chub",
+            "item_id": 702
+        },
+        {
+            "item_name": "Magnet",
+            "item_id": 703
+        },
+        {
+            "item_name": "Dorado",
+            "item_id": 704
+        },
+        {
+            "item_name": "Albacore",
+            "item_id": 705
+        },
+        {
+            "item_name": "Shad",
+            "item_id": 706
+        },
+        {
+            "item_name": "Lingcod",
+            "item_id": 707
+        },
+        {
+            "item_name": "Halibut",
+            "item_id": 708
+        },
+        {
+            "item_name": "Hardwood",
+            "item_id": 709
+        },
+        {
+            "item_name": "Crab Pot",
+            "item_id": 710
+        },
+        {
+            "item_name": "Lobster",
+            "item_id": 715
+        },
+        {
+            "item_name": "Crayfish",
+            "item_id": 716
+        },
+        {
+            "item_name": "Crab",
+            "item_id": 717
+        },
+        {
+            "item_name": "Cockle",
+            "item_id": 718
+        },
+        {
+            "item_name": "Mussel",
+            "item_id": 719
+        },
+        {
+            "item_name": "Shrimp",
+            "item_id": 720
+        },
+        {
+            "item_name": "Snail",
+            "item_id": 721
+        },
+        {
+            "item_name": "Periwinkle",
+            "item_id": 722
+        },
+        {
+            "item_name": "Oyster",
+            "item_id": 723
+        },
+        {
+            "item_name": "Maple Syrup",
+            "item_id": 724
+        },
+        {
+            "item_name": "Oak Resin",
+            "item_id": 725
+        },
+        {
+            "item_name": "Pine Tar",
+            "item_id": 726
+        },
+        {
+            "item_name": "Chowder",
+            "item_id": 727
+        },
+        {
+            "item_name": "Fish Stew",
+            "item_id": 728
+        },
+        {
+            "item_name": "Escargot",
+            "item_id": 729
+        },
+        {
+            "item_name": "Lobster Bisque",
+            "item_id": 730
+        },
+        {
+            "item_name": "Maple Bar",
+            "item_id": 731
+        },
+        {
+            "item_name": "Crab Cakes",
+            "item_id": 732
+        },
+        {
+            "item_name": "Shrimp Cocktail",
+            "item_id": 733
+        },
+        {
+            "item_name": "Woodskip",
+            "item_id": 734
+        },
+        {
+            "item_name": "Strawberry Seeds",
+            "item_id": 745
+        },
+        {
+            "item_name": "Jack-O-Lantern",
+            "item_id": 746
+        },
+        {
+            "item_name": "Rotten Plant",
+            "item_id": 747
+        },
+        {
+            "item_name": "Rotten Plant",
+            "item_id": 748
+        },
+        {
+            "item_name": "Omni Geode",
+            "item_id": 749
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 750
+        },
+        {
+            "item_name": "Stone",
+            "item_id": 751
+        },
+        {
+            "item_name": "Stone",
+            "item_id": 760
+        },
+        {
+            "item_name": "Stone",
+            "item_id": 762
+        },
+        {
+            "item_name": "Stone",
+            "item_id": 764
+        },
+        {
+            "item_name": "Stone",
+            "item_id": 765
+        },
+        {
+            "item_name": "Slime",
+            "item_id": 766
+        },
+        {
+            "item_name": "Bat Wing",
+            "item_id": 767
+        },
+        {
+            "item_name": "Solar Essence",
+            "item_id": 768
+        },
+        {
+            "item_name": "Void Essence",
+            "item_id": 769
+        },
+        {
+            "item_name": "Mixed Seeds",
+            "item_id": 770
+        },
+        {
+            "item_name": "Fiber",
+            "item_id": 771
+        },
+        {
+            "item_name": "Oil of Garlic",
+            "item_id": 772
+        },
+        {
+            "item_name": "Life Elixir",
+            "item_id": 773
+        },
+        {
+            "item_name": "Wild Bait",
+            "item_id": 774
+        },
+        {
+            "item_name": "Glacierfish",
+            "item_id": 775
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 784
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 785
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 786
+        },
+        {
+            "item_name": "Battery Pack",
+            "item_id": 787
+        },
+        {
+            "item_name": "Lost Axe",
+            "item_id": 788
+        },
+        {
+            "item_name": "Lucky Purple Shorts",
+            "item_id": 789
+        },
+        {
+            "item_name": "Berry Basket",
+            "item_id": 790
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 792
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 793
+        },
+        {
+            "item_name": "Weeds",
+            "item_id": 794
+        },
+        {
+            "item_name": "Void Salmon",
+            "item_id": 795
+        },
+        {
+            "item_name": "Slimejack",
+            "item_id": 796
+        },
+        {
+            "item_name": "Pearl",
+            "item_id": 797
+        },
+        {
+            "item_name": "Midnight Squid",
+            "item_id": 798
+        },
+        {
+            "item_name": "Spook Fish",
+            "item_id": 799
+        },
+        {
+            "item_name": "Blobfish",
+            "item_id": 800
+        },
+        {
+            "item_name": "Wedding Ring",
+            "item_id": 801
+        },
+        {
+            "item_name": "Cactus Seeds",
+            "item_id": 802
+        },
+        {
+            "item_name": "Iridium Milk",
+            "item_id": 803
+        },
+        {
+            "item_name": "Tree Fertilizer",
+            "item_id": 805
+        },
+        {
+            "item_name": "Dinosaur Mayonnaise",
+            "item_id": 807
+        },
+        {
+            "item_name": "Void Ghost Pendant",
+            "item_id": 808
+        },
+        {
+            "item_name": "Movie Ticket",
+            "item_id": 809
+        },
+        {
+            "item_name": "Crabshell Ring",
+            "item_id": 810
+        },
+        {
+            "item_name": "Napalm Ring",
+            "item_id": 811
+        },
+        {
+            "item_name": "Roe",
+            "item_id": 812
+        },
+        {
+            "item_name": "Squid Ink",
+            "item_id": 814
+        },
+        {
+            "item_name": "Tea Leaves",
+            "item_id": 815
+        }
+    ]
+}
