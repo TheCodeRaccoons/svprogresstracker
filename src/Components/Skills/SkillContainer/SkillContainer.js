@@ -12,8 +12,8 @@ class Skills extends React.Component {
                     <h1>{GetSkillName(this.props.index)}</h1>
                     <span>
                         Current XP: {this.props.xp} <br />
-                        Level Up in: {(GetLevelInfo(this.props.xp, this.props.levelList.Levels) - this.props.xp)}<br />
-                        Max level in: {15000 - this.props.xp}
+                        Level Up in: {(GetLevelInfo(this.props.xp, this.props.levelList.Levels))}<br />
+                        Max level in: { (this.props.xp > 15000) ? 0 : 15000 - this.props.xp}
                     </span>
                     <img src={this.props.skillImg} alt={this.props.index} ></img>
             </div>

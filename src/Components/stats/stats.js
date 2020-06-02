@@ -1,9 +1,7 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Skills from '../Skills/Skills'
-import Achievements from '../Achievements/Achievements' 
-import itemList from '../Utility/items.json';
-import {GetItemNames, GetArtifactNames} from '../Utility/Utility';
+import Achievements from '../Achievements/Achievements'
 
 import Junimo1a from '../../Media/Junimo1.png'
 import Junimo2a from '../../Media/Junimo2.png'
@@ -36,17 +34,17 @@ const playerStats = this.props.farmhands.map((item, i) =>(
             <img src={Rope} alt="" ></img>
             <img src={Rope} alt="" ></img>
         </div>
-        <Achievements recipesCooked={item.recipesCooked} ></Achievements>
+        <Achievements 
+        recipesCooked={item.recipesCooked}
+        itemsCrafted={item.itemsCrafted}  
+        ></Achievements>
     </section> 
 </TabPanel>) 
 )
 
         return ( 
-            <div className="file-container"> 
-                <div className="farmName"><h2>Farm: {this.props.playerData.farmName}</h2></div>
-
-                {console.log(GetArtifactNames(this.props.playerData.artifactsFound, itemList.items))}
-                {console.log(GetItemNames(this.props.playerData.ShippedItems, itemList.items))}
+            <div className="file-container">  
+                <div className="farmName"><h2>Farm: {this.props.playerData.farmName}</h2></div> 
                 <section className="scroller"> 
                 <Tabs>
                     <TabList> 
@@ -60,7 +58,11 @@ const playerStats = this.props.farmhands.map((item, i) =>(
                             <img src={Rope} alt="" ></img>
                             <img src={Rope} alt="" ></img>
                         </div>
-                        <Achievements recipesCooked={this.props.playerData.recipesCooked} ></Achievements>
+                        {console.log("real")}
+                        <Achievements 
+                        recipesCooked={this.props.playerData.recipesCooked} 
+                        itemsCrafted={this.props.playerData.itemsCrafted}  
+                        ></Achievements>
                         </section>
                     </TabPanel>
                         {playerStats}

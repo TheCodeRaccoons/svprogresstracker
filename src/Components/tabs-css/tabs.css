@@ -30,8 +30,8 @@
 .react-tabs__tab--selected { 
     color: black;
     border-radius: 5px 5px 0 0;
-    padding-bottom: 15px;
-    margin-bottom: -15px;
+    padding-bottom: 10px;
+    margin-bottom: -10px; 
 }
 .react-tabs__tab img{
     width: 25px;

@@ -1,3 +1,5 @@
+const Dishes = require('../Utility/Dishes.json');
+
 const GetProfession = (id) =>{
     let prof = ""; 
     switch(id){
@@ -106,7 +108,7 @@ const GetLevelInfo = (xp, levelList) =>{
     catch(err){ 
         val = null
     }
-    return val
+    return (val) ? val - xp : "Maxed";  
 } 
 const GetArtifactNames = (arr, itemList) =>{
     let data = [] 
@@ -191,6 +193,41 @@ const GetQuests = (arr) =>{
         }
     } 
     return data;
+}  
+const ValidateKnown = (k, name) => {
+    if(Array.isArray(k)){
+        let known = k.find(item => item.key.string._text === name) 
+        return known ? true : false
+    }
+}
+const GetCooked = (c, id) => { 
+    let cooked = ""; 
+    let x = 0
+    if(Array.isArray(c.item)){
+        let i = c.item.find(item => parseInt(item.key.int._text) === id) 
+        cooked = (i !== undefined) ? parseInt(i.value.int._text) : 0  
+    }
+    else{
+        if(!c.hasOwnProperty("item")){ 
+        }else{
+            cooked = (parseInt(c.item.key.int._text) === id) ? parseInt(c.item.value.int._text) : 0 
+        }
+    }
+    return cooked;
+}
+const GetCookingData = (cooked, known) =>{
+    let data = [];  
+    console.log("REEEE")
+    Dishes.Dishes.forEach(item => {
+        let d = {
+            name: item.Name,
+            id: item.id,
+            image: GetImages(item.Name),
+            times: (ValidateKnown(known, item.Name)) ? GetCooked(cooked, item.id) : undefined
+        }
+        data = [...data, d]
+    })
+    return data 
 } 
 const GetProfessionData = (arr) =>{
     let data = []; 
@@ -250,7 +287,7 @@ const parseData = (data) => {
     /* Get minerals found */
     let mineralsFound   = GetArrayData(data.mineralsFound.item) 
     /* Get recipes cooked */
-    let recipesCooked   = GetArrayData(data.recipesCooked.item) 
+    let recipesCooked   = GetCookingData(data.recipesCooked, data.cookingRecipes.item) 
     /* Get fish caught */
     let fishCaught      = GetArrayDataTimeless(data.fishCaught.item) 
     /* Get artifacts found */
@@ -291,29 +328,58 @@ const GetSkillName = (skillId) =>{
         default:
             return "Unknown" 
     }
+} 
+const GetImages = (name) => {
+    if(name === "Wild Seeds (Sp)"){
+        return "Spring_Seeds"
+    }
+    if(name === "Wild Seeds (Su)"){ 
+        return "Summer_Seeds"
+    }
+    if(name === "Wild Seeds (Fa)"){
+        return "Fall_Seeds"
+    }
+    if(name === "Wild Seeds (Wi)") {
+        return "Winter_Seeds"
+    }
+    if(name === "Transmute (Fe)"){
+        return "Iron_Bar"
+    }
+    if(name === "Transmute (Au)"){
+        return "Gold_Bar"
+    }
+    if(name === "Oil Of Garlic"){
+        return "Oil_of_Garlic"
+    }
+    return name.split(" ").join("_").replace("'","").replace(":", "")
 }
-const getCookedDishes = (dishes, all) => {
+
+const GetKnownRecipes = (recipes, all) => {
     let data = [] 
-    if(Array.isArray(dishes)){
+    if(Array.isArray(recipes)){
+        console.log("PLayer's",recipes) 
+        console.log("All",all)
         data = all.map((item) => {
             return {
-                Name: item.Name,
-                times: dishes.find( d => parseInt(d.item) === item.id),
-                img: item.img
+                Name: item,
+                img: GetImages(item),
+                times: recipes.find( i => (i.item === item))
             }
         })
+        
     }
-    else if(!dishes){
+    else if(!recipes){
         return data
     }
     else{ 
+        /*
         data = all.map((item) => {
             return {
                 item: item.Name,
                 times: (parseInt(dishes.item) === item.id) ? dishes : undefined,
                 img: item.img
             }
-        })
+        })*/
     }
     return data 
 }
@@ -328,5 +394,5 @@ exports.GetFarmHands = GetFarmHands;
 exports.GetDetailedInfo = GetDetailedInfo; 
 exports.GetSkillName = GetSkillName;
 exports.GetArtifactNames = GetArtifactNames;
-exports.GetLevelInfo = GetLevelInfo;
-exports.getCookedDishes = getCookedDishes;
+exports.GetLevelInfo = GetLevelInfo; 
+exports.GetKnownRecipes = GetKnownRecipes

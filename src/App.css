@@ -310,22 +310,19 @@ html{
   width: 100%;
   height: 100%; 
   margin-top: -13px;
-  background: url('./Media/Windows/Window5.png') no-repeat center center; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: 100% 100%;
+  padding: 2.5%; 
+  border-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARwAAACOCAYAAADjLbccAAAAAXNSR0IArs4c6QAAAt1JREFUeJzt1jFq23cYx+FXsbwUQzs2FDzZmjv2BF1iTM8SyJIDdCn0MEZdchTJkyHYBzBZjFEnudCUdmk+AuV5JvH+NXynD7/Fdxc/ze7s+7l62uwG4AtYn64Wi8eHWe5jc315NzMzF6uTA08Djsnt5nlmO7v12Wrxah+bm+35oXcBR+hmez7Xl3dz9bTZLffH/QvndvN8sGHA8Xn75uPMnMxsZ16Cc7E6md//+OGAs4Bjs3/I7C3//offfv05GwMcr3fvP3x2+yw4MzOvX3/zxccAx+f+/tO/fn8V7QC+Av/1WBEcICM4QEZwgIzgABnBATKCA2QEB8gIDpARHCAjOEBGcICM4AAZwQEyggNkBAfICA6QERwgIzhARnCAjOAAGcEBMoIDZAQHyAgOkBEcICM4QEZwgIzgABnBATKCA2QEB8gIDpARHCAjOEBGcICM4AAZwQEyggNkBAfICA6QERwgIzhARnCAjOAAGcEBMoIDZAQHyAgOkBEcICM4QEZwgIzgABnBATKCA2QEB8gIDpARHCAjOEBGcICM4AAZwQEyggNkBAfICA6QERwgIzhARnCAjOAAGcEBMoIDZAQHyAgOkBEcICM4QEZwgIzgABnBATKCA2QEB8gIDpARHCAjOEBGcICM4AAZwQEyggNkBAfICA6QERwgIzhARnCAjOAAGcEBMoIDZAQHyAgOkBEcICM4QEZwgIzgABnBATKCA2QEB8gIDpARHCAjOEBGcICM4AAZwQEyggNkBAfICA6QERwgIzhARnCAjOAAGcEBMoIDZAQHyAgOkBEcICM4QEZwgIzgABnBATKCA2QEB8gIDpARHCCz/Kfj/f2negfwFXgJzu3mea4v7+bd+w+H3AMcmdvN88vvl+DcbM/n+vJu3r75eJBRwPG53fzVlpmZxbc//jJXT5vd/gDwf7vZns/6dLVYLh4fZn22Wsx2doceBRyn9elqsXh8mD8BJHJTYOepXaYAAAAASUVORK5CYII=) 16 16 16 16 fill stretch;
+  border-style: solid;
+  image-rendering: pixelated;
+  border-width: 35px;
+  overflow: hidden;
 }
 .achievement-container{
   width: 90%;
   min-height: 450px;
-  height: auto;  
-  background: url('./Media/Windows/Window5.png') no-repeat center center; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: 100% 100%;
+  height: auto;    
 }
+
 .skill-info{ 
   padding: 30px 0;
   width: 100%;
@@ -387,8 +384,11 @@ html{
   margin-bottom: -70px;
 }
 
-.cooked{
+.done{
   filter: grayscale(0) brightness(1) !important;
+}
+.known{ 
+  filter: grayscale(1) brightness(0.5) !important;
 }
 
 /*Small Screens*/
@@ -425,22 +425,20 @@ html{
   width: 40px;
 }
 
-
 /*Achievement containers*/
-.food-container{
-  padding: 2.5%;
-  width: 95%;
-  height: 95%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
+.progress-container{
+  padding: 2.5%; 
+  border-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARwAAACOCAYAAADjLbccAAAAAXNSR0IArs4c6QAAAt1JREFUeJzt1jFq23cYx+FXsbwUQzs2FDzZmjv2BF1iTM8SyJIDdCn0MEZdchTJkyHYBzBZjFEnudCUdmk+AuV5JvH+NXynD7/Fdxc/ze7s+7l62uwG4AtYn64Wi8eHWe5jc315NzMzF6uTA08Djsnt5nlmO7v12Wrxah+bm+35oXcBR+hmez7Xl3dz9bTZLffH/QvndvN8sGHA8Xn75uPMnMxsZ16Cc7E6md//+OGAs4Bjs3/I7C3//offfv05GwMcr3fvP3x2+yw4MzOvX3/zxccAx+f+/tO/fn8V7QC+Av/1WBEcICM4QEZwgIzgABnBATKCA2QEB8gIDpARHCAjOEBGcICM4AAZwQEyggNkBAfICA6QERwgIzhARnCAjOAAGcEBMoIDZAQHyAgOkBEcICM4QEZwgIzgABnBATKCA2QEB8gIDpARHCAjOEBGcICM4AAZwQEyggNkBAfICA6QERwgIzhARnCAjOAAGcEBMoIDZAQHyAgOkBEcICM4QEZwgIzgABnBATKCA2QEB8gIDpARHCAjOEBGcICM4AAZwQEyggNkBAfICA6QERwgIzhARnCAjOAAGcEBMoIDZAQHyAgOkBEcICM4QEZwgIzgABnBATKCA2QEB8gIDpARHCAjOEBGcICM4AAZwQEyggNkBAfICA6QERwgIzhARnCAjOAAGcEBMoIDZAQHyAgOkBEcICM4QEZwgIzgABnBATKCA2QEB8gIDpARHCAjOEBGcICM4AAZwQEyggNkBAfICA6QERwgIzhARnCAjOAAGcEBMoIDZAQHyAgOkBEcICM4QEZwgIzgABnBATKCA2QEB8gIDpARHCCz/Kfj/f2negfwFXgJzu3mea4v7+bd+w+H3AMcmdvN88vvl+DcbM/n+vJu3r75eJBRwPG53fzVlpmZxbc//jJXT5vd/gDwf7vZns/6dLVYLh4fZn22Wsx2doceBRyn9elqsXh8mD8BJHJTYOepXaYAAAAASUVORK5CYII=) 16 16 16 16 fill stretch;
+  border-style: solid;
+  image-rendering: pixelated;
+  border-width: 35px;
+  overflow: hidden;
 } 
 
-.food-container img{ 
+.progress-container img{ 
   padding: 5px;
   width: 35px;
-  filter: grayscale(1) brightness(0.3);
+  filter: grayscale(1) brightness(0);
   cursor: pointer;
 }
 /*Mid Screens*/

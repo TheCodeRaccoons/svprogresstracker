@@ -1,8 +1,7 @@
 import React from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'; 
-//import itemList from '../Utility/items.json';
-//import {GetItemNames, GetArtifactNames} from '../Utility/Utility'; 
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';  
 import Food from '../AchieveTabs/Food'
+import Crafting from '../AchieveTabs/Crafting'
 import AchCook from '../../Media/Achievements/AchCook.png'
 import AchCraft from '../../Media/Achievements/AchCraft.png'
 import AchCrops from '../../Media/Achievements/AchCrops.png'
@@ -39,16 +38,18 @@ class Achievements extends React.Component {
             <img className="star" alt="star" src={Star}></img>
                 <Tabs>
                     <TabList className="achievement">                       
-                        {this.state.achievementImg.map( (img, i) => <Tab key={i}> <img src={img.img} alt={img.alt} className="tab-ico"></img></Tab> )}
+                        {this.state.achievementImg.map( (img, i) => <Tab key={i}> <img src={img.img} alt={img.alt} title={img.alt} className="tab-ico"></img></Tab> )}
                     </TabList> 
                         
                 <TabPanel> 
                     <section className="achievement-container"> 
-                    <Food recipesCooked={this.props.recipesCooked}></Food>
+                        <Food recipesCooked={this.props.recipesCooked}></Food>
                     </section>
                 </TabPanel> 
                 <TabPanel> 
-                    <section className="achievement-container">  s
+                    <section className="achievement-container"> 
+                        {console.log("jmmm")}
+                        <Crafting itemsCrafted={this.props.itemsCrafted}></Crafting>
                     </section>
                 </TabPanel> 
                 <TabPanel> 
