@@ -7,8 +7,6 @@ class Crafting extends React.Component {
         super(props)
         this.state = {
             Items: [],
-
-            //images: [Fried_Egg,Omelet,Salad,Cheese_Cauliflower,Baked_Fish,Parsnip_Soup,Vegetable_Medley,Complete_Breakfast,Fried_Calamari,Strange_Bun,Lucky_Lunch,Fried_Mushroom,Pizza,Bean_Hotpot,Glazed_Yams,Carp_Surprise,Hashbrowns,Pancakes,Salmon_Dinner,Fish_Taco,Crispy_Bass,Pepper_Poppers,Bread,Tom_Kha_Soup,Trout_Soup,Chocolate_Cake,Pink_Cake,Rhubarb_Pie,Cookie,Spaghetti,Fried_Eel,Spicy_Eel,Sashimi,Maki_Roll,Tortilla,Red_Plate,Eggplant_Parmesan,Rice_Pudding,Ice_Cream,Blueberry_Tart,Autumns_Bounty,Pumpkin_Soup,Super_Meal,Cranberry_Sauce,Stuffing,Farmers_Lunch,Survival_Burger,Dish_o_The_Sea,Miners_Treat,Roots_Platter,Triple_Shot_Espresso,Seafoam_Pudding,Algae_Soup,Pale_Broth,Plum_Pudding,Artichoke_Dip,Stir_Fry,Roasted_Hazelnuts,Pumpkin_Pie,Radish_Salad,Fruit_Salad,Blackberry_Cobbler,Cranberry_Candy,Bruschetta,Coleslaw,Fiddlehead_Risotto,Poppyseed_Muffin,Chowder,Fish_Stew,Escargot,Lobster_Bisque,Maple_Bar,Crab_Cakes,Shrimp_Cocktail]
         }
     }  
 
