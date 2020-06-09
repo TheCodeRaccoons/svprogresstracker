@@ -1,5 +1,4 @@
-import React from 'react';    
-import {GetSkillName, GetLevelInfo} from '../../Utility/Utility'
+import React from 'react';
 class Skills extends React.Component {
     constructor(props) {
         super(props)
@@ -9,11 +8,11 @@ class Skills extends React.Component {
     render() {
         return ( 
             <div className="skill-container"> 
-                    <h1>{GetSkillName(this.props.index)}</h1>
+                    <h1>{`${this.props.skillName} lvl ${(this.props.xp > this.props.levelInfo.val) ? this.props.levelInfo.id :  this.props.levelInfo.id - 1} `}</h1>
                     <span>
                         Current XP: {this.props.xp} <br />
-                        Level Up in: {(GetLevelInfo(this.props.xp, this.props.levelList.Levels))}<br />
-                        Max level in: { (this.props.xp > 15000) ? 0 : 15000 - this.props.xp}
+                        Level Up in: { (this.props.xp > 15000) ? 0 : (this.props.levelInfo.val - this.props.xp)}<br />
+                        Max level in: { (this.props.xp > 15000) ? "Maxed" : 15000 - this.props.xp}
                     </span>
                     <img src={this.props.skillImg} alt={this.props.index} ></img>
             </div>

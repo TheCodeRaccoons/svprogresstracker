@@ -4,8 +4,7 @@ import Fa_img from '../../Media/Skills/Farming.png'
 import Mi_img from '../../Media/Skills/Mining.png'
 import Fo_img from '../../Media/Skills/Foraging.png'
 import Fi_img from '../../Media/Skills/Fishing.png'
-import Co_img from '../../Media/Skills/Combat.png'
-import levelList from '../Utility/levels.json';
+import Co_img from '../../Media/Skills/Combat.png' 
 class Skills extends React.Component {
     constructor(props) {
         super(props)
@@ -19,7 +18,15 @@ class Skills extends React.Component {
         return (
             <section className="stats-container"> 
                 <div className="skill-info"> 
-                    {this.state.skills.map((item, i) => (item === "0") ? "" : <SkillContainer key={i} index={i} skillImg={this.state.skillImg[i]} xp={item} levelList={levelList} />)}         
+                    {this.state.skills.map((item, i) => (i === 5) ? "" :  
+                    <SkillContainer 
+                        key={i} 
+                        index={i} 
+                        skillImg={this.state.skillImg[i]} 
+                        skillName={item.skill} 
+                        xp={item.xp} 
+                        levelInfo={item.levelInfo}
+                    />)}         
                 </div>
             </section>
         );

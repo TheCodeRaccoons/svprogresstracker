@@ -1,0 +1,39 @@
+{
+    "poly_crops":[
+        {"id":24, "name":"Parsnip"},
+        {"id":188, "name":"Green Bean"},
+        {"id":190, "name":"Cauliflower"},
+        {"id":192, "name":"Potato"},
+        {"id":248, "name":"Garlic"},
+        {"id":250, "name":"Kale"},
+        {"id":256, "name":"Tomato"},
+        {"id":262, "name":"Wheat"},
+        {"id":264, "name":"Radish"},
+        {"id":266, "name":"Red Cabbage"},
+        {"id":270, "name":"Corn"},
+        {"id":272, "name":"Eggplant"},
+        {"id":274, "name":"Artichoke"},
+        {"id":276, "name":"Pumpkin"},
+        {"id":278, "name":"Bok Choy"},
+        {"id":280, "name":"Yam"},
+        {"id":284, "name":"Beet"},
+        {"id":300, "name":"Amaranth"},
+        {"id":304, "name":"Hops"},
+        {"id":252, "name":"Rhubarb"},
+        {"id":254, "name":"Melon"},
+        {"id":258, "name":"Blueberry"},
+        {"id":260, "name":"Hot Pepper"},
+        {"id":268, "name":"Starfruit"},
+        {"id":282, "name":"Cranberries"},
+        {"id":398, "name":"Grape"},
+        {"id":400, "name":"Strawberry"},
+        {"id":433, "name":"Coffee Bean"}
+    ],
+    "mono_extras":[
+        {"id":454, "name":"Ancient Fruit"},
+        {"id":591, "name":"Tulip"},
+        {"id":593, "name":"Summer Spangle"},
+        {"id":595, "name":"Fairy Rose"},
+        {"id":597, "name":"Blue Jazz"}
+    ]
+}

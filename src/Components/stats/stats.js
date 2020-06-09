@@ -1,8 +1,7 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Skills from '../Skills/Skills'
-import Achievements from '../Achievements/Achievements'
-
+import Achievements from '../Achievements/Achievements' 
 import Junimo1a from '../../Media/Junimo1.png'
 import Junimo2a from '../../Media/Junimo2.png'
 import Junimo3a from '../../Media/Junimo3.png'
@@ -37,6 +36,8 @@ const playerStats = this.props.farmhands.map((item, i) =>(
         <Achievements 
         recipesCooked={item.recipesCooked}
         itemsCrafted={item.itemsCrafted}  
+        cropsShipped={item.cropsShipped} 
+        fishCaught = {item.fishCaught}
         ></Achievements>
     </section> 
 </TabPanel>) 
@@ -57,11 +58,12 @@ const playerStats = this.props.farmhands.map((item, i) =>(
                         <div className="ropes">
                             <img src={Rope} alt="" ></img>
                             <img src={Rope} alt="" ></img>
-                        </div>
-                        {console.log("real")}
+                        </div> 
                         <Achievements 
-                        recipesCooked={this.props.playerData.recipesCooked} 
-                        itemsCrafted={this.props.playerData.itemsCrafted}  
+                            recipesCooked={this.props.playerData.recipesCooked} 
+                            itemsCrafted={this.props.playerData.itemsCrafted}  
+                            cropsShipped={this.props.playerData.cropsShipped}  
+                            fishCaught = {this.props.playerData.fishCaught}
                         ></Achievements>
                         </section>
                     </TabPanel>

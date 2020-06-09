@@ -13,6 +13,8 @@ import AchMoney from '../../Media/Achievements/AchMoney.png'
 import AchMuseum from '../../Media/Achievements/AchMuseum.png'
 import AchQuests from '../../Media/Achievements/AchQuests.png'
 import Star from '../../Media/Star.png'
+import Crops from '../AchieveTabs/Crops';
+import Fish from '../AchieveTabs/Fish';
 
 class Achievements extends React.Component {
     constructor(props) {
@@ -47,19 +49,18 @@ class Achievements extends React.Component {
                     </section>
                 </TabPanel> 
                 <TabPanel> 
-                    <section className="achievement-container"> 
-                        {console.log("jmmm")}
+                    <section className="achievement-container">  
                         <Crafting itemsCrafted={this.props.itemsCrafted}></Crafting>
                     </section>
                 </TabPanel> 
                 <TabPanel> 
                     <section className="achievement-container">
-                        d
+                        <Crops cropsShipped = {this.props.cropsShipped} />
                     </section>
                 </TabPanel> 
                 <TabPanel> 
                     <section className="achievement-container">
-                        f
+                        <Fish fishCaught = {this.props.fishCaught} />
                     </section>
                 </TabPanel> 
                 <TabPanel> 

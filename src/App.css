@@ -282,19 +282,18 @@ html{
 }
  
 .farmName{
-  width: 96%;
-  padding: 2%;
-  height: 2.5em;
+  width: initial; 
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5em;
   color:black;
-  background: url('./Media/Windows/Window6.png') no-repeat center center; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: 100% 100%; 
+  border-image: url('./Media/Windows/Window6.png') 20 21 20 20 fill stretch;
+  border-style: solid;
+  image-rendering: pixelated;
+  border-width: 35px;  
+  border-width: 10px;
+  padding: 15px 0;
 }
 
 /*Skills*/
@@ -370,11 +369,30 @@ html{
 }
 .a-title{
   width: 100%;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    font-size: 1.5em;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-size: 1.5em;
+  text-align: center;
 }
+
+.a-List{
+  width: 100%;  
+  font-size: 1.5em; 
+}
+.a-List li{ 
+  padding-left: 15px;
+  list-style: none;
+  font-size: 1em; 
+}  
+.completed{
+  color: green;
+}  
+.pending{
+  color: red;
+}
+
+
 /*Misc*/
 .ropes{ 
   display: flex;
