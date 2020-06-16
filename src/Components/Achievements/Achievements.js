@@ -15,6 +15,7 @@ import AchQuests from '../../Media/Achievements/AchQuests.png'
 import Star from '../../Media/Star.png'
 import Crops from '../AchieveTabs/Crops';
 import Fish from '../AchieveTabs/Fish';
+import Friendship from '../AchieveTabs/Friendship';
 
 class Achievements extends React.Component {
     constructor(props) {
@@ -65,7 +66,7 @@ class Achievements extends React.Component {
                 </TabPanel> 
                 <TabPanel> 
                     <section className="achievement-container">
-                        g
+                        <Friendship  friendship={this.props.friendship}/>
                     </section>
                 </TabPanel> 
                 <TabPanel> 

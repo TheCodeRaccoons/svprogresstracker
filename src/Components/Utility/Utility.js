@@ -5,6 +5,7 @@ const Levels = require('../Utility/levels.json');
 const ShipItems = require('../Utility/shippingItems.json'); 
 const ShipCrops = require('../Utility/shippingCrops.json'); 
 const Fishes = require('../Utility/fishes.json'); 
+const Friendship = require('../Utility/friendship.json'); 
 
 /* Gather the XML and handling the file */
 //Gets the info from the farm hands as an array of the same type
@@ -51,8 +52,8 @@ const parseData = (data) => {
     let cropsShipped    = GetShippedCrops(basicShipped)
     /* Get fish caught */
     let fishCaught      = GetFishes(data.fishCaught.item) 
-
-
+    /* Get Friendship Data */
+    let FriendshipData  = GetFriendshipData(data.friendshipData.item)
     //Not finished  
     /* Get professions */
     let professions = GetProfessionData(data.professions.int)
@@ -78,7 +79,8 @@ const parseData = (data) => {
             fishCaught: fishCaught,
             artifactsFound: archaeologyFound,
             tailoredItems: tailoredItems,
-            itemsCrafted: craftingRecipes 
+            itemsCrafted: craftingRecipes,
+            friendship: FriendshipData
     }
     return playerData;
 } 
@@ -179,6 +181,28 @@ const GetFishes = (allFished) => {
     
     return  data
 }
+const GetFriendshipData = (allFriends) => { 
+    let data = []
+    if(Array.isArray(allFriends)){
+        allFriends.map(i => {
+            if(Friendship.includes(i.key.string._text)){
+                let level = Math.trunc(parseInt(i.value.Friendship.Points._text) / 250)
+                let d = {
+                    name: i.key.string._text, 
+                    points: parseInt(i.value.Friendship.Points._text),
+                    level: level,
+                    lvlup: 250 - (parseInt(i.value.Friendship.Points._text) - (level * 250))
+                } 
+                data = [...data, d] 
+            }
+            else{
+                console.log(i.key.string._text)
+            }
+        })
+    }
+    return data
+}
+
 /* Utility methods */ 
 const GetLevelInfo = (xp) =>{  
     let val;
