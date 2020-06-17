@@ -409,35 +409,6 @@ html{
   filter: grayscale(1) brightness(0.5) !important;
 }
 
-/*Small Screens*/
-@media only screen and (max-width: 800px){
-  
-  .adds{
-    display: none;
-  }
-  
-.rotated { 
-  margin: 5px 0;
-  padding: 5px; 
-  font-size: 0.75em;
-  text-align: center; 
-  font-weight: 600;
-}
-
-.media{
-  height: 1.5rem; 
-}
-
-.main-media{ 
-  width: 2.5rem;
-  height: 60%;
-}
-
-.title h1,
-.filepath{
-  font-size: 1em;
-} 
-}
 
 .food-container img{
   width: 40px;
@@ -481,13 +452,46 @@ html{
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  text-align: center;
+  text-align: center; 
+  padding-top: 20px;
 }
 .npc-data .friendship {
   margin: auto;
   width: 90px;
   cursor: pointer; 
 }
+
+
+/*Small Screens*/
+@media only screen and (max-width: 800px){
+  
+  .adds{
+    display: none;
+  }
+  
+.rotated { 
+  margin: 5px 0;
+  padding: 5px; 
+  font-size: 0.75em;
+  text-align: center; 
+  font-weight: 600;
+}
+
+.media{
+  height: 1.5rem; 
+}
+
+.main-media{ 
+  width: 2.5rem;
+  height: 60%;
+}
+
+.title h1,
+.filepath{
+  font-size: 1em;
+} 
+}
+
 
 /*Mid Screens*/
 @media only screen and (max-width: 1280px){

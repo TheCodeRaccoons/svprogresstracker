@@ -10,7 +10,7 @@ const Friendship = require('../Utility/friendship.json');
 /* Gather the XML and handling the file */
 //Gets the info from the farm hands as an array of the same type
 const GetFarmHands = (arr) =>{
-    let data = []  
+    let data = []
     if(Array.isArray(arr)){
         arr.forEach(building => {
             if(building.indoors)
@@ -35,7 +35,6 @@ const GetDetailedInfo = (data) =>{
 } 
 //Creates an object per player with the cleanup data from the file
 const parseData = (data) => {
-    
     /* Get name */ //Done
     let name        = data.name._text; 
     /* Get farm name */ //Done
@@ -46,7 +45,7 @@ const parseData = (data) => {
     let recipesCooked   = GetCookingData(data.recipesCooked, data.cookingRecipes.item) 
     /* Get crafted items */ //Done
     let craftingRecipes = GetCraftingRecipes(data.craftingRecipes.item) 
-    /* Get shipped items */
+    /* Get shipped items */ 
     let basicShipped    = GetShippedItems(data.basicShipped.item)
     /* Get shipped Crops */
     let cropsShipped    = GetShippedCrops(basicShipped)
@@ -54,6 +53,11 @@ const parseData = (data) => {
     let fishCaught      = GetFishes(data.fishCaught.item) 
     /* Get Friendship Data */
     let FriendshipData  = GetFriendshipData(data.friendshipData.item)
+    /* Get Specific monsters killed */
+    let specificMonsters = GetSpecificMonsters(data.stats.specificMonstersKilled.item)
+
+    console.log(specificMonsters)
+
     //Not finished  
     /* Get professions */
     let professions = GetProfessionData(data.professions.int)
@@ -65,7 +69,8 @@ const parseData = (data) => {
     let archaeologyFound= GetArrayDataTimeless(data.archaeologyFound.item) 
     /* Get tailored items */
     let tailoredItems   = GetArrayDataTimeless(data.tailoredItems.item) 
-    
+
+
     let playerData = {
             playerName: name,
             farmName: farmName,
@@ -201,6 +206,20 @@ const GetFriendshipData = (allFriends) => {
         })
     }
     return data
+}
+const GetSpecificMonsters = (allMonsters) => {
+    let monsters = []
+    if(Array.isArray(allMonsters)){ 
+        allMonsters.map(item => {
+            let m = {
+                name: item.key.string._text,
+                image: GetImages(item.key.string._text),
+                timesKilled: parseInt(item.value.int._text)
+            }
+            monsters = [...monsters, m]
+        })
+    }
+    return monsters
 }
 
 /* Utility methods */ 
