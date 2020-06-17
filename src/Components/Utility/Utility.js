@@ -55,8 +55,7 @@ const parseData = (data) => {
     let FriendshipData  = GetFriendshipData(data.friendshipData.item)
     /* Get Specific monsters killed */
     let specificMonsters = GetSpecificMonsters(data.stats.specificMonstersKilled.item)
-
-    console.log(specificMonsters)
+ 
 
     //Not finished  
     /* Get professions */
@@ -85,7 +84,8 @@ const parseData = (data) => {
             artifactsFound: archaeologyFound,
             tailoredItems: tailoredItems,
             itemsCrafted: craftingRecipes,
-            friendship: FriendshipData
+            friendship: FriendshipData,
+            monstersKilled: specificMonsters
     }
     return playerData;
 } 
