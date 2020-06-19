@@ -18,26 +18,30 @@ class Monsters extends React.Component {
 
     render() {
         return ( 
-            <div className="progress-container">  
+            <div className="progress-container-flex">  
              
              <span className="a-title"><h1>Adventurer's Guild</h1></span>
+                <br />
                 <p>Monsters from the Quarry Mine are not being showed, neither are the armored bugs which you can't kill.</p>
                 <br />
-                <h2>Monster Eradication Goals</h2>
-                <ul className="a-List"> 
+                <br />
+                <h2 className="title-center">Monster Eradication Goals</h2>
+                <br />
+                <ul className="m-List"> 
                     <li>Slimes: {(this.state.monstersKilled.slimesKilled >= 1000) ?  <span className="completed"> {this.state.monstersKilled.slimesKilled} / 1000</span> : <span className="pending"> {this.state.monstersKilled.slimesKilled} / 1000</span> } </li>
                     <li>Void Spirits: {(this.state.monstersKilled.slimesKilled >= 1000) ?  <span className="completed"> {this.state.monstersKilled.slimesKilled} / 1000</span> : <span className="pending"> {this.state.monstersKilled.slimesKilled} / 1000</span> } </li>
                     <li>Bats: {(this.state.monstersKilled.slimesKilled >= 1000) ?  <span className="completed"> {this.state.monstersKilled.slimesKilled} / 1000</span> : <span className="pending"> {this.state.monstersKilled.slimesKilled} / 1000</span> } </li>
                     <li>Skeleton: {(this.state.monstersKilled.slimesKilled >= 1000) ?  <span className="completed"> {this.state.monstersKilled.slimesKilled} / 1000</span> : <span className="pending"> {this.state.monstersKilled.slimesKilled} / 1000</span> } </li>
                     <li>Cave Insects: {(this.state.monstersKilled.slimesKilled >= 1000) ?  <span className="completed"> {this.state.monstersKilled.slimesKilled} / 1000</span> : <span className="pending"> {this.state.monstersKilled.slimesKilled} / 1000</span> } </li>
                     <li>Duggy: {(this.state.monstersKilled.slimesKilled >= 1000) ?  <span className="completed"> {this.state.monstersKilled.slimesKilled} / 1000</span> : <span className="pending"> {this.state.monstersKilled.slimesKilled} / 1000</span> } </li>
+                </ul>
+                <ul className="m-List">
                     <li>Dust Sprite: {(this.state.monstersKilled.slimesKilled >= 1000) ?  <span className="completed"> {this.state.monstersKilled.slimesKilled} / 1000</span> : <span className="pending"> {this.state.monstersKilled.slimesKilled} / 1000</span> } </li>
                     <li>Rock Crabs: {(this.state.monstersKilled.slimesKilled >= 1000) ?  <span className="completed"> {this.state.monstersKilled.slimesKilled} / 1000</span> : <span className="pending"> {this.state.monstersKilled.slimesKilled} / 1000</span> } </li>
                     <li>Mummy: {(this.state.monstersKilled.slimesKilled >= 1000) ?  <span className="completed"> {this.state.monstersKilled.slimesKilled} / 1000</span> : <span className="pending"> {this.state.monstersKilled.slimesKilled} / 1000</span> } </li>
                     <li>Pepper Rex: {(this.state.monstersKilled.slimesKilled >= 1000) ?  <span className="completed"> {this.state.monstersKilled.slimesKilled} / 1000</span> : <span className="pending"> {this.state.monstersKilled.slimesKilled} / 1000</span> } </li>
                     <li>Serpent: {(this.state.monstersKilled.slimesKilled >= 1000) ?  <span className="completed"> {this.state.monstersKilled.slimesKilled} / 1000</span> : <span className="pending"> {this.state.monstersKilled.slimesKilled} / 1000</span> } </li>
-                </ul>
-                <br />
+                </ul> 
                 {this.state.monstersKilled.specificMonsters.map((monster, i) => <img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Monsters/${monster.image}.png`} className={monster.data === undefined ? "" : "done"} title={monster.name} alt={monster.name} ></img>)}
             </div>
         );

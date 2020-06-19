@@ -21,7 +21,7 @@ class Friendship extends React.Component {
 
     render() {
         return ( 
-            <div className="progress-container-friendship">    
+            <div className="progress-container-flex">    
                 {this.state.Friendship.map((d, i) => 
                     <div className="npc-data"  key={i}>
                         <h2>{d.name}</h2>
