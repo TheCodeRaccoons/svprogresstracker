@@ -16,6 +16,7 @@ import Star from '../../Media/Star.png'
 import Crops from '../AchieveTabs/Crops';
 import Fish from '../AchieveTabs/Fish';
 import Friendship from '../AchieveTabs/Friendship';
+import Monsters from '../AchieveTabs/Monsters';
 
 class Achievements extends React.Component {
     constructor(props) {
@@ -71,7 +72,7 @@ class Achievements extends React.Component {
                 </TabPanel> 
                 <TabPanel> 
                     <section className="achievement-container">
-                        h
+                        <Monsters  monstersKilled={this.props.monstersKilled}/>
                     </section>
                 </TabPanel> 
                 <TabPanel> 

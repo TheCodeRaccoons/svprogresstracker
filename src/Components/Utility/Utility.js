@@ -6,6 +6,7 @@ const ShipItems = require('../Utility/shippingItems.json');
 const ShipCrops = require('../Utility/shippingCrops.json'); 
 const Fishes = require('../Utility/fishes.json'); 
 const Friendship = require('../Utility/friendship.json'); 
+const Monsters = require('../Utility/monsters.json'); 
 
 /* Gather the XML and handling the file */
 //Gets the info from the farm hands as an array of the same type
@@ -55,7 +56,7 @@ const parseData = (data) => {
     let FriendshipData  = GetFriendshipData(data.friendshipData.item)
     /* Get Specific monsters killed */
     let specificMonsters = GetSpecificMonsters(data.stats.specificMonstersKilled.item)
- 
+    let slimesKilled = (data.stats.slimesKilled._text !== undefined) ? parseInt(data.stats.slimesKilled._text) : 0
 
     //Not finished  
     /* Get professions */
@@ -85,7 +86,7 @@ const parseData = (data) => {
             tailoredItems: tailoredItems,
             itemsCrafted: craftingRecipes,
             friendship: FriendshipData,
-            monstersKilled: specificMonsters
+            monstersKilled: {specificMonsters, slimesKilled}
     }
     return playerData;
 } 
@@ -212,13 +213,25 @@ const GetSpecificMonsters = (allMonsters) => {
     if(Array.isArray(allMonsters)){ 
         allMonsters.map(item => {
             let m = {
-                name: item.key.string._text,
-                image: GetImages(item.key.string._text),
+                name: item.key.string._text, 
                 timesKilled: parseInt(item.value.int._text)
             }
             monsters = [...monsters, m]
         })
     }
+    if(monsters){ 
+        let mData = []
+        Monsters.map( m => {
+            let d = {
+                name: m,
+                image: GetImages(m),
+                data: (Array.isArray(monsters)) ? monsters.find(i => i.name === m ) : false
+            }
+            mData = [...mData, d]
+        })
+    return mData
+    }
+
     return monsters
 }
 
