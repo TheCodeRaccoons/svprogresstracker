@@ -1,3 +1,4 @@
+/* eslint-disable no-loop-func */
 const Dishes = require('../Utility/Dishes.json');
 const CraftingRec = require('../Utility/CraftingRecipes.json'); 
 const ProfNames = require('../Utility/professions.json'); 
@@ -6,7 +7,7 @@ const ShipItems = require('../Utility/shippingItems.json');
 const ShipCrops = require('../Utility/shippingCrops.json'); 
 const Fishes = require('../Utility/fishes.json'); 
 const Friendship = require('../Utility/friendship.json'); 
-const Monsters = require('../Utility/monsters.json'); 
+const MonsterCat = require('../Utility/monsterCategorie.json'); 
 
 /* Gather the XML and handling the file */
 //Gets the info from the farm hands as an array of the same type
@@ -55,8 +56,9 @@ const parseData = (data) => {
     /* Get Friendship Data */
     let FriendshipData  = GetFriendshipData(data.friendshipData.item)
     /* Get Specific monsters killed */
-    let specificMonsters = GetSpecificMonsters(data.stats.specificMonstersKilled.item)
     let slimesKilled = (data.stats.slimesKilled._text !== undefined) ? parseInt(data.stats.slimesKilled._text) : 0
+    let specificMonsters = GetMonsterQuests(data.stats.specificMonstersKilled.item, slimesKilled)
+    
 
     //Not finished  
     /* Get professions */
@@ -86,7 +88,7 @@ const parseData = (data) => {
             tailoredItems: tailoredItems,
             itemsCrafted: craftingRecipes,
             friendship: FriendshipData,
-            monstersKilled: {specificMonsters, slimesKilled}
+            monstersKilled: specificMonsters
     }
     return playerData;
 } 
@@ -208,7 +210,7 @@ const GetFriendshipData = (allFriends) => {
     }
     return data
 }
-const GetSpecificMonsters = (allMonsters) => {
+const GetMonsterQuests = (allMonsters, slimesKilled) => {
     let monsters = []
     if(Array.isArray(allMonsters)){ 
         allMonsters.map(item => {
@@ -219,20 +221,32 @@ const GetSpecificMonsters = (allMonsters) => {
             monsters = [...monsters, m]
         })
     }
-    if(monsters){ 
+    
+    if(monsters){
         let mData = []
-        Monsters.map( m => {
-            let d = {
-                name: m,
-                image: GetImages(m),
-                data: (Array.isArray(monsters)) ? monsters.find(i => i.name === m ) : false
-            }
-            mData = [...mData, d]
-        })
-    return mData
+        let sum = 0;
+        for (let [key] of Object.entries(MonsterCat)) {
+            sum = 0;
+            MonsterCat[key].monsters.map(cat => { 
+                let d = {
+                    timesKilled: (Array.isArray(monsters)) ? monsters.find(i => i.name === cat ) !== undefined ? monsters.find(i => i.name === cat ).timesKilled : 0 : 0
+                } 
+                sum += d.timesKilled 
+            }) 
+            mData = [...mData, {
+                category: key,
+                goal: MonsterCat[key].goal ,
+                timesKilled: (key === "Slimes") ? slimesKilled : sum,
+                images: MonsterCat[key].monsters.map(m => {
+                    let d = {name: m, img: GetImages(m)}
+                    return d
+                })
+            }]
+        }   
+        return(mData) 
     }
 
-    return monsters
+    return []
 }
 
 /* Utility methods */ 

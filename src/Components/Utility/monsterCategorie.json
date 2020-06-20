@@ -1,0 +1,77 @@
+{
+    "Slimes": {
+        "goal": 1000,
+        "monsters": [
+            "Green Slime",
+            "Sludge",
+            "Frost Jelly"
+        ]
+    },
+    "VoidSpirits": {
+        "goal": 150,
+        "monsters": [
+            "Shadow Brute",
+            "Shadow Shaman"
+        ]
+    },
+    "Bats": {
+        "goal": 200,
+        "monsters": [
+            "Bat",
+            "Frost Bat",
+            "Lava Bat"
+        ]
+    },
+    "Skeleton": {
+        "goal": 50,
+        "monsters": [
+            "Skeleton"
+        ]
+    },
+    "CaveInsects": {
+        "goal": 125,
+        "monsters": [
+            "Bug",
+            "Fly",
+            "Grub"
+        ]
+    },
+    "Duggy": {
+        "goal": 30,
+        "monsters": [
+            "Duggy"
+        ]
+    },
+    "DustSpirit": {
+        "goal": 500,
+        "monsters": [
+            "Dust Spirit"
+        ]
+    },
+    "RockCrabs": {
+        "goal": 60,
+        "monsters": [
+            "Rock Crab",
+            "Lava Crab",
+            "Iridium Crab"
+        ]
+    },
+    "Mummy": {
+        "goal": 100,
+        "monsters": [
+            "Mummy"
+        ]
+    },
+    "PepperRex": {
+        "goal": 50,
+        "monsters": [
+            "Pepper Rex"
+        ]
+    },
+    "Serpent": {
+        "goal": 250,
+        "monsters": [
+            "Serpent"
+        ]
+    }
+}

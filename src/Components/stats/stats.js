@@ -34,12 +34,12 @@ const playerStats = this.props.farmhands.map((item, i) =>(
             <img src={Rope} alt="" ></img>
         </div>
         <Achievements 
-        recipesCooked={item.recipesCooked}
-        itemsCrafted={item.itemsCrafted}  
-        cropsShipped={item.cropsShipped} 
-        fishCaught = {item.fishCaught}
-        friendship = {item.friendship}
-        friendship = {item.monstersKilled}
+        recipesCooked   ={item.recipesCooked}
+        itemsCrafted    ={item.itemsCrafted}  
+        cropsShipped    ={item.cropsShipped} 
+        fishCaught      = {item.fishCaught}
+        friendship      = {item.friendship}
+        monstersKilled  = {item.monstersKilled}
         ></Achievements>
     </section> 
 </TabPanel>) 
@@ -62,12 +62,12 @@ const playerStats = this.props.farmhands.map((item, i) =>(
                             <img src={Rope} alt="" ></img>
                         </div> 
                         <Achievements 
-                            recipesCooked={this.props.playerData.recipesCooked} 
-                            itemsCrafted={this.props.playerData.itemsCrafted}  
-                            cropsShipped={this.props.playerData.cropsShipped}  
-                            fishCaught = {this.props.playerData.fishCaught}
-                            friendship = {this.props.playerData.friendship}
-                            monstersKilled = {this.props.playerData.monstersKilled}
+                            recipesCooked   ={this.props.playerData.recipesCooked} 
+                            itemsCrafted    ={this.props.playerData.itemsCrafted}  
+                            cropsShipped    ={this.props.playerData.cropsShipped}  
+                            fishCaught      = {this.props.playerData.fishCaught}
+                            friendship      = {this.props.playerData.friendship}
+                            monstersKilled  = {this.props.playerData.monstersKilled}
                         ></Achievements>
                         </section>
                     </TabPanel>

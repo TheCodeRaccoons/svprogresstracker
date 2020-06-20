@@ -394,6 +394,7 @@ html{
   padding-left: 15px;
   list-style: none;
   font-size: 1em; 
+  display: flex;
 }  
 .completed{
   color: green;
@@ -426,6 +427,14 @@ html{
 
 .food-container img{
   width: 40px;
+}
+
+.goal-mg{
+  width: 100px;
+  height: auto;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 15px;
 }
 
 /*Achievement containers*/

@@ -34,7 +34,7 @@ class Crops extends React.Component {
     render() {
         return ( 
             <div className="progress-container">  
-                <span className="a-title"><h1>{`${(this.state.maxShipped.times < 300) ? `You've shipped ${this.state.maxShipped.name} the most and you require ${300 - this.state.maxShipped.times} more of it to get the 'Monoculture' Achievement` : `You already have the 'Monoculture' Achievement` }`}</h1></span>
+                <span className="a-title"><h1>{(this.state.maxShipped.times < 300) ? `You've shipped ${ this.state.maxShipped.name } the most and you require ${300 - this.state.maxShipped.times} more of it to get the 'Monoculture' Achievement` : <span className="completed">`You already have the 'Monoculture' Achievement`</span> }</h1></span>
                 <br /><br />
                 <span className="a-title"><h1>Ship 15 of the following crops to get the 'Polyculture' achievement</h1></span>
                 {this.state.shippedCrops.poly_crops.map((crop, i) => <img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Crops/${crop.image}.png`} alt={crop.name} className={ (crop.shipped !== undefined) ? ((parseInt(crop.shipped.times) >= 15) ? "done" : "known" ): "" } title={(crop.shipped !== undefined) ? (parseInt(crop.shipped.times) >= 15) ? `You have shipped  ${crop.name}  ${crop.shipped.times} times` : `You have to ship ${ 15 - parseInt(crop.shipped.times)} more ${crop.name} ` : `You haven't shipped ${crop.name}`} ></img>)}
