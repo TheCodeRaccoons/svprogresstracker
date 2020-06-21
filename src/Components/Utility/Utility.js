@@ -147,7 +147,7 @@ const GetShippedItems = (allShipped) => {
         }
         data = [...data, d]
     })
-    
+    console.log(data);
     return data;
 }
 const GetShippedCrops = (allShipped) => { 
