@@ -249,9 +249,6 @@ const GetMonsterQuests = (allMonsters, slimesKilled) => {
     return []
 }
 
-const reee = () =>{
-    return "hehe";
-}
 /* Utility methods */ 
 const GetLevelInfo = (xp) =>{  
     let val;
