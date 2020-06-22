@@ -25,7 +25,7 @@ class Friendship extends React.Component {
                 {this.state.Friendship.map((d, i) => 
                     <div className="npc-data"  key={i}>
                         <h2>{d.name}</h2>
-                        <img className="friendship" src={`https://stardew-tracker.s3.amazonaws.com/Friendship/${d.name}.png`} alt={d.name} title={(d.lvlup > 10) ? `You have ${d.level} hearts with this npc` : `you need ${d.lvlup} points to level up`} ></img>
+                        <img className="friendship" src={`https://stardew-tracker.s3.amazonaws.com/Friendship/${d.name}.png`} alt={d.name} title={(d.lvlup > 10) ? `You have ${d.level} hearts with this npc` : (d.dateable && d.level === 8) ? `You need to start a relationship with ${d.name} to increase your friendship level`  :`you need ${d.lvlup} points to level up`} ></img>
                         {this.displayHearts(d.level)}
                     </div>
                         

@@ -27,7 +27,7 @@ class Fish extends React.Component {
                 <ul className="a-List"> 
                     <li>Fisherman: {(this.state.totalFished >= 10) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to catch {15 - this.state.totalFished} more fish to get this</span> } </li>
                     <li>Ol' Mariner: {(this.state.totalFished >= 24) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to catch {30 - this.state.totalFished} more fish to get this </span>}</li>
-                    <li>Craft Master: {(this.state.totalFished >= this.state.fishCaught.length) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to catch {this.state.fishCaught.length - this.state.totalFished} more fish to get this </span>}</li>
+                    <li>Master Angler : {(this.state.totalFished >= this.state.fishCaught.length) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to catch {this.state.fishCaught.length - this.state.totalFished} more fish to get this </span>}</li>
                 </ul>
                 <br />
                 {this.state.fishCaught.map((fish, i) => <img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Fishing/${fish.image}.png`} alt={fish.name} className={ (fish.fished) ? "done" : ""} title={(fish.fished) ? `You've caught  ${fish.name}` :  `You haven't fished ${fish.name}`} ></img>)}

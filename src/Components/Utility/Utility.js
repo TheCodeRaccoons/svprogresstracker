@@ -197,6 +197,7 @@ const GetFriendshipData = (allFriends) => {
                 let level = Math.trunc(parseInt(i.value.Friendship.Points._text) / 250)
                 let d = {
                     name: i.key.string._text, 
+                    dateable: GetDateableNPC(i.key.string._text),
                     points: parseInt(i.value.Friendship.Points._text),
                     level: level,
                     lvlup: 250 - (parseInt(i.value.Friendship.Points._text) - (level * 250))
@@ -444,6 +445,26 @@ const NameTranslate = (name) => {
             return name;
     }
 }
+const GetDateableNPC = (name) => {
+
+    if( name === "Abigail" || 
+        name === "Alex" || 
+        name === "Elliott" || 
+        name === "Emily" || 
+        name === "Haley" || 
+        name === "Harvey" ||  
+        name === "Leah" ||  
+        name === "Maru" ||  
+        name === "Penny" ||  
+        name === "Sam" || 
+        name === "Sebastian" ||  
+        name === "Shane"){
+        return true
+    }
+    return false; 
+}
+
+
 const GetArtifactNames = (arr, itemList) =>{
     let data = [] 
     if(Array.isArray(arr)){ 
@@ -542,5 +563,4 @@ exports.GetArrayDataTimeless = GetArrayDataTimeless;
 exports.GetQuests = GetQuests;
 exports.GetProfessionData = GetProfessionData;
 exports.GetFarmHands = GetFarmHands;
-exports.GetDetailedInfo = GetDetailedInfo;  
-exports.GetArtifactNames = GetArtifactNames; 
+exports.GetDetailedInfo = GetDetailedInfo;   
