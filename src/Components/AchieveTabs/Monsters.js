@@ -21,12 +21,8 @@ class Monsters extends React.Component {
         return ( 
             <div className="progress-container-flex">  
             
-            <span className="a-title"><h1>Adventurer's Guild</h1></span>
-                <br />
-                <p>Monsters from the Quarry Mine are not being showed, neither are the armored bugs which you can't kill.</p>
-                <br />
-                <br />
-                <h2 className="title-center">Monster Eradication Goals</h2>
+            <span className="a-title"><h1>Monster Eradication Goals</h1></span>
+                <br /> 
                 <br />
                 <ul className="m-List"> 
                     { this.state.monstersKilled.slice(0, 5).map( m => this.GetQuestData(m))} 
