@@ -12,7 +12,7 @@ class Crafting extends React.Component {
         return items.map((num) => (num.times !== undefined && num.times > 0 && num.name !== "Wedding Ring") ? 1 : 0).reduce((n, next) => next + n)
     }
 
-    componentWillMount() { 
+    UNSAFE_componentWillMount() { 
         this.setState({totalCrafted: this.GetCraftedItems(this.state.itemsCrafted)})
     }
 

@@ -9,7 +9,7 @@ class Food extends React.Component {
         }
     }  
  
-    componentWillMount() { 
+    UNSAFE_componentWillMount() { 
         this.setState({
             DishesCooked: this.props.recipesCooked.map((num) => (num.times !== undefined && num.times > 0) ? 1 : 0 ).reduce((n, next) => n + next )
         }) 

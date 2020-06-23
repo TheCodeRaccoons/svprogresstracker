@@ -19,7 +19,7 @@ class Main extends React.Component {
     ShowLoader = () =>{ 
         this.setState({showLoader: true});
     }
-  
+
     UpdatePlayerData = (_playerData) => {
         this.setState({
             hasData: true,
@@ -35,9 +35,11 @@ class Main extends React.Component {
     }
 
     GetCollection = (collection) => { 
-        this.setState({
-            mCollection: collection
-        });
+        let museumPieces = []
+        if(collection.museumPieces.item !== undefined){
+            museumPieces = [...collection.museumPieces.item]
+        } 
+        return (museumPieces.length > 0) ? [...museumPieces] : [] 
     }
 
     loaderShow = () =>{

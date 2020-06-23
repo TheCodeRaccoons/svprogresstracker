@@ -4,43 +4,50 @@ class Collection extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            shippedCrops: this.props.cropsShipped,
+            museumCollection: this.props.museumCollection
         }
-    }  
-    
-    timesShipped = (arr) => {
-        let Max = []
-        let name = []
-        arr.poly_crops.map( crop => {
-            Max = (crop.shipped !== undefined) ? [...Max, parseInt(crop.shipped.times)] : [...Max]
-            name = (crop.shipped !== undefined) ? [...name, crop.name] : [...name]
-        })
-        arr.mono_extras.map( crop => {
-            Max = (crop.shipped !== undefined) ? [...Max, parseInt(crop.shipped.times)] : [...Max]
-            name = (crop.shipped !== undefined) ? [...name, crop.name] : [...name]
-        })
-        var indexOfMaxValue = Max.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0) 
-        this.setState({
-            maxShipped: {
-                name: name[indexOfMaxValue],
-                times: Max[indexOfMaxValue]
-            }
-        })
     }
 
-    componentWillMount() { 
-        this.timesShipped(this.state.shippedCrops)
-    } 
+    GetTotalFound = () => {
+        let artifacts = this.state.museumCollection.artifacts
+        let minerals = this.state.museumCollection.minerals 
+        let totalArtFound = 0
+        let totalMinFound = 0
+        let totalArtD = 0
+        let totalMinD = 0
+
+        totalArtFound = artifacts.reduce((accum,item) => (item.found) ? accum + 1 : accum, 0)
+        totalMinFound = minerals.reduce((accum,item) => (item.found) ? accum + 1 : accum, 0)
+        totalArtD = artifacts.reduce((accum,item) => (item.inMuseum) ? accum + 1 : accum, 0)
+        totalMinD = minerals.reduce((accum,item) => (item.inMuseum) ? accum + 1 : accum, 0)
+
+        this.setState({
+            totalFound: totalArtFound + totalMinFound,
+            totalDelivered: totalArtD + totalMinD,
+            total: artifacts.length + minerals.length
+        })
+    }    
+
+    UNSAFE_componentWillMount = () =>{
+        this.GetTotalFound()
+    }
+
+
     render() {
         return ( 
             <div className="progress-container">  
-                <span className="a-title"><h1>{(this.state.maxShipped.times < 300) ? `You've shipped ${ this.state.maxShipped.name } the most and you require ${300 - this.state.maxShipped.times} more of it to get the 'Monoculture' Achievement` : <span className="completed">`You already have the 'Monoculture' Achievement`</span> }</h1></span>
-                <br /><br />
-                <span className="a-title"><h1>Ship 15 of the following crops to get the 'Polyculture' achievement</h1></span>
-                {this.state.shippedCrops.poly_crops.map((crop, i) => <img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Crops/${crop.image}.png`} alt={crop.name} className={ (crop.shipped !== undefined) ? ((parseInt(crop.shipped.times) >= 15) ? "done" : "known" ): "" } title={(crop.shipped !== undefined) ? (parseInt(crop.shipped.times) >= 15) ? `You have shipped  ${crop.name}  ${crop.shipped.times} times` : `You have to ship ${ 15 - parseInt(crop.shipped.times)} more ${crop.name} ` : `You haven't shipped ${crop.name}`} ></img>)}
+                <span className="a-title"><h1>{`You've found ${this.state.totalFound} objects and delivered ${this.state.totalDelivered} / ${this.state.total} to the museum`}</h1></span>
+                <br />
+                <br />
+                <h2>Museum Achievements</h2>
+                <ul className="a-List"> 
+                    <li>A Complete Collection: {(this.state.total === this.state.totalDelivered) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to deliver {this.state.total - this.state.totalDelivered} more items to get this achievement.</span> } </li>
+                </ul>
+                <span className="a-title"><h1>Artifacts</h1></span>
+                {this.state.museumCollection.artifacts.map((item, i) => <img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Artifacts/${item.image}.png`} alt={item.name} className={ (item.found) ? item.inMuseum ? "done" : "known": "" } title={(item.found) ? (item.inMuseum) ? `You have delivered ${item.name} to the museum` : `You haven't delivered ${item.name} to the museum` : `You haven't found ${item.name} yet`} ></img>)}
         
-                <span className="a-title"><h1>This crops are not counted for the 'Polyculture' achievement</h1></span>
-                {this.state.shippedCrops.mono_extras.map((crop, i) => <img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Crops/${crop.image}.png`} alt={crop.name} className={ (crop.shipped !== undefined) ? ((parseInt(crop.shipped.times) > 0) ? "done" : "known" ): "" } title={(crop.shipped !== undefined) ? `You have shipped  ${crop.name}  ${crop.shipped.times} times` : `You haven't shipped ${crop.name}`} ></img>)}
+                <span className="a-title"><h1>Minerals</h1></span>
+                {this.state.museumCollection.minerals.map((item, i) => <img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Minerals/${item.image}.png`} alt={item.name} className={ (item.found) ? item.inMuseum ? "done" : "known" : "" } title={(item.found) ? (item.inMuseum) ? `You have delivered ${item.name} to the museum` : `You haven't delivered ${item.name} to the museum` : `You haven't found ${item.name} yet`} ></img>)}
             </div>
         );
     }

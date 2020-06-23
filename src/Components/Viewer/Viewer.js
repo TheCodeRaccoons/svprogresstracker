@@ -20,17 +20,19 @@ class Viewer extends React.Component {
         if(json.SaveGame !== undefined){ 
             let prefix = d.includes("SaveGame xmlns:xsi") ? 'xsi': 'p3' 
             //console.log(json.SaveGame)
+            /* Get's game prefix bc of the way the save is created in mac */
+            this.props.UpdateGamePrefix(prefix) 
+            /* Get the info of the museum's current collection */
             let collection = json.SaveGame.locations.GameLocation.find(loc => (loc._attributes !== undefined) ? loc._attributes[`${prefix}:type`] === "LibraryMuseum" : "" )
+            let collectionStatus = this.props.GetCollection(collection)
             /* Gather data */
             let player          = json.SaveGame.player;
             let farmHands       = GetFarmHands(json.SaveGame.locations.GameLocation[1].buildings.Building); 
             let players = {
-                playerData: GetDetailedInfo([player]),
-                farmhandData: GetDetailedInfo(farmHands)
+                playerData: GetDetailedInfo([player], collectionStatus),
+                farmhandData: GetDetailedInfo(farmHands, collectionStatus)
             } 
             this.props.UpdatePlayerData(players) 
-            this.props.UpdateGamePrefix(prefix) 
-            this.props.GetCollection(collection)
         }
     }
     

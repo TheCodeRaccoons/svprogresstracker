@@ -11,11 +11,11 @@ class Crops extends React.Component {
     timesShipped = (arr) => {
         let Max = []
         let name = []
-        arr.poly_crops.map( crop => {
+        arr.poly_crops.forEach( crop => {
             Max = (crop.shipped !== undefined) ? [...Max, parseInt(crop.shipped.times)] : [...Max]
             name = (crop.shipped !== undefined) ? [...name, crop.name] : [...name]
         })
-        arr.mono_extras.map( crop => {
+        arr.mono_extras.forEach( crop => {
             Max = (crop.shipped !== undefined) ? [...Max, parseInt(crop.shipped.times)] : [...Max]
             name = (crop.shipped !== undefined) ? [...name, crop.name] : [...name]
         })
@@ -28,7 +28,7 @@ class Crops extends React.Component {
         })
     }
 
-    componentWillMount() { 
+    UNSAFE_componentWillMount() { 
         this.timesShipped(this.state.shippedCrops)
     } 
     render() {

@@ -19,6 +19,8 @@ import Friendship from '../AchieveTabs/Friendship';
 import Monsters from '../AchieveTabs/Monsters';
 import Shipping from '../AchieveTabs/Shipping'
 import Earnings from '../AchieveTabs/moneyEarned'
+import Collection from '../AchieveTabs/Collection'
+import Quests from '../AchieveTabs/quests'
 
 class Achievements extends React.Component {
     constructor(props) {
@@ -89,12 +91,12 @@ class Achievements extends React.Component {
                 </TabPanel> 
                 <TabPanel> 
                     <section className="achievement-container">
-                        l
+                        <Collection museumCollection={this.props.museumCollection} />
                     </section>
                 </TabPanel> 
                 <TabPanel> 
                     <section className="achievement-container"> 
-                        m
+                        <Quests questsDone={this.props.questsDone} />
                     </section>
                 </TabPanel>
                 </Tabs>

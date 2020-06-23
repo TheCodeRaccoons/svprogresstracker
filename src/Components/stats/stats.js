@@ -42,6 +42,8 @@ const playerStats = this.props.farmhands.map((item, i) =>(
         monstersKilled  = {item.monstersKilled}
         shippedItems    = {item.shippedItems}
         moneyEarned     = {item.moneyEarned}
+        museumCollection= {item.museumCollection}
+        questsDone      = {item.questsDone}
         ></Achievements>
     </section> 
 </TabPanel>) 
@@ -72,6 +74,8 @@ const playerStats = this.props.farmhands.map((item, i) =>(
                             monstersKilled  = {this.props.playerData.monstersKilled}
                             shippedItems    = {this.props.playerData.shippedItems}
                             moneyEarned     = {this.props.playerData.moneyEarned}
+                            museumCollection= {this.props.playerData.museumCollection}
+                            questsDone      = {this.props.playerData.questsDone}
                         ></Achievements>
                         </section>
                     </TabPanel>

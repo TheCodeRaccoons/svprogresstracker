@@ -13,7 +13,7 @@ class Fish extends React.Component {
         return items.map((num) => (num.fished) ? 1 : 0).reduce((n, next) => next + n)
     }
     
-    componentWillMount() {  
+    UNSAFE_componentWillMount() {  
         this.setState({
             totalFished: this.GetCraftedItems(this.state.fishCaught)
         })

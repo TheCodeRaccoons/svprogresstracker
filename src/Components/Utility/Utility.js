@@ -8,6 +8,7 @@ const ShipCrops = require('../Utility/shippingCrops.json');
 const Fishes = require('../Utility/fishes.json'); 
 const Friendship = require('../Utility/friendship.json'); 
 const MonsterCat = require('../Utility/monsterCategorie.json'); 
+const Museum = require('../Utility/museum.json'); 
 
 /* Gather the XML and handling the file */
 //Gets the info from the farm hands as an array of the same type
@@ -27,17 +28,18 @@ const GetFarmHands = (arr) =>{
     return data;
 }  
 //Calls the parser and creates an array of players depending on wether it is a single player or multiple
-const GetDetailedInfo = (data) =>{ 
+const GetDetailedInfo = (data, collectionStatus) =>{ 
     let playerData = []
     if(Array.isArray(data)){
         data.forEach(p => { 
-            playerData = [...playerData, parseData(p)]
+            playerData = [...playerData, parseData(p, collectionStatus)]
         }) 
     }
     return playerData
 } 
 //Creates an object per player with the cleanup data from the file
-const parseData = (data) => {
+const parseData = (data, collectionStatus) => { 
+    console.log(data)
     /* Get name */ //Done
     let name        = data.name._text; 
     /* Get farm name */ //Done
@@ -49,7 +51,7 @@ const parseData = (data) => {
     /* Get crafted items */ //Done
     let craftingRecipes = GetCraftingRecipes(data.craftingRecipes.item) 
     /* Get shipped items */ 
-    let basicShipped    = GetShippedItems(data.basicShipped.item)
+    let basicShipped    = GetShippedItems(data.basicShipped.item) 
     /* Get shipped Crops */
     let cropsShipped    = GetShippedCrops(basicShipped)
     /* Get fish caught */
@@ -61,37 +63,38 @@ const parseData = (data) => {
     let specificMonsters = GetMonsterQuests(data.stats.specificMonstersKilled.item, slimesKilled)
     /* Get total money earned */
     let moneyEarned = parseInt(data.totalMoneyEarned._text)
-
+    /* Get Museum collection */
+    /* Get minerals found */
+    let mineralsFound   = GetArrayData()  
+    /* Get artifacts found */ 
+    let museumCollection = GetMCollection(data.archaeologyFound.item, data.mineralsFound.item, collectionStatus)
+    /* Get No. of quests finished */
+    let questsDone = (data.stats.questsCompleted !== undefined) ? parseInt(data.stats.questsCompleted._text) : 0
+    
+    
     //Not finished  
     /* Get professions */
-    let professions = GetProfessionData(data.professions.int)
-    /* Get Quest log */
-    let questLog    = GetQuests(data.questLog.Quest) 
-    /* Get minerals found */
-    let mineralsFound   = GetArrayData(data.mineralsFound.item) 
-    /* Get artifacts found */
-    let archaeologyFound= GetArrayDataTimeless(data.archaeologyFound.item) 
+    let professions = GetProfessionData(data.professions.int) 
     /* Get tailored items */
     let tailoredItems   = GetArrayDataTimeless(data.tailoredItems.item) 
-
 
     let playerData = {
             playerName: name,
             farmName: farmName,
             experience: xp,
             moneyEarned: moneyEarned,
-            professions: professions,
-            questLog: questLog,
+            professions: professions, 
             shippedItems: basicShipped,
             cropsShipped: cropsShipped,
             mineralsFound: mineralsFound,
             recipesCooked: recipesCooked,
-            fishCaught: fishCaught,
-            artifactsFound: archaeologyFound,
+            fishCaught: fishCaught, 
             tailoredItems: tailoredItems,
             itemsCrafted: craftingRecipes,
             friendship: FriendshipData,
-            monstersKilled: specificMonsters
+            monstersKilled: specificMonsters,
+            museumCollection: museumCollection,
+            questsDone: questsDone
     }
     return playerData;
 } 
@@ -113,20 +116,20 @@ const GetCookingData = (cooked, known) =>{
 const GetCraftingRecipes = (recipes) => {
     let data = []  
     if(Array.isArray(recipes)) {
-        CraftingRec.recipes.map(item => {
+        CraftingRec.recipes.forEach(item => {
             let d = {
                 name: item,
                 image: GetImages(item),
                 times: CleanTimes(recipes.find(i => i.key.string._text === item))
             }
-            data = [...data, d]
+            data = [...data, d] 
         })
     } 
     return data 
 } 
 const GetXpInfo = (xp) => {  
     let data = [] 
-    xp.map((item, id) => {
+    xp.forEach((item, id) => {
         let d = {
             skill: GetSkillName(id),
             xp: parseInt(item._text),
@@ -141,7 +144,7 @@ const GetShippedItems = (allShipped) => {
     //Parses the shipped info
     let shipped =  (Array.isArray(allShipped)) ? allShipped.map( val => {return {id: val.key.int._text, times: val.value.int._text}}) : []
 
-    ShipItems.shipping.map(item => {
+    ShipItems.shipping.forEach(item => {
         let d = {
             name: item.item_name,
             image: GetImages(item.item_name),
@@ -149,28 +152,26 @@ const GetShippedItems = (allShipped) => {
             shipped: (Array.isArray(shipped) ? shipped.find(i => parseInt(i.id) === item.item_id ) : false)
         }
         data = [...data, d]
-    })
-    console.log(data);
+    }) 
     return data;
 }
 const GetShippedCrops = (allShipped) => { 
-    let poly_crops = [], mono_extras = []
-
-    ShipCrops.poly_crops.map(item => {
+    let poly_crops = [], mono_extras = [] 
+    ShipCrops.poly_crops.forEach(item => {  
         let d = {
             name: item.name,
             image: GetImages(item.name),
             id: item.id,
-            shipped:  allShipped.find(i => parseInt(i.id) === item.id ).shipped
+            shipped: (allShipped.find(i => parseInt(i.id) === item.id ) !== undefined) ? allShipped.find(i => parseInt(i.id) === item.id ).shipped : undefined
         }
         poly_crops = [...poly_crops, d]
     })
-    ShipCrops.mono_extras.map(item => {
+    ShipCrops.mono_extras.forEach(item => {
         let d = {
             name: item.name,
             image: GetImages(item.name),
             id: item.id,
-            shipped:  allShipped.find(i => parseInt(i.id) === item.id ).shipped
+            shipped:  (allShipped.find(i => parseInt(i.id) === item.id ) !== undefined) ? allShipped.find(i => parseInt(i.id) === item.id ).shipped : undefined
         }
         mono_extras = [...mono_extras, d]
     })
@@ -180,7 +181,7 @@ const GetShippedCrops = (allShipped) => {
 const GetFishes = (allFished) => { 
     let data = []
 
-    Fishes.map(item => {
+    Fishes.forEach(item => {
         let d = {
             name: item.name,
             image: GetImages(item.name),
@@ -195,7 +196,7 @@ const GetFishes = (allFished) => {
 const GetFriendshipData = (allFriends) => { 
     let data = []
     if(Array.isArray(allFriends)){
-        allFriends.map(i => {
+        allFriends.forEach(i => {
             if(Friendship.includes(i.key.string._text)){
                 let level = Math.trunc(parseInt(i.value.Friendship.Points._text) / 250)
                 let d = {
@@ -206,10 +207,7 @@ const GetFriendshipData = (allFriends) => {
                     lvlup: 250 - (parseInt(i.value.Friendship.Points._text) - (level * 250))
                 } 
                 data = [...data, d] 
-            }
-            else{
-                console.log(i.key.string._text)
-            }
+            } 
         })
     }
     return data
@@ -217,7 +215,7 @@ const GetFriendshipData = (allFriends) => {
 const GetMonsterQuests = (allMonsters, slimesKilled) => {
     let monsters = []
     if(Array.isArray(allMonsters)){ 
-        allMonsters.map(item => {
+        allMonsters.forEach(item => {
             let m = {
                 name: item.key.string._text, 
                 timesKilled: parseInt(item.value.int._text)
@@ -231,7 +229,7 @@ const GetMonsterQuests = (allMonsters, slimesKilled) => {
         let sum = 0;
         for (let [key] of Object.entries(MonsterCat)) {
             sum = 0;
-            MonsterCat[key].monsters.map(cat => { 
+            MonsterCat[key].monsters.forEach(cat => { 
                 let d = {
                     timesKilled: (Array.isArray(monsters)) ? monsters.find(i => i.name === cat ) !== undefined ? monsters.find(i => i.name === cat ).timesKilled : 0 : 0
                 } 
@@ -251,6 +249,40 @@ const GetMonsterQuests = (allMonsters, slimesKilled) => {
     }
 
     return []
+}
+const GetMCollection = (archeology, geology, currentCollection) =>{
+    
+    let currCol = (Array.isArray(currentCollection)) ? currentCollection.map(c => parseInt(c.value.int._text)) : []
+
+    //Get found Archeology
+    let currArch = []
+    if(Array.isArray(archeology)) currArch = archeology.map(item => parseInt(item.key.int._text)) 
+    let artifacts = []
+    Museum.artifacts.forEach(a => {
+        let d = {
+            name: a.name,
+            image: GetImages(a.name),
+            found: (currArch.indexOf(a._id) !== -1),
+            inMuseum: (currCol.indexOf(a._id) !== -1)
+        }
+        artifacts = [...artifacts, d]
+    }) 
+
+    //Get found minerals
+    let currMin = []
+    if(Array.isArray(geology)) currMin = geology.map(item => parseInt(item.key.int._text)) 
+    let minerals = []
+    Museum.minerals.forEach(m => {
+        let d = {
+            name: m.name,
+            image: GetImages(m.name),
+            found: (currMin.indexOf(m._id) !== -1),
+            inMuseum: (currCol.indexOf(m._id) !== -1)
+        }
+        minerals = [...minerals, d]
+    })
+
+    return {artifacts, minerals}  
 }
 
 /* Utility methods */ 
@@ -482,20 +514,6 @@ const GetDateableNPC = (name) => {
     return false; 
 }
 
-
-const GetArtifactNames = (arr, itemList) =>{
-    let data = [] 
-    if(Array.isArray(arr)){ 
-        data = arr.map((item) => itemList.find(i => (parseInt(item) === i.item_id) ? i.item_name : "" ).item_name);
-    }
-    else if(!arr){
-        return data
-    }
-    else{ 
-        return data
-    }
-    return data 
-}  
 const GetArrayData = (arr) =>{
     let data = [];
     if(Array.isArray(arr)){
