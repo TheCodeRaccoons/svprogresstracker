@@ -17,7 +17,7 @@ import Crops from '../AchieveTabs/Crops';
 import Fish from '../AchieveTabs/Fish';
 import Friendship from '../AchieveTabs/Friendship';
 import Monsters from '../AchieveTabs/Monsters';
-
+import Shipping from '../AchieveTabs/Shipping'
 class Achievements extends React.Component {
     constructor(props) {
         super(props)
@@ -77,7 +77,7 @@ class Achievements extends React.Component {
                 </TabPanel> 
                 <TabPanel> 
                     <section className="achievement-container">
-                        j
+                        <Shipping  shippedItems={this.props.shippedItems}/>
                     </section>
                 </TabPanel> 
                 <TabPanel> 

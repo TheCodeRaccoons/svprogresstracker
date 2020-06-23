@@ -304,7 +304,22 @@ const GetImages = (name) => {
     if(name === "Oil Of Garlic"){
         return "Oil_of_Garlic"
     }
-    return name.split(" ").join("_").replace("'","").replace(":", "")
+    if(name === "Egg (brown)"){
+        return "Brown_Egg"
+    }
+    if(name === "Egg (white)"){
+        return "Egg"
+    }
+    if(name === "Large Egg (white)"){
+        return "Large_Egg"
+    }
+    if(name === "Large Egg (brown)"){
+        return "Large_Brown_Egg"
+    }
+    if(name === "L. Goat Milk"){
+        return "Large_Goat_Milk"
+    }
+    return name.split(" ").join("_").replace("'","").replace(":", "").replace("", "")
 }  
 const CleanTimes = (obj) => {
     return (obj !== undefined ? parseInt(obj.value.int._text) : undefined)

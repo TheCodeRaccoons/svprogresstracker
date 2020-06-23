@@ -11,7 +11,7 @@ class Monsters extends React.Component {
     GetQuestData = (monsters) => {
         return(
                 <li>
-                    <span className="goal-mg">{monsters.images.map((image, i) => <img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Monsters/${image.img}.png`} className="done" title={image.name} alt={image.name} ></img>) }</span>
+                    <span className="goal-mg">{monsters.images.map((image, i) => <img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Monsters/${image.img}.png`} className="done" title={image.name} alt={image.name} width="21px" ></img>) }</span>
         {monsters.category}: {(monsters.timesKilled >= monsters.goal) ?  <span className="completed"> {monsters.timesKilled} / {monsters.goal}</span> : <span className="pending"> {monsters.timesKilled} / {monsters.goal}</span> } 
                 </li>    
         )
@@ -30,7 +30,6 @@ class Monsters extends React.Component {
                 <ul className="m-List">
                     { this.state.monstersKilled.slice(5).map( m => this.GetQuestData(m))} 
                 </ul> 
-                {/*this.state.monstersKilled.specificMonsters.map((monster, i) => <img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Monsters/${monster.image}.png`} className={monster.data === undefined ? "" : "done"} title={monster.name} alt={monster.name} ></img>)*/}
             </div>
         );
     }
