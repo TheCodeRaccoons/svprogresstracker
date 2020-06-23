@@ -29,10 +29,11 @@ const GetFarmHands = (arr) =>{
 //Calls the parser and creates an array of players depending on wether it is a single player or multiple
 const GetDetailedInfo = (data) =>{ 
     let playerData = []
-    if(Array.isArray(data))
-    data.forEach(p => { 
-        playerData = [...playerData, parseData(p)]
-    })
+    if(Array.isArray(data)){
+        data.forEach(p => { 
+            playerData = [...playerData, parseData(p)]
+        }) 
+    }
     return playerData
 } 
 //Creates an object per player with the cleanup data from the file
@@ -58,7 +59,8 @@ const parseData = (data) => {
     /* Get Specific monsters killed */
     let slimesKilled = (data.stats.slimesKilled._text !== undefined) ? parseInt(data.stats.slimesKilled._text) : 0
     let specificMonsters = GetMonsterQuests(data.stats.specificMonstersKilled.item, slimesKilled)
-    
+    /* Get total money earned */
+    let moneyEarned = parseInt(data.totalMoneyEarned._text)
 
     //Not finished  
     /* Get professions */
@@ -77,6 +79,7 @@ const parseData = (data) => {
             playerName: name,
             farmName: farmName,
             experience: xp,
+            moneyEarned: moneyEarned,
             professions: professions,
             questLog: questLog,
             shippedItems: basicShipped,

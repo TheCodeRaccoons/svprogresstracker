@@ -18,6 +18,8 @@ import Fish from '../AchieveTabs/Fish';
 import Friendship from '../AchieveTabs/Friendship';
 import Monsters from '../AchieveTabs/Monsters';
 import Shipping from '../AchieveTabs/Shipping'
+import Earnings from '../AchieveTabs/moneyEarned'
+
 class Achievements extends React.Component {
     constructor(props) {
         super(props)
@@ -67,22 +69,22 @@ class Achievements extends React.Component {
                 </TabPanel> 
                 <TabPanel> 
                     <section className="achievement-container">
-                        <Friendship  friendship={this.props.friendship}/>
+                        <Friendship friendship={this.props.friendship}/>
                     </section>
                 </TabPanel> 
                 <TabPanel> 
                     <section className="achievement-container">
-                        <Monsters  monstersKilled={this.props.monstersKilled}/>
+                        <Monsters monstersKilled={this.props.monstersKilled}/>
                     </section>
                 </TabPanel> 
                 <TabPanel> 
                     <section className="achievement-container">
-                        <Shipping  shippedItems={this.props.shippedItems}/>
+                        <Shipping shippedItems={this.props.shippedItems}/>
                     </section>
                 </TabPanel> 
                 <TabPanel> 
                     <section className="achievement-container">
-                        k
+                        <Earnings moneyEarned={this.props.moneyEarned}/>
                     </section>
                 </TabPanel> 
                 <TabPanel> 

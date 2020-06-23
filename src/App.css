@@ -355,6 +355,7 @@ html{
   left: 20px;
   width: 40px;
   height: 40px;
+  cursor: help;
 }
 
 .skill-container span{
@@ -427,6 +428,7 @@ html{
 
 .food-container img{
   width: 40px;
+  cursor: help;
 }
 
 .goal-mg{
@@ -434,7 +436,7 @@ html{
   height: auto;
   display: flex;
   justify-content: flex-end;
-  padding: 0 15px;
+  padding: 0 15px; 
 }
 
 /*Achievement containers*/
@@ -463,7 +465,7 @@ html{
   padding: 5px;
   width: 35px;
   filter: grayscale(1) brightness(0);
-  cursor: pointer;
+  cursor: help;
 }
 
 .progress-container-flex .npc-data{

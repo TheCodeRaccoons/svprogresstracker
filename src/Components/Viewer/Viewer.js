@@ -8,23 +8,32 @@ class Viewer extends React.Component {
         this.state = {}
     }
 
-    RetrivePlayerData(d){  
-        var p_res = convert.xml2json(d, {compact: true});
-        let json = JSON.parse(p_res); 
-        /* Gather data */
-        let player          = json.SaveGame.player;
-        let farmHands       = GetFarmHands(json.SaveGame.locations.GameLocation[1].buildings.Building);
-        console.log(player)
-        console.log(farmHands)
-
-        let players = {
+    RetrivePlayerData(d){
+        let json = "";
+        try{
+            var p_res = convert.xml2json(d, {compact: true});
+            json = JSON.parse(p_res);
+        }
+        catch(e){
+            console.log("really m8")
+        }
+        if(json.SaveGame !== undefined){ 
+            let prefix = d.includes("SaveGame xmlns:xsi") ? 'xsi': 'p3' 
+            //console.log(json.SaveGame)
+            let collection = json.SaveGame.locations.GameLocation.find(loc => (loc._attributes !== undefined) ? loc._attributes[`${prefix}:type`] === "LibraryMuseum" : "" )
+            /* Gather data */
+            let player          = json.SaveGame.player;
+            let farmHands       = GetFarmHands(json.SaveGame.locations.GameLocation[1].buildings.Building); 
+            let players = {
                 playerData: GetDetailedInfo([player]),
                 farmhandData: GetDetailedInfo(farmHands)
+            } 
+            this.props.UpdatePlayerData(players) 
+            this.props.UpdateGamePrefix(prefix) 
+            this.props.GetCollection(collection)
         }
-        
-        this.props.UpdatePlayerData(players) 
     }
-     
+    
     onChange(e){
         let file = e.target.files; 
         let reader = new FileReader(); 

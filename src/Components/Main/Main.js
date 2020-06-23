@@ -28,6 +28,18 @@ class Main extends React.Component {
             playerData: _playerData.playerData[0]});
     }
 
+    UpdateGamePrefix = (pref) => {
+        this.setState({
+            nsPrefix: pref
+        });
+    }
+
+    GetCollection = (collection) => { 
+        this.setState({
+            mCollection: collection
+        });
+    }
+
     loaderShow = () =>{
         return (this.state.showLoader) ? "loader loader-active" : "loader";
     }
@@ -71,7 +83,7 @@ class Main extends React.Component {
                     <div className="main-container"> 
                         {
                             (this.state.hasData)? <Stats playerData={this.state.playerData} farmhands={this.state.farmhands} /> : 
-                                                <Viewer UpdatePlayerData={this.UpdatePlayerData} ShowLoader={this.ShowLoader}/>
+                                                <Viewer UpdatePlayerData={this.UpdatePlayerData} UpdateGamePrefix={this.UpdateGamePrefix} GetCollection={this.GetCollection} ShowLoader={this.ShowLoader}/>
                         }
                     </div>
                     <div className="adds">
