@@ -82,6 +82,7 @@ const playerStats = this.props.farmhands.map((item, i) =>(
                         {playerStats}
                 </Tabs>
                 </section>
+            
             </div>
         );
     }

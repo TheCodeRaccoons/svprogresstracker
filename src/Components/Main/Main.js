@@ -92,6 +92,7 @@ class Main extends React.Component {
                         ADS
                     </div>
                 </div>
+                <div className="coright" > Source at GitHub, All <br /> "Stardew Valley" assets <br /> copyright Concerned Ape, <br /> other assets and site design <br /> made by Ookamijime</div>
             </div>
         );
     }

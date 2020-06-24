@@ -107,6 +107,7 @@ const GetCookingData = (cooked, known) =>{
             name: NameTranslate(item.Name),
             id: item.id,
             image: GetImages(item.Name),
+            link: item.link,
             times: (ValidateKnown(known, NameTranslate(item.Name))) ? GetCooked(cooked, item.id) : undefined
         }
         data = [...data, d]

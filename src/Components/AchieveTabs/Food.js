@@ -27,7 +27,7 @@ class Food extends React.Component {
                     <li>Gourmet Chef: {(this.state.DishesCooked >= 74) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to cook {74 - this.state.DishesCooked} more dishes to get this</span> }</li>
                 </ul>
                 <br />
-                {this.props.recipesCooked.map((d, i) => <img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Cooking/${d.image}.png`} alt={d.name} className={ (d.times !== undefined) ? ((d.times > 0) ? "done" : "known" ): "" } title={(d.times !== undefined) ? (d.times > 0) ? `Cooked ${d.name}  ${d.times} times` : `You haven't cooked ${d.name}` : `You don't know how to cook ${d.name}`} ></img>)}
+                {this.props.recipesCooked.map((d, i) => <a href={`https://stardewvalleywiki.com/${d.link}`} target="blank" key={i}><img src={`https://stardew-tracker.s3.amazonaws.com/Cooking/${d.image}.png`} alt={d.name} className={ (d.times !== undefined) ? ((d.times > 0) ? "done" : "known" ): "" } title={(d.times !== undefined) ? (d.times > 0) ? `Cooked ${d.name}  ${d.times} times` : `You haven't cooked ${d.name}` : `You don't know how to cook ${d.name}`} ></img></a>)}
             </div>
         );
     }

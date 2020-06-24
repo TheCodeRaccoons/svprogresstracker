@@ -18,7 +18,7 @@ class Quests extends React.Component {
                 <ul className="a-List"> 
                     <li>Gofer: {(this.state.questsDone >= 10) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to complete {10 - this.state.questsDone} more requests to get this achievement.</span> } </li>
                     <li>A Big Help: {(this.state.questsDone >= 40) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to complete {40 - this.state.questsDone} more requests to get this achievement.</span> } </li>
-               </ul>
+                </ul>
             </div>
         );
     }
