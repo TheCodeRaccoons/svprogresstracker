@@ -590,12 +590,6 @@ const GetSkillName = (skillId) =>{
     }
 } 
 
-/* Required Methods */
-exports.GetProfession = GetProfession; 
+/* Required Methods */ 
 exports.GetFarmHands = GetFarmHands;  
-exports.GetDetailedInfo = GetDetailedInfo;    
-exports.GetArrayData = GetArrayData;
-exports.GetArrayDataTimeless = GetArrayDataTimeless;
-exports.GetQuests = GetQuests;
-exports.GetProfessionData = GetProfessionData;
-exports.GetFarmHands = GetFarmHands;
+exports.GetDetailedInfo = GetDetailedInfo;
