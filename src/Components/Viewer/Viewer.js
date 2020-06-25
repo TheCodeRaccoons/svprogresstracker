@@ -1,7 +1,8 @@
 import React from 'react'; 
 import convert from 'xml-js'
 import Junimo6 from '../../Media/Junimo6.png'
-import {GetFarmHands, GetDetailedInfo} from '../Utility/Utility'
+import {GetFarmHands} from '../Utility/Utility'
+import {GetDetailedInfo} from '../Utility/Utility'
 class Viewer extends React.Component {
     constructor(props) {
         super(props)
