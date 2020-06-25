@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/svprogresstracker/static/css/main.ce9ce2d4.chunk.css",
+    "main.js": "/svprogresstracker/static/js/main.4d7328c3.chunk.js",
+    "main.js.map": "/svprogresstracker/static/js/main.4d7328c3.chunk.js.map",
+    "runtime-main.js": "/svprogresstracker/static/js/runtime-main.c8c2c6b7.js",
+    "runtime-main.js.map": "/svprogresstracker/static/js/runtime-main.c8c2c6b7.js.map",
+    "static/js/2.612f4e4b.chunk.js": "/svprogresstracker/static/js/2.612f4e4b.chunk.js",
+    "static/js/2.612f4e4b.chunk.js.map": "/svprogresstracker/static/js/2.612f4e4b.chunk.js.map",
+    "index.html": "/svprogresstracker/index.html",
+    "precache-manifest.d9e22df8955a85a34baf1209cee22853.js": "/svprogresstracker/precache-manifest.d9e22df8955a85a34baf1209cee22853.js",
+    "service-worker.js": "/svprogresstracker/service-worker.js",
+    "static/css/main.ce9ce2d4.chunk.css.map": "/svprogresstracker/static/css/main.ce9ce2d4.chunk.css.map",
+    "static/js/2.612f4e4b.chunk.js.LICENSE.txt": "/svprogresstracker/static/js/2.612f4e4b.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/svprogresstracker/static/media/rainyhearts.069fb64d.ttf",
+    "static/media/fb.png": "/svprogresstracker/static/media/fb.302fc879.png",
+    "static/media/kofi.png": "/svprogresstracker/static/media/kofi.e72d9b9d.png",
+    "static/media/twitter.png": "/svprogresstracker/static/media/twitter.60be19f5.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c8c2c6b7.js",
+    "static/js/2.612f4e4b.chunk.js",
+    "static/css/main.ce9ce2d4.chunk.css",
+    "static/js/main.4d7328c3.chunk.js"
+  ]
+}
