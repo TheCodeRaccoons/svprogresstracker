@@ -591,5 +591,4 @@ const GetSkillName = (skillId) =>{
 } 
 
 /* Required Methods */ 
-exports.GetFarmHands = GetFarmHands;  
-exports.GetDetailedInfo = GetDetailedInfo;
+export { GetFarmHands, GetDetailedInfo};

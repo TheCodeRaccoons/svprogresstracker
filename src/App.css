@@ -494,7 +494,9 @@ html{
   font-size: 1em;
   color: #FFF;
 }
-
+.adsbygoogle{
+  display:block
+}
 
 /*Small Screens*/
 @media only screen and (max-width: 800px){

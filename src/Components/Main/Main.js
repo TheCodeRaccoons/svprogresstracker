@@ -7,6 +7,8 @@ import kofi from '../../Media/Social/kofi.png'
 import twit from '../../Media/Social/twitter.png'
 import Window4 from '../../Media/Windows/Window4.png'
 import Loader from '../../Media/loader.gif'
+import AdComponent from '../adsense/adComponent'
+
 class Main extends React.Component {
     constructor() {
         super()
@@ -80,7 +82,7 @@ class Main extends React.Component {
                 </div>
                 <div className="container">
                     <div className="adds">
-                        ADS
+                        <AdComponent />
                     </div>
                     <div className="main-container"> 
                         {
@@ -89,7 +91,7 @@ class Main extends React.Component {
                         }
                     </div>
                     <div className="adds">
-                        ADS
+                        <AdComponent />
                     </div>
                 </div>
                 <div className="coright" > Source at GitHub, All <br /> "Stardew Valley" assets <br /> copyright Concerned Ape, <br /> other assets and site design <br /> made by Ookamijime</div>
