@@ -116,14 +116,15 @@ html{
   justify-content: center;
 } 
 
-.container{
-  max-width: 1080px;
-  min-width: 80vw;
-  height: 500px;
-  min-height: 80vh;
-  display: flex;
-  flex-wrap: nowrap;
-  margin: auto;
+section.sv-container{
+  height: 500px !important;
+  width: 80px;
+  max-width: 1080px !important;
+  min-width: 80vw !important;
+  min-height: 80vh !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  margin: auto !important;
 }
 
 .adds{
@@ -138,6 +139,11 @@ html{
   color: white;
   font-weight: 600;
   font-size: 5em;
+}
+
+.adds ins{
+  width: 100%;
+  height: 100%;
 }
 
 .main-container{

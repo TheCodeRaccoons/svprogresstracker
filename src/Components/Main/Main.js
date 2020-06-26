@@ -9,6 +9,8 @@ import Window4 from '../../Media/Windows/Window4.png'
 import Loader from '../../Media/loader.gif'
 import AdComponent from '../adsense/adComponent'
 
+import AdSense from 'react-adsense';
+
 class Main extends React.Component {
     constructor() {
         super()
@@ -80,9 +82,8 @@ class Main extends React.Component {
                         <h1>Stardew Valley: Progress tracker</h1> 
                     </div>
                 </div>
-                <div className="container">
-                    <div className="adds">
-                        <AdComponent />
+                <section className="sv-container">
+                    <div className="adds"> 
                     </div>
                     <div className="main-container"> 
                         {
@@ -90,10 +91,9 @@ class Main extends React.Component {
                                                 <Viewer UpdatePlayerData={this.UpdatePlayerData} UpdateGamePrefix={this.UpdateGamePrefix} GetCollection={this.GetCollection} ShowLoader={this.ShowLoader}/>
                         }
                     </div>
-                    <div className="adds">
-                        <AdComponent />
+                    <div className="adds"> 
                     </div>
-                </div>
+                </section>
                 <div className="coright" > Source at GitHub, All <br /> "Stardew Valley" assets <br /> copyright Concerned Ape, <br /> other assets and site design <br /> made by Ookamijime</div>
             </div>
         );
