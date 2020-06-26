@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "420759e72c304cedc8f56205609edd6a",
+    "revision": "654069087c6b581770f0907546053325",
     "url": "/svprogresstracker/index.html"
   },
   {
-    "revision": "113a9cdb0042309dffde",
-    "url": "/svprogresstracker/static/css/main.25edda82.chunk.css"
+    "revision": "ca80a24dfea9ff0122d5",
+    "url": "/svprogresstracker/static/css/main.5b4e9090.chunk.css"
   },
   {
-    "revision": "0ea664cda8ccbbdba700",
-    "url": "/svprogresstracker/static/js/2.612f4e4b.chunk.js"
+    "revision": "233d6609338be73661a8",
+    "url": "/svprogresstracker/static/js/2.1a1c935b.chunk.js"
   },
   {
     "revision": "f7b2638586adbb7036ab49259c96a2df",
-    "url": "/svprogresstracker/static/js/2.612f4e4b.chunk.js.LICENSE.txt"
+    "url": "/svprogresstracker/static/js/2.1a1c935b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "113a9cdb0042309dffde",
-    "url": "/svprogresstracker/static/js/main.f9d63142.chunk.js"
+    "revision": "ca80a24dfea9ff0122d5",
+    "url": "/svprogresstracker/static/js/main.cb6713da.chunk.js"
   },
   {
     "revision": "2d90a8733a7cd40f5fb4",
