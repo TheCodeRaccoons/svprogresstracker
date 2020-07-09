@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "654069087c6b581770f0907546053325",
+    "revision": "2e25ca860c7fa8373355ac0814599f5b",
     "url": "/svprogresstracker/index.html"
   },
   {
-    "revision": "ca80a24dfea9ff0122d5",
-    "url": "/svprogresstracker/static/css/main.5b4e9090.chunk.css"
+    "revision": "9a80e790f9c6dbaefd64",
+    "url": "/svprogresstracker/static/css/main.2fc1c9c8.chunk.css"
   },
   {
     "revision": "233d6609338be73661a8",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/svprogresstracker/static/js/2.1a1c935b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "ca80a24dfea9ff0122d5",
-    "url": "/svprogresstracker/static/js/main.cb6713da.chunk.js"
+    "revision": "9a80e790f9c6dbaefd64",
+    "url": "/svprogresstracker/static/js/main.76ea4c1b.chunk.js"
   },
   {
     "revision": "2d90a8733a7cd40f5fb4",
