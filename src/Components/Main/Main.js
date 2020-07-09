@@ -94,7 +94,7 @@ class Main extends React.Component {
                     <div className="adds"> 
                     </div>
                 </section>
-                <div className="coright" > Source at GitHub, All <br /> "Stardew Valley" assets <br /> copyright Concerned Ape, <br /> other assets and site design <br /> made by Ookamijime</div>
+                <div className="coright" > Source at GitHub, All <br /> "Stardew Valley" assets <br /> copyright <a  href="https://twitter.com/ConcernedApe" target="blank" >Concerned Ape</a>, <br /> other assets and site design <br /> made by <a  href="https://twitter.com/OokamiJime" target="blank" >Ookamijime</a></div>
             </div>
         );
     }

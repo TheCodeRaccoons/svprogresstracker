@@ -128,7 +128,7 @@ section.sv-container{
 }
 
 .adds{
-  background: pink;
+  background: transparent;
   height: 100%;
   min-width: 200px;
   margin: 0 15px;
@@ -487,6 +487,12 @@ section.sv-container{
   text-align: center; 
   padding-top: 20px;
 }
+
+.progress-container a{
+  text-decoration: none;
+  cursor: help;
+}
+
 .npc-data .friendship {
   margin: auto;
   width: 90px;
@@ -500,6 +506,12 @@ section.sv-container{
   font-size: 1em;
   color: #FFF;
 }
+.coright a{
+  
+  text-decoration: underline;
+  color: inherit;
+}
+
 .adsbygoogle{
   display:block
 }

@@ -29,13 +29,15 @@ class Crafting extends React.Component {
                 </ul>
                 <br />
                 {this.props.itemsCrafted.map((item, i) => (
-                <img 
+                <a href={`https://stardewvalleywiki.com/${item.image}`} target="blank" key={i}>
+                    <img 
                     key={i} 
                     src={`https://stardew-tracker.s3.amazonaws.com/Crafting/${item.image}.png`} 
                     alt={item.Name} 
                     className={(item.times !== undefined) ? ((item.times > 0) ? "done" : "known") : "" } 
                     title={(item.times !== undefined) ? ((item.times > 0) ? `You have crafted "${item.name}" ${item.times} Times` : `You haven't crafted any ${item.name} yet`) : `You don't know how to craft ${item.name} yet`}>
-                    </img>))}
+                    </img>
+                </a>))}
             </div>
         );
     }
