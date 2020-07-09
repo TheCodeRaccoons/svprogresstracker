@@ -44,10 +44,10 @@ class Collection extends React.Component {
                     <li>A Complete Collection: {(this.state.total === this.state.totalDelivered) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to deliver {this.state.total - this.state.totalDelivered} more items to get this achievement.</span> } </li>
                 </ul>
                 <span className="a-title"><h1>Artifacts</h1></span>
-                {this.state.museumCollection.artifacts.map((item, i) => <img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Artifacts/${item.image}.png`} alt={item.name} className={ (item.found) ? item.inMuseum ? "done" : "known": "" } title={(item.found) ? (item.inMuseum) ? `You have delivered ${item.name} to the museum` : `You haven't delivered ${item.name} to the museum` : `You haven't found ${item.name} yet`} ></img>)}
+                {this.state.museumCollection.artifacts.map((item, i) => <a href={`https://stardewvalleywiki.com/${item.image}`} target="blank" key={i}><img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Artifacts/${item.image}.png`} alt={item.name} className={ (item.found) ? item.inMuseum ? "done" : "known": "" } title={(item.found) ? (item.inMuseum) ? `You have delivered ${item.name} to the museum` : `You haven't delivered ${item.name} to the museum` : `You haven't found ${item.name} yet`} ></img></a>)}
         
                 <span className="a-title"><h1>Minerals</h1></span>
-                {this.state.museumCollection.minerals.map((item, i) => <img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Minerals/${item.image}.png`} alt={item.name} className={ (item.found) ? item.inMuseum ? "done" : "known" : "" } title={(item.found) ? (item.inMuseum) ? `You have delivered ${item.name} to the museum` : `You haven't delivered ${item.name} to the museum` : `You haven't found ${item.name} yet`} ></img>)}
+                {this.state.museumCollection.minerals.map((item, i) => <a href={`https://stardewvalleywiki.com/${item.image}`} target="blank" key={i}><img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Minerals/${item.image}.png`} alt={item.name} className={ (item.found) ? item.inMuseum ? "done" : "known" : "" } title={(item.found) ? (item.inMuseum) ? `You have delivered ${item.name} to the museum` : `You haven't delivered ${item.name} to the museum` : `You haven't found ${item.name} yet`} ></img></a>)}
             </div>
         );
     }

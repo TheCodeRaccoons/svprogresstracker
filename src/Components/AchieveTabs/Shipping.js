@@ -37,7 +37,7 @@ class Shipping extends React.Component {
                     <li>Full Shipment: {(this.state.totalShipped === this.state.shippedItems.length) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to ship {this.state.shippedItems.length - this.state.totalShipped} more item to get this achievement.</span> } </li>
                 </ul>
                 <br />
-                {this.props.shippedItems.map((d, i) => <img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Shipment/${d.image}.png`} alt={d.name} className={ (d.shipped !== undefined) ?  "done" : "" } title={(d.shipped !== undefined) ? `You have shipped ${d.name}` : `You haven't shipped ${d.name}`} ></img>)}
+                {this.props.shippedItems.map((d, i) => <a href={`https://stardewvalleywiki.com/${d.image}`} target="blank" key={i}><img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Shipment/${d.image}.png`} alt={d.name} className={ (d.shipped !== undefined) ?  "done" : "" } title={(d.shipped !== undefined) ? `You have shipped ${d.name}` : `You haven't shipped ${d.name}`} ></img></a>)}
             </div>
         );
     }

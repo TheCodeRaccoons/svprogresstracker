@@ -30,7 +30,7 @@ class Fish extends React.Component {
                     <li>Master Angler : {(this.state.totalFished >= this.state.fishCaught.length) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to catch {this.state.fishCaught.length - this.state.totalFished} more fish to get this </span>}</li>
                 </ul>
                 <br />
-                {this.state.fishCaught.map((fish, i) => <img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Fishing/${fish.image}.png`} alt={fish.name} className={ (fish.fished) ? "done" : ""} title={(fish.fished) ? `You've caught  ${fish.name}` :  `You haven't fished ${fish.name}`} ></img>)}
+                {this.state.fishCaught.map((fish, i) => <a href={`https://stardewvalleywiki.com/${fish.image}`} target="blank" key={i}><img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Fishing/${fish.image}.png`} alt={fish.name} className={ (fish.fished) ? "done" : ""} title={(fish.fished) ? `You've caught  ${fish.name}` :  `You haven't fished ${fish.name}`} ></img></a>)}
 
             </div>
         );
