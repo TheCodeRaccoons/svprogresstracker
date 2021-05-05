@@ -1,26 +1,24 @@
 {
   "files": {
-    "main.css": "/svprogresstracker/static/css/main.2fc1c9c8.chunk.css",
-    "main.js": "/svprogresstracker/static/js/main.76ea4c1b.chunk.js",
-    "main.js.map": "/svprogresstracker/static/js/main.76ea4c1b.chunk.js.map",
-    "runtime-main.js": "/svprogresstracker/static/js/runtime-main.c8c2c6b7.js",
-    "runtime-main.js.map": "/svprogresstracker/static/js/runtime-main.c8c2c6b7.js.map",
-    "static/js/2.1a1c935b.chunk.js": "/svprogresstracker/static/js/2.1a1c935b.chunk.js",
-    "static/js/2.1a1c935b.chunk.js.map": "/svprogresstracker/static/js/2.1a1c935b.chunk.js.map",
+    "main.css": "/svprogresstracker/static/css/main.c664aa53.chunk.css",
+    "main.js": "/svprogresstracker/static/js/main.7a8257ff.chunk.js",
+    "main.js.map": "/svprogresstracker/static/js/main.7a8257ff.chunk.js.map",
+    "runtime-main.js": "/svprogresstracker/static/js/runtime-main.db48e0f2.js",
+    "runtime-main.js.map": "/svprogresstracker/static/js/runtime-main.db48e0f2.js.map",
+    "static/js/2.c3a2c2dd.chunk.js": "/svprogresstracker/static/js/2.c3a2c2dd.chunk.js",
+    "static/js/2.c3a2c2dd.chunk.js.map": "/svprogresstracker/static/js/2.c3a2c2dd.chunk.js.map",
     "index.html": "/svprogresstracker/index.html",
-    "precache-manifest.b250ef882544b5378e3d035e38b6568b.js": "/svprogresstracker/precache-manifest.b250ef882544b5378e3d035e38b6568b.js",
-    "service-worker.js": "/svprogresstracker/service-worker.js",
-    "static/css/main.2fc1c9c8.chunk.css.map": "/svprogresstracker/static/css/main.2fc1c9c8.chunk.css.map",
-    "static/js/2.1a1c935b.chunk.js.LICENSE.txt": "/svprogresstracker/static/js/2.1a1c935b.chunk.js.LICENSE.txt",
-    "static/media/App.css": "/svprogresstracker/static/media/rainyhearts.069fb64d.ttf",
-    "static/media/fb.png": "/svprogresstracker/static/media/fb.302fc879.png",
-    "static/media/kofi.png": "/svprogresstracker/static/media/kofi.e72d9b9d.png",
-    "static/media/twitter.png": "/svprogresstracker/static/media/twitter.60be19f5.png"
+    "static/css/main.c664aa53.chunk.css.map": "/svprogresstracker/static/css/main.c664aa53.chunk.css.map",
+    "static/js/2.c3a2c2dd.chunk.js.LICENSE.txt": "/svprogresstracker/static/js/2.c3a2c2dd.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/svprogresstracker/static/media/rainyhearts.2f088ce2.ttf",
+    "static/media/fb.0a13d69d.png": "/svprogresstracker/static/media/fb.0a13d69d.png",
+    "static/media/kofi.4eddcc1f.png": "/svprogresstracker/static/media/kofi.4eddcc1f.png",
+    "static/media/twitter.008fa004.png": "/svprogresstracker/static/media/twitter.008fa004.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.c8c2c6b7.js",
-    "static/js/2.1a1c935b.chunk.js",
-    "static/css/main.2fc1c9c8.chunk.css",
-    "static/js/main.76ea4c1b.chunk.js"
+    "static/js/runtime-main.db48e0f2.js",
+    "static/js/2.c3a2c2dd.chunk.js",
+    "static/css/main.c664aa53.chunk.css",
+    "static/js/main.7a8257ff.chunk.js"
   ]
 }
