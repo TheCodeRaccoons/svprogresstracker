@@ -72,5 +72,11 @@
     {"Name":"Lobster Bisque", "id":730, "link":"Lobster_Bisque"},
     {"Name":"Maple Bar", "id":731, "link":"Maple_Bar"},	
     {"Name":"Crab Cakes", "id":732, "link":"Crab_Cakes"},	
-    {"Name":"Shrimp Cocktail", "id":733, "link":"Shrimp_Cocktail"}
+    {"Name":"Shrimp Cocktail", "id":733, "link":"Shrimp_Cocktail"},
+    {"Name":"Ginger Ale", "id":903, "link":"Ginger_Ale"},
+    {"Name":"Banana Pudding", "id":904, "link":"Banana_Pudding"},
+    {"Name":"Mango Sticky Rice", "id":905, "link":"Mango_Sticky_Rice"},
+    {"Name":"Poi", "id":906, "link":"Poi"},
+    {"Name":"Tropical Curry", "id":907, "link":"Tropical_Curry"},
+    {"Name":"Squid Ink Ravioli", "id":733, "link":"Squid_Ink_Ravioli"}
 ]}

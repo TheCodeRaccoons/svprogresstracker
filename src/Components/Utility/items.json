@@ -57,6 +57,10 @@
             "item_id": 68
         },
         {
+            "item_name": "Banana Sapling",
+            "item_id": 69
+        }, 
+        {
             "item_name": "Jade",
             "item_id": 70
         },
@@ -116,6 +120,10 @@
             "item_name": "Cactus Fruit",
             "item_id": 90
         },
+        {
+            "item_name": "Banana",
+            "item_id": 91
+        }, 
         {
             "item_name": "Sap",
             "item_id": 92
@@ -829,8 +837,16 @@
             "item_id": 288
         },
         {
+            "item_name": "Ostrich Egg",
+            "item_id": 289
+        },
+        {
             "item_name": "Stone",
             "item_id": 290
+        },
+        {
+            "item_name": "Mahogany Seed",
+            "item_id": 292
         },
         {
             "item_name": "Brick Floor",
@@ -2347,6 +2363,266 @@
         {
             "item_name": "Tea Leaves",
             "item_id": 815
+        },
+        {
+            "item_name": "Fossilized Skull",
+            "item_id": 820
+        },
+        {
+            "item_name": "Fossilized Spine",
+            "item_id": 821
+        },
+        {
+            "item_name": "Fossilized Tail",
+            "item_id": 822
+        },
+        {
+            "item_name": "Fossilized Leg",
+            "item_id": 823
+        },
+        {
+            "item_name": "Fossilized Ribs",
+            "item_id": 824
+        },
+        {
+            "item_name": "Snake Skull",
+            "item_id": 825
+        },
+        {
+            "item_name": "Snake Vertebrae",
+            "item_id": 826
+        },
+        {
+            "item_name": "Mummified Bat",
+            "item_id": 827
+        },
+        {
+            "item_name": "Mummified Frog",
+            "item_id": 828
+        },
+        {
+            "item_name": "Ginger",
+            "item_id": 829
+        },
+        {
+            "item_name": "Taro Root",
+            "item_id": 830
+        },
+        {
+            "item_name": "Taro Tuber",
+            "item_id": 831
+        },
+        {
+            "item_name": "Pineapple",
+            "item_id": 832
+        },
+        {
+            "item_name": "Pineapple Seeds",
+            "item_id": 833
+        },
+        {
+            "item_name": "Mango",
+            "item_id": 834
+        },
+        {
+            "item_name": "Mango Sapling",
+            "item_id": 835
+        },
+        {
+            "item_name": "Stingray",
+            "item_id": 836
+        },
+        {
+            "item_name": "Lionfish",
+            "item_id": 837
+        },
+        {
+            "item_name": "Blue Discus",
+            "item_id": 838
+        },
+        {
+            "item_name": "Rustic Plank Floor",
+            "item_id": 840
+        },
+        {
+            "item_name": "Stone Walkway Floor",
+            "item_id": 841
+        },
+        {
+            "item_name": "Cinder Shard",
+            "item_id": 848
+        },
+        {
+            "item_name": "Magma Cap",
+            "item_id": 851
+        },
+        {
+            "item_name": "Dragon Tooth",
+            "item_id": 852
+        },
+        {
+            "item_name": "Curiosity Lure",
+            "item_id": 856
+        },
+        {
+            "item_name": "Tiger Slime Egg",
+            "item_id": 857
+        },
+        {
+            "item_name": "Fairy Dust",
+            "item_id": 872
+        },
+        {
+            "item_name": "Piña Colada",
+            "item_id": 873
+        },
+        {
+            "item_name": "Bug Steak",
+            "item_id": 874
+        },
+        {
+            "item_name": "Quality Bobber",
+            "item_id": 877
+        },
+        {
+            "item_name": "Monster Musk",
+            "item_id": 879
+        },
+        {
+            "item_name": "Bone Fragment",
+            "item_id": 881
+        },
+        {
+            "item_name": "Fiber Seeds",
+            "item_id": 885
+        },
+        {
+            "item_name": "Warp Totem: Island",
+            "item_id": 886
+        },
+        {
+            "item_name": "Qi Fruit",
+            "item_id": 889
+        },
+        {
+            "item_name": "Qi Bean",
+            "item_id": 890
+        },
+        {
+            "item_name": "Mushroom Tree Seed",
+            "item_id": 891
+        },
+        {
+            "item_name": "Warp Totem: Qi's Arena",
+            "item_id": 892
+        },
+        {
+            "item_name": "Fireworks (Red)",
+            "item_id": 893
+        },
+        {
+            "item_name": "Fireworks (Purple)",
+            "item_id": 894
+        },
+        {
+            "item_name": "Fireworks (Green)",
+            "item_id": 895
+        },
+        {
+            "item_name": "Galaxy Soul",
+            "item_id": 896
+        },
+        {
+            "item_name": "Son of Crimsonfish",
+            "item_id": 898
+        },
+        {
+            "item_name": "Ms. Angler",
+            "item_id": 899
+        },
+        {
+            "item_name": "Legend II",
+            "item_id": 900
+        },
+        {
+            "item_name": "Radioactive Carp",
+            "item_id": 901
+        },
+        {
+            "item_name": "Glacierfish Jr.",
+            "item_id": 902
+        },
+        {
+            "item_name": "Ginger Ale",
+            "item_id": 903
+        },
+        {
+            "item_name": "Banana Pudding",
+            "item_id": 904
+        },
+        {
+            "item_name": "Mango Sticky Rice",
+            "item_id": 905
+        },
+        {
+            "item_name": "Poi",
+            "item_id": 906
+        },
+        {
+            "item_name": "Tropical Curry",
+            "item_id": 907
+        },
+        {
+            "item_name": "Magic Bait",
+            "item_id": 908
+        },
+        {
+            "item_name": "Radioactive Ore",
+            "item_id": 909
+        },
+        {
+            "item_name": "Radioactive Bar",
+            "item_id": 910
+        },
+        {
+            "item_name": "Horse Flute",
+            "item_id": 911
+        },
+        {
+            "item_name": "Enricher",
+            "item_id": 912
+        },
+        {
+            "item_name": "Pressure Nozzle",
+            "item_id": 915
+        },
+        {
+            "item_name": "Qi Seasoning",
+            "item_id": 917
+        },
+        {
+            "item_name": "Hyper Speed-Gro",
+            "item_id": 918
+        },
+        {
+            "item_name": "Deluxe Fertilizer",
+            "item_id": 919
+        },
+        {
+            "item_name": "Deluxe Retaining Soil",
+            "item_id": 920
+        },
+        {
+            "item_name": "Squid Ink Ravioli",
+            "item_id": 921
+        },
+        {
+            "item_name": "Cookout Kit",
+            "item_id": 926
+        },
+        {
+            "item_name": "Golden Egg",
+            "item_id": 928
         }
     ]
 }

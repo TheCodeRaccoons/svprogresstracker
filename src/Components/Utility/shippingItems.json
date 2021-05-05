@@ -535,6 +535,42 @@
         {
             "item_name": "Tea Leaves",
             "item_id": 815
+        },
+        {
+            "item_name": "Ginger",
+            "item_id": 829
+        },
+        {
+            "item_name": "Taro Root",
+            "item_id": 830
+        },
+        {
+            "item_name": "Pineapple",
+            "item_id": 832
+        },
+        {
+            "item_name": "Mango",
+            "item_id": 834
+        },
+        {
+            "item_name": "Cinder Shard",
+            "item_id": 848
+        },
+        {
+            "item_name": "Magma Cap",
+            "item_id": 851
+        },
+        {
+            "item_name": "Bone Fragment",
+            "item_id": 881
+        },
+        {
+            "item_name": "Radioactive Ore",
+            "item_id": 909
+        },
+        {
+            "item_name": "Radioactive Bar",
+            "item_id": 910
         }
     ]
 }

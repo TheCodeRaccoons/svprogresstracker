@@ -11,15 +11,21 @@
         "goal": 150,
         "monsters": [
             "Shadow Brute",
-            "Shadow Shaman"
+            "Shadow Brute (dangerous)",
+            "Shadow Shaman",
+            "Shadow Shaman (dangerous)",
+            "Shadow Sniper"
         ]
     },
     "Bats": {
         "goal": 200,
         "monsters": [
             "Bat",
+            "Bat (dangerous)",
             "Frost Bat",
-            "Lava Bat"
+            "Frost Bat (dangerous)",
+            "Lava Bat",
+            "Iridium Bat"
         ]
     },
     "Skeleton": {

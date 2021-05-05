@@ -1,0 +1,22 @@
+{
+    "Requests": [
+        {"name":"Caroline", "description": "Island Ingredients"},
+        {"name":"Clint", "description": "Cave Patrol"},
+        {"name":"Demetrius", "description": "Aquatic Overpopulation"},
+        {"name":"Demetrius2", "description": "Biome Balance"},
+        {"name":"Emily", "description": "Rock Rejuvenation"},
+        {"name":"Evelyn", "description": "Gifts for George"},
+        {"name":"Gunther", "description": "Fragments of the past"},
+        {"name":"Gus", "description": "Gus' Famous Omelet"},
+        {"name":"Lewis", "description": "Crop Order"},
+        {"name":"Linus", "description": "Community Cleanup"},
+        {"name":"Pam", "description": "The Strong Stuff"},
+        {"name":"Pierre", "description": "Pierre's Prime Produce"},
+        {"name":"Robin", "description": "Robin's Project"},
+        {"name":"Robin2", "description": "Robin's Resource Rush"},
+        {"name":"Willy", "description": "Juicy Bugs Wanted!"},
+        {"name":"Willy2", "description": "Tropical Fish"},
+        {"name":"Wizard", "description": "A Curious Substance"},
+        {"name":"Wizard2", "description": "Prismatic Jelly"}
+    ]
+}

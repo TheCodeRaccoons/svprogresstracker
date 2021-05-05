@@ -25,12 +25,15 @@ class Viewer extends React.Component {
             /* Get the info of the museum's current collection */
             let collection = json.SaveGame.locations.GameLocation.find(loc => (loc._attributes !== undefined) ? loc._attributes[`${prefix}:type`] === "LibraryMuseum" : "" )
             let collectionStatus = this.props.GetCollection(collection)
+            /*Gather special requests */
+            let specialRequests = json.SaveGame.completedSpecialOrders;
+            let availableSpecialRequests = json.SaveGame.availableSpecialOrders; 
             /* Gather data */
             let player          = json.SaveGame.player;
             let farmHands       = GetFarmHands(json.SaveGame.locations.GameLocation[1].buildings.Building); 
             let players = {
-                playerData: GetDetailedInfo([player], collectionStatus),
-                farmhandData: GetDetailedInfo(farmHands, collectionStatus)
+                playerData: GetDetailedInfo([player], collectionStatus, specialRequests, availableSpecialRequests),
+                farmhandData: GetDetailedInfo(farmHands, collectionStatus, specialRequests, availableSpecialRequests)
             } 
             this.props.UpdatePlayerData(players) 
         }

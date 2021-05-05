@@ -20,7 +20,7 @@ import Monsters from '../AchieveTabs/Monsters';
 import Shipping from '../AchieveTabs/Shipping'
 import Earnings from '../AchieveTabs/moneyEarned'
 import Collection from '../AchieveTabs/Collection'
-import Quests from '../AchieveTabs/quests'
+import Quests from '../AchieveTabs/quests' 
 
 class Achievements extends React.Component {
     constructor(props) {
@@ -96,7 +96,7 @@ class Achievements extends React.Component {
                 </TabPanel> 
                 <TabPanel> 
                     <section className="achievement-container"> 
-                        <Quests questsDone={this.props.questsDone} />
+                        <Quests questsDone={this.props.questsDone} specialReq={this.props.specialReq} pendingSpecialReq={this.props.pendingSpecialReq} />
                     </section>
                 </TabPanel>
                 </Tabs>

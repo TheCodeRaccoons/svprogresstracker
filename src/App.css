@@ -383,6 +383,14 @@ section.sv-container{
   font-size: 1.5em;
   text-align: center;
 }
+.a-title-big{ 
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-size: 2em;
+  text-align: center;
+}
 
 .a-List{
   width: 100%;  

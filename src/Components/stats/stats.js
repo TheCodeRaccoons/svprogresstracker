@@ -34,16 +34,18 @@ const playerStats = this.props.farmhands.map((item, i) =>(
             <img src={Rope} alt="" ></img>
         </div>
         <Achievements 
-        recipesCooked   ={item.recipesCooked}
-        itemsCrafted    ={item.itemsCrafted}  
-        cropsShipped    ={item.cropsShipped} 
-        fishCaught      = {item.fishCaught}
-        friendship      = {item.friendship}
-        monstersKilled  = {item.monstersKilled}
-        shippedItems    = {item.shippedItems}
-        moneyEarned     = {item.moneyEarned}
-        museumCollection= {item.museumCollection}
-        questsDone      = {item.questsDone}
+        recipesCooked       = {item.recipesCooked}
+        itemsCrafted        = {item.itemsCrafted}  
+        cropsShipped        = {item.cropsShipped} 
+        fishCaught          = {item.fishCaught}
+        friendship          = {item.friendship}
+        monstersKilled      = {item.monstersKilled}
+        shippedItems        = {item.shippedItems}
+        moneyEarned         = {item.moneyEarned}
+        museumCollection    = {item.museumCollection}
+        questsDone          = {item.questsDone}
+        specialReq          = {item.specialRequests}
+        pendingSpecialReq   = {item.pendingSpecialRequests}
         ></Achievements>
     </section> 
 </TabPanel>) 
@@ -66,16 +68,18 @@ const playerStats = this.props.farmhands.map((item, i) =>(
                             <img src={Rope} alt="" ></img>
                         </div> 
                         <Achievements 
-                            recipesCooked   ={this.props.playerData.recipesCooked} 
-                            itemsCrafted    ={this.props.playerData.itemsCrafted}  
-                            cropsShipped    ={this.props.playerData.cropsShipped}  
-                            fishCaught      = {this.props.playerData.fishCaught}
-                            friendship      = {this.props.playerData.friendship}
-                            monstersKilled  = {this.props.playerData.monstersKilled}
-                            shippedItems    = {this.props.playerData.shippedItems}
-                            moneyEarned     = {this.props.playerData.moneyEarned}
-                            museumCollection= {this.props.playerData.museumCollection}
-                            questsDone      = {this.props.playerData.questsDone}
+                            recipesCooked       = {this.props.playerData.recipesCooked} 
+                            itemsCrafted        = {this.props.playerData.itemsCrafted}  
+                            cropsShipped        = {this.props.playerData.cropsShipped}  
+                            fishCaught          = {this.props.playerData.fishCaught}
+                            friendship          = {this.props.playerData.friendship}
+                            monstersKilled      = {this.props.playerData.monstersKilled}
+                            shippedItems        = {this.props.playerData.shippedItems}
+                            moneyEarned         = {this.props.playerData.moneyEarned}
+                            museumCollection    = {this.props.playerData.museumCollection}
+                            questsDone          = {this.props.playerData.questsDone}
+                            specialReq          = {this.props.playerData.specialRequests}
+                            pendingSpecialReq   = {this.props.playerData.pendingSpecialRequests}
                         ></Achievements>
                         </section>
                     </TabPanel>

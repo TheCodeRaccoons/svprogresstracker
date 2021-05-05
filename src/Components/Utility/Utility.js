@@ -9,6 +9,8 @@ const Fishes = require('../Utility/fishes.json');
 const Friendship = require('../Utility/friendship.json'); 
 const MonsterCat = require('../Utility/monsterCategorie.json'); 
 const Museum = require('../Utility/museum.json'); 
+const townSR = require('./TownSpecialReq.json');
+const QiSR = require('./QiSpecialReq.json'); 
 
 /* Gather the XML and handling the file */
 //Gets the info from the farm hands as an array of the same type
@@ -28,18 +30,19 @@ const GetFarmHands = (arr) =>{
     return data;
 }  
 //Calls the parser and creates an array of players depending on wether it is a single player or multiple
-const GetDetailedInfo = (data, collectionStatus) =>{ 
+const GetDetailedInfo = (data, collectionStatus, specialRequests, pendingSpecialRequests) =>{ 
     let playerData = []
     if(Array.isArray(data)){
         data.forEach(p => { 
-            playerData = [...playerData, parseData(p, collectionStatus)]
+            playerData = [...playerData, parseData(p, collectionStatus, specialRequests, pendingSpecialRequests)]
         }) 
     }
+    
+    console.log(playerData)
     return playerData
 } 
 //Creates an object per player with the cleanup data from the file
-const parseData = (data, collectionStatus) => { 
-    console.log(data)
+const parseData = (data, collectionStatus,specialRequests, pendingSpecialRequests) => { 
     /* Get name */ //Done
     let name        = data.name._text; 
     /* Get farm name */ //Done
@@ -70,8 +73,10 @@ const parseData = (data, collectionStatus) => {
     let museumCollection = GetMCollection(data.archaeologyFound.item, data.mineralsFound.item, collectionStatus)
     /* Get No. of quests finished */
     let questsDone = (data.stats.questsCompleted !== undefined) ? parseInt(data.stats.questsCompleted._text) : 0
-    
-    
+    /*Get Special requests */ 
+    let SpecialReqDone = GetSpecialRequests(specialRequests.string, townSR.Requests) 
+    let SpecialReqPending = GetPendingSpecialRequests(specialRequests.string, townSR.Requests) 
+
     //Not finished  
     /* Get professions */
     let professions = GetProfessionData(data.professions.int) 
@@ -94,8 +99,11 @@ const parseData = (data, collectionStatus) => {
             friendship: FriendshipData,
             monstersKilled: specificMonsters,
             museumCollection: museumCollection,
-            questsDone: questsDone
+            questsDone: questsDone,
+            specialRequests: SpecialReqDone,
+            pendingSpecialRequests: SpecialReqPending
     }
+    console.log(playerData)
     return playerData;
 } 
 
@@ -514,7 +522,6 @@ const GetDateableNPC = (name) => {
     }
     return false; 
 }
-
 const GetArrayData = (arr) =>{
     let data = [];
     if(Array.isArray(arr)){
@@ -589,6 +596,25 @@ const GetSkillName = (skillId) =>{
             return "Unknown" 
     }
 } 
+const GetSpecialRequests = (requests, info) =>{ 
+    let data = [];  
+    if(Array.isArray(requests)){ 
+        requests.forEach(item => {
+            let d = info.find(obj => obj.name === item._text) 
+            data = [...data,d]
+        });
+    } 
+    return data
+} 
+const GetPendingSpecialRequests= (requests, info) =>{
+    console.log("info", info)
+    let data = info;  
+    if(Array.isArray(requests)){  
+
+        requests.forEach(req =>{ data = data.filter(item => item.name !== req._text)})
+    } 
+    return data
+}
 
 /* Required Methods */ 
 export { GetFarmHands, GetDetailedInfo};
