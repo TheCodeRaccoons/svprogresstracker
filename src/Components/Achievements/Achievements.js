@@ -12,6 +12,7 @@ import AchItems from '../../Media/Achievements/AchItems.png'
 import AchMoney from '../../Media/Achievements/AchMoney.png'
 import AchMuseum from '../../Media/Achievements/AchMuseum.png'
 import AchQuests from '../../Media/Achievements/AchQuests.png'
+import AchGrandpa from '../../Media/Achievements/AchGrandpa.png'
 import Star from '../../Media/Star.png'
 import Crops from '../AchieveTabs/Crops';
 import Fish from '../AchieveTabs/Fish';
@@ -36,7 +37,8 @@ class Achievements extends React.Component {
                 {img:AchItems, alt: "Items"}, 
                 {img:AchMoney, alt: "Money"}, 
                 {img:AchMuseum, alt: "Museum"}, 
-                {img:AchQuests, alt: "Quests"}]
+                {img:AchQuests, alt: "Quests"}, 
+                {img:AchGrandpa, alt: "Grandpa's evaluation"}]
         }
     }
 
@@ -94,6 +96,11 @@ class Achievements extends React.Component {
                         <Collection museumCollection={this.props.museumCollection} />
                     </section>
                 </TabPanel> 
+                <TabPanel> 
+                    <section className="achievement-container"> 
+                        <Quests questsDone={this.props.questsDone} specialReq={this.props.specialReq} pendingSpecialReq={this.props.pendingSpecialReq} />
+                    </section>
+                </TabPanel>
                 <TabPanel> 
                     <section className="achievement-container"> 
                         <Quests questsDone={this.props.questsDone} specialReq={this.props.specialReq} pendingSpecialReq={this.props.pendingSpecialReq} />

@@ -38,7 +38,6 @@ const GetDetailedInfo = (data, collectionStatus, specialRequests, pendingSpecial
         }) 
     }
     
-    console.log(playerData)
     return playerData
 } 
 //Creates an object per player with the cleanup data from the file
@@ -76,6 +75,25 @@ const parseData = (data, collectionStatus,specialRequests, pendingSpecialRequest
     /*Get Special requests */ 
     let SpecialReqDone = GetSpecialRequests(specialRequests.string, townSR.Requests) 
     let SpecialReqPending = GetPendingSpecialRequests(specialRequests.string, townSR.Requests) 
+ 
+
+    
+    console.log("%c Grandpa's eval", 'color: #7289DA')
+    console.group() 
+    console.log("rusty key", data.hasRustyKey._text)
+    console.log("Skull key",data.hasSkullKey._text)
+    console.log("money", moneyEarned)
+    console.log("museum", collectionStatus)
+    console.log("fish", fishCaught)
+    console.log("Master of 5 ways", xp)
+    console.log("Legend", "NA")
+    console.log("friendship", FriendshipData)
+    console.log("Pet", FriendshipData)
+    console.log("married")
+    console.log("skull key")
+    console.log("rusty key")
+    console.log("total skill points") 
+    console.groupEnd();
 
     //Not finished  
     /* Get professions */
@@ -102,8 +120,7 @@ const parseData = (data, collectionStatus,specialRequests, pendingSpecialRequest
             questsDone: questsDone,
             specialRequests: SpecialReqDone,
             pendingSpecialRequests: SpecialReqPending
-    }
-    console.log(playerData)
+    } 
     return playerData;
 } 
 
@@ -606,14 +623,19 @@ const GetSpecialRequests = (requests, info) =>{
     } 
     return data
 } 
-const GetPendingSpecialRequests= (requests, info) =>{
-    console.log("info", info)
+const GetPendingSpecialRequests= (requests, info) =>{ 
     let data = info;  
     if(Array.isArray(requests)){  
 
         requests.forEach(req =>{ data = data.filter(item => item.name !== req._text)})
     } 
     return data
+}
+
+const GetGrantpasEval = () =>{
+
+
+
 }
 
 /* Required Methods */ 

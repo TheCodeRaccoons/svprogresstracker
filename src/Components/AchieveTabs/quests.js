@@ -30,10 +30,10 @@ class Quests extends React.Component {
                 </ul> 
                 <span className="a-title-big"><h1>Special Orders.</h1></span> 
                 <ul className="m-List"> 
-                    {this.state.specialReq.map(m =>  <li> <span className="completed">{m.name}: {m.description}</span> </li>)}
+                    {this.state.specialReq.map((m,i) =>  <li key={i}> <span className="completed">{m.name}: {m.description}</span> </li>)}
                 </ul> 
                 <ul className="m-List">
-                    {this.state.pendingSpecialReq.map(m => <li><span className="pending">{m.name}: {m.description}.</span></li>)} 
+                    {this.state.pendingSpecialReq.map((m,i) => <li key={i}><span className="pending" >{m.name}: {m.description}.</span></li>)} 
                 </ul>  
             </div>
         );
