@@ -1,16 +1,17 @@
 /* eslint-disable no-loop-func */
-const Dishes = require('../Utility/Dishes.json');
-const CraftingRec = require('../Utility/CraftingRecipes.json'); 
-const ProfNames = require('../Utility/professions.json'); 
-const Levels = require('../Utility/levels.json'); 
-const ShipItems = require('../Utility/shippingItems.json'); 
-const ShipCrops = require('../Utility/shippingCrops.json'); 
-const Fishes = require('../Utility/fishes.json'); 
-const Friendship = require('../Utility/friendship.json'); 
-const MonsterCat = require('../Utility/monsterCategorie.json'); 
-const Museum = require('../Utility/museum.json'); 
-const townSR = require('./TownSpecialReq.json');
-const QiSR = require('./QiSpecialReq.json'); 
+
+import Dishes from '../Utility/Dishes.json';
+import CraftingRec from '../Utility/CraftingRecipes.json';
+import ProfNames from '../Utility/professions.json';
+import Levels from '../Utility/levels.json';
+import ShipItems from '../Utility/shippingItems.json';
+import ShipCrops from '../Utility/shippingCrops.json';
+import Fishes from '../Utility/fishes.json';
+import Friendship from '../Utility/friendship.json';
+import MonsterCat from '../Utility/monsterCategorie.json';
+import Museum from '../Utility/museum.json';
+import townSR from './TownSpecialReq.json';
+import QiSR from './QiSpecialReq.json';
 
 /* Gather the XML and handling the file */
 //Gets the info from the farm hands as an array of the same type

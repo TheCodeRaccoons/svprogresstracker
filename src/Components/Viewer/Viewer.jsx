@@ -1,5 +1,5 @@
 import React from 'react'; 
-import convert from 'xml-js'
+import { XMLParser } from 'fast-xml-parser';
 import Junimo6 from '../../Media/Junimo6.png'
 import {GetDetailedInfo, GetFarmHands} from '../Utility/Utility' 
 class Viewer extends React.Component {
@@ -11,27 +11,21 @@ class Viewer extends React.Component {
     RetrivePlayerData(d){
         let json = "";
         try{
-            var p_res = convert.xml2json(d, {compact: true});
-            json = JSON.parse(p_res);
+            const parser = new XMLParser({ ignoreAttributes: false });
+            json = parser.parse(d);
         }
         catch(e){
             console.log("really m8")
         }
         if(json.SaveGame !== undefined){ 
             let prefix = d.includes("SaveGame xmlns:xsi") ? 'xsi': 'p3' 
-            //console.log(json.SaveGame)
-            /* Get's game prefix bc of the way the save is created in mac */
             this.props.UpdateGamePrefix(prefix) 
-            /* Get the info of the museum's current collection */
-            let collection = json.SaveGame.locations.GameLocation.find(loc => (loc._attributes !== undefined) ? loc._attributes[`${prefix}:type`] === "LibraryMuseum" : "" )
+            let collection = json.SaveGame.locations.GameLocation.find(loc => (loc['@_xsi:type'] === "LibraryMuseum" || loc['@_p3:type'] === "LibraryMuseum"));
             let collectionStatus = this.props.GetCollection(collection)
-            /*Gather special requests */
             let specialRequests = json.SaveGame.completedSpecialOrders;
             let availableSpecialRequests = json.SaveGame.availableSpecialOrders; 
-            /* Gather data */
-            let player          = json.SaveGame.player;
-            console.log(player)
-            let farmHands       = GetFarmHands(json.SaveGame.locations.GameLocation[1].buildings.Building); 
+            let player = json.SaveGame.player;
+            let farmHands = GetFarmHands(json.SaveGame.locations.GameLocation[1].buildings.Building); 
             let players = {
                 playerData: GetDetailedInfo([player], collectionStatus, specialRequests, availableSpecialRequests),
                 farmhandData: GetDetailedInfo(farmHands, collectionStatus, specialRequests, availableSpecialRequests)
