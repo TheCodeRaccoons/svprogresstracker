@@ -25,7 +25,7 @@ class Viewer extends React.Component {
             let specialRequests = json.SaveGame.completedSpecialOrders;
             let availableSpecialRequests = json.SaveGame.availableSpecialOrders; 
             let player = json.SaveGame.player;
-            let farmHands = GetFarmHands(json.SaveGame.locations.GameLocation[1].buildings.Building); 
+            let farmHands = GetFarmHands(json.SaveGame.locations.GameLocation[1].buildings?.Building); 
             let players = {
                 playerData: GetDetailedInfo([player], collectionStatus, specialRequests, availableSpecialRequests),
                 farmhandData: GetDetailedInfo(farmHands, collectionStatus, specialRequests, availableSpecialRequests)
