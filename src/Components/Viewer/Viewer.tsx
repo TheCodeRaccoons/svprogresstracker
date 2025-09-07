@@ -1,7 +1,8 @@
 import React from 'react'; 
 import { XMLParser } from 'fast-xml-parser';
-import Junimo6 from '../../Media/Junimo6.png'
-import {GetDetailedInfo, GetFarmHands} from '../Utility/Utility' 
+import Junimo6 from '@media/Junimo6.png';
+import {GetDetailedInfo, GetFarmHands} from '@utility/Utility';
+import type { saveGameType } from 'types/savefile.js';
 class Viewer extends React.Component {
     constructor(props) {
         super(props)
@@ -9,23 +10,31 @@ class Viewer extends React.Component {
     }
 
     RetrivePlayerData(d){
-        let json = "";
+        let json: saveGameType | null  = null;
+
         try{
-            const parser = new XMLParser({ ignoreAttributes: false });
+            const parser = new XMLParser({ ignoreAttributes: true });
             json = parser.parse(d);
         }
         catch(e){
             console.log("really m8")
         }
-        if(json.SaveGame !== undefined){ 
+        console.log(json)
+
+        if(json && json.SaveGame){ 
             let prefix = d.includes("SaveGame xmlns:xsi") ? 'xsi': 'p3' 
-            this.props.UpdateGamePrefix(prefix) 
-            let collection = json.SaveGame.locations.GameLocation.find(loc => (loc['@_xsi:type'] === "LibraryMuseum" || loc['@_p3:type'] === "LibraryMuseum"));
+            //this.props.UpdateGamePrefix(prefix)   
+            //getting players
+            let player = json.SaveGame.player;
+            let farmHands = GetFarmHands(json.SaveGame.locations.GameLocation); 
+
+            let collection = json.SaveGame.locations.GameLocation.find(loc => {
+                const locAny = loc as any;
+                return locAny['@_xsi:type'] === "LibraryMuseum" || locAny['@_p3:type'] === "LibraryMuseum";
+            });
             let collectionStatus = this.props.GetCollection(collection)
             let specialRequests = json.SaveGame.completedSpecialOrders;
             let availableSpecialRequests = json.SaveGame.availableSpecialOrders; 
-            let player = json.SaveGame.player;
-            let farmHands = GetFarmHands(json.SaveGame.locations.GameLocation[1].buildings?.Building); 
             let players = {
                 playerData: GetDetailedInfo([player], collectionStatus, specialRequests, availableSpecialRequests),
                 farmhandData: GetDetailedInfo(farmHands, collectionStatus, specialRequests, availableSpecialRequests)

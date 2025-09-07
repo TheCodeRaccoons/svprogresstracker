@@ -38,7 +38,14 @@
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@media/*": ["Media/*"],
+      "@utility/*": ["Components/Utility/*"]
+    },
   }
 }

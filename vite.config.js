@@ -7,6 +7,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
+      '@media': path.resolve(__dirname, 'src/Media'),
+      '@utility': path.resolve(__dirname, 'src/Components/Utility'),
     },
   },
   build: {

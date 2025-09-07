@@ -1,40 +1,47 @@
 /* eslint-disable no-loop-func */
 
-import Dishes from '../Utility/Dishes.json';
-import CraftingRec from '../Utility/CraftingRecipes.json';
-import ProfNames from '../Utility/professions.json';
-import Levels from '../Utility/levels.json';
-import ShipItems from '../Utility/shippingItems.json';
-import ShipCrops from '../Utility/shippingCrops.json';
-import Fishes from '../Utility/fishes.json';
-import Friendship from '../Utility/friendship.json';
-import MonsterCat from '../Utility/monsterCategorie.json';
-import Museum from '../Utility/museum.json';
-import townSR from './TownSpecialReq.json';
-import QiSR from './QiSpecialReq.json';
+import Dishes from './Dishes.json' with { type: "json" };
+import CraftingRec from '@utility/CraftingRecipes.json' with { type: "json" };
+import ProfNames from '@utility/professions.json' with { type: "json" };
+import Levels from '@utility/levels.json' with { type: "json" };
+import ShipItems from '@utility/shippingItems.json' with { type: "json" };
+import ShipCrops from '@utility/shippingCrops.json' with { type: "json" };
+import Fishes from '@utility/fishes.json' with { type: "json" };
+import Friendship from '@utility/friendship.json' with { type: "json" };
+import MonsterCat from '@utility/monsterCategorie.json' with { type: "json" };
+import Museum from '@utility/museum.json' with { type: "json" };
+import townSR from './TownSpecialReq.json' with { type: "json" };
+import QiSR from './QiSpecialReq.json' with { type: "json" };
+import type { gameLocationType, playerType } from 'types/savefile.js';
 
 /* Gather the XML and handling the file */
 //Gets the info from the farm hands as an array of the same type
-const GetFarmHands = (arr) =>{
-    let data = []
-    if(Array.isArray(arr)){
-        arr.forEach(building => {
-            if(building.indoors)
-            { 
-                if(building.indoors.farmhand) 
-                data = [...data, building.indoors.farmhand];
-            } 
+const GetFarmHands = (locations: gameLocationType[]): playerType[] => {
+    if (!Array.isArray(locations)) return [];
+    let players: playerType[] = []
+    let farmBuildings = locations.filter(loc => loc.isFarm === true);
+
+    if(farmBuildings && farmBuildings.length > 0){
+        farmBuildings.forEach(building => {
+            let locationBuildings = (Array.isArray(building.buildings?.Building)) 
+                ? building.buildings.Building.filter(b => b !== undefined) 
+                : (building.buildings?.Building !== undefined ? [building.buildings.Building] : []);
+            locationBuildings.forEach(building => {
+                if(building.indoors && building.indoors.farmhand) {
+                    players.push(building.indoors.farmhand);
+                }
+            })
         })
     }
-    else data = []
+    else players = []
+    return players;
+}
 
-    return data;
-}  
 //Calls the parser and creates an array of players depending on wether it is a single player or multiple
-const GetDetailedInfo = (data, collectionStatus, specialRequests, pendingSpecialRequests) =>{ 
-    let playerData = []
-    if(Array.isArray(data)){
-        data.forEach(p => { 
+const GetDetailedInfo = (playerData , collectionStatus, specialRequests, pendingSpecialRequests) =>{ 
+    let fullPlayerData = []
+    if(Array.isArray(playerData)){
+        playerData.forEach(p => { 
             playerData = [...playerData, parseData(p, collectionStatus, specialRequests, pendingSpecialRequests)]
         }) 
     }
@@ -81,6 +88,20 @@ const parseData = (data, collectionStatus,specialRequests, pendingSpecialRequest
     
     console.log("%c Grandpa's eval", 'color: #7289DA')
     console.group() 
+    console.log("Name", name)
+    console.log("Farm name", farmName)
+    console.log("shipped items", basicShipped.filter(i => i.shipped !== undefined).length)
+    console.log("shipped crops", cropsShipped.poly_crops.filter(i => i.shipped !== undefined).length + cropsShipped.mono_extras.filter(i => i.shipped !== undefined).length)
+    console.log("crops shipped", cropsShipped)
+    console.log("recipes cooked", recipesCooked.filter(i => i.times !== undefined && i.times > 0).length)
+    console.log("crafting recipes", craftingRecipes.filter(i => i.times !== undefined && i.times > 0).length)
+    console.log("crafting recipes full", craftingRecipes)
+    console.log("fish caught", fishCaught.filter(i => i.fished !== false).length)
+    console.log("fish caught full", fishCaught)
+    console.log("monsters killed", specificMonsters.reduce((a, b) => a + b.timesKilled, 0))
+    console.log("monsters killed full", specificMonsters)
+    console.log("quests done", questsDone)
+    console.log("special requests done", SpecialReqDone.length)
     console.log("rusty key", data.hasRustyKey._text)
     console.log("Skull key",data.hasSkullKey._text)
     console.log("money", moneyEarned)
