@@ -6,9 +6,10 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
-      '@media': path.resolve(__dirname, 'src/Media'),
-      '@utility': path.resolve(__dirname, 'src/Components/Utility'),
+        '@': path.resolve(__dirname, 'src'),
+        '@media': path.resolve(__dirname, 'src/Media'),
+        '@utility': path.resolve(__dirname, 'src/Components/Utility'),
+        '@hooks': path.resolve(__dirname, 'src/hooks'),
     },
   },
   build: {

@@ -45,7 +45,8 @@
     "baseUrl": "./src",
     "paths": {
       "@media/*": ["Media/*"],
-      "@utility/*": ["Components/Utility/*"]
+  "@utility/*": ["Components/Utility/*"],
+  "@hooks/*": ["hooks/*"]
     },
   }
 }
