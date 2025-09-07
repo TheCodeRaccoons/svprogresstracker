@@ -57,6 +57,12 @@ export type saveFileType = {
     lastAppliedSaveFix: number,
     gameVersion: string,
     gameVersionLabel: string,
+    completedSpecialOrders: specialOrderType,
+    availableSpecialOrders: specialOrderType,
+}
+
+export type specialOrderType = {
+    SpecialOrder: questType[]
 }
 
 type minePermanentChanges = {
@@ -69,6 +75,7 @@ type locationsType = {
 
 export type gameLocationType = {
     isFarm: boolean,
+    name: string,
     isOutdoors: boolean,
     isStructure: boolean,
     ignoreDebrisWeather: boolean,
@@ -88,6 +95,7 @@ export type gameLocationType = {
     buildings: {
         Building: buildingType[]
     },
+    museumPieces: {item: itemsType[]},
 }
 
 type buildingType = {
@@ -254,6 +262,12 @@ export type playerType = {
     mineralsFound: itemType,
     archaeologyFound: itemType,
     friendshipData: friendshipDataItemType
+    experiencePoints: intArrayType,
+    fishCaught: itemType,
+}
+
+type intArrayType = {
+    int: number[]
 }
 
 type friendshipDataItemType = {
@@ -278,21 +292,21 @@ type friendshipDataType = {
     }
 }
 
-type itemType = {
+export type itemType = {
     item: itemsType[]
 }
 
-type itemsType = {
+export type itemsType = {
     key: {
             int?: number
             string?: string
         },
-        value: {
-            int: number,
-            ArrayOfInt?: {
-                int: number[]
-            }
+    value: {
+        int: number,
+        ArrayOfInt?: {
+            int: number[]
         }
+    }
 }
 
 type statsType = {
@@ -400,6 +414,58 @@ type statsType = {
     ItemsCooked: number,
     ItemsShipped: number,
     SeedsSown: number,
-    IndividualMoneyEarned: number
+    IndividualMoneyEarned: number,
+    specificMonstersKilled: specificMonstersKilledType
 }
 
+type specificMonstersKilledType = {
+    item: itemType
+}
+
+// Leaf types
+type tileLocationType = {
+    X: number;
+    Y: number;
+}
+
+type donateObjectiveType = {
+    currentCount: number;
+    maxCount: number;
+    description: string;
+    failOnCompletion: boolean;
+    dropBox: string;
+    dropBoxGameLocation: string;
+    dropBoxTileLocation: tileLocationType;
+    acceptableContextTagSets: string;
+    minimumCapacity: number;
+    confirmed: boolean;
+    "@_xsi:type": string;
+}
+
+type gemsRewardType = {
+    amount: { int: number };
+    "@_xsi:type": string;
+}
+
+export type questType = {
+    preSelectedItems: string;
+    selectedRandomElements: string;
+    objectives: donateObjectiveType;
+    generationSeed: number;
+    seenParticipantsIDs: string;
+    participantsIDs: string;
+    unclaimedRewardsIDs: string;
+    appliedSpecialRules: boolean;
+    rewards: gemsRewardType;
+    questKey: string;
+    questName: string;
+    questDescription: string;
+    requester: string;
+    orderType: string; // e.g., "Qi"
+    specialRule: string;
+    readyForRemoval: boolean;
+    itemToRemoveOnEnd: number;
+    dueDate: number;
+    duration: string;
+    questState: string;
+}
