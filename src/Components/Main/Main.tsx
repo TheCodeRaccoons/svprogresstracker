@@ -35,7 +35,8 @@ const Main = () => {
         let museumPieces = []
         if(collection.museumPieces.item !== undefined){
             museumPieces = [...collection.museumPieces.item]
-        }         console.log(museumPieces)
+        }
+        console.log(museumPieces)
 
         return (museumPieces.length > 0) ? [...museumPieces] : [] 
     }
