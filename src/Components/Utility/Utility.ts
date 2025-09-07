@@ -12,7 +12,7 @@ import MonsterCat from '@utility/monsterCategorie.json' with { type: "json" };
 import Museum from '@utility/museum.json' with { type: "json" };
 import townSR from './TownSpecialReq.json' with { type: "json" };
 import QiSR from './QiSpecialReq.json' with { type: "json" };
-import type { gameLocationType, playerType } from 'types/savefile.js';
+import type { gameLocationType, itemsType, itemType, playerType, specialOrderType } from 'types/savefile.js';
 
 /* Gather the XML and handling the file */
 //Gets the info from the farm hands as an array of the same type
@@ -37,55 +37,71 @@ const GetFarmHands = (locations: gameLocationType[]): playerType[] => {
     return players;
 }
 
+type getDetailedInfoType = {
+    playerData: playerType[],
+    collectionStatus: itemsType[],
+    specialRequests: specialOrderType ,
+    availableSpecialRequests: specialOrderType
+}
+
+type getParsedUserDataType = Omit<getDetailedInfoType, 'playerData'> & {
+    playerData: playerType
+}
+
 //Calls the parser and creates an array of players depending on wether it is a single player or multiple
-const GetDetailedInfo = (playerData , collectionStatus, specialRequests, pendingSpecialRequests) =>{ 
-    let fullPlayerData = []
+const GetDetailedInfo = ({playerData , collectionStatus, specialRequests, availableSpecialRequests}: getDetailedInfoType) =>{ 
+    let fullPlayerData: any = []
     if(Array.isArray(playerData)){
         playerData.forEach(p => { 
-            playerData = [...playerData, parseData(p, collectionStatus, specialRequests, pendingSpecialRequests)]
+            let playerFull = {
+                ...p, ...parseData({playerData: p, collectionStatus, specialRequests, availableSpecialRequests})
+            }
+            fullPlayerData.push(playerFull)
         }) 
     }
     
-    return playerData
+    return fullPlayerData;
 } 
-//Creates an object per player with the cleanup data from the file
-const parseData = (data, collectionStatus,specialRequests, pendingSpecialRequests) => { 
-    /* Get name */ //Done
-    let name        = data.name._text; 
-    /* Get farm name */ //Done
-    let farmName    = data.farmName._text; 
-    /* Get Experience */ //Done
-    let xp =  GetXpInfo(data.experiencePoints.int) 
-    /* Get recipes cooked */ //Done
-    let recipesCooked   = GetCookingData(data.recipesCooked, data.cookingRecipes.item) 
-    /* Get crafted items */ //Done
-    let craftingRecipes = GetCraftingRecipes(data.craftingRecipes.item) 
-    /* Get shipped items */ 
-    let basicShipped    = GetShippedItems(data.basicShipped.item) 
-    /* Get shipped Crops */
-    let cropsShipped    = GetShippedCrops(basicShipped)
-    /* Get fish caught */
-    let fishCaught      = GetFishes(data.fishCaught.item) 
-    /* Get Friendship Data */
-    let FriendshipData  = GetFriendshipData(data.friendshipData.item)
-    /* Get Specific monsters killed */
-    let slimesKilled = (data.stats.slimesKilled._text !== undefined) ? parseInt(data.stats.slimesKilled._text) : 0
-    let specificMonsters = GetMonsterQuests(data.stats.specificMonstersKilled.item, slimesKilled)
-    /* Get total money earned */
-    let moneyEarned = parseInt(data.totalMoneyEarned._text)
-    /* Get Museum collection */
-    /* Get minerals found */
-    let mineralsFound   = GetArrayData()  
-    /* Get artifacts found */ 
-    let museumCollection = GetMCollection(data.archaeologyFound.item, data.mineralsFound.item, collectionStatus)
-    /* Get No. of quests finished */
-    let questsDone = (data.stats.questsCompleted !== undefined) ? parseInt(data.stats.questsCompleted._text) : 0
-    /*Get Special requests */ 
-    let SpecialReqDone = GetSpecialRequests(specialRequests.string, townSR.Requests) 
-    let SpecialReqPending = GetPendingSpecialRequests(specialRequests.string, townSR.Requests) 
- 
-
     
+//Creates an object per player with the cleanup playerData.from the file
+const parseData = ({playerData, collectionStatus, specialRequests, availableSpecialRequests}: getParsedUserDataType) => { 
+    if(!playerData) return null;
+    let name        = playerData.name;
+    let farmName    = playerData.farmName;
+    let xp =  GetXpInfo(playerData.experiencePoints.int)
+    let recipesCooked   = playerData?.recipesCooked ? 
+        GetCookingData(playerData.recipesCooked, playerData.cookingRecipes.item) 
+        : []
+    let craftingRecipes = playerData?.craftingRecipes?.item ? 
+        GetCraftingRecipes(playerData.craftingRecipes.item) 
+        : []
+    let basicShipped    = playerData?.basicShipped?.item ? 
+        GetShippedItems(playerData.basicShipped.item) 
+        : []
+    let cropsShipped    = playerData?.basicShipped ? 
+        GetShippedCrops(basicShipped) 
+        : []
+    let fishCaught      = playerData?.fishCaught?.item ? 
+        GetFishes(playerData.fishCaught.item) 
+        : []
+    let FriendshipData  = playerData?.friendshipData?.item ? 
+        GetFriendshipData(playerData.friendshipData.item) 
+        : []
+    let slimesKilled = (playerData.stats.slimesKilled) ? 
+        playerData.stats.slimesKilled 
+        : 0
+    let specificMonsters = playerData?.stats.specificMonstersKilled?.item ?
+        GetMonsterQuests(playerData.stats.specificMonstersKilled.item, slimesKilled) 
+        : []
+    let moneyEarned = playerData.totalMoneyEarned || 0
+    let mineralsFound   = playerData.mineralsFound ? 
+        GetArrayData(playerData.mineralsFound.item) 
+        : []
+    let museumCollection = GetMCollection(playerData.archaeologyFound.item, playerData.mineralsFound.item, collectionStatus)
+    let questsDone = playerData.stats.questsCompleted || 0;
+    let SpecialReqDone = GetSpecialRequests(specialRequests.SpecialOrder, townSR.Requests) 
+    let SpecialReqPending = GetPendingSpecialRequests(specialRequests.SpecialOrder, townSR.Requests) 
+
     console.log("%c Grandpa's eval", 'color: #7289DA')
     console.group() 
     console.log("Name", name)
@@ -102,8 +118,8 @@ const parseData = (data, collectionStatus,specialRequests, pendingSpecialRequest
     console.log("monsters killed full", specificMonsters)
     console.log("quests done", questsDone)
     console.log("special requests done", SpecialReqDone.length)
-    console.log("rusty key", data.hasRustyKey._text)
-    console.log("Skull key",data.hasSkullKey._text)
+    console.log("rusty key", playerData.hasRustyKey._text)
+    console.log("Skull key",playerData.hasSkullKey._text)
     console.log("money", moneyEarned)
     console.log("museum", collectionStatus)
     console.log("fish", fishCaught)
@@ -119,35 +135,36 @@ const parseData = (data, collectionStatus,specialRequests, pendingSpecialRequest
 
     //Not finished  
     /* Get professions */
-    let professions = GetProfessionData(data.professions.int) 
+    let professions = GetProfessionData(playerData.professions.int) 
     /* Get tailored items */
-    let tailoredItems   = GetArrayDataTimeless(data.tailoredItems.item) 
-
-    let playerData = {
-            playerName: name,
-            farmName: farmName,
-            experience: xp,
-            moneyEarned: moneyEarned,
-            professions: professions, 
-            shippedItems: basicShipped,
-            cropsShipped: cropsShipped,
-            mineralsFound: mineralsFound,
-            recipesCooked: recipesCooked,
-            fishCaught: fishCaught, 
-            tailoredItems: tailoredItems,
-            itemsCrafted: craftingRecipes,
-            friendship: FriendshipData,
-            monstersKilled: specificMonsters,
-            museumCollection: museumCollection,
-            questsDone: questsDone,
-            specialRequests: SpecialReqDone,
-            pendingSpecialRequests: SpecialReqPending
+    let tailoredItems   = GetArrayDataTimeless(playerData.tailoredItems.item) 
+    console.log("Finished up for ", name)
+    let fullPlayerData = {
+        playerName: name,
+        farmName: farmName,
+        experience: xp,
+        moneyEarned: moneyEarned,
+        professions: professions, 
+        shippedItems: basicShipped,
+        cropsShipped: cropsShipped,
+        mineralsFound: mineralsFound,
+        recipesCooked: recipesCooked,
+        fishCaught: fishCaught, 
+        tailoredItems: tailoredItems,
+        itemsCrafted: craftingRecipes,
+        friendship: FriendshipData,
+        monstersKilled: specificMonsters,
+        museumCollection: museumCollection,
+        questsDone: questsDone,
+        specialRequests: SpecialReqDone,
+        availableSpecialRequests: SpecialReqPending
     } 
-    return playerData;
+    return fullPlayerData;
 } 
 
-/* Parse the XML data into JSON objects, I hope the names here are pretty self explanatory */
+/* Parse the XML datainto JSON objects, I hope the names here are pretty self explanatory */
 const GetCookingData = (cooked, known) =>{
+    console.log("Getting cooking data...")
     let data = [];
     Dishes.Dishes.forEach(item => {
         let d = {
@@ -203,14 +220,16 @@ const GetShippedItems = (allShipped) => {
     }) 
     return data;
 }
-const GetShippedCrops = (allShipped) => { 
+const GetShippedCrops = (allShipped: itemType[]) => { 
     let poly_crops = [], mono_extras = [] 
-    ShipCrops.poly_crops.forEach(item => {  
+    ShipCrops.poly_crops.forEach(polycropItem => {  
         let d = {
-            name: item.name,
-            image: GetImages(item.name),
-            id: item.id,
-            shipped: (allShipped.find(i => parseInt(i.id) === item.id ) !== undefined) ? allShipped.find(i => parseInt(i.id) === item.id ).shipped : undefined
+            name: polycropItem.name,
+            image: GetImages(polycropItem.name),
+            id: polycropItem.id,
+            shipped: (allShipped.find(i => parseInt(i.id) === polycropItem.id ) !== undefined) ? 
+                allShipped.find(i => parseInt(i.id) === polycropItem.id ).shipped 
+                : undefined
         }
         poly_crops = [...poly_crops, d]
     })
