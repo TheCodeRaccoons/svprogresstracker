@@ -9,7 +9,7 @@ export default defineConfig({
         '@': path.resolve(__dirname, 'src'),
         '@media': path.resolve(__dirname, 'src/Media'),
         '@utility': path.resolve(__dirname, 'src/Components/Utility'),
-        '@hooks': path.resolve(__dirname, 'src/hooks'),
+        '@hooks': path.resolve(__dirname, 'src/Hooks'),
     },
   },
   build: {

@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import Junimo6 from '@media/Junimo6.png';
 import useLoadSaveFile from '@hooks/useLoadSaveFile';
 
-const Viewer: React.FC = () => {
+const Viewer = () => {
     const inputRef = useRef<HTMLInputElement>(null);
     const { fileData, isLoading, error, selectFile } = useLoadSaveFile();
 
