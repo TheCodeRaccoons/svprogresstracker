@@ -75,9 +75,7 @@ const parseData = ({playerData, collectionStatus, specialRequests, availableSpec
     let craftingRecipes = playerData?.craftingRecipes?.item ? 
         GetCraftingRecipes(playerData.craftingRecipes.item) 
         : []
-    let basicShipped    = playerData?.basicShipped?.item ? 
-        GetShippedItems(playerData.basicShipped.item) 
-        : []
+    let basicShipped    = GetShippedItems(playerData.basicShipped) || []
     let cropsShipped    = playerData?.basicShipped ? 
         GetShippedCrops(basicShipped) 
         : []
@@ -106,7 +104,7 @@ const parseData = ({playerData, collectionStatus, specialRequests, availableSpec
     console.group() 
     console.log("Name", name)
     console.log("Farm name", farmName)
-    console.log("shipped items", basicShipped.filter(i => i.shipped !== undefined).length)
+    console.log("shipped items", basicShipped);
     console.log("shipped crops", cropsShipped.poly_crops.filter(i => i.shipped !== undefined).length + cropsShipped.mono_extras.filter(i => i.shipped !== undefined).length)
     console.log("crops shipped", cropsShipped)
     console.log("recipes cooked", recipesCooked.filter(i => i.times !== undefined && i.times > 0).length)
@@ -118,8 +116,8 @@ const parseData = ({playerData, collectionStatus, specialRequests, availableSpec
     console.log("monsters killed full", specificMonsters)
     console.log("quests done", questsDone)
     console.log("special requests done", SpecialReqDone.length)
-    console.log("rusty key", playerData.hasRustyKey._text)
-    console.log("Skull key",playerData.hasSkullKey._text)
+    console.log("rusty key", playerData.hasRustyKey)
+    console.log("Skull key",playerData.hasSkullKey)
     console.log("money", moneyEarned)
     console.log("museum", collectionStatus)
     console.log("fish", fishCaught)
@@ -135,9 +133,9 @@ const parseData = ({playerData, collectionStatus, specialRequests, availableSpec
 
     //Not finished  
     /* Get professions */
-    let professions = GetProfessionData(playerData.professions.int) 
+    let professions = GetProfessionData(playerData.professions) 
     /* Get tailored items */
-    let tailoredItems   = GetArrayDataTimeless(playerData.tailoredItems.item) 
+    let tailoredItems   = GetArrayDataTimeless(playerData.tailoredItems) 
     console.log("Finished up for ", name)
     let fullPlayerData = {
         playerName: name,
@@ -204,17 +202,18 @@ const GetXpInfo = (xp) => {
     })  
     return data
 } 
-const GetShippedItems = (allShipped) => { 
+const GetShippedItems = (allShipped: itemType) => { 
     let data = []
+    if(!allShipped?.item || allShipped?.item.length === 0) return data;
     //Parses the shipped info
-    let shipped =  (Array.isArray(allShipped)) ? allShipped.map( val => {return {id: val.key.int._text, times: val.value.int._text}}) : []
+    let shipped =  allShipped.item.map( val => {return {id: val.key.int, times: val.value.int}})
 
     ShipItems.shipping.forEach(item => {
         let d = {
             name: item.item_name,
             image: GetImages(item.item_name),
             id: item.item_id,
-            shipped: (Array.isArray(shipped) ? shipped.find(i => parseInt(i.id) === item.item_id ) : false)
+            shipped: (Array.isArray(shipped) ? shipped.find(i => i.id === item.item_id ) : false)
         }
         data = [...data, d]
     }) 
