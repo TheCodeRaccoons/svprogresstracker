@@ -469,3 +469,24 @@ export type questType = {
     duration: string;
     questState: string;
 }
+
+export type shippedItemType = {
+    name: string;
+    image: string;
+    id: number;
+    shipped: number;
+}
+
+export type cropsShippedType = {
+    mono_extras: shippedItemType[];
+    poly_crops: shippedItemType[];
+};
+
+export type experienceType = {
+    levelInfo: {
+        id: number;
+        val: number;
+    };
+    skill: string;
+    xp: number;
+};
