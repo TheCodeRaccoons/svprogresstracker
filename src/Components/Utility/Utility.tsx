@@ -308,13 +308,13 @@ const ValidateKnown = (k, name) => {
 const GetCooked = (c, id) => { 
     let cooked = "";  
     if(Array.isArray(c.item)){
-        let i = c.item.find(item => parseInt(item.key.int._text) === id) 
-        cooked = (i !== undefined) ? parseInt(i.value.int._text) : 0  
+        let i = c.item.find(item => item.key.int === id) 
+        cooked = (i !== undefined) ? i.value.int : 0  
     }
     else{
         if(!c.hasOwnProperty("item")){ 
         }else{
-            cooked = (parseInt(c.item.key.int._text) === id) ? parseInt(c.item.value.int._text) : 0 
+            cooked = (c.item.key.int === id) ? c.item.value.int : 0 
         }
     }
     return cooked;
