@@ -35,7 +35,6 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
                 setFileData(json);
                 setIsLoading(false);
                 setError(null);
-                console.log(json); // For now, just log the parsed JSON
             } catch (err: any) {
                 setError('Failed to parse the save file.');
                 setFileData(null);
@@ -68,7 +67,6 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
         let collectionStatus = GetCollection(museumLocation)
         let specialRequests: specialOrderType = fileData.SaveGame.completedSpecialOrders;
         let availableSpecialRequests: specialOrderType = fileData.SaveGame.availableSpecialOrders;
-        console.log("p", player)
         let players = {
             playerData: GetDetailedInfo({
                 playerData: [player],
@@ -93,7 +91,7 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
         if(collection.museumPieces.item && collection.museumPieces.item !== undefined && collection.museumPieces.item.length > 0){
             museumPieces = [...collection.museumPieces.item]
         }
-        console.log(museumPieces)
+        // console.log(museumPieces)
 
         return (museumPieces.length > 0) ? [...museumPieces] : [] 
     }
