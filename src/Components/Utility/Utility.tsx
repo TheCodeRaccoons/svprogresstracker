@@ -12,7 +12,9 @@ import MonsterCat from '@utility/monsterCategorie.json' with { type: "json" };
 import Museum from '@utility/museum.json' with { type: "json" };
 import townSR from './TownSpecialReq.json' with { type: "json" };
 import QiSR from './QiSpecialReq.json' with { type: "json" };
-import type { gameLocationType, itemsType, itemType, playerType, specialOrderType } from 'types/savefile.js';
+import type { cropsShippedType, experienceType, gameLocationType, itemsType, itemType, playerType, shippedItemType, specialOrderType } from 'types/savefile.js';
+
+const SKILLS = ["Farming", "Fishing", "Foraging", "Mining", "Combat"]
 
 /* Gather the XML and handling the file */
 //Gets the info from the farm hands as an array of the same type
@@ -66,97 +68,30 @@ const GetDetailedInfo = ({playerData , collectionStatus, specialRequests, availa
 //Creates an object per player with the cleanup playerData.from the file
 const parseData = ({playerData, collectionStatus, specialRequests, availableSpecialRequests}: getParsedUserDataType) => { 
     if(!playerData) return null;
-    let name        = playerData.name;
-    let farmName    = playerData.farmName;
-    let xp =  GetXpInfo(playerData.experiencePoints.int)
-    let recipesCooked   = playerData?.recipesCooked ? 
-        GetCookingData(playerData.recipesCooked, playerData.cookingRecipes.item) 
-        : []
-    let craftingRecipes = playerData?.craftingRecipes?.item ? 
-        GetCraftingRecipes(playerData.craftingRecipes.item) 
-        : []
-    let basicShipped    = GetShippedItems(playerData.basicShipped) || []
-    let cropsShipped    = playerData?.basicShipped ? 
-        GetShippedCrops(basicShipped) 
-        : []
-    let fishCaught      = playerData?.fishCaught?.item ? 
-        GetFishes(playerData.fishCaught.item) 
-        : []
-    let FriendshipData  = playerData?.friendshipData?.item ? 
-        GetFriendshipData(playerData.friendshipData.item) 
-        : []
-    let slimesKilled = (playerData.stats.slimesKilled) ? 
-        playerData.stats.slimesKilled 
-        : 0
-    let specificMonsters = playerData?.stats.specificMonstersKilled?.item ?
-        GetMonsterQuests(playerData.stats.specificMonstersKilled.item, slimesKilled) 
-        : []
-    let moneyEarned = playerData.totalMoneyEarned || 0
-    let mineralsFound   = playerData.mineralsFound ? 
-        GetArrayData(playerData.mineralsFound.item) 
-        : []
-    let museumCollection = GetMCollection(playerData.archaeologyFound.item, playerData.mineralsFound.item, collectionStatus)
-    let questsDone = playerData.stats.questsCompleted || 0;
-    let SpecialReqDone = GetSpecialRequests(specialRequests.SpecialOrder, townSR.Requests) 
-    let SpecialReqPending = GetPendingSpecialRequests(specialRequests.SpecialOrder, townSR.Requests) 
-
-    console.log("%c Grandpa's eval", 'color: #7289DA')
-    console.group() 
-    console.log("Name", name)
-    console.log("Farm name", farmName)
-    console.log("shipped items", basicShipped);
-    console.log("shipped crops", cropsShipped.poly_crops.filter(i => i.shipped !== undefined).length + cropsShipped.mono_extras.filter(i => i.shipped !== undefined).length)
-    console.log("crops shipped", cropsShipped)
-    console.log("recipes cooked", recipesCooked.filter(i => i.times !== undefined && i.times > 0).length)
-    console.log("crafting recipes", craftingRecipes.filter(i => i.times !== undefined && i.times > 0).length)
-    console.log("crafting recipes full", craftingRecipes)
-    console.log("fish caught", fishCaught.filter(i => i.fished !== false).length)
-    console.log("fish caught full", fishCaught)
-    console.log("monsters killed", specificMonsters.reduce((a, b) => a + b.timesKilled, 0))
-    console.log("monsters killed full", specificMonsters)
-    console.log("quests done", questsDone)
-    console.log("special requests done", SpecialReqDone.length)
-    console.log("rusty key", playerData.hasRustyKey)
-    console.log("Skull key",playerData.hasSkullKey)
-    console.log("money", moneyEarned)
-    console.log("museum", collectionStatus)
-    console.log("fish", fishCaught)
-    console.log("Master of 5 ways", xp)
-    console.log("Legend", "NA")
-    console.log("friendship", FriendshipData)
-    console.log("Pet", FriendshipData)
-    console.log("married")
-    console.log("skull key")
-    console.log("rusty key")
-    console.log("total skill points") 
-    console.groupEnd();
-
     //Not finished  
-    /* Get professions */
-    let professions = GetProfessionData(playerData.professions) 
-    /* Get tailored items */
-    let tailoredItems   = GetArrayDataTimeless(playerData.tailoredItems) 
-    console.log("Finished up for ", name)
     let fullPlayerData = {
-        playerName: name,
-        farmName: farmName,
-        experience: xp,
-        moneyEarned: moneyEarned,
-        professions: professions, 
-        shippedItems: basicShipped,
-        cropsShipped: cropsShipped,
-        mineralsFound: mineralsFound,
-        recipesCooked: recipesCooked,
-        fishCaught: fishCaught, 
-        tailoredItems: tailoredItems,
-        itemsCrafted: craftingRecipes,
-        friendship: FriendshipData,
-        monstersKilled: specificMonsters,
-        museumCollection: museumCollection,
-        questsDone: questsDone,
-        specialRequests: SpecialReqDone,
-        availableSpecialRequests: SpecialReqPending
+        playerName: playerData.name,
+        farmName: playerData.farmName, //TODO: Remove and make global if even needed
+        experience: GetXpInfo(playerData.experiencePoints.int),
+        moneyEarned: playerData.totalMoneyEarned || 0,
+        professions: GetProfessionData(playerData.professions) , 
+        shippedItems: GetShippedItems(playerData.basicShipped) || [],
+        cropsShipped: GetShippedCrops(playerData.basicShipped?.item),
+        mineralsFound: GetArrayData(playerData.mineralsFound.item) || [],
+        recipesCooked: GetCookingData(playerData.recipesCooked, playerData.cookingRecipes.item) || [],
+        fishCaught: GetFishes(playerData.fishCaught.item) || [], 
+        tailoredItems: GetArrayDataTimeless(playerData.tailoredItems) || [],
+        itemsCrafted: GetCraftingRecipes(playerData.craftingRecipes.item) || [],
+        friendship: GetFriendshipData(playerData.friendshipData.item) || [],
+        monstersKilled: GetMonsterQuests(playerData.stats.specificMonstersKilled.item, playerData.stats.slimesKilled) || [],
+        museumCollection: GetMCollection(playerData.archaeologyFound.item, playerData.mineralsFound.item, collectionStatus) || {},
+        questsDone: playerData.stats.questsCompleted || 0,
+        specialRequests: GetSpecialRequests(specialRequests.SpecialOrder, townSR.Requests),
+        availableSpecialRequests: GetPendingSpecialRequests(specialRequests.SpecialOrder, townSR.Requests)
     } 
+
+    console.log(`%c Grandpa's eval for ${playerData.name}`, 'color: #7289DA') 
+    console.log("Player Data", fullPlayerData)
     return fullPlayerData;
 } 
 
@@ -190,20 +125,20 @@ const GetCraftingRecipes = (recipes) => {
     } 
     return data 
 } 
-const GetXpInfo = (xp) => {  
-    let data = [] 
+const GetXpInfo = (xp: number[]): experienceType[] => {  
+    let data: experienceType[] = [] 
     xp.forEach((item, id) => {
-        let d = {
-            skill: GetSkillName(id),
-            xp: parseInt(item._text),
-            levelInfo: GetLevelInfo(item._text) 
+        let d: experienceType = {
+            skill:  SKILLS[id] || "Unknown",
+            xp: item,
+            levelInfo: Levels.Levels.find((level) => level.val >= item) || { id: 10, val: 15000 }
         }
         data = [...data, d]
     })  
     return data
 } 
-const GetShippedItems = (allShipped: itemType) => { 
-    let data = []
+const GetShippedItems = (allShipped: itemType) :shippedItemType[] => { 
+    let data: shippedItemType[] = []
     if(!allShipped?.item || allShipped?.item.length === 0) return data;
     //Parses the shipped info
     let shipped =  allShipped.item.map( val => {return {id: val.key.int, times: val.value.int}})
@@ -213,14 +148,15 @@ const GetShippedItems = (allShipped: itemType) => {
             name: item.item_name,
             image: GetImages(item.item_name),
             id: item.item_id,
-            shipped: (Array.isArray(shipped) ? shipped.find(i => i.id === item.item_id ) : false)
+            shipped: (shipped && shipped.length > 0 ? shipped.find(i => i.id === item.item_id )?.times || 0 : 0)
         }
         data = [...data, d]
     }) 
     return data;
 }
-const GetShippedCrops = (allShipped: itemType[]) => { 
-    let poly_crops = [], mono_extras = [] 
+
+const GetShippedCrops = (allShipped: itemsType[]) : cropsShippedType => { 
+    let poly_crops: shippedItemType[] = [], mono_extras: shippedItemType[] = [] 
     ShipCrops.poly_crops.forEach(polycropItem => {  
         let d = {
             name: polycropItem.name,
@@ -637,22 +573,7 @@ const GetQuests = (arr) =>{
     } 
     return data;
 }  
-const GetSkillName = (skillId) =>{
-    switch(skillId){
-        case 0:
-            return "Farming" 
-        case 1: 
-            return "Fishing"
-        case 2:
-            return "Foraging"  
-        case 3:
-            return "Mining"  
-        case 4:
-            return "Combat"  
-        default:
-            return "Unknown" 
-    }
-} 
+
 const GetSpecialRequests = (requests, info) =>{ 
     let data = [];  
     if(Array.isArray(requests)){ 
