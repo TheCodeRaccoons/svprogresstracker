@@ -222,9 +222,9 @@ export type playerType = {
     stardewHero: boolean,
     hasClubCard: boolean,
     hasSpecialCharm: boolean,
-    recipesCooked: string,
+    recipesCooked: recipesCookedType[],
     callsReceived: string,
-    tailoredItems: string,
+    tailoredItems: itemType,
     dayOfMonthForSaveGame: number,
     seasonForSaveGame: number,
     yearForSaveGame: number,
@@ -265,6 +265,13 @@ export type playerType = {
     experiencePoints: intArrayType,
     fishCaught: itemType,
 }
+
+export type recipesCookedType = {
+    id: number;
+    image: string;
+    link: string;
+    name: string;
+};
 
 type intArrayType = {
     int: number[]
