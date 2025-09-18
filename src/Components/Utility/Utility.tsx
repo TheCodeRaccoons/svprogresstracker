@@ -12,7 +12,7 @@ import MonsterCat from '@utility/monsterCategorie.json' with { type: "json" };
 import Museum from '@utility/museum.json' with { type: "json" };
 import townSR from './TownSpecialReq.json' with { type: "json" };
 import QiSR from './QiSpecialReq.json' with { type: "json" };
-import type { cropsShippedType, experienceType, gameLocationType, itemsType, itemType, playerType, shippedItemType, specialOrderType } from 'types/savefile.js';
+import type { cropsShippedType, experienceType, gameLocationType, itemsType, itemType, playerType, recipesCookedType, shippedItemType, specialOrderType } from 'types/savefile.js';
 
 const SKILLS = ["Farming", "Fishing", "Foraging", "Mining", "Combat"]
 
@@ -69,6 +69,7 @@ const GetDetailedInfo = ({playerData , collectionStatus, specialRequests, availa
 const parseData = ({playerData, collectionStatus, specialRequests, availableSpecialRequests}: getParsedUserDataType) => { 
     if(!playerData) return null;
     //Not finished  
+    console.log("Parsing data for:", playerData)
     let fullPlayerData = {
         playerName: playerData.name,
         farmName: playerData.farmName, //TODO: Remove and make global if even needed
@@ -78,17 +79,17 @@ const parseData = ({playerData, collectionStatus, specialRequests, availableSpec
         shippedItems: GetShippedItems(playerData.basicShipped) || [],
         cropsShipped: GetShippedCrops(playerData.basicShipped?.item),
         mineralsFound: GetArrayData(playerData.mineralsFound.item) || [],
-        recipesCooked: GetCookingData(playerData.recipesCooked, playerData.cookingRecipes.item) || [],
+        recipesCooked: playerData.recipesCooked.length > 0 ? GetCookingData(playerData.recipesCooked, playerData.cookingRecipes.item) : [],
         fishCaught: GetFishes(playerData.fishCaught.item) || [], 
-        tailoredItems: GetArrayDataTimeless(playerData.tailoredItems) || [],
+        tailoredItems: playerData.tailoredItems ? GetArrayDataTimeless(playerData.tailoredItems) : [],
         itemsCrafted: GetCraftingRecipes(playerData.craftingRecipes.item) || [],
         friendship: GetFriendshipData(playerData.friendshipData.item) || [],
         monstersKilled: GetMonsterQuests(playerData.stats.specificMonstersKilled.item, playerData.stats.slimesKilled) || [],
         museumCollection: GetMCollection(playerData.archaeologyFound.item, playerData.mineralsFound.item, collectionStatus) || {},
         questsDone: playerData.stats.questsCompleted || 0,
-        specialRequests: GetSpecialRequests(specialRequests.SpecialOrder, townSR.Requests),
-        availableSpecialRequests: GetPendingSpecialRequests(specialRequests.SpecialOrder, townSR.Requests)
-    } 
+        specialRequests: specialRequests?.SpecialOrder ? GetSpecialRequests(specialRequests.SpecialOrder, townSR.Requests) : [],
+        availableSpecialRequests: specialRequests?.SpecialOrder ? GetPendingSpecialRequests(specialRequests.SpecialOrder, townSR.Requests) : []
+    }
 
     console.log(`%c Grandpa's eval for ${playerData.name}`, 'color: #7289DA') 
     console.log("Player Data", fullPlayerData)
@@ -96,16 +97,16 @@ const parseData = ({playerData, collectionStatus, specialRequests, availableSpec
 } 
 
 /* Parse the XML datainto JSON objects, I hope the names here are pretty self explanatory */
-const GetCookingData = (cooked, known) =>{
-    console.log("Getting cooking data...")
-    let data = [];
+const GetCookingData = (cooked: recipesCookedType[], known: itemsType[]): recipesCookedType[] =>{
+    console.log("Getting cooking data...", cooked);
+    let data: recipesCookedType[] = [];
     Dishes.Dishes.forEach(item => {
         let d = {
             name: NameTranslate(item.Name),
             id: item.id,
             image: GetImages(item.Name),
             link: item.link,
-            times: (ValidateKnown(known, NameTranslate(item.Name))) ? GetCooked(cooked, item.id) : undefined
+            times: (ValidateKnown(known, NameTranslate(item.Name))) ? GetCooked(cooked, item.id) : 0
         }
         data = [...data, d]
     })
@@ -299,14 +300,15 @@ const GetLevelInfo = (xp) =>{
     } 
     return val;  
 } 
-const ValidateKnown = (k, name) => {
+const ValidateKnown = (k:itemsType[], name: string) => {
     if(Array.isArray(k)){
-        let known = k.find(item => item.key.string._text === name) 
+        let known = k.find(item => item.key.string === name) 
         return known ? true : false
     }
 }
 const GetCooked = (c, id) => { 
-    let cooked = "";  
+    let cooked = ""; 
+    console.log("Getting cooked for id:", id, c) 
     if(Array.isArray(c.item)){
         let i = c.item.find(item => item.key.int === id) 
         cooked = (i !== undefined) ? i.value.int : 0  
@@ -314,11 +316,12 @@ const GetCooked = (c, id) => {
     else{
         if(!c.hasOwnProperty("item")){ 
         }else{
-            cooked = (c.item.key.int === id) ? c.item.value.int : 0 
+            cooked = (c.item.key.int === id) ? c.item.value : 0 
         }
     }
     return cooked;
 }
+
 const GetImages = (name) => {
     if(name === "Wild Seeds (Sp)"){
         return "Spring_Seeds"
@@ -537,22 +540,19 @@ const GetArrayData = (arr) =>{
     } 
     return data;
 } 
-const GetArrayDataTimeless = (arr) =>{
-    let data = []; 
-    if(Array.isArray(arr)){ 
-        arr.forEach(item => {
-            let d = (item.key.int) ? item.key.int._text : item.key.string._text 
-            data = [...data,d]
+const GetArrayDataTimeless = (arr: itemType) =>{
+    let data: string[] = [];
+    if(arr && arr.item?.length > 0){ 
+        arr.item.forEach(item => {
+            let d = (item?.key?.int) ? item.key.int : item.key.string
+            if (d !== undefined) { 
+                data = [...data, typeof d === "string" ? d : d.toString()]
+            }
         });
     }
     else if(!arr){
         return data
     }
-    else{
-        data = {
-            item: (arr.key.int) ? arr.key.int._text : arr.key.string._text
-        }
-    } 
     return data;
 } 
 const GetQuests = (arr) =>{
