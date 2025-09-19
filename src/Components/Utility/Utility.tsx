@@ -12,7 +12,7 @@ import MonsterCat from '@utility/monsterCategorie.json' with { type: "json" };
 import Museum from '@utility/museum.json' with { type: "json" };
 import townSR from './TownSpecialReq.json' with { type: "json" };
 import QiSR from './QiSpecialReq.json' with { type: "json" };
-import type { cropsShippedType, experienceType, gameLocationType, itemsType, itemType, playerType, recipesCookedType, shippedItemType, specialOrderType } from 'types/savefile.js';
+import type { cropsShippedType, experienceType, gameLocationType, itemsType, itemType, playerType, professionsType, recipesCookedType, shippedItemType, specialOrderType } from 'types/savefile.js';
 
 const SKILLS = ["Farming", "Fishing", "Foraging", "Mining", "Combat"]
 
@@ -73,9 +73,9 @@ const parseData = ({playerData, collectionStatus, specialRequests, availableSpec
     let fullPlayerData = {
         playerName: playerData.name,
         farmName: playerData.farmName, //TODO: Remove and make global if even needed
-        experience: GetXpInfo(playerData.experiencePoints.int),
-        moneyEarned: playerData.totalMoneyEarned || 0,
-        professions: GetProfessionData(playerData.professions) , 
+        experience: GetXpInfo(playerData.experiencePoints.int), //DONE
+        moneyEarned: playerData.totalMoneyEarned || 0, //DONE
+        professions: GetProfessionData(playerData.professions.int) , 
         shippedItems: GetShippedItems(playerData.basicShipped) || [],
         cropsShipped: GetShippedCrops(playerData.basicShipped?.item),
         mineralsFound: GetArrayData(playerData.mineralsFound.item) || [],
@@ -129,12 +129,14 @@ const GetCraftingRecipes = (recipes) => {
 const GetXpInfo = (xp: number[]): experienceType[] => {  
     let data: experienceType[] = [] 
     xp.forEach((item, id) => {
-        let d: experienceType = {
-            skill:  SKILLS[id] || "Unknown",
-            xp: item,
-            levelInfo: Levels.Levels.find((level) => level.val >= item) || { id: 10, val: 15000 }
+        if (SKILLS[id] !== undefined){
+            let d: experienceType = {
+                skill:  SKILLS[id] || "Unknown",
+                xp: item,
+                levelInfo: Levels.Levels.find((level) => level.val >= item) || { id: 10, val: 15000 }
+            }
+            data = [...data, d]
         }
-        data = [...data, d]
     })  
     return data
 } 
@@ -364,24 +366,19 @@ const GetImages = (name) => {
 const CleanTimes = (obj) => {
     return (obj !== undefined ? parseInt(obj.value.int._text) : undefined)
 }  
-const GetProfessionData = (arr) =>{
-    let data = []; 
-    if(Array.isArray(arr)){ 
-        arr.forEach(item => {
-            let d = ProfNames.professions.find( p  => p.id === parseInt(item._text))
-            data = [...data,d]
+const GetProfessionData = (professions: number[]): professionsType[] =>{
+    let data: professionsType[] = []; 
+    if(Array.isArray(professions)){ 
+        professions.forEach(item => {
+            let d = ProfNames.professions.find( p  => p.id === item)
+            if (d !== undefined) {
+                data = [...data, d]
+            }
         });
     }
-    else if(!arr){
-        return data
-    }
-    else{
-        data = {
-            data: ProfNames.professions.find( p  => p.id === parseInt(arr._text))
-        }
-    }  
     return data;
-}  
+}
+
 const GetProfession = (id) =>{
     let prof = ""; 
     switch(id){
