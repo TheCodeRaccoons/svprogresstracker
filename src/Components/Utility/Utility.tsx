@@ -12,7 +12,7 @@ import MonsterCat from '@utility/monsterCategorie.json' with { type: "json" };
 import Museum from '@utility/museum.json' with { type: "json" };
 import townSR from './TownSpecialReq.json' with { type: "json" };
 import QiSR from './QiSpecialReq.json' with { type: "json" };
-import type { cropsShippedType, experienceType, gameLocationType, itemsType, itemType, playerType, professionsType, recipesCookedType, shippedItemType, specialOrderType } from 'types/savefile.js';
+import type { cropsShippedType, experienceType, gameLocationType, itemFoundType, itemsType, itemType, playerType, professionsType, recipesCookedType, shippedItemType, specialOrderType } from 'types/savefile.js';
 
 const SKILLS = ["Farming", "Fishing", "Foraging", "Mining", "Combat"]
 
@@ -75,10 +75,10 @@ const parseData = ({playerData, collectionStatus, specialRequests, availableSpec
         farmName: playerData.farmName, //TODO: Remove and make global if even needed
         experience: GetXpInfo(playerData.experiencePoints.int), //DONE
         moneyEarned: playerData.totalMoneyEarned || 0, //DONE
-        professions: GetProfessionData(playerData.professions.int) , 
-        shippedItems: GetShippedItems(playerData.basicShipped) || [],
-        cropsShipped: GetShippedCrops(playerData.basicShipped?.item),
-        mineralsFound: GetArrayData(playerData.mineralsFound.item) || [],
+        professions: GetProfessionData(playerData.professions.int) , //DONE?
+        shippedItems: GetShippedItems(playerData.basicShipped) || [],//DONE
+        cropsShipped: GetShippedCrops(playerData.basicShipped?.item),//DONE
+        mineralsFound: GetArrayData(playerData.mineralsFound?.item) || [], //DONE
         recipesCooked: playerData.recipesCooked.length > 0 ? GetCookingData(playerData.recipesCooked, playerData.cookingRecipes.item) : [],
         fishCaught: GetFishes(playerData.fishCaught.item) || [], 
         tailoredItems: playerData.tailoredItems ? GetArrayDataTimeless(playerData.tailoredItems) : [],
@@ -165,18 +165,18 @@ const GetShippedCrops = (allShipped: itemsType[]) : cropsShippedType => {
             name: polycropItem.name,
             image: GetImages(polycropItem.name),
             id: polycropItem.id,
-            shipped: (allShipped.find(i => parseInt(i.id) === polycropItem.id ) !== undefined) ? 
-                allShipped.find(i => parseInt(i.id) === polycropItem.id ).shipped 
-                : undefined
+            shipped: (allShipped && allShipped.length > 0) ? 
+                allShipped.find(i => i.key.int === polycropItem.id )?.value?.int || 0 : 0
         }
         poly_crops = [...poly_crops, d]
     })
-    ShipCrops.mono_extras.forEach(item => {
+    ShipCrops.mono_extras.forEach(monoCropItem => {
         let d = {
-            name: item.name,
-            image: GetImages(item.name),
-            id: item.id,
-            shipped:  (allShipped.find(i => parseInt(i.id) === item.id ) !== undefined) ? allShipped.find(i => parseInt(i.id) === item.id ).shipped : undefined
+            name: monoCropItem.name,
+            image: GetImages(monoCropItem.name),
+            id: monoCropItem.id,
+            shipped:  (allShipped && allShipped.length > 0) ?
+            allShipped.find(i => i.key.int === monoCropItem.id )?.value?.int || 0 : 0
         }
         mono_extras = [...mono_extras, d]
     })
@@ -324,45 +324,25 @@ const GetCooked = (c, id) => {
     return cooked;
 }
 
-const GetImages = (name) => {
-    if(name === "Wild Seeds (Sp)"){
-        return "Spring_Seeds"
-    }
-    if(name === "Wild Seeds (Su)"){ 
-        return "Summer_Seeds"
-    }
-    if(name === "Wild Seeds (Fa)"){
-        return "Fall_Seeds"
-    }
-    if(name === "Wild Seeds (Wi)") {
-        return "Winter_Seeds"
-    }
-    if(name === "Transmute (Fe)"){
-        return "Iron_Bar"
-    }
-    if(name === "Transmute (Au)"){
-        return "Gold_Bar"
-    }
-    if(name === "Oil Of Garlic"){
-        return "Oil_of_Garlic"
-    }
-    if(name === "Egg (brown)"){
-        return "Brown_Egg"
-    }
-    if(name === "Egg (white)"){
-        return "Egg"
-    }
-    if(name === "Large Egg (white)"){
-        return "Large_Egg"
-    }
-    if(name === "Large Egg (brown)"){
-        return "Large_Brown_Egg"
-    }
-    if(name === "L. Goat Milk"){
-        return "Large_Goat_Milk"
-    }
-    return name.split(" ").join("_").replace("'","").replace(":", "").replace("", "")
-}  
+const GetImages = (name: string): string => {
+    const imageMap: { [key: string]: string } = {
+        "Wild Seeds (Sp)": "Spring_Seeds",
+        "Wild Seeds (Su)": "Summer_Seeds",
+        "Wild Seeds (Fa)": "Fall_Seeds",
+        "Wild Seeds (Wi)": "Winter_Seeds",
+        "Transmute (Fe)": "Iron_Bar",
+        "Transmute (Au)": "Gold_Bar",
+        "Oil Of Garlic": "Oil_of_Garlic",
+        "Egg (brown)": "Brown_Egg",
+        "Egg (white)": "Egg",
+        "Large Egg (white)": "Large_Egg",
+        "Large Egg (brown)": "Large_Brown_Egg",
+        "L. Goat Milk": "Large_Goat_Milk"
+    };
+    
+    return imageMap[name] || name.split(" ").join("_").replace(/['":]/g, "");
+}
+
 const CleanTimes = (obj) => {
     return (obj !== undefined ? parseInt(obj.value.int._text) : undefined)
 }  
@@ -379,164 +359,78 @@ const GetProfessionData = (professions: number[]): professionsType[] =>{
     return data;
 }
 
-const GetProfession = (id) =>{
-    let prof = ""; 
-    switch(id){
-        case 0:
-            prof = "Rancher";
-            break;
-        case 1:
-            prof = "Tiller";
-            break;
-        case 2:
-            prof = "Coopmaster";
-            break;
-        case 3:
-            prof = "Shepherd";
-            break;
-        case 4:
-            prof = "Artisan";
-            break;
-        case 5:
-            prof = "Agriculturist";
-            break;
-        case 6:
-            prof = "Fisher";
-            break;
-        case 7:
-            prof = "Trapper";
-            break;
-        case 8:
-            prof = "Angler";
-            break;
-        case 9:
-            prof = "Pirate";
-            break;
-        case 10:
-            prof = "Mariner";
-            break;
-        case 11:
-            prof = "Luremaster";
-            break;
-        case 12:
-            prof = "Forester";
-            break;
-        case 13:
-            prof = "Gatherer";
-            break;
-        case 14:
-            prof = "Lumberjack";
-            break;
-        case 15:
-            prof = "Tapper";
-            break;
-        case 16:
-            prof = "Botanist";
-            break;
-        case 17:
-            prof = "Tracker";
-            break;
-        case 18:
-            prof = "Miner";
-            break;
-        case 19:
-            prof = "Geologist";
-            break;
-        case 20:
-            prof = "Blacksmith";
-            break;
-        case 21:
-            prof = "Prospector";
-            break;
-        case 22:
-            prof = "Excavator";
-            break;
-        case 23:
-            prof = "Gemologist";
-            break;
-        case 24:
-            prof = "Fighter";
-            break;
-        case 25:
-            prof = "Scout";
-            break;
-        case 26:
-            prof = "Brute";
-            break;
-        case 27:
-            prof = "Defender";
-            break;
-        case 28:
-            prof = "Acrobat";
-            break;
-        case 29:
-            prof = "Desperado";
-            break; 
-        default:
-            prof = "";
-            break;
-    }
-
-    return prof;
-} 
-const NameTranslate = (name) => {
-    switch(name) {
-        case "Cheese Cauliflower":
-            return "Cheese Cauli."
-        case "Cookie":
-            return "Cookies"
-        case "Cranberry Sauce":
-            return "Cran. Sauce"
-        case "Dish O' The Sea":
-            return "Dish o' The Sea"
-        case "Eggplant Parmesan":
-            return "Eggplant Parm."
-        case "Vegetable Medley":
-            return "Vegetable Stew"
-        default:
-            return name;
-    }
+const GetProfession = (id: number): string => {
+    const professionMap: { [key: number]: string } = {
+        0: "Rancher",
+        1: "Tiller",
+        2: "Coopmaster",
+        3: "Shepherd",
+        4: "Artisan",
+        5: "Agriculturist",
+        6: "Fisher",
+        7: "Trapper",
+        8: "Angler",
+        9: "Pirate",
+        10: "Mariner",
+        11: "Luremaster",
+        12: "Forester",
+        13: "Gatherer",
+        14: "Lumberjack",
+        15: "Tapper",
+        16: "Botanist",
+        17: "Tracker",
+        18: "Miner",
+        19: "Geologist",
+        20: "Blacksmith",
+        21: "Prospector",
+        22: "Excavator",
+        23: "Gemologist",
+        24: "Fighter",
+        25: "Scout",
+        26: "Brute",
+        27: "Defender",
+        28: "Acrobat",
+        29: "Desperado"
+    };
+    
+    return professionMap[id] || "";
 }
-const GetDateableNPC = (name) => {
-
-    if( name === "Abigail" || 
-        name === "Alex" || 
-        name === "Elliott" || 
-        name === "Emily" || 
-        name === "Haley" || 
-        name === "Harvey" ||  
-        name === "Leah" ||  
-        name === "Maru" ||  
-        name === "Penny" ||  
-        name === "Sam" || 
-        name === "Sebastian" ||  
-        name === "Shane"){
-        return true
-    }
-    return false; 
+const NameTranslate = (name: string): string => {
+    const nameMap: { [key: string]: string } = {
+        "Cheese Cauliflower": "Cheese Cauli.",
+        "Cookie": "Cookies",
+        "Cranberry Sauce": "Cran. Sauce",
+        "Dish O' The Sea": "Dish o' The Sea",
+        "Eggplant Parmesan": "Eggplant Parm.",
+        "Vegetable Medley": "Vegetable Stew"
+    };
+    
+    return nameMap[name] || name;
 }
-const GetArrayData = (arr) =>{
-    let data = [];
+
+const GetDateableNPC = (name: string): boolean => {
+    const dateableNPCs = new Set([
+        "Abigail", "Alex", "Elliott", "Emily", "Haley", "Harvey",
+        "Leah", "Maru", "Penny", "Sam", "Sebastian", "Shane"
+    ]);
+    
+    return dateableNPCs.has(name);
+}
+
+const GetArrayData = (arr: itemsType[]) =>{
+    let data: itemFoundType[] = [];
     if(Array.isArray(arr)){
         arr.forEach(item => {
-            let d = {
-                item: (item.key.int) ? item.key.int._text : item.key.string._text,
-                times: item.value.int._text
+            let d: itemFoundType = {
+                item: (item.key.int) ? item.key.int : item.key.string || 0,
+                timesFound: item.value.int || 0
             }
             data = [...data, d]
         });
     }
-    else if(!arr){
-        return data
-    }
-    else{ 
-        data = {
-            item: (arr.key.int) ? arr.key.int._text : arr.key.string._text,
-            times: (arr.value.int) ? arr.value.int._text : arr.value.string._text
-        }
-    } 
     return data;
-} 
+}
+
 const GetArrayDataTimeless = (arr: itemType) =>{
     let data: string[] = [];
     if(arr && arr.item?.length > 0){ 
