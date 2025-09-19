@@ -130,7 +130,7 @@ export type playerType = {
     IsEmoting: boolean,
     CurrentEmote: number,
     Scale: number,
-    professions: string,
+    professions: intArrayType,
     newLevels: string,
     dialogueQuestionsAnswered: string,
     furnitureOwned: string,
