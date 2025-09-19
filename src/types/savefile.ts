@@ -266,6 +266,11 @@ export type playerType = {
     fishCaught: itemType,
 }
 
+export type professionsType = {
+    id: number;
+    name: string;
+}
+
 export type recipesCookedType = {
     id: number;
     image: string;
@@ -279,6 +284,11 @@ type intArrayType = {
 
 type friendshipDataItemType = {
     item: friendshipDataType[]
+}
+
+export type itemFoundType = {
+    item: number | string,
+    timesFound: number
 }
 
 type friendshipDataType = {
