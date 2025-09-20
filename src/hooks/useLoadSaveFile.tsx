@@ -4,6 +4,7 @@ import { GetDetailedInfo, GetFarmHands } from '@utility/Utility';
 import type { gameLocationType, itemsType, itemType, playerType, saveFileType, saveGameType, specialOrderType } from 'types/savefile.js';
 
 export interface UseLoadSaveFileResult {
+    playerData: any;
     fileData: any;
     isLoading: boolean;
     error: string | null;
@@ -14,7 +15,7 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
     const [fileData, setFileData] = useState<saveGameType | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const [playerData, setPlayerData] = useState<playerType[] | null>(null);
+    const [playerData, setPlayerData] = useState<any | null>(null);
 
     useEffect(() => {
         if (fileData) {
@@ -83,7 +84,7 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
         }
 
         console.log("Players:", players)
-        //setPlayerData(players)
+        setPlayerData(players)
     }, [fileData])
 
     const GetCollection = (collection: gameLocationType) => { 
@@ -97,6 +98,7 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
     }
 
     return {
+        playerData,
         fileData,
         isLoading,
         error,
