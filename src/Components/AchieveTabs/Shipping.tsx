@@ -1,46 +1,45 @@
-import React from 'react' 
- 
-class Shipping extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = { 
-            shippedItems: this.props.shippedItems
-            
-        }
-    }  
+import React, { useState, useEffect } from 'react'
 
+interface ShippedItem {
+    shipped?: any;
+    image: string;
+    name: string;
+}
 
-    GetAcchievements = () => {
+interface ShippingProps {
+    shippedItems: ShippedItem[];
+}
+
+const Shipping: React.FC<ShippingProps> = ({ shippedItems }) => {
+    const [totalShipped, setTotalShipped] = useState(0);
+
+    const getAchievements = () => {
         let total = 0 
-        this.state.shippedItems.forEach(el => { 
+        shippedItems.forEach(el => { 
             if((el.shipped !== undefined)){
                 total += 1;
             }  
         }); 
 
-        this.setState({
-            totalShipped: total 
-        }) 
-    }
+        setTotalShipped(total);
+    };
 
-    componentDidMount = () => {
-        this.GetAcchievements()
-    }
+    useEffect(() => {
+        getAchievements();
+    }, [shippedItems]);
 
-    render() {
-        return ( 
-            <div className="progress-container">   
-                <span className="a-title"><h1>You have shipped {this.state.totalShipped} / {this.state.shippedItems.length} items.</h1></span>
-                <br />
-                <h2>Shipping Achievements</h2>
-                <ul className="a-List"> 
-                    <li>Full Shipment: {(this.state.totalShipped === this.state.shippedItems.length) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to ship {this.state.shippedItems.length - this.state.totalShipped} more item to get this achievement.</span> } </li>
-                </ul>
-                <br />
-                {this.props.shippedItems.map((d, i) => <a href={`https://stardewvalleywiki.com/${d.image}`} target="blank" key={i}><img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Shipment/${d.image}.png`} alt={d.name} className={ (d.shipped !== undefined) ?  "done" : "" } title={(d.shipped !== undefined) ? `You have shipped ${d.name}` : `You haven't shipped ${d.name}`} ></img></a>)}
-            </div>
-        );
-    }
-}
+    return ( 
+        <div className="progress-container">   
+            <span className="a-title"><h1>You have shipped {totalShipped} / {shippedItems.length} items.</h1></span>
+            <br />
+            <h2>Shipping Achievements</h2>
+            <ul className="a-List"> 
+                <li>Full Shipment: {(totalShipped === shippedItems.length) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to ship {shippedItems.length - totalShipped} more item to get this achievement.</span> } </li>
+            </ul>
+            <br />
+            {shippedItems.map((d, i) => <a href={`https://stardewvalleywiki.com/${d.image}`} target="blank" key={i}><img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Shipment/${d.image}.png`} alt={d.name} className={ (d.shipped !== undefined) ?  "done" : "" } title={(d.shipped !== undefined) ? `You have shipped ${d.name}` : `You haven't shipped ${d.name}`} ></img></a>)}
+        </div>
+    );
+};
 
 export default Shipping;
