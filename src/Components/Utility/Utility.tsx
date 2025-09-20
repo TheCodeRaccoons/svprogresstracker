@@ -12,7 +12,21 @@ import MonsterCat from '@utility/monsterCategorie.json' with { type: "json" };
 import Museum from '@utility/museum.json' with { type: "json" };
 import townSR from './TownSpecialReq.json' with { type: "json" };
 import QiSR from './QiSpecialReq.json' with { type: "json" };
-import type { cropsShippedType, experienceType, gameLocationType, itemFoundType, itemsType, itemType, playerType, professionsType, recipesCookedType, shippedItemType, specialOrderType } from 'types/savefile.js';
+import type { 
+    cropsShippedType, 
+    experienceType, 
+    formatedFriendshipDataType, 
+    formatedMonsterDataType, 
+    friendshipDataType, 
+    gameLocationType, 
+    generalFormatedItemType, 
+    itemFoundType, 
+    itemsType, 
+    itemType, 
+    playerType, 
+    professionsType, 
+    specialOrderType 
+} from 'types/savefile.js';
 
 const SKILLS = ["Farming", "Fishing", "Foraging", "Mining", "Combat"]
 
@@ -79,9 +93,9 @@ const parseData = ({playerData, collectionStatus, specialRequests, availableSpec
         shippedItems: GetShippedItems(playerData.basicShipped) || [],//DONE
         cropsShipped: GetShippedCrops(playerData.basicShipped?.item),//DONE
         mineralsFound: GetArrayData(playerData.mineralsFound?.item) || [], //DONE
-        recipesCooked: playerData.recipesCooked.length > 0 ? GetCookingData(playerData.recipesCooked, playerData.cookingRecipes.item) : [],
+        cookedItems: GetCookingData(playerData.recipesCooked, playerData.cookingRecipes.item) || [], //DONE
         fishCaught: GetFishes(playerData.fishCaught.item) || [], 
-        tailoredItems: playerData.tailoredItems ? GetArrayDataTimeless(playerData.tailoredItems) : [],
+        tailoredItems: GetArrayDataTimeless(playerData.tailoredItems) || [],
         itemsCrafted: GetCraftingRecipes(playerData.craftingRecipes.item) || [],
         friendship: GetFriendshipData(playerData.friendshipData.item) || [],
         monstersKilled: GetMonsterQuests(playerData.stats.specificMonstersKilled.item, playerData.stats.slimesKilled) || [],
@@ -96,36 +110,47 @@ const parseData = ({playerData, collectionStatus, specialRequests, availableSpec
     return fullPlayerData;
 } 
 
-/* Parse the XML datainto JSON objects, I hope the names here are pretty self explanatory */
-const GetCookingData = (cooked: recipesCookedType[], known: itemsType[]): recipesCookedType[] =>{
-    console.log("Getting cooking data...", cooked);
-    let data: recipesCookedType[] = [];
+const GetCookingData = (cooked: itemType, known: itemsType[]): generalFormatedItemType[] =>{
+    let data: generalFormatedItemType[] = [];
     Dishes.Dishes.forEach(item => {
+        let knownDish = ValidateKnown(known, NameTranslate(item.Name)) || false
         let d = {
             name: NameTranslate(item.Name),
             id: item.id,
             image: GetImages(item.Name),
             link: item.link,
-            times: (ValidateKnown(known, NameTranslate(item.Name))) ? GetCooked(cooked, item.id) : 0
+            knownDish: knownDish,
+            times: knownDish ? GetCooked(cooked.item, item.id) : 0
         }
         data = [...data, d]
     })
     return data 
-}  
-const GetCraftingRecipes = (recipes) => {
-    let data = []  
+}
+
+const GetCooked = (cookedItems:itemsType[], id: number): number => { 
+    let cooked = 0; 
+    if(Array.isArray(cookedItems)){
+        let i = cookedItems.find(item => item.key.int === id) 
+        cooked = (i !== undefined) ? i.value.int : 0  
+    }
+    return cooked;
+}
+
+const GetCraftingRecipes = (recipes: itemsType[]): generalFormatedItemType[] => {
+    let data: generalFormatedItemType[] = []  
     if(Array.isArray(recipes)) {
         CraftingRec.recipes.forEach(item => {
             let d = {
                 name: item,
                 image: GetImages(item),
-                times: CleanTimes(recipes.find(i => i.key.string._text === item))
+                times: recipes.find(i => i.key.string === item)?.value.int || 0,
             }
             data = [...data, d] 
         })
     } 
     return data 
-} 
+}
+
 const GetXpInfo = (xp: number[]): experienceType[] => {  
     let data: experienceType[] = [] 
     xp.forEach((item, id) => {
@@ -140,8 +165,8 @@ const GetXpInfo = (xp: number[]): experienceType[] => {
     })  
     return data
 } 
-const GetShippedItems = (allShipped: itemType) :shippedItemType[] => { 
-    let data: shippedItemType[] = []
+const GetShippedItems = (allShipped: itemType) :generalFormatedItemType[] => { 
+    let data: generalFormatedItemType[] = []
     if(!allShipped?.item || allShipped?.item.length === 0) return data;
     //Parses the shipped info
     let shipped =  allShipped.item.map( val => {return {id: val.key.int, times: val.value.int}})
@@ -159,7 +184,7 @@ const GetShippedItems = (allShipped: itemType) :shippedItemType[] => {
 }
 
 const GetShippedCrops = (allShipped: itemsType[]) : cropsShippedType => { 
-    let poly_crops: shippedItemType[] = [], mono_extras: shippedItemType[] = [] 
+    let poly_crops: generalFormatedItemType[] = [], mono_extras: generalFormatedItemType[] = [] 
     ShipCrops.poly_crops.forEach(polycropItem => {  
         let d = {
             name: polycropItem.name,
@@ -183,77 +208,64 @@ const GetShippedCrops = (allShipped: itemsType[]) : cropsShippedType => {
     
     return {poly_crops, mono_extras}
 }
-const GetFishes = (allFished) => { 
-    let data = []
+const GetFishes = (allFished: itemsType[]) => { 
+    let data: generalFormatedItemType[] = []
 
     Fishes.forEach(item => {
         let d = {
             name: item.name,
             image: GetImages(item.name),
             id: item.id,
-            fished: (Array.isArray(allFished)) ? (allFished.find(i => parseInt(i.key.int._text) === item.id ) !== undefined) : false
+            fished: (Array.isArray(allFished)) ? (allFished.find(i => i.key.int === item.id ) !== undefined) : false
         }
         data = [...data, d]
     }) 
     
     return  data
 }
-const GetFriendshipData = (allFriends) => { 
-    let data = []
+const GetFriendshipData = (allFriends: friendshipDataType[]): formatedFriendshipDataType[] => { 
+    let data: formatedFriendshipDataType[] = []
     if(Array.isArray(allFriends)){
         allFriends.forEach(i => {
-            if(Friendship.includes(i.key.string._text)){
-                let level = Math.trunc(parseInt(i.value.Friendship.Points._text) / 250)
+            if(Friendship.includes(i.key.string)){
+                let level = Math.trunc(i.value.Friendship.Points / 250)
                 let d = {
-                    name: i.key.string._text, 
-                    dateable: GetDateableNPC(i.key.string._text),
-                    points: parseInt(i.value.Friendship.Points._text),
+                    name: i.key.string, 
+                    dateable: GetDateableNPC(i.key.string),
+                    points: i.value.Friendship.Points,
                     level: level,
-                    lvlup: 250 - (parseInt(i.value.Friendship.Points._text) - (level * 250))
+                    lvlup: 250 - (i.value.Friendship.Points - (level * 250))
                 } 
-                data = [...data, d] 
+                data.push(d); 
             } 
         })
     }
     return data
 }
-const GetMonsterQuests = (allMonsters, slimesKilled) => {
-    let monsters = []
-    if(Array.isArray(allMonsters)){ 
-        allMonsters.forEach(item => {
-            let m = {
-                name: item.key.string._text, 
-                timesKilled: parseInt(item.value.int._text)
-            }
-            monsters = [...monsters, m]
-        })
-    }
-    
-    if(monsters){
-        let mData = []
+
+const GetMonsterQuests = (allMonsters: itemsType[], slimesKilled: number): formatedMonsterDataType[] => {
+
+    if(!allMonsters || allMonsters.length === 0) return [];
+
+        let mData: formatedMonsterDataType[] = []
         let sum = 0;
-        for (let [key] of Object.entries(MonsterCat)) {
+        MonsterCat.monsters.forEach(category => {
             sum = 0;
-            MonsterCat[key].monsters.forEach(cat => { 
-                let d = {
-                    timesKilled: (Array.isArray(monsters)) ? monsters.find(i => i.name === cat ) !== undefined ? monsters.find(i => i.name === cat ).timesKilled : 0 : 0
-                } 
-                sum += d.timesKilled 
-            }) 
-            mData = [...mData, {
-                category: key,
-                goal: MonsterCat[key].goal ,
-                timesKilled: (key === "Slimes") ? slimesKilled : sum,
-                images: MonsterCat[key].monsters.map(m => {
+            category.monsters.forEach(_category => {
+                let monster = allMonsters.find(m => m.key.string === _category);
+                sum += monster ? monster.value.int : 0
+            })
+            mData.push({
+                category: category.name,
+                goal: category.goal,
+                timesKilled: (category.name === "Slimes") ? slimesKilled : sum,
+                images: category.monsters.map(m => {
                     let d = {name: m, img: GetImages(m)}
                     return d
                 })
-            }]
-        }   
+            })
+        })
         return(mData) 
-    }
-
-    return []
 }
 const GetMCollection = (archeology, geology, currentCollection) =>{
     
@@ -308,21 +320,7 @@ const ValidateKnown = (k:itemsType[], name: string) => {
         return known ? true : false
     }
 }
-const GetCooked = (c, id) => { 
-    let cooked = ""; 
-    console.log("Getting cooked for id:", id, c) 
-    if(Array.isArray(c.item)){
-        let i = c.item.find(item => item.key.int === id) 
-        cooked = (i !== undefined) ? i.value.int : 0  
-    }
-    else{
-        if(!c.hasOwnProperty("item")){ 
-        }else{
-            cooked = (c.item.key.int === id) ? c.item.value : 0 
-        }
-    }
-    return cooked;
-}
+
 
 const GetImages = (name: string): string => {
     const imageMap: { [key: string]: string } = {
@@ -343,8 +341,8 @@ const GetImages = (name: string): string => {
     return imageMap[name] || name.split(" ").join("_").replace(/['":]/g, "");
 }
 
-const CleanTimes = (obj) => {
-    return (obj !== undefined ? parseInt(obj.value.int._text) : undefined)
+const CleanTimes = (obj: itemsType) => {
+    return (obj !== undefined ? obj.value.int : 0)
 }  
 const GetProfessionData = (professions: number[]): professionsType[] =>{
     let data: professionsType[] = []; 
