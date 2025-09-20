@@ -1,10 +1,24 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import Junimo6 from '@media/Junimo6.png';
 import useLoadSaveFile from '@hooks/useLoadSaveFile';
 
-const Viewer = () => {
+interface ViewerProps {
+    UpdatePlayerData: (playerData: any) => void;
+    UpdateGamePrefix?: (prefix: string) => void;
+    GetCollection?: (collection: any) => any[];
+    ShowLoader?: (show: boolean) => void;
+}
+
+const Viewer = ({ UpdatePlayerData, UpdateGamePrefix, GetCollection, ShowLoader }: ViewerProps) => {
     const inputRef = useRef<HTMLInputElement>(null);
-    const { fileData, isLoading, error, selectFile } = useLoadSaveFile();
+    const { playerData, fileData, isLoading, error, selectFile } = useLoadSaveFile();
+
+    // Call UpdatePlayerData when playerData is available
+    useEffect(() => {
+        if (playerData && UpdatePlayerData) {
+            UpdatePlayerData(playerData);
+        }
+    }, [playerData, UpdatePlayerData]);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
