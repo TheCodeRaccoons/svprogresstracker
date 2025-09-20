@@ -222,7 +222,7 @@ export type playerType = {
     stardewHero: boolean,
     hasClubCard: boolean,
     hasSpecialCharm: boolean,
-    recipesCooked: recipesCookedType[],
+    recipesCooked: itemType,
     callsReceived: string,
     tailoredItems: itemType,
     dayOfMonthForSaveGame: number,
@@ -271,11 +271,58 @@ export type professionsType = {
     name: string;
 }
 
-export type recipesCookedType = {
-    id: number;
+export type cropsShippedType = {
+    mono_extras: generalFormatedItemType[];
+    poly_crops: generalFormatedItemType[];
+};
+
+export type generalFormatedItemType = {
+    id?: number;
     image: string;
-    link: string;
     name: string;
+    link?: string;
+    knownDish?: boolean;
+    times?: number;
+    shipped?: number;
+    fished?: boolean;
+}
+
+export type formatedFriendshipDataType = {
+    name: string;
+    dateable: boolean;
+    points: number;
+    level: number;
+    lvlup: number;
+}
+export type formatedMonsterDataType = {
+    category: string;
+    goal: number;
+    images: monsterImageType[];
+    timesKilled: number;
+};
+
+type monsterImageType = {
+    img: string;
+    name: string;
+}
+
+type batType = {
+    goal: number;
+    monsters: string[];
+};
+
+export type monsterCategoryType = {
+    Bats: batType;
+    CaveInsects: batType;
+    Duggy: batType;
+    DustSpirit: batType;
+    Mummy: batType;
+    PepperRex: batType;
+    RockCrabs: batType;
+    Serpent: batType;
+    Skeleton: batType;
+    Slimes: batType;
+    VoidSpirits: batType;
 };
 
 type intArrayType = {
@@ -291,7 +338,7 @@ export type itemFoundType = {
     timesFound: number
 }
 
-type friendshipDataType = {
+export type friendshipDataType = {
     key: {
         string: "Robin"
     },
@@ -436,7 +483,7 @@ type statsType = {
 }
 
 type specificMonstersKilledType = {
-    item: itemType
+    item: itemsType[]
 }
 
 // Leaf types
@@ -486,18 +533,6 @@ export type questType = {
     duration: string;
     questState: string;
 }
-
-export type shippedItemType = {
-    name: string;
-    image: string;
-    id: number;
-    shipped: number;
-}
-
-export type cropsShippedType = {
-    mono_extras: shippedItemType[];
-    poly_crops: shippedItemType[];
-};
 
 export type experienceType = {
     levelInfo: {
