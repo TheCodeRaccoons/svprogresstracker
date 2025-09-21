@@ -1,60 +1,69 @@
 {
-    "Slimes": {
-        "goal": 1000,
-        "monsters": [
-            "Green Slime",
-            "Sludge",
-            "Frost Jelly"
-        ]
-    },
-    "VoidSpirits": {
-        "goal": 150,
-        "monsters": [
-            "Shadow Brute",
-            "Shadow Brute (dangerous)",
-            "Shadow Shaman",
-            "Shadow Shaman (dangerous)",
-            "Shadow Sniper"
-        ]
-    },
-    "Bats": {
-        "goal": 200,
-        "monsters": [
-            "Bat",
-            "Bat (dangerous)",
-            "Frost Bat",
-            "Frost Bat (dangerous)",
-            "Lava Bat",
-            "Iridium Bat"
-        ]
-    },
-    "Skeleton": {
-        "goal": 50,
-        "monsters": [
-            "Skeleton"
-        ]
-    },
-    "CaveInsects": {
-        "goal": 125,
-        "monsters": [
-            "Bug",
-            "Fly",
-            "Grub"
-        ]
-    },
-    "Duggy": {
+    "monsters": [
+        {
+            "name": "Slimes",
+            "goal": 1000,
+            "monsters": [
+                "Green Slime",
+                "Sludge",
+                "Frost Jelly"
+            ]
+        },
+        {
+            "name": "VoidSpirits",
+            "goal": 150,
+            "monsters": [
+                "Shadow Brute",
+                "Shadow Brute (dangerous)",
+                "Shadow Shaman",
+                "Shadow Shaman (dangerous)",
+                "Shadow Sniper"
+            ]
+        },
+        {
+            "name": "Bats",
+            "goal": 200,
+            "monsters": [
+                "Bat",
+                "Bat (dangerous)",
+                "Frost Bat",
+                "Frost Bat (dangerous)",
+                "Lava Bat",
+                "Iridium Bat"
+            ]
+        },
+        {
+            "name": "Skeleton",
+            "goal": 50,
+            "monsters": [
+                "Skeleton"
+            ]
+        },
+        {
+            "name": "CaveInsects",
+            "goal": 125,
+            "monsters": [
+                "Bug",
+                "Fly",
+                "Grub"
+            ]
+        },
+        {
+            "name": "Duggy",
         "goal": 30,
         "monsters": [
             "Duggy"
         ]
     },
-    "DustSpirit": {
+    {
+        "name": "DustSpirit",
         "goal": 500,
         "monsters": [
             "Dust Spirit"
         ]
     },
-    "RockCrabs": {
+    {
+        "name": "RockCrabs",
         "goal": 60,
         "monsters": [
             "Rock Crab",
@@ -62,22 +71,25 @@
             "Iridium Crab"
         ]
     },
-    "Mummy": {
+    {
+        "name": "Mummy",
         "goal": 100,
         "monsters": [
             "Mummy"
         ]
     },
-    "PepperRex": {
+    {
+        "name": "PepperRex",
         "goal": 50,
         "monsters": [
             "Pepper Rex"
         ]
     },
-    "Serpent": {
+    {
+        "name": "Serpent",
         "goal": 250,
         "monsters": [
             "Serpent"
         ]
-    }
+    }]
 }
