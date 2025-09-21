@@ -26,7 +26,7 @@ import type {
     playerType, 
     professionsType, 
     specialOrderType 
-} from 'types/savefile.js';
+} from 'types/savefile';
 
 const SKILLS = ["Farming", "Fishing", "Foraging", "Mining", "Combat"]
 
