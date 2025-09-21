@@ -1,6 +1,6 @@
 import React from 'react';  
 import Stats from '../stats/stats.js'
-import Viewer from '../Viewer/Viewer.js'
+import Viewer from '../Viewer/Viewer'
 import Logo from '@media/Logo.png';
 import fb from '@media/Social/fb.png'
 import kofi from '@media/Social/kofi.png'
