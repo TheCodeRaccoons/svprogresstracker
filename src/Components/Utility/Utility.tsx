@@ -267,38 +267,31 @@ const GetMonsterQuests = (allMonsters: itemsType[], slimesKilled: number): forma
         })
         return(mData) 
 }
-const GetMCollection = (archeology, geology, currentCollection) =>{
-    
-    let currCol = (Array.isArray(currentCollection)) ? currentCollection.map(c => parseInt(c.value.int._text)) : []
+const GetMCollection = (archeology: itemsType[], geology: itemsType[], currentCollection: itemsType[]) =>{
+
+    if(currentCollection === undefined || currentCollection.length === 0) return {artifacts: [], minerals: []};
 
     //Get found Archeology
-    let currArch = []
-    if(Array.isArray(archeology)) currArch = archeology.map(item => parseInt(item.key.int._text)) 
-    let artifacts = []
-    Museum.artifacts.forEach(a => {
-        let d = {
-            name: a.name,
-            image: GetImages(a.name),
-            found: (currArch.indexOf(a._id) !== -1),
-            inMuseum: (currCol.indexOf(a._id) !== -1)
-        }
-        artifacts = [...artifacts, d]
-    }) 
+    let artifacts: generalFormatedItemType[] = [];
+    let minerals: generalFormatedItemType[] = []
 
-    //Get found minerals
-    let currMin = []
-    if(Array.isArray(geology)) currMin = geology.map(item => parseInt(item.key.int._text)) 
-    let minerals = []
-    Museum.minerals.forEach(m => {
-        let d = {
-            name: m.name,
-            image: GetImages(m.name),
-            found: (currMin.indexOf(m._id) !== -1),
-            inMuseum: (currCol.indexOf(m._id) !== -1)
+    for(let collectionItem of Museum.collection) {
+        if(collectionItem.type === "Artifact"){
+            artifacts.push({
+                name: collectionItem.name,
+                image: GetImages(collectionItem.name),
+                found: (archeology && archeology.length > 0 && archeology.filter(a => a.key.int === collectionItem.id).length > 0),
+                inMuseum: (currentCollection.filter(c => c.key.int === collectionItem.id).length > 0)
+            })
+        } else if(collectionItem.type === "mineral"){
+            minerals.push({
+                name: collectionItem.name,
+                image: GetImages(collectionItem.name),
+                found: (geology && geology.length > 0 && geology.filter(g => g.key.int === collectionItem.id).length > 0),
+                inMuseum: (currentCollection.filter(c => c.key.int === collectionItem.id).length > 0)
+            })
         }
-        minerals = [...minerals, d]
-    })
-
+    }
     return {artifacts, minerals}  
 }
 
