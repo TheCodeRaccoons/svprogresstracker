@@ -275,20 +275,21 @@ const GetMCollection = (archeology: itemsType[], geology: itemsType[], currentCo
     let artifacts: generalFormatedItemType[] = [];
     let minerals: generalFormatedItemType[] = []
 
+    console.log("Current Museum collection:", currentCollection, "Archeology found:", archeology, "Geology found:", geology)
     for(let collectionItem of Museum.collection) {
-        if(collectionItem.type === "Artifact"){
+        if( archeology && archeology.length > 0 && collectionItem.type === "artifact"){
             artifacts.push({
                 name: collectionItem.name,
                 image: GetImages(collectionItem.name),
                 found: (archeology && archeology.length > 0 && archeology.filter(a => a.key.int === collectionItem.id).length > 0),
-                inMuseum: (currentCollection.filter(c => c.key.int === collectionItem.id).length > 0)
+                inMuseum: (currentCollection.filter(c => c.value.int === collectionItem.id).length > 0)
             })
-        } else if(collectionItem.type === "mineral"){
+        } else if(geology && geology.length > 0 && collectionItem.type === "mineral"){
             minerals.push({
                 name: collectionItem.name,
                 image: GetImages(collectionItem.name),
                 found: (geology && geology.length > 0 && geology.filter(g => g.key.int === collectionItem.id).length > 0),
-                inMuseum: (currentCollection.filter(c => c.key.int === collectionItem.id).length > 0)
+                inMuseum: (currentCollection.filter(c => c.value.int === collectionItem.id).length > 0)
             })
         }
     }
