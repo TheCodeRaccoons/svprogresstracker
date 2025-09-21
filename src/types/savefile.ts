@@ -285,6 +285,8 @@ export type generalFormatedItemType = {
     times?: number;
     shipped?: number;
     fished?: boolean;
+    found?: boolean;
+    inMuseum?: boolean;
 }
 
 export type formatedFriendshipDataType = {
