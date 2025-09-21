@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { XMLParser } from 'fast-xml-parser';
 import { GetDetailedInfo, GetFarmHands } from '@utility/Utility';
-import type { gameLocationType, itemsType, itemType, playerType, saveFileType, saveGameType, specialOrderType } from 'types/savefile.js';
+import type { gameLocationType, itemsType, itemType, playerType, saveFileType, saveGameType, specialOrderType } from 'types/savefile';
 
 export interface UseLoadSaveFileResult {
     playerData: any;
