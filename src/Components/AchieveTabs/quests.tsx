@@ -44,10 +44,10 @@ const Quests: React.FC<QuestsProps> = ({ questsDone, specialReq, pendingSpecialR
             </ul> 
             <span className="a-title-big"><h1>Special Orders.</h1></span> 
             <ul className="m-List"> 
-                {specialReq.map((m,i) =>  <li key={i}> <span className="completed">{m.name}: {m.description}</span> </li>)}
+                {specialReq ? specialReq.map((m,i) =>  <li key={i}> <span className="completed">{m.name}: {m.description}</span> </li>) : null}
             </ul> 
             <ul className="m-List">
-                {pendingSpecialReq.map((m,i) => <li key={i}><span className="pending" >{m.name}: {m.description}.</span></li>)} 
+                {pendingSpecialReq ? pendingSpecialReq.map((m,i) => <li key={i}><span className="pending" >{m.name}: {m.description}.</span></li>) : null}
             </ul>  
         </div>
     );
