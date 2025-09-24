@@ -307,7 +307,8 @@ const GetLevelInfo = (xp) =>{
         val = parseInt(xp)
     } 
     return val;  
-} 
+}
+
 const ValidateKnown = (k:itemsType[], name: string) => {
     if(Array.isArray(k)){
         let known = k.find(item => item.key.string === name) 
@@ -437,7 +438,8 @@ const GetArrayDataTimeless = (arr: itemType) =>{
         return data
     }
     return data;
-} 
+}
+
 const GetQuests = (arr) =>{
     let data = []; 
     if(Array.isArray(arr)){ 
@@ -466,7 +468,8 @@ const GetSpecialRequests = (requests, info) =>{
         });
     } 
     return data
-} 
+}
+
 const GetPendingSpecialRequests= (requests, info) =>{ 
     let data = info;  
     if(Array.isArray(requests)){  
