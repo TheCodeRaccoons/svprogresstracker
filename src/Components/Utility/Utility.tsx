@@ -25,6 +25,7 @@ import type {
     itemType, 
     playerType, 
     professionsType, 
+    questType, 
     specialOrderType 
 } from 'types/savefile';
 
@@ -101,8 +102,8 @@ const parseData = ({playerData, collectionStatus, specialRequests, availableSpec
         monstersKilled: GetMonsterQuests(playerData.stats.specificMonstersKilled.item, playerData.stats.slimesKilled) || [],
         museumCollection: GetMCollection(playerData.archaeologyFound.item, playerData.mineralsFound.item, collectionStatus) || {},
         questsDone: playerData.stats.questsCompleted || 0,
-        specialRequests: specialRequests?.SpecialOrder ? GetSpecialRequests(specialRequests.SpecialOrder, townSR.Requests) : [],
-        availableSpecialRequests: specialRequests?.SpecialOrder ? GetPendingSpecialRequests(specialRequests.SpecialOrder, townSR.Requests) : []
+        specialRequests: specialRequests?.SpecialOrder ? GetSpecialRequests(specialRequests.SpecialOrder, townSR.Requests, true) : [],
+        availableSpecialRequests: specialRequests?.SpecialOrder ? GetSpecialRequests(specialRequests.SpecialOrder, townSR.Requests, false) : []
     }
 
     console.log(`%c Grandpa's eval for ${playerData.name}`, 'color: #7289DA') 
@@ -178,35 +179,42 @@ const GetShippedItems = (allShipped: itemType) :generalFormatedItemType[] => {
             id: item.item_id,
             shipped: (shipped && shipped.length > 0 ? shipped.find(i => i.id === item.item_id )?.times || 0 : 0)
         }
-        data = [...data, d]
+        data.push(d);
     }) 
     return data;
 }
 
 const GetShippedCrops = (allShipped: itemsType[]) : cropsShippedType => { 
-    let poly_crops: generalFormatedItemType[] = [], mono_extras: generalFormatedItemType[] = [] 
+    const poly_crops: generalFormatedItemType[] = [] 
+    const mono_extras: generalFormatedItemType[] = []
+    
+    // Process poly crops
     ShipCrops.poly_crops.forEach(polycropItem => {  
-        let d = {
+        const shippedItem = (allShipped && allShipped.length > 0) ? 
+            allShipped.find(i => i.key.int === polycropItem.id) : null;
+            
+        poly_crops.push({
             name: polycropItem.name,
             image: GetImages(polycropItem.name),
             id: polycropItem.id,
-            shipped: (allShipped && allShipped.length > 0) ? 
-                allShipped.find(i => i.key.int === polycropItem.id )?.value?.int || 0 : 0
-        }
-        poly_crops = [...poly_crops, d]
-    })
+            shipped: shippedItem?.value?.int || 0
+        });
+    });
+    
+    // Process mono extras
     ShipCrops.mono_extras.forEach(monoCropItem => {
-        let d = {
+        const shippedItem = (allShipped && allShipped.length > 0) ?
+            allShipped.find(i => i.key.int === monoCropItem.id) : null;
+            
+        mono_extras.push({
             name: monoCropItem.name,
             image: GetImages(monoCropItem.name),
             id: monoCropItem.id,
-            shipped:  (allShipped && allShipped.length > 0) ?
-            allShipped.find(i => i.key.int === monoCropItem.id )?.value?.int || 0 : 0
-        }
-        mono_extras = [...mono_extras, d]
-    })
+            shipped: shippedItem?.value?.int || 0
+        });
+    });
     
-    return {poly_crops, mono_extras}
+    return { poly_crops, mono_extras };
 }
 const GetFishes = (allFished: itemsType[]) => { 
     let data: generalFormatedItemType[] = []
@@ -218,7 +226,7 @@ const GetFishes = (allFished: itemsType[]) => {
             id: item.id,
             fished: (Array.isArray(allFished)) ? (allFished.find(i => i.key.int === item.id ) !== undefined) : false
         }
-        data = [...data, d]
+        data.push(d)
     }) 
     
     return  data
@@ -297,17 +305,17 @@ const GetMCollection = (archeology: itemsType[], geology: itemsType[], currentCo
 }
 
 /* Utility methods */ 
-const GetLevelInfo = (xp) =>{  
-    let val;
-    try{ 
-        val = Levels.Levels.find((level, i) => level.val >= parseInt(xp))
-        val = (val === undefined) ? {"id": 10,"val": 15000} : val; 
-    }
-    catch(err){ 
-        val = parseInt(xp)
-    } 
-    return val;  
-}
+// const GetLevelInfo = (xp) =>{  
+//     let val;
+//     try{ 
+//         val = Levels.Levels.find((level, i) => level.val >= parseInt(xp))
+//         val = (val === undefined) ? {"id": 10,"val": 15000} : val; 
+//     }
+//     catch(err){ 
+//         val = parseInt(xp)
+//     } 
+//     return val;  
+// }
 
 const ValidateKnown = (k:itemsType[], name: string) => {
     if(Array.isArray(k)){
@@ -440,43 +448,45 @@ const GetArrayDataTimeless = (arr: itemType) =>{
     return data;
 }
 
-const GetQuests = (arr) =>{
-    let data = []; 
-    if(Array.isArray(arr)){ 
-        arr.forEach(item => {
-            let d = item._currentObjective._text
-            data = [...data,d]
-        });
-    }
-    else if(!arr){
-        return data
-    }
-    else{
-        data = {
-            data: arr._currentObjective._text 
+// const GetQuests = (arr) =>{
+//     let data = []; 
+//     if(Array.isArray(arr)){ 
+//         arr.forEach(item => {
+//             let d = item._currentObjective._text
+//             data = [...data,d]
+//         });
+//     }
+//     else if(!arr){
+//         return data
+//     }
+//     else{
+//         data = {
+//             data: arr._currentObjective._text 
+//         }
+//     } 
+//     return data;
+// }
+
+const GetSpecialRequests = (requests: questType[], info: any[], includeCompleted: boolean = true) => {
+    let data: any[] = [];
+    
+    if (Array.isArray(requests)) {
+        if (includeCompleted) {
+            // Return completed requests
+            requests.forEach(item => {
+                let d = info.find(obj => obj.name === item);
+                if (d) data = [...data, d];
+            });
+        } else {
+            // Return pending requests (filter out completed ones)
+            data = info.filter(item => !requests.includes(item.name));
         }
-    } 
+    } else if (!includeCompleted) {
+        // If no requests and we want pending, return all info
+        data = info;
+    }
+    
     return data;
-}  
-
-const GetSpecialRequests = (requests, info) =>{ 
-    let data = [];  
-    if(Array.isArray(requests)){ 
-        requests.forEach(item => {
-            let d = info.find(obj => obj.name === item._text) 
-            data = [...data,d]
-        });
-    } 
-    return data
-}
-
-const GetPendingSpecialRequests= (requests, info) =>{ 
-    let data = info;  
-    if(Array.isArray(requests)){  
-
-        requests.forEach(req =>{ data = data.filter(item => item.name !== req._text)})
-    } 
-    return data
 }
 
 const GetGrantpasEval = () =>{
