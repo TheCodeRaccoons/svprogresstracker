@@ -29,8 +29,6 @@ import type {
     specialOrderType 
 } from 'types/savefile';
 
-const SKILLS = ["Farming", "Fishing", "Foraging", "Mining", "Combat"]
-
 /* Gather the XML and handling the file */
 //Gets the info from the farm hands as an array of the same type
 const GetFarmHands = (locations: gameLocationType[]): playerType[] => {
@@ -147,26 +145,28 @@ const GetCraftingRecipes = (recipes: itemsType[]): generalFormatedItemType[] => 
                 image: GetImages(item),
                 times: recipes.find(i => i.key.string === item)?.value.int || 0,
             }
-            data = [...data, d] 
+            data.push(d)
         })
     } 
     return data 
 }
 
-const GetXpInfo = (xp: number[]): experienceType[] => {  
-    let data: experienceType[] = [] 
-    xp.forEach((item, id) => {
+const GetXpInfo = (xp: number[]): experienceType[] => {
+    const SKILLS = ["Farming", "Fishing", "Foraging", "Mining", "Combat"]
+
+    let skillLevelData: experienceType[] = [] 
+    xp.forEach((_skill, id) => {
         if (SKILLS[id] !== undefined){
-            let d: experienceType = {
+            skillLevelData.push({
                 skill:  SKILLS[id] || "Unknown",
-                xp: item,
-                levelInfo: Levels.Levels.find((level) => level.val >= item) || { id: 10, val: 15000 }
-            }
-            data = [...data, d]
+                xp: _skill,
+                levelInfo: Levels.find((level) => level.val >= _skill) || { id: 10, val: 15000 }
+            })
         }
     })  
-    return data
-} 
+    return skillLevelData
+}
+
 const GetShippedItems = (allShipped: itemType) :generalFormatedItemType[] => { 
     let data: generalFormatedItemType[] = []
     if(!allShipped?.item || allShipped?.item.length === 0) return data;
