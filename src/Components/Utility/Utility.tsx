@@ -123,8 +123,9 @@ const GetCookingData = (cooked: itemType, known: itemsType[]): generalFormatedIt
             knownDish: knownDish,
             times: knownDish ? GetCooked(cooked.item, item.id) : 0
         }
-        data = [...data, d]
+        data.push(d);
     })
+    console.log('Cooking Data:', data);
     return data 
 }
 
@@ -283,7 +284,7 @@ const GetMCollection = (archeology: itemsType[], geology: itemsType[], currentCo
     let artifacts: generalFormatedItemType[] = [];
     let minerals: generalFormatedItemType[] = []
 
-    console.log("Current Museum collection:", currentCollection, "Archeology found:", archeology, "Geology found:", geology)
+    //console.log("Current Museum collection:", currentCollection, "Archeology found:", archeology, "Geology found:", geology)
     for(let collectionItem of Museum.collection) {
         if( archeology && archeology.length > 0 && collectionItem.type === "artifact"){
             artifacts.push({
