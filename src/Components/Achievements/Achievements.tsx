@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';  
-import Food from '../AchieveTabs/Food'
+import Food from '../AchieveTabs/Cooking'
 import Crafting from '../AchieveTabs/Crafting'
 import AchCook from '../../Media/Achievements/AchCook.png'
 import AchCraft from '../../Media/Achievements/AchCraft.png'
