@@ -7,9 +7,7 @@ interface dishesCookedType {
 
 const Food = ( recipesCooked  : dishesCookedType) => {
     const [dishesCooked, setDishesCooked] = useState(0);
-    console.log('recipesCooked prop:', recipesCooked.recipesCooked);
     if(!recipesCooked) return <div>No cooking data available.</div>;
-    //
 
     const canMap = (recipesCooked.recipesCooked && recipesCooked.recipesCooked.length > 0);
     useEffect(() => {  
