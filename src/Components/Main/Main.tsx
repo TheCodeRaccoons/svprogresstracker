@@ -1,4 +1,3 @@
-import React from 'react';  
 import Stats from '../stats/stats.js'
 import Viewer from '../Viewer/Viewer'
 import Logo from '@media/Logo.png';
