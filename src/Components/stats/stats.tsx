@@ -32,7 +32,7 @@ const Stats = (props) => {
                     <img src={Rope} alt=""></img>
                 </div>
                 <Achievements 
-                    recipesCooked={item.recipesCooked}
+                    recipesCooked={item.cookedItems}
                     itemsCrafted={item.itemsCrafted}  
                     cropsShipped={item.cropsShipped} 
                     fishCaught={item.fishCaught}
@@ -67,7 +67,7 @@ const Stats = (props) => {
                                 <img src={Rope} alt=""></img>
                             </div> 
                             <Achievements 
-                                recipesCooked={props.playerData.recipesCooked} 
+                                recipesCooked={props.playerData.cookedItems} 
                                 itemsCrafted={props.playerData.itemsCrafted}  
                                 cropsShipped={props.playerData.cropsShipped}  
                                 fishCaught={props.playerData.fishCaught}
