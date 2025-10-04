@@ -30,7 +30,6 @@ import type {
     specialOrderType 
 } from 'types/savefile';
 
-/* Gather the XML and handling the file */
 //Gets the info from the farm hands as an array of the same type
 const GetFarmHands = (locations: gameLocationType[]): playerType[] => {
     if (!Array.isArray(locations)) return [];
@@ -385,19 +384,6 @@ const GetMCollection = (archeology: itemsType[], geology: itemsType[], currentCo
     return {artifacts, minerals}  
 }
 
-/* Utility methods */ 
-// const GetLevelInfo = (xp) =>{  
-//     let val;
-//     try{ 
-//         val = Levels.Levels.find((level, i) => level.val >= parseInt(xp))
-//         val = (val === undefined) ? {"id": 10,"val": 15000} : val; 
-//     }
-//     catch(err){ 
-//         val = parseInt(xp)
-//     } 
-//     return val;  
-// }
-
 const ValidateKnown = (k:itemsType[], name: string) => {
     if(Array.isArray(k)){
         let known = k.find(item => item.key.string === name) 
@@ -519,8 +505,6 @@ const GetSpecialRequests = (requests: questType[], info: any[], includeCompleted
 }
 
 const GetGrantpasEval = () =>{
-
-
 
 }
 
