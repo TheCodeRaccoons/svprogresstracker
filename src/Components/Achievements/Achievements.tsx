@@ -2,17 +2,7 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';  
 import Food from '../AchieveTabs/Cooking'
 import Crafting from '../AchieveTabs/Crafting'
-import AchCook from '../../Media/Achievements/AchCook.png'
-import AchCraft from '../../Media/Achievements/AchCraft.png'
-import AchCrops from '../../Media/Achievements/AchCrops.png'
-import AchFishing from '../../Media/Achievements/AchFishing.png'
-import AchFriendship from '../../Media/Achievements/AchFriendship.png' 
-import AchGuild from '../../Media/Achievements/AchGuild.png'
-import AchItems from '../../Media/Achievements/AchItems.png'
-import AchMoney from '../../Media/Achievements/AchMoney.png'
-import AchMuseum from '../../Media/Achievements/AchMuseum.png'
-import AchQuests from '../../Media/Achievements/AchQuests.png'
-import AchGrandpa from '../../Media/Achievements/AchGrandpa.png'
+import { TabCook, TabCraft, TabCrops, TabFishing, TabFriendship, TabGuild, TabItems, TabMoney, TabMuseum, TabQuests, TabGrandpa } from '@media/Tabs'
 import Star from '../../Media/Star.png'
 import Crops from '../AchieveTabs/Crops';
 import Fish from '../AchieveTabs/Fish';
@@ -24,18 +14,18 @@ import Collection from '../AchieveTabs/Collection'
 import Quests from '../AchieveTabs/quests'
 
 const Achievements = (props) => {
-    const achievementImg = [
-        {img: AchCook, alt: "Cooking"}, 
-        {img: AchCraft, alt: "Crafting"}, 
-        {img: AchCrops, alt: "Crops"}, 
-        {img: AchFishing, alt: "Fishing"}, 
-        {img: AchFriendship, alt: "Friendship"}, 
-        {img: AchGuild, alt: "Guild"}, 
-        {img: AchItems, alt: "Items"}, 
-        {img: AchMoney, alt: "Money"}, 
-        {img: AchMuseum, alt: "Museum"}, 
-        {img: AchQuests, alt: "Quests"}, 
-        {img: AchGrandpa, alt: "Grandpa's evaluation"}
+    const TabImg = [
+        {img: TabCook, alt: "Cooking"}, 
+        {img: TabCraft, alt: "Crafting"}, 
+        {img: TabCrops, alt: "Crops"}, 
+        {img: TabFishing, alt: "Fishing"}, 
+        {img: TabFriendship, alt: "Friendship"}, 
+        {img: TabGuild, alt: "Guild"}, 
+        {img: TabItems, alt: "Items"}, 
+        {img: TabMoney, alt: "Money"}, 
+        {img: TabMuseum, alt: "Museum"}, 
+        {img: TabQuests, alt: "Quests"}, 
+        {img: TabGrandpa, alt: "Grandpa's evaluation"}
     ];
 
     return ( 
@@ -43,9 +33,8 @@ const Achievements = (props) => {
         <img className="star" alt="star" src={Star}></img>
             <Tabs>
                 <TabList className="achievement">                       
-                    {achievementImg.map((img, i) => <Tab key={i}> <img src={img.img} alt={img.alt} title={img.alt} className="tab-ico"></img></Tab>)}
-                </TabList> 
-                    
+                    {TabImg.map((img, i) => <Tab key={i}> <img src={img.img} alt={img.alt} title={img.alt} className="tab-ico"></img></Tab>)}
+                </TabList>
             <TabPanel> 
                 <section className="achievement-container"> 
                     <Food recipesCooked={props.recipesCooked}></Food>
