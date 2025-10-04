@@ -279,7 +279,7 @@ export type cropsShippedType = {
     maxMono: null | maxMonoType;
 };
 
-type maxMonoType = {
+export type maxMonoType = {
     name: string;
     shipped: number;
 }
