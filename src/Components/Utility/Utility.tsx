@@ -23,6 +23,7 @@ import type {
     itemFoundType, 
     itemsType, 
     itemType, 
+    maxMonoType, 
     playerType, 
     professionsType, 
     questType, 
@@ -69,7 +70,8 @@ const GetDetailedInfo = ({playerData , collectionStatus, specialRequests, availa
     if(Array.isArray(playerData)){
         playerData.forEach(p => { 
             let playerFull = {
-                ...p, ...parseData({playerData: p, collectionStatus, specialRequests, availableSpecialRequests})
+                //...p, 
+                ...parseData({playerData: p, collectionStatus, specialRequests, availableSpecialRequests})
             }
             fullPlayerData.push(playerFull)
         }) 
@@ -90,7 +92,7 @@ const parseData = ({playerData, collectionStatus, specialRequests, availableSpec
         moneyEarned: playerData.totalMoneyEarned || 0, //DONE
         professions: GetProfessionData(playerData.professions.int) , //DONE?
         shippedItems: GetShippedItems(playerData.basicShipped) || [],//DONE
-        cropsShipped: GetShippedCrops(playerData.basicShipped?.item),//DONE
+        cropsShipped: GetCropsAchievements(playerData.basicShipped?.item),//DONE
         mineralsFound: GetArrayData(playerData.mineralsFound?.item) || [], //DONE
         cookedItems: GetCookingData(playerData.recipesCooked, playerData.cookingRecipes.item) || [], //DONE
         fishCaught: GetFishes(playerData.fishCaught.item) || [], 
@@ -185,38 +187,58 @@ const GetShippedItems = (allShipped: itemType) :generalFormatedItemType[] => {
     return data;
 }
 
-const GetShippedCrops = (allShipped: itemsType[]) : cropsShippedType => { 
+/* Crop Related Achievements */
+const GetCropsAchievements = (allShipped: itemsType[]) : cropsShippedType => { 
     const poly_crops: generalFormatedItemType[] = [] 
     const mono_extras: generalFormatedItemType[] = []
-    
-    // Process poly crops
-    ShipCrops.poly_crops.forEach(polycropItem => {  
-        const shippedItem = (allShipped && allShipped.length > 0) ? 
-            allShipped.find(i => i.key.int === polycropItem.id) : null;
-            
-        poly_crops.push({
-            name: polycropItem.name,
-            image: GetImages(polycropItem.name),
-            id: polycropItem.id,
-            shipped: shippedItem?.value?.int || 0
-        });
+    let polycultureCount = 0;
+    let maxMono: maxMonoType = { name: "undefined", shipped: 0 };
+
+    ShipCrops.forEach(cropItem => {
+        const shippedCount = getShippedCount(allShipped, cropItem.id);
+        const cropData = createCropData(cropItem, shippedCount);
+
+        if (!maxMono || shippedCount > maxMono.shipped) {
+            maxMono = {
+                name: cropItem.name,
+                shipped: shippedCount
+            };
+        }
+
+        if (cropItem.isPolyCrop) {
+            if (shippedCount >= 15) polycultureCount++;
+            poly_crops.push(cropData);
+        } else {
+            mono_extras.push(cropData);
+        }
     });
-    
-    // Process mono extras
-    ShipCrops.mono_extras.forEach(monoCropItem => {
-        const shippedItem = (allShipped && allShipped.length > 0) ?
-            allShipped.find(i => i.key.int === monoCropItem.id) : null;
-            
-        mono_extras.push({
-            name: monoCropItem.name,
-            image: GetImages(monoCropItem.name),
-            id: monoCropItem.id,
-            shipped: shippedItem?.value?.int || 0
-        });
-    });
-    
-    return { poly_crops, mono_extras };
+
+    const cropsAchievements = {
+        hasPolyculture: polycultureCount === 28,
+        hasMonoculture: maxMono ? maxMono?.shipped >= 300 : false,
+        maxMono,
+        poly_crops,
+        mono_extras 
+    };
+
+    return cropsAchievements;
 }
+
+const getShippedCount = (allShipped: itemsType[], cropId: number): number => {
+    if (!allShipped?.length) return 0;
+    const shippedItem = allShipped.find(item => item.key.int === cropId);
+    return shippedItem?.value?.int || 0;
+};
+
+const createCropData = (cropItem: any, shippedCount: number): generalFormatedItemType => ({
+        name: cropItem.name,
+        image: GetImages(cropItem.name),
+        id: cropItem.id,
+        shipped: shippedCount
+    });
+
+/* End of Crop Related Achievements */
+
 const GetFishes = (allFished: itemsType[]) => { 
     let data: generalFormatedItemType[] = []
 
