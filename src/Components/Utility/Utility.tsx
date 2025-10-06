@@ -363,7 +363,6 @@ const GetMCollection = (archeology: itemsType[], geology: itemsType[], currentCo
     let artifacts: generalFormatedItemType[] = [];
     let minerals: generalFormatedItemType[] = []
 
-    //console.log("Current Museum collection:", currentCollection, "Archeology found:", archeology, "Geology found:", geology)
     for(let collectionItem of Museum.collection) {
         if( archeology && archeology.length > 0 && collectionItem.type === "artifact"){
             artifacts.push({
