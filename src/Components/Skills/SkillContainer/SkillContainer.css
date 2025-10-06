@@ -1,0 +1,111 @@
+/* SkillContainer Component Styles */
+.skill-container {
+    position: relative;
+    width: 28%;
+    height: auto;
+    margin: 1%;
+    padding: 1%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: 100% 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-image: url(/src/Media/Windows/Window5.png) 2 fill stretch;
+    border-style: solid;
+    image-rendering: pixelated;
+    border-width: 4px;
+}
+
+.skill-container__title {
+    font-size: 1.5em;
+    text-align: center;
+    margin: 0;
+    padding: 0.25rem;
+    color: #000;
+    font-weight: bold;
+    position: absolute;
+    top: -15%;
+    background-size: 100% 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-image: url(/src/Media/Windows/Window5.png) 5 fill stretch;
+    border-width: 6px;
+    border-style: solid;
+    image-rendering: pixelated;
+}
+
+.skill-container__stats {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+    font-size: 1.25em;
+    width: 100%;
+    height: 80%;
+    line-height: 1.5em;
+    text-align: center;
+}
+
+.skill-container__stats-line {
+    margin: 0.2rem 0;
+}
+
+.skill-container__icon {
+    position: absolute;
+    bottom: -12px;
+    left: -12px;
+    width: 40px;
+    height: 40px;
+    cursor: help;
+    transition: transform 0.2s ease-in-out;
+}
+
+.skill-container__icon:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .skill-container {
+        width: 45%;
+        height: 200px;
+        margin: 2%;
+    }
+    
+    .skill-container__title {
+        font-size: 1.2em;
+    }
+    
+    .skill-container__stats {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .skill-container {
+        width: 90%;
+        height: 180px;
+        margin: 5% auto;
+    }
+    
+    .skill-container__title {
+        font-size: 1em;
+    }
+    
+    .skill-container__stats {
+        font-size: 0.9em;
+    }
+    
+    .skill-container__icon {
+        width: 30px;
+        height: 30px;
+        bottom: 10px;
+        left: 15px;
+    }
+}
