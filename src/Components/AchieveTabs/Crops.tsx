@@ -6,7 +6,6 @@ interface CropsShippedWrapperType {
 }
 
 const Crops= (cropsShipped : CropsShippedWrapperType) => {
-    console.log('CropsShipped', cropsShipped);
     let _monocultureText = cropsShipped.cropsShipped.hasMonoculture ? "You already have the 'Monoculture' Achievement" : `You've shipped ${ cropsShipped.cropsShipped.maxMono?.name } the most and you require ${300 - cropsShipped.cropsShipped.maxMono?.shipped} more of it to get the 'Monoculture' Achievement`;
     let _polycultureText = cropsShipped.cropsShipped.hasPolyculture ? "You already have the 'Polyculture' Achievement" : `You need to ship 15 crops for each polyculture crop to get the 'Polyculture' achievement`;
     
