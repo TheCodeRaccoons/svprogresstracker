@@ -21,7 +21,7 @@ const Crops= (cropsShipped : CropsShippedWrapperType) => {
             <span className="a-title"><p>Ship 15 of the following crops to get the 'Polyculture' achievement</p></span>
             {cropsShipped.cropsShipped.poly_crops.map((crop, i) =><a href={`https://stardewvalleywiki.com/${crop.image}`} target="blank" key={i}> <img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Crops/${crop.image}.png`} alt={crop.name} className={ (crop.shipped !== undefined) ? ((crop.shipped >= 15) ? "done" : "known" ): "" } title={(crop.shipped !== undefined) ? (crop.shipped >= 15) ? `You have shipped  ${crop.name}  ${crop.shipped} times` : `You have to ship ${ 15 - crop.shipped} more ${crop.name} ` : `You haven't shipped ${crop.name}`} ></img></a>)}
 
-            <span className="a-title"><p>This crops are not counted for the 'Polyculture' achievement</p></span>
+            <span className="a-title"><p>These crops are not counted for the 'Polyculture' achievement</p></span>
             {cropsShipped.cropsShipped.mono_extras.map((crop, i) =><a href={`https://stardewvalleywiki.com/${crop.image}`} target="blank" key={i}> <img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Crops/${crop.image}.png`} alt={crop.name} className={ (crop.shipped !== undefined) ? ((crop.shipped > 0) ? "done" : "known" ): "" } title={(crop.shipped !== undefined) ? `You have shipped  ${crop.name}  ${crop.shipped} times` : `You haven't shipped ${crop.name}`} ></img></a>)}
         </div>
     );
