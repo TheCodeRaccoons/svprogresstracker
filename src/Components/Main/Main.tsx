@@ -1,4 +1,3 @@
-import React from 'react';  
 import Stats from '../stats/stats.js'
 import Viewer from '../Viewer/Viewer'
 import Logo from '@media/Logo.png';
@@ -9,15 +8,14 @@ import Window4 from '@media/Windows/Window4.png'
 import Loader from '@media/loader.gif'
 import AdComponent from '../adsense/adComponent.js'
 import { useState } from 'react';
-
-import AdSense from 'react-adsense';
+//TODO: enable ads
+//import AdSense from 'react-adsense';
 
 const Main = () => {
     const [hasData, setHasData] = useState(false);
     const [showLoader, setShowLoader] = useState(false);
     const [playerData, setPlayerData] = useState(null);
     const [farmhands, setFarmhands] = useState([])
-    const [nsPrefix, setNsPrefix] = useState('xsi') //default to xsi
 
     const UpdatePlayerData = (_playerData) => {
         setHasData(true);
@@ -27,7 +25,6 @@ const Main = () => {
     }
 
     const UpdateGamePrefix = (pref) => {
-        setNsPrefix(pref);
         console.log("Using prefix: " + pref)
     }
 
@@ -36,7 +33,7 @@ const Main = () => {
         if(collection.museumPieces.item !== undefined){
             museumPieces = [...collection.museumPieces.item]
         }
-        return (museumPieces.length > 0) ? [...museumPieces] : [] 
+        return (museumPieces.length > 0) ? museumPieces : [] 
     }
 
     return (

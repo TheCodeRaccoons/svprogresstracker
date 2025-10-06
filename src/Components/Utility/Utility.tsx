@@ -23,14 +23,13 @@ import type {
     itemFoundType, 
     itemsType, 
     itemType, 
+    maxMonoType, 
     playerType, 
     professionsType, 
+    questType, 
     specialOrderType 
 } from 'types/savefile';
 
-const SKILLS = ["Farming", "Fishing", "Foraging", "Mining", "Combat"]
-
-/* Gather the XML and handling the file */
 //Gets the info from the farm hands as an array of the same type
 const GetFarmHands = (locations: gameLocationType[]): playerType[] => {
     if (!Array.isArray(locations)) return [];
@@ -70,7 +69,8 @@ const GetDetailedInfo = ({playerData , collectionStatus, specialRequests, availa
     if(Array.isArray(playerData)){
         playerData.forEach(p => { 
             let playerFull = {
-                ...p, ...parseData({playerData: p, collectionStatus, specialRequests, availableSpecialRequests})
+                //...p, 
+                ...parseData({playerData: p, collectionStatus, specialRequests, availableSpecialRequests})
             }
             fullPlayerData.push(playerFull)
         }) 
@@ -91,7 +91,7 @@ const parseData = ({playerData, collectionStatus, specialRequests, availableSpec
         moneyEarned: playerData.totalMoneyEarned || 0, //DONE
         professions: GetProfessionData(playerData.professions.int) , //DONE?
         shippedItems: GetShippedItems(playerData.basicShipped) || [],//DONE
-        cropsShipped: GetShippedCrops(playerData.basicShipped?.item),//DONE
+        cropsShipped: GetCropsAchievements(playerData.basicShipped?.item),//Refactored DONE
         mineralsFound: GetArrayData(playerData.mineralsFound?.item) || [], //DONE
         cookedItems: GetCookingData(playerData.recipesCooked, playerData.cookingRecipes.item) || [], //DONE
         fishCaught: GetFishes(playerData.fishCaught.item) || [], 
@@ -101,14 +101,105 @@ const parseData = ({playerData, collectionStatus, specialRequests, availableSpec
         monstersKilled: GetMonsterQuests(playerData.stats.specificMonstersKilled.item, playerData.stats.slimesKilled) || [],
         museumCollection: GetMCollection(playerData.archaeologyFound.item, playerData.mineralsFound.item, collectionStatus) || {},
         questsDone: playerData.stats.questsCompleted || 0,
-        specialRequests: specialRequests?.SpecialOrder ? GetSpecialRequests(specialRequests.SpecialOrder, townSR.Requests) : [],
-        availableSpecialRequests: specialRequests?.SpecialOrder ? GetPendingSpecialRequests(specialRequests.SpecialOrder, townSR.Requests) : []
+        specialRequests: specialRequests?.SpecialOrder ? GetSpecialRequests(specialRequests.SpecialOrder, townSR.Requests, true) : [],
+        availableSpecialRequests: specialRequests?.SpecialOrder ? GetSpecialRequests(specialRequests.SpecialOrder, townSR.Requests, false) : []
     }
 
     console.log(`%c Grandpa's eval for ${playerData.name}`, 'color: #7289DA') 
     console.log("Player Data", fullPlayerData)
     return fullPlayerData;
 } 
+
+/* XP Data */
+const GetXpInfo = (xp: number[]): experienceType[] => {
+    const SKILLS = ["Farming", "Fishing", "Foraging", "Mining", "Combat"]
+
+    let skillLevelData: experienceType[] = [] 
+    xp.forEach((_skill, id) => {
+        if (SKILLS[id] !== undefined){
+            skillLevelData.push({
+                skill:  SKILLS[id] || "Unknown",
+                xp: _skill,
+                levelInfo: Levels.find((level) => level.val >= _skill) || { id: 10, val: 15000 }
+            })
+        }
+    })  
+    return skillLevelData
+}
+/* End of XP Data */
+/* Profession Data */
+
+const GetProfessionData = (professions: number[]): professionsType[] =>{
+    let data: professionsType[] = []; 
+    if(Array.isArray(professions)){ 
+        professions.forEach(item => {
+            let d = ProfNames.professions.find( p  => p.id === item)
+            if (d !== undefined) {
+                data = [...data, d]
+            }
+        });
+    }
+    return data;
+}
+
+//TODO: generate json file for professions and implement in the profession tab
+const GetProfession = (id: number): string => {
+    const professionMap: { [key: number]: string } = {
+        0: "Rancher",
+        1: "Tiller",
+        2: "Coopmaster",
+        3: "Shepherd",
+        4: "Artisan",
+        5: "Agriculturist",
+        6: "Fisher",
+        7: "Trapper",
+        8: "Angler",
+        9: "Pirate",
+        10: "Mariner",
+        11: "Luremaster",
+        12: "Forester",
+        13: "Gatherer",
+        14: "Lumberjack",
+        15: "Tapper",
+        16: "Botanist",
+        17: "Tracker",
+        18: "Miner",
+        19: "Geologist",
+        20: "Blacksmith",
+        21: "Prospector",
+        22: "Excavator",
+        23: "Gemologist",
+        24: "Fighter",
+        25: "Scout",
+        26: "Brute",
+        27: "Defender",
+        28: "Acrobat",
+        29: "Desperado"
+    };
+    
+    return professionMap[id] || "";
+}
+/* End of Profession Data */
+
+/* Shipping Related Achievements */
+const GetShippedItems = (allShipped: itemType) :generalFormatedItemType[] => { 
+    let data: generalFormatedItemType[] = []
+    if(!allShipped?.item || allShipped?.item.length === 0) return data;
+    //Parses the shipped info
+    let shipped =  allShipped.item.map( val => {return {id: val.key.int, times: val.value.int}})
+
+    ShipItems.shipping.forEach(item => {
+        let d = {
+            name: item.item_name,
+            image: GetImages(item.item_name),
+            id: item.item_id,
+            shipped: (shipped && shipped.length > 0 ? shipped.find(i => i.id === item.item_id )?.times || 0 : 0)
+        }
+        data.push(d);
+    }) 
+    return data;
+}
+/* End of Shipping Related Achievements */
 
 const GetCookingData = (cooked: itemType, known: itemsType[]): generalFormatedItemType[] =>{
     let data: generalFormatedItemType[] = [];
@@ -122,8 +213,9 @@ const GetCookingData = (cooked: itemType, known: itemsType[]): generalFormatedIt
             knownDish: knownDish,
             times: knownDish ? GetCooked(cooked.item, item.id) : 0
         }
-        data = [...data, d]
+        data.push(d);
     })
+    console.log('Cooking Data:', data);
     return data 
 }
 
@@ -145,69 +237,64 @@ const GetCraftingRecipes = (recipes: itemsType[]): generalFormatedItemType[] => 
                 image: GetImages(item),
                 times: recipes.find(i => i.key.string === item)?.value.int || 0,
             }
-            data = [...data, d] 
+            data.push(d)
         })
     } 
     return data 
 }
 
-const GetXpInfo = (xp: number[]): experienceType[] => {  
-    let data: experienceType[] = [] 
-    xp.forEach((item, id) => {
-        if (SKILLS[id] !== undefined){
-            let d: experienceType = {
-                skill:  SKILLS[id] || "Unknown",
-                xp: item,
-                levelInfo: Levels.Levels.find((level) => level.val >= item) || { id: 10, val: 15000 }
-            }
-            data = [...data, d]
-        }
-    })  
-    return data
-} 
-const GetShippedItems = (allShipped: itemType) :generalFormatedItemType[] => { 
-    let data: generalFormatedItemType[] = []
-    if(!allShipped?.item || allShipped?.item.length === 0) return data;
-    //Parses the shipped info
-    let shipped =  allShipped.item.map( val => {return {id: val.key.int, times: val.value.int}})
+/* Crop Related Achievements */
+const GetCropsAchievements = (allShipped: itemsType[]) : cropsShippedType => { 
+    const poly_crops: generalFormatedItemType[] = [] 
+    const mono_extras: generalFormatedItemType[] = []
+    let polycultureCount = 0;
+    let maxMono: maxMonoType = { name: "undefined", shipped: 0 };
 
-    ShipItems.shipping.forEach(item => {
-        let d = {
-            name: item.item_name,
-            image: GetImages(item.item_name),
-            id: item.item_id,
-            shipped: (shipped && shipped.length > 0 ? shipped.find(i => i.id === item.item_id )?.times || 0 : 0)
+    ShipCrops.forEach(cropItem => {
+        const shippedCount = getShippedCount(allShipped, cropItem.id);
+        const cropData = createCropData(cropItem, shippedCount);
+
+        if (!maxMono || shippedCount > maxMono.shipped) {
+            maxMono = {
+                name: cropItem.name,
+                shipped: shippedCount
+            };
         }
-        data = [...data, d]
-    }) 
-    return data;
+
+        if (cropItem.isPolyCrop) {
+            if (shippedCount >= 15) polycultureCount++;
+            poly_crops.push(cropData);
+        } else {
+            mono_extras.push(cropData);
+        }
+    });
+
+    const cropsAchievements = {
+        hasPolyculture: polycultureCount === 28,
+        hasMonoculture: maxMono ? maxMono?.shipped >= 300 : false,
+        maxMono,
+        poly_crops,
+        mono_extras 
+    };
+
+    return cropsAchievements;
 }
 
-const GetShippedCrops = (allShipped: itemsType[]) : cropsShippedType => { 
-    let poly_crops: generalFormatedItemType[] = [], mono_extras: generalFormatedItemType[] = [] 
-    ShipCrops.poly_crops.forEach(polycropItem => {  
-        let d = {
-            name: polycropItem.name,
-            image: GetImages(polycropItem.name),
-            id: polycropItem.id,
-            shipped: (allShipped && allShipped.length > 0) ? 
-                allShipped.find(i => i.key.int === polycropItem.id )?.value?.int || 0 : 0
-        }
-        poly_crops = [...poly_crops, d]
-    })
-    ShipCrops.mono_extras.forEach(monoCropItem => {
-        let d = {
-            name: monoCropItem.name,
-            image: GetImages(monoCropItem.name),
-            id: monoCropItem.id,
-            shipped:  (allShipped && allShipped.length > 0) ?
-            allShipped.find(i => i.key.int === monoCropItem.id )?.value?.int || 0 : 0
-        }
-        mono_extras = [...mono_extras, d]
-    })
-    
-    return {poly_crops, mono_extras}
-}
+const getShippedCount = (allShipped: itemsType[], cropId: number): number => {
+    if (!allShipped?.length) return 0;
+    const shippedItem = allShipped.find(item => item.key.int === cropId);
+    return shippedItem?.value?.int || 0;
+};
+
+const createCropData = (cropItem: any, shippedCount: number): generalFormatedItemType => ({
+        name: cropItem.name,
+        image: GetImages(cropItem.name),
+        id: cropItem.id,
+        shipped: shippedCount
+    });
+
+/* End of Crop Related Achievements */
+
 const GetFishes = (allFished: itemsType[]) => { 
     let data: generalFormatedItemType[] = []
 
@@ -218,11 +305,12 @@ const GetFishes = (allFished: itemsType[]) => {
             id: item.id,
             fished: (Array.isArray(allFished)) ? (allFished.find(i => i.key.int === item.id ) !== undefined) : false
         }
-        data = [...data, d]
+        data.push(d)
     }) 
     
     return  data
 }
+
 const GetFriendshipData = (allFriends: friendshipDataType[]): formatedFriendshipDataType[] => { 
     let data: formatedFriendshipDataType[] = []
     if(Array.isArray(allFriends)){
@@ -275,7 +363,6 @@ const GetMCollection = (archeology: itemsType[], geology: itemsType[], currentCo
     let artifacts: generalFormatedItemType[] = [];
     let minerals: generalFormatedItemType[] = []
 
-    console.log("Current Museum collection:", currentCollection, "Archeology found:", archeology, "Geology found:", geology)
     for(let collectionItem of Museum.collection) {
         if( archeology && archeology.length > 0 && collectionItem.type === "artifact"){
             artifacts.push({
@@ -296,18 +383,6 @@ const GetMCollection = (archeology: itemsType[], geology: itemsType[], currentCo
     return {artifacts, minerals}  
 }
 
-/* Utility methods */ 
-const GetLevelInfo = (xp) =>{  
-    let val;
-    try{ 
-        val = Levels.Levels.find((level, i) => level.val >= parseInt(xp))
-        val = (val === undefined) ? {"id": 10,"val": 15000} : val; 
-    }
-    catch(err){ 
-        val = parseInt(xp)
-    } 
-    return val;  
-} 
 const ValidateKnown = (k:itemsType[], name: string) => {
     if(Array.isArray(k)){
         let known = k.find(item => item.key.string === name) 
@@ -315,7 +390,7 @@ const ValidateKnown = (k:itemsType[], name: string) => {
     }
 }
 
-
+/* Utility methods*/
 const GetImages = (name: string): string => {
     const imageMap: { [key: string]: string } = {
         "Wild Seeds (Sp)": "Spring_Seeds",
@@ -335,58 +410,6 @@ const GetImages = (name: string): string => {
     return imageMap[name] || name.split(" ").join("_").replace(/['":]/g, "");
 }
 
-const CleanTimes = (obj: itemsType) => {
-    return (obj !== undefined ? obj.value.int : 0)
-}  
-const GetProfessionData = (professions: number[]): professionsType[] =>{
-    let data: professionsType[] = []; 
-    if(Array.isArray(professions)){ 
-        professions.forEach(item => {
-            let d = ProfNames.professions.find( p  => p.id === item)
-            if (d !== undefined) {
-                data = [...data, d]
-            }
-        });
-    }
-    return data;
-}
-
-const GetProfession = (id: number): string => {
-    const professionMap: { [key: number]: string } = {
-        0: "Rancher",
-        1: "Tiller",
-        2: "Coopmaster",
-        3: "Shepherd",
-        4: "Artisan",
-        5: "Agriculturist",
-        6: "Fisher",
-        7: "Trapper",
-        8: "Angler",
-        9: "Pirate",
-        10: "Mariner",
-        11: "Luremaster",
-        12: "Forester",
-        13: "Gatherer",
-        14: "Lumberjack",
-        15: "Tapper",
-        16: "Botanist",
-        17: "Tracker",
-        18: "Miner",
-        19: "Geologist",
-        20: "Blacksmith",
-        21: "Prospector",
-        22: "Excavator",
-        23: "Gemologist",
-        24: "Fighter",
-        25: "Scout",
-        26: "Brute",
-        27: "Defender",
-        28: "Acrobat",
-        29: "Desperado"
-    };
-    
-    return professionMap[id] || "";
-}
 const NameTranslate = (name: string): string => {
     const nameMap: { [key: string]: string } = {
         "Cheese Cauliflower": "Cheese Cauli.",
@@ -437,48 +460,50 @@ const GetArrayDataTimeless = (arr: itemType) =>{
         return data
     }
     return data;
-} 
-const GetQuests = (arr) =>{
-    let data = []; 
-    if(Array.isArray(arr)){ 
-        arr.forEach(item => {
-            let d = item._currentObjective._text
-            data = [...data,d]
-        });
-    }
-    else if(!arr){
-        return data
-    }
-    else{
-        data = {
-            data: arr._currentObjective._text 
+}
+
+// const GetQuests = (arr) =>{
+//     let data = []; 
+//     if(Array.isArray(arr)){ 
+//         arr.forEach(item => {
+//             let d = item._currentObjective._text
+//             data = [...data,d]
+//         });
+//     }
+//     else if(!arr){
+//         return data
+//     }
+//     else{
+//         data = {
+//             data: arr._currentObjective._text 
+//         }
+//     } 
+//     return data;
+// }
+
+const GetSpecialRequests = (requests: questType[], info: any[], includeCompleted: boolean = true) => {
+    let data: any[] = [];
+    
+    if (Array.isArray(requests)) {
+        if (includeCompleted) {
+            // Return completed requests
+            requests.forEach(item => {
+                let d = info.find(obj => obj.name === item);
+                if (d) data = [...data, d];
+            });
+        } else {
+            // Return pending requests (filter out completed ones)
+            data = info.filter(item => !requests.includes(item.name));
         }
-    } 
+    } else if (!includeCompleted) {
+        // If no requests and we want pending, return all info
+        data = info;
+    }
+    
     return data;
-}  
-
-const GetSpecialRequests = (requests, info) =>{ 
-    let data = [];  
-    if(Array.isArray(requests)){ 
-        requests.forEach(item => {
-            let d = info.find(obj => obj.name === item._text) 
-            data = [...data,d]
-        });
-    } 
-    return data
-} 
-const GetPendingSpecialRequests= (requests, info) =>{ 
-    let data = info;  
-    if(Array.isArray(requests)){  
-
-        requests.forEach(req =>{ data = data.filter(item => item.name !== req._text)})
-    } 
-    return data
 }
 
 const GetGrantpasEval = () =>{
-
-
 
 }
 

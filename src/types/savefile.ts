@@ -272,9 +272,17 @@ export type professionsType = {
 }
 
 export type cropsShippedType = {
+    hasMonoculture: boolean;
+    hasPolyculture: boolean;
     mono_extras: generalFormatedItemType[];
     poly_crops: generalFormatedItemType[];
+    maxMono: null | maxMonoType;
 };
+
+export type maxMonoType = {
+    name: string;
+    shipped: number;
+}
 
 export type generalFormatedItemType = {
     id?: number;
@@ -430,7 +438,6 @@ type statsType = {
     totalMoneyGifted: number,
     individualMoneyEarned: number,
     GoodFriends: number,
-    CropsShipped: number,
     ItemsForaged: number,
     GeodesCracked: number,
     SlimesKilled: number,

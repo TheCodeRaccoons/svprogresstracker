@@ -1,0 +1,12 @@
+// Export all tab images
+export { default as TabCook } from '@media/Tabs/TabCook.png'
+export { default as TabCraft } from '@media/Tabs/TabCraft.png'
+export { default as TabCrops } from '@media/Tabs/TabCrops.png'
+export { default as TabFishing } from '@media/Tabs/TabFishing.png'
+export { default as TabFriendship } from '@media/Tabs/TabFriendship.png'
+export { default as TabGuild } from '@media/Tabs/TabGuild.png'
+export { default as TabItems } from '@media/Tabs/TabItems.png'
+export { default as TabMoney } from '@media/Tabs/TabMoney.png'
+export { default as TabMuseum } from '@media/Tabs/TabMuseum.png'
+export { default as TabQuests } from '@media/Tabs/TabQuests.png'
+export { default as TabGrandpa } from '@media/Tabs/TabGrandpa.png'
