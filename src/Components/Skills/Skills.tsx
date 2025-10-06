@@ -3,7 +3,6 @@ import SkillContainer from './SkillContainer/SkillContainer'
 import {Farming, Mining, Foraging, Fishing, Combat} from '@media/Skills'
 
 const Skills = (props) => {
-    console.log(props)
     let [skills, setSkills] = useState(props.xp)
     let [skillImg, setSkillImg] = useState([Farming, Fishing, Foraging, Mining, Combat])
 
