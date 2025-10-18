@@ -8,23 +8,27 @@ import Window4 from '@media/Windows/Window4.png'
 import Loader from '@media/loader.gif'
 import AdComponent from '../adsense/adComponent.js'
 import { useState } from 'react';
+import type { formattedSaveFileType, fullPlayerDataType } from 'types/displayDataTypes.js';
 //TODO: enable ads
 //import AdSense from 'react-adsense';
 
 const Main = () => {
     const [hasData, setHasData] = useState(false);
     const [showLoader, setShowLoader] = useState(false);
-    const [playerData, setPlayerData] = useState(null);
-    const [farmhands, setFarmhands] = useState([])
+    const [playerData, setPlayerData] = useState<fullPlayerDataType | null>(null);
+    const [farmhands, setFarmhands] = useState<fullPlayerDataType[]>([]);
+    const [globalFarmName, setFarmName] = useState("My Farm");
 
-    const UpdatePlayerData = (_playerData) => {
+    const UpdatePlayerData = ({farmName, playerData, farmhandData}: formattedSaveFileType) => {
+        console.log("Player data received", playerData, farmhandData);
         setHasData(true);
         setShowLoader(false);
-        setFarmhands(_playerData.farmhandData);
-        setPlayerData(_playerData.playerData[0]);
+        setFarmName(farmName ? playerData.farmName : "My Farm");
+        setFarmhands(farmhandData);
+        setPlayerData(playerData);
     }
 
-    const UpdateGamePrefix = (pref) => {
+    const UpdateGamePrefix = (pref: string) => {
         console.log("Using prefix: " + pref)
     }
 
@@ -75,7 +79,7 @@ const Main = () => {
                 <div className="main-container"> 
                     {
                         hasData ? 
-                            <Stats playerData={playerData} farmhands={farmhands} /> : 
+                            <Stats globalFarmName={globalFarmName} playerData={playerData} farmhands={farmhands} /> : 
                             <Viewer 
                                 UpdatePlayerData={UpdatePlayerData} 
                                 UpdateGamePrefix={UpdateGamePrefix}
