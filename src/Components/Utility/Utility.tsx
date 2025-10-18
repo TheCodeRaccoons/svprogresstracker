@@ -29,6 +29,7 @@ import type {
     questType, 
     specialOrderType 
 } from 'types/savefile';
+import type { fullPlayerDataType, museumCollectionType } from 'types/displayDataTypes';
 
 //Gets the info from the farm hands as an array of the same type
 const GetFarmHands = (locations: gameLocationType[]): playerType[] => {
@@ -84,7 +85,7 @@ const parseData = ({playerData, collectionStatus, specialRequests, availableSpec
     if(!playerData) return null;
     //Not finished  
     console.log("Parsing data for:", playerData)
-    let fullPlayerData = {
+    let fullPlayerData : fullPlayerDataType = {
         playerName: playerData.name,
         farmName: playerData.farmName, //TODO: Remove and make global if even needed
         experience: GetXpInfo(playerData.experiencePoints.int), //DONE
@@ -355,7 +356,7 @@ const GetMonsterQuests = (allMonsters: itemsType[], slimesKilled: number): forma
         })
         return(mData) 
 }
-const GetMCollection = (archeology: itemsType[], geology: itemsType[], currentCollection: itemsType[]) =>{
+const GetMCollection = (archeology: itemsType[], geology: itemsType[], currentCollection: itemsType[]) : museumCollectionType =>{
 
     if(currentCollection === undefined || currentCollection.length === 0) return {artifacts: [], minerals: []};
 
