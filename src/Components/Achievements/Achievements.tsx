@@ -12,8 +12,28 @@ import Shipping from '../AchieveTabs/Shipping'
 import Earnings from '../AchieveTabs/moneyEarned'
 import Collection from '../AchieveTabs/Collection'
 import Quests from '../AchieveTabs/quests'
+import type { fullPlayerDataType } from 'types/displayDataTypes.js';
 
-const Achievements = (props) => {
+const Achievements = ({
+    playerName,
+    farmName,
+    experience,
+    moneyEarned,
+    professions,
+    shippedItems,
+    cropsShipped,
+    mineralsFound,
+    cookedItems,
+    museumCollection,
+    availableSpecialRequests,
+    fishCaught,
+    friendship,
+    itemsCrafted,
+    monstersKilled,
+    questsDone,
+    specialRequests,
+    tailoredItems,
+    }: fullPlayerDataType ) => {
     const TabImg = [
         {img: TabCook, alt: "Cooking"}, 
         {img: TabCraft, alt: "Crafting"}, 
@@ -37,57 +57,57 @@ const Achievements = (props) => {
                 </TabList>
             <TabPanel> 
                 <section className="achievement-container"> 
-                    <Food recipesCooked={props.recipesCooked}></Food>
+                    <Food recipesCooked={cookedItems}></Food>
                 </section>
             </TabPanel> 
             <TabPanel> 
                 <section className="achievement-container">  
-                    <Crafting itemsCrafted={props.itemsCrafted}></Crafting>
+                    <Crafting itemsCrafted={itemsCrafted}></Crafting>
                 </section>
             </TabPanel> 
             <TabPanel> 
                 <section className="achievement-container">
-                    <Crops cropsShipped={props.cropsShipped} />
+                    <Crops cropsShipped={cropsShipped} />
                 </section>
             </TabPanel> 
             <TabPanel> 
                 <section className="achievement-container">
-                    <Fish fishCaught={props.fishCaught} />
+                    <Fish fishCaught={fishCaught} />
                 </section>
             </TabPanel> 
             <TabPanel> 
                 <section className="achievement-container">
-                    <Friendship friendship={props.friendship}/>
+                    <Friendship friendship={friendship}/>
                 </section>
             </TabPanel> 
             <TabPanel> 
                 <section className="achievement-container">
-                    <Monsters monstersKilled={props.monstersKilled}/>
+                    <Monsters monstersKilled={monstersKilled}/>
                 </section>
             </TabPanel> 
             <TabPanel> 
                 <section className="achievement-container">
-                    <Shipping shippedItems={props.shippedItems}/>
+                    <Shipping shippedItems={shippedItems}/>
                 </section>
             </TabPanel> 
             <TabPanel> 
                 <section className="achievement-container">
-                    <Earnings moneyEarned={props.moneyEarned}/>
+                    <Earnings moneyEarned={moneyEarned}/>
                 </section>
             </TabPanel> 
             <TabPanel> 
                 <section className="achievement-container">
-                    <Collection museumCollection={props.museumCollection} />
+                    <Collection museumCollection={museumCollection} />
                 </section>
             </TabPanel> 
             <TabPanel> 
                 <section className="achievement-container"> 
-                    <Quests questsDone={props.questsDone} specialReq={props.specialReq} pendingSpecialReq={props.pendingSpecialReq} />
+                    <Quests questsDone={questsDone} specialReq={specialRequests} pendingSpecialReq={pendingSpecialReq} />
                 </section>
             </TabPanel>
             <TabPanel> 
                 <section className="achievement-container"> 
-                    <Quests questsDone={props.questsDone} specialReq={props.specialReq} pendingSpecialReq={props.pendingSpecialReq} />
+                    <Quests questsDone={questsDone} specialReq={specialRequests} pendingSpecialReq={pendingSpecialReq} />
                 </section>
             </TabPanel>
             </Tabs>
