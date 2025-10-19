@@ -15,7 +15,7 @@ import type { formattedSaveFileType, fullPlayerDataType } from 'types/displayDat
 const Main = () => {
     const [hasData, setHasData] = useState(false);
     const [showLoader, setShowLoader] = useState(false);
-    const [playerData, setPlayerData] = useState<fullPlayerDataType | null>(null);
+    const [playerData, setPlayerData] = useState<fullPlayerDataType>({} as fullPlayerDataType);
     const [farmhands, setFarmhands] = useState<fullPlayerDataType[]>([]);
     const [globalFarmName, setFarmName] = useState("My Farm");
 
@@ -26,18 +26,6 @@ const Main = () => {
         setFarmName(farmName ? playerData.farmName : "My Farm");
         setFarmhands(farmhandData);
         setPlayerData(playerData);
-    }
-
-    const UpdateGamePrefix = (pref: string) => {
-        console.log("Using prefix: " + pref)
-    }
-
-    const GetCollection = (collection) => { 
-        let museumPieces = []
-        if(collection.museumPieces.item !== undefined){
-            museumPieces = [...collection.museumPieces.item]
-        }
-        return (museumPieces.length > 0) ? museumPieces : [] 
     }
 
     return (
@@ -80,12 +68,7 @@ const Main = () => {
                     {
                         hasData ? 
                             <Stats globalFarmName={globalFarmName} playerData={playerData} farmhands={farmhands} /> : 
-                            <Viewer 
-                                UpdatePlayerData={UpdatePlayerData} 
-                                UpdateGamePrefix={UpdateGamePrefix}
-                                GetCollection={GetCollection}
-                                ShowLoader={setShowLoader}
-                            />
+                            <Viewer  UpdatePlayerData={UpdatePlayerData} />
                     }
                 </div>
                 <div className="adds"> 
