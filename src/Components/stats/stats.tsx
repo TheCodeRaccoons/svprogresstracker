@@ -11,11 +11,12 @@ import Junimo2  from '../../Media/Junimo2B.png'
 import Junimo3  from '../../Media/Junimo3B.png' 
 import Junimo4  from '../../Media/Junimo4B.png' 
 import Rope     from '../../Media/Rope.png'
+import type { fullPlayerDataType } from 'types/displayDataTypes';
 
 type statsPageProps = {
-    playerData: any;
+    playerData: fullPlayerDataType;
     globalFarmName: string;
-    farmhands: any[];
+    farmhands: fullPlayerDataType[];
 }
 
 const Stats = ({playerData, globalFarmName, farmhands}: statsPageProps) => {
@@ -32,7 +33,7 @@ const Stats = ({playerData, globalFarmName, farmhands}: statsPageProps) => {
     const playerStats = farmhands.map((item, i) => (
         <TabPanel key={i}>
             <section className="wrapper">
-                <Skills xp={item.experience}></Skills>
+                <Skills {...item.experience}></Skills>
                 <div className="ropes">
                     <img src={Rope} alt=""></img>
                     <img src={Rope} alt=""></img>
@@ -61,30 +62,30 @@ const Stats = ({playerData, globalFarmName, farmhands}: statsPageProps) => {
             <section className="scroller"> 
                 <Tabs>
                     <TabList> 
-                        <Tab><img src={junimos[0]} alt="Junimo" width="25px"></img>{playerData.playerName}</Tab>
+                        <Tab><img src={junimos[0]} alt="Junimo" width="25px"></img>{playerData[0].playerName}</Tab>
                         {titles}
                     </TabList>
                 
                     <TabPanel>
                         <section className="wrapper">
-                            <Skills xp={playerData.experience}></Skills>
+                            <Skills {...playerData[0].experience}></Skills>
                             <div className="ropes">
                                 <img src={Rope} alt=""></img>
                                 <img src={Rope} alt=""></img>
                             </div> 
                             <Achievements 
-                                recipesCooked={playerData.cookedItems} 
-                                itemsCrafted={playerData.itemsCrafted}  
-                                cropsShipped={playerData.cropsShipped}  
-                                fishCaught={playerData.fishCaught}
-                                friendship={playerData.friendship}
-                                monstersKilled={playerData.monstersKilled}
-                                shippedItems={playerData.shippedItems}
-                                moneyEarned={playerData.moneyEarned}
-                                museumCollection={playerData.museumCollection}
-                                questsDone={playerData.questsDone}
-                                specialReq={playerData.specialRequests}
-                                pendingSpecialReq={playerData.pendingSpecialRequests}
+                                recipesCooked={playerData[0].cookedItems} 
+                                itemsCrafted={playerData[0].itemsCrafted}  
+                                cropsShipped={playerData[0].cropsShipped}  
+                                fishCaught={playerData[0].fishCaught}
+                                friendship={playerData[0].friendship}
+                                monstersKilled={playerData[0].monstersKilled}
+                                shippedItems={playerData[0].shippedItems}
+                                moneyEarned={playerData[0].moneyEarned}
+                                museumCollection={playerData[0].museumCollection}
+                                questsDone={playerData[0].questsDone}
+                                specialReq={playerData[0].specialRequests}
+                                pendingSpecialReq={playerData[0].pendingSpecialRequests}
                             ></Achievements>
                         </section>
                     </TabPanel>
