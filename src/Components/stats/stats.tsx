@@ -27,27 +27,27 @@ const Stats = ({playerData, farmName, farmhandData}: formattedSaveFileType) => {
     );
     
 
-    const playerStats = farmhandData.map((item, i) => (
+    const playerStats = farmhandData.map((p, i) => (
         <TabPanel key={i}>
             <section className="wrapper">
-                <Skills {...item.experience}></Skills>
+                <Skills experience={p.experience}></Skills>
                 <div className="ropes">
                     <img src={Rope} alt=""></img>
                     <img src={Rope} alt=""></img>
                 </div>
                 <Achievements 
-                    recipesCooked={item.cookedItems}
-                    itemsCrafted={item.itemsCrafted}  
-                    cropsShipped={item.cropsShipped} 
-                    fishCaught={item.fishCaught}
-                    friendship={item.friendship}
-                    monstersKilled={item.monstersKilled}
-                    shippedItems={item.shippedItems}
-                    moneyEarned={item.moneyEarned}
-                    museumCollection={item.museumCollection}
-                    questsDone={item.questsDone}
-                    specialReq={item.specialRequests}
-                    pendingSpecialReq={item.pendingSpecialRequests}
+                    cookedItems={p.cookedItems}
+                    itemsCrafted={p.itemsCrafted}  
+                    cropsShipped={p.cropsShipped} 
+                    fishCaught={p.fishCaught}
+                    friendship={p.friendship}
+                    monstersKilled={p.monstersKilled}
+                    shippedItems={p.shippedItems}
+                    moneyEarned={p.moneyEarned}
+                    museumCollection={p.museumCollection}
+                    questsDone={p.questsDone}
+                    specialRequests={p.specialRequests}
+                    //availableSpecialRequests={p.availableSpecialRequests}
                 ></Achievements>
             </section> 
         </TabPanel>
@@ -73,7 +73,7 @@ const Stats = ({playerData, farmName, farmhandData}: formattedSaveFileType) => {
                                 <img src={Rope} alt=""></img>
                             </div> 
                             <Achievements 
-                                recipesCooked={playerData.cookedItems} 
+                                cookedItems={playerData.cookedItems} 
                                 itemsCrafted={playerData.itemsCrafted}  
                                 cropsShipped={playerData.cropsShipped}  
                                 fishCaught={playerData.fishCaught}
@@ -83,7 +83,7 @@ const Stats = ({playerData, farmName, farmhandData}: formattedSaveFileType) => {
                                 moneyEarned={playerData.moneyEarned}
                                 museumCollection={playerData.museumCollection}
                                 questsDone={playerData.questsDone}
-                                specialReq={playerData.specialRequests}
+                                specialRequests={playerData.specialRequests}
                                 //pendingSpecialReq={playerData.pendingSpecialRequests}
                             ></Achievements> 
                             </>

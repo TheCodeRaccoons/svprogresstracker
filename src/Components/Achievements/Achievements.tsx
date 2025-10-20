@@ -57,7 +57,7 @@ const Achievements = ({
                 </TabList>
             <TabPanel> 
                 <section className="achievement-container"> 
-                    <Food recipesCooked={cookedItems}></Food>
+                    <Food cookedItems={cookedItems}></Food>
                 </section>
             </TabPanel> 
             <TabPanel> 
