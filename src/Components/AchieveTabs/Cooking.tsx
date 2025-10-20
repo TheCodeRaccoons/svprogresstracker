@@ -9,17 +9,17 @@ const Food = ( recipesCooked  : dishesCookedType) => {
     const [dishesCooked, setDishesCooked] = useState(0);
     if(!recipesCooked) return <div>No cooking data available.</div>;
 
-    const canMap = (recipesCooked.recipesCooked && recipesCooked.recipesCooked.length > 0);
+    const canMap = (recipesCooked && recipesCooked.length > 0);
     useEffect(() => {  
-        const cookedCount = canMap ? recipesCooked.recipesCooked.map((num) => (num.times !== undefined && num.times > 0) ? 1 : 0).reduce((n: number, next: number) => n + next, 0) : 0;
+        const cookedCount = canMap ? recipesCooked.map((num) => (num.times !== undefined && num.times > 0) ? 1 : 0).reduce((n: number, next: number) => n + next, 0) : 0;
         setDishesCooked(cookedCount);
     }, [recipesCooked]);
-    const cookedCount = canMap ? recipesCooked.recipesCooked.map((num) => (num.times !== undefined && num.times > 0) ? 1 : 0).reduce((n: number, next: number) => n + next, 0) : 0;
-    const knownCount = canMap ? recipesCooked.recipesCooked.map((num) => (num.times !== undefined && num.times >= 0) ? 1 : 0).reduce((n: number, next: number) => n + next, 0) : 0;
+    const cookedCount = canMap ? recipesCooked.map((num) => (num.times !== undefined && num.times > 0) ? 1 : 0).reduce((n: number, next: number) => n + next, 0) : 0;
+    const knownCount = canMap ? recipesCooked.map((num) => (num.times !== undefined && num.times >= 0) ? 1 : 0).reduce((n: number, next: number) => n + next, 0) : 0;
 
     return ( 
         <div className="progress-container">   
-            <span className="a-title"><h1>You have cooked {cookedCount}, knowing {knownCount} out of {recipesCooked.recipesCooked.length} recipes</h1></span>
+            <span className="a-title"><h1>You have cooked {cookedCount}, knowing {knownCount} out of {recipesCooked.length} recipes</h1></span>
             <br />
             <h2>Cooking Achievements</h2>
             <ul className="a-List"> 

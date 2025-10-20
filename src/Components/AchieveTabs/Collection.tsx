@@ -1,23 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import type { museumCollectionType } from 'types/displayDataTypes';
 
 interface CollectionProps {
-    museumCollection: {
-        artifacts: Array<{
-            found: boolean;
-            inMuseum: boolean;
-            image: string;
-            name: string;
-        }>;
-        minerals: Array<{
-            found: boolean;
-            inMuseum: boolean;
-            image: string;
-            name: string;
-        }>;
-    };
+    museumCollection: museumCollectionType;
 }
 
-const Collection: React.FC<CollectionProps> = ({ museumCollection }) => {
+const Collection = ({ museumCollection }: CollectionProps) => {
     const [totalFound, setTotalFound] = useState(0);
     const [totalDelivered, setTotalDelivered] = useState(0);
     const [total, setTotal] = useState(0);
