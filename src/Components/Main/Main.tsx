@@ -21,6 +21,10 @@ const Main = () => {
 
     const UpdatePlayerData = ({farmName, playerData, farmhandData}: formattedSaveFileType) => {
         console.log("Player data received", playerData, farmhandData);
+        if(!playerData) {
+            console.error("No player data received in Main component");
+            return;
+        }
         setHasData(true);
         setShowLoader(false);
         setFarmName(farmName ? playerData.farmName : "My Farm");
@@ -67,8 +71,8 @@ const Main = () => {
                 <div className="main-container"> 
                     {
                         hasData ? 
-                            <Stats globalFarmName={globalFarmName} playerData={playerData} farmhands={farmhands} /> : 
-                            <Viewer  UpdatePlayerData={UpdatePlayerData} />
+                            <Stats farmName={globalFarmName} playerData={playerData} farmhandData={farmhands} /> : 
+                            <Viewer UpdatePlayerData={UpdatePlayerData} />
                     }
                 </div>
                 <div className="adds"> 
