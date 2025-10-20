@@ -100,7 +100,7 @@ const Achievements = ({
                     <Collection museumCollection={museumCollection} />
                 </section>
             </TabPanel> 
-            <TabPanel> 
+            {/* <TabPanel> 
                 <section className="achievement-container"> 
                     <Quests questsDone={questsDone} specialReq={specialRequests} pendingSpecialReq={pendingSpecialReq} />
                 </section>
@@ -109,7 +109,7 @@ const Achievements = ({
                 <section className="achievement-container"> 
                     <Quests questsDone={questsDone} specialReq={specialRequests} pendingSpecialReq={pendingSpecialReq} />
                 </section>
-            </TabPanel>
+            </TabPanel> */}
             </Tabs>
         </div>
     );
