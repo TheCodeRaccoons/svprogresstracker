@@ -1,6 +1,6 @@
 export type formattedSaveFileType = {
     farmName?: string;
-    playerData: fullPlayerDataType;
+    playerData: fullPlayerDataType | null;
     farmhandData: fullPlayerDataType[];
 }
 
