@@ -3,7 +3,11 @@ import SkillContainer from './SkillContainer/SkillContainer'
 import {Farming, Mining, Foraging, Fishing, Combat} from '@media/Skills'
 import type { experienceType } from 'types/displayDataTypes'
 
-const Skills = (experience: experienceType[]) => {
+interface SkillsProps {
+    experience: experienceType[];
+}
+
+const Skills = ({ experience }: SkillsProps) => {
     const skillImg =[Farming, Fishing, Foraging, Mining, Combat];
     console.log("Skills data:", experience);
         return (
@@ -12,7 +16,6 @@ const Skills = (experience: experienceType[]) => {
                     {experience.map((item, i: number) => (i === 5) ? "" :  
                     <SkillContainer 
                         key={i} 
-                        index={i} 
                         skillImg={skillImg[i] || ""} 
                         skillName={item.skill} 
                         xp={item.xp} 

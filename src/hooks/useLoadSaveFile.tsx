@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { XMLParser } from 'fast-xml-parser';
 import { GetDetailedInfo, GetFarmHands } from '@utility/Utility';
 import type { gameLocationType, itemsType, itemType, playerType, saveFileType, saveGameType, specialOrderType } from 'types/savefile.js';
+import type { formattedSaveFileType } from 'types/displayDataTypes';
 
 export interface UseLoadSaveFileResult {
     playerData: any;
@@ -15,7 +16,7 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
     const [fileData, setFileData] = useState<saveGameType | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const [playerData, setPlayerData] = useState<any | null>(null);
+    const [playerData, setPlayerData] = useState<formattedSaveFileType | null>(null);
 
     useEffect(() => {
         if (fileData) {
@@ -74,7 +75,7 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
                 collectionStatus: collectionStatus,
                 specialRequests: specialRequests,
                 availableSpecialRequests: availableSpecialRequests
-            }),
+            })[0] || null,
             farmhandData: GetDetailedInfo({
                 playerData: farmHands,
                 collectionStatus: collectionStatus,
