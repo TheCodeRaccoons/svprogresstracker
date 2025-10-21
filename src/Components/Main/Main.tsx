@@ -8,32 +8,28 @@ import Window4 from '@media/Windows/Window4.png'
 import Loader from '@media/loader.gif'
 import AdComponent from '../adsense/adComponent.js'
 import { useState } from 'react';
+import type { formattedSaveFileType, fullPlayerDataType } from 'types/displayDataTypes.js';
 //TODO: enable ads
 //import AdSense from 'react-adsense';
 
 const Main = () => {
     const [hasData, setHasData] = useState(false);
     const [showLoader, setShowLoader] = useState(false);
-    const [playerData, setPlayerData] = useState(null);
-    const [farmhands, setFarmhands] = useState([])
+    const [playerData, setPlayerData] = useState<fullPlayerDataType>({} as fullPlayerDataType);
+    const [farmhands, setFarmhands] = useState<fullPlayerDataType[]>([]);
+    const [globalFarmName, setFarmName] = useState("My Farm");
 
-    const UpdatePlayerData = (_playerData) => {
+    const UpdatePlayerData = ({farmName, playerData, farmhandData}: formattedSaveFileType) => {
+        console.log("Player data received", playerData, farmhandData);
+        if(!playerData) {
+            console.error("No player data received in Main component");
+            return;
+        }
         setHasData(true);
         setShowLoader(false);
-        setFarmhands(_playerData.farmhandData);
-        setPlayerData(_playerData.playerData[0]);
-    }
-
-    const UpdateGamePrefix = (pref) => {
-        console.log("Using prefix: " + pref)
-    }
-
-    const GetCollection = (collection) => { 
-        let museumPieces = []
-        if(collection.museumPieces.item !== undefined){
-            museumPieces = [...collection.museumPieces.item]
-        }
-        return (museumPieces.length > 0) ? museumPieces : [] 
+        setFarmName(farmName ? playerData.farmName : "My Farm");
+        setFarmhands(farmhandData);
+        setPlayerData(playerData);
     }
 
     return (
@@ -75,13 +71,8 @@ const Main = () => {
                 <div className="main-container"> 
                     {
                         hasData ? 
-                            <Stats playerData={playerData} farmhands={farmhands} /> : 
-                            <Viewer 
-                                UpdatePlayerData={UpdatePlayerData} 
-                                UpdateGamePrefix={UpdateGamePrefix}
-                                GetCollection={GetCollection}
-                                ShowLoader={setShowLoader}
-                            />
+                            <Stats farmName={globalFarmName} playerData={playerData} farmhandData={farmhands} /> : 
+                            <Viewer UpdatePlayerData={UpdatePlayerData} />
                     }
                 </div>
                 <div className="adds"> 

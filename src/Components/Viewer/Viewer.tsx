@@ -4,12 +4,9 @@ import useLoadSaveFile from '@hooks/useLoadSaveFile';
 
 interface ViewerProps {
     UpdatePlayerData: (playerData: any) => void;
-    UpdateGamePrefix?: (prefix: string) => void;
-    GetCollection?: (collection: any) => any[];
-    ShowLoader?: (show: boolean) => void;
 }
 
-const Viewer = ({ UpdatePlayerData, UpdateGamePrefix, GetCollection, ShowLoader }: ViewerProps) => {
+const Viewer = ({ UpdatePlayerData }: ViewerProps) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const { playerData, fileData, isLoading, error, selectFile } = useLoadSaveFile();
 

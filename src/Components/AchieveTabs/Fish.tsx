@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from 'react'
-
-interface FishItem {
-    fished: boolean;
-    image: string;
-    name: string;
-}
+import type { generalFormatedItemType } from 'types/displayDataTypes';
 
 interface FishProps {
-    fishCaught: FishItem[];
+    fishCaught: generalFormatedItemType[];
 }
 
-const Fish: React.FC<FishProps> = ({ fishCaught }) => {
+const Fish = ({ fishCaught }: FishProps) => {
     const [totalFished, setTotalFished] = useState(0);
 
-    const getCraftedItems = (items: FishItem[]) => {
+    const getCraftedItems = (items: generalFormatedItemType[]) => {
         return items.map((num) => (num.fished) ? 1 : 0).reduce((n: number, next: number) => next + n, 0);
     };
     

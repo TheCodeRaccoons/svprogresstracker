@@ -29,6 +29,7 @@ import type {
     questType, 
     specialOrderType 
 } from 'types/savefile';
+import type { fullPlayerDataType, museumCollectionType } from 'types/displayDataTypes';
 
 //Gets the info from the farm hands as an array of the same type
 const GetFarmHands = (locations: gameLocationType[]): playerType[] => {
@@ -65,13 +66,16 @@ type getParsedUserDataType = Omit<getDetailedInfoType, 'playerData'> & {
 
 //Calls the parser and creates an array of players depending on wether it is a single player or multiple
 const GetDetailedInfo = ({playerData , collectionStatus, specialRequests, availableSpecialRequests}: getDetailedInfoType) =>{ 
-    let fullPlayerData: any = []
+    let fullPlayerData: fullPlayerDataType[] = []
     if(Array.isArray(playerData)){
         playerData.forEach(p => { 
-            let playerFull = {
+            let playerFull: fullPlayerDataType
+            = {
                 //...p, 
                 ...parseData({playerData: p, collectionStatus, specialRequests, availableSpecialRequests})
             }
+            
+            if(playerFull !== null)
             fullPlayerData.push(playerFull)
         }) 
     }
@@ -80,12 +84,11 @@ const GetDetailedInfo = ({playerData , collectionStatus, specialRequests, availa
 } 
     
 //Creates an object per player with the cleanup playerData.from the file
-const parseData = ({playerData, collectionStatus, specialRequests, availableSpecialRequests}: getParsedUserDataType) => { 
-    if(!playerData) return null;
+const parseData = ({playerData, collectionStatus, specialRequests, availableSpecialRequests}: getParsedUserDataType) : fullPlayerDataType => { 
     //Not finished  
     console.log("Parsing data for:", playerData)
-    let fullPlayerData = {
-        playerName: playerData.name,
+    let fullPlayerData : fullPlayerDataType = {
+        playerName: playerData.name || "Unknown",
         farmName: playerData.farmName, //TODO: Remove and make global if even needed
         experience: GetXpInfo(playerData.experiencePoints.int), //DONE
         moneyEarned: playerData.totalMoneyEarned || 0, //DONE
@@ -123,7 +126,7 @@ const GetXpInfo = (xp: number[]): experienceType[] => {
                 levelInfo: Levels.find((level) => level.val >= _skill) || { id: 10, val: 15000 }
             })
         }
-    })  
+    })
     return skillLevelData
 }
 /* End of XP Data */
@@ -355,7 +358,7 @@ const GetMonsterQuests = (allMonsters: itemsType[], slimesKilled: number): forma
         })
         return(mData) 
 }
-const GetMCollection = (archeology: itemsType[], geology: itemsType[], currentCollection: itemsType[]) =>{
+const GetMCollection = (archeology: itemsType[], geology: itemsType[], currentCollection: itemsType[]) : museumCollectionType =>{
 
     if(currentCollection === undefined || currentCollection.length === 0) return {artifacts: [], minerals: []};
 

@@ -11,79 +11,87 @@ import Junimo2  from '../../Media/Junimo2B.png'
 import Junimo3  from '../../Media/Junimo3B.png' 
 import Junimo4  from '../../Media/Junimo4B.png' 
 import Rope     from '../../Media/Rope.png'
+import type { formattedSaveFileType, fullPlayerDataType } from 'types/displayDataTypes';
 
-const Stats = (props) => {
-    const [farmName] = useState(props.farmName);
+
+
+const Stats = ({playerData, farmName, farmhandData}: formattedSaveFileType) => {
+    const [globalFarmName] = useState(farmName || "My Farm");
     const [junimos] = useState([Junimo1, Junimo2, Junimo3, Junimo4]);
     const [Activejunimos] = useState([Junimo1a, Junimo2a, Junimo3a, Junimo4a]);
 
-    const titles = props.farmhands.map((item, i) => 
+    const titles = farmhandData.map((item, i) => 
         <Tab key={i}>
             <img src={junimos[i + 1]} alt="Jun"></img> {item.playerName}
         </Tab>
     );
+    
 
-    const playerStats = props.farmhands.map((item, i) => (
+    const playerStats = farmhandData.map((p, i) => (
         <TabPanel key={i}>
             <section className="wrapper">
-                <Skills xp={item.experience}></Skills>
+                <Skills experience={p.experience}></Skills>
                 <div className="ropes">
                     <img src={Rope} alt=""></img>
                     <img src={Rope} alt=""></img>
                 </div>
                 <Achievements 
-                    recipesCooked={item.cookedItems}
-                    itemsCrafted={item.itemsCrafted}  
-                    cropsShipped={item.cropsShipped} 
-                    fishCaught={item.fishCaught}
-                    friendship={item.friendship}
-                    monstersKilled={item.monstersKilled}
-                    shippedItems={item.shippedItems}
-                    moneyEarned={item.moneyEarned}
-                    museumCollection={item.museumCollection}
-                    questsDone={item.questsDone}
-                    specialReq={item.specialRequests}
-                    pendingSpecialReq={item.pendingSpecialRequests}
+                    cookedItems={p.cookedItems}
+                    itemsCrafted={p.itemsCrafted}  
+                    cropsShipped={p.cropsShipped} 
+                    fishCaught={p.fishCaught}
+                    friendship={p.friendship}
+                    monstersKilled={p.monstersKilled}
+                    shippedItems={p.shippedItems}
+                    moneyEarned={p.moneyEarned}
+                    museumCollection={p.museumCollection}
+                    questsDone={p.questsDone}
+                    specialRequests={p.specialRequests}
+                    //availableSpecialRequests={p.availableSpecialRequests}
                 ></Achievements>
             </section> 
         </TabPanel>
     ));
-
+    console.log("Rendering Stats component with playerData:", playerData, "experience:", playerData.experience);
     return ( 
         <div className="file-container">  
-            <div className="farmName"><h2>Farm: {props.playerData.farmName}</h2></div> 
+            <div className="farmName"><h2>Farm: {globalFarmName}</h2></div> 
             <section className="scroller"> 
+                            { playerData ? (
                 <Tabs>
                     <TabList> 
-                        <Tab><img src={junimos[0]} alt="Junimo" width="25px"></img>{props.playerData.playerName}</Tab>
+                        <Tab><img src={junimos[0]} alt="Junimo" width="25px"></img>{playerData.playerName}</Tab>
                         {titles}
                     </TabList>
                 
                     <TabPanel>
                         <section className="wrapper">
-                            <Skills xp={props.playerData.experience}></Skills>
+                            <>
+                            <Skills experience={playerData.experience}></Skills>
                             <div className="ropes">
                                 <img src={Rope} alt=""></img>
                                 <img src={Rope} alt=""></img>
                             </div> 
                             <Achievements 
-                                recipesCooked={props.playerData.cookedItems} 
-                                itemsCrafted={props.playerData.itemsCrafted}  
-                                cropsShipped={props.playerData.cropsShipped}  
-                                fishCaught={props.playerData.fishCaught}
-                                friendship={props.playerData.friendship}
-                                monstersKilled={props.playerData.monstersKilled}
-                                shippedItems={props.playerData.shippedItems}
-                                moneyEarned={props.playerData.moneyEarned}
-                                museumCollection={props.playerData.museumCollection}
-                                questsDone={props.playerData.questsDone}
-                                specialReq={props.playerData.specialRequests}
-                                pendingSpecialReq={props.playerData.pendingSpecialRequests}
-                            ></Achievements>
+                                cookedItems={playerData.cookedItems} 
+                                itemsCrafted={playerData.itemsCrafted}  
+                                cropsShipped={playerData.cropsShipped}  
+                                fishCaught={playerData.fishCaught}
+                                friendship={playerData.friendship}
+                                monstersKilled={playerData.monstersKilled}
+                                shippedItems={playerData.shippedItems}
+                                moneyEarned={playerData.moneyEarned}
+                                museumCollection={playerData.museumCollection}
+                                questsDone={playerData.questsDone}
+                                specialRequests={playerData.specialRequests}
+                                //pendingSpecialReq={playerData.pendingSpecialRequests}
+                            ></Achievements> 
+                            </>
                         </section>
                     </TabPanel>
                     {playerStats}
-                </Tabs>
+                </Tabs>) : <p>No player data available.</p>
+                            }
             </section>
         </div>
     );
