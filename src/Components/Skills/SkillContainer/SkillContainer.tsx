@@ -48,7 +48,7 @@ const Skills = ({
                             }}
                         ></div>
                     </div>
-                    {xpToNextLevel > 0 ? `XP to next level: ${xpToNextLevel}` : "Max Level Reached"}
+                    {xpToNextLevel > 0 ? `${xpToNextLevel}XP to next level` : "Max Level Reached"}
                     {/* {xp} / {levelInfo.val} */}
                 </div>
             </div>
