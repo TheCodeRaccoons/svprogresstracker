@@ -5,7 +5,7 @@ interface dishesCookedType {
     cookedItems: generalFormatedItemType[];
 }
 
-const Food = ( {cookedItems}  : dishesCookedType) => {
+const Food = ( {cookedItems} : dishesCookedType) => {
     const [dishesCooked, setDishesCooked] = useState(0);
     if(!cookedItems) return <div>No cooking data available.</div>;
 
