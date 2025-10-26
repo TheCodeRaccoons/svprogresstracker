@@ -16,9 +16,22 @@ const Skills = ({
     xp,
     levelInfo
 }: SkillProps) => {
-    const currentLevel = (xp > levelInfo.val) ? levelInfo.id : levelInfo.id - 1;
-    const xpToNextLevel = (xp > 15000) ? 0 : (levelInfo.val - xp);
-    const xpToMax = (xp > 15000) ? "Maxed" : 15000 - xp;
+    const currentLevel = (xp >= levelInfo.val) ? levelInfo.id : levelInfo.id - 1;
+    const xpToNextLevel = (xp >= 15000) ? 0 : (levelInfo.val - xp);
+    const xpToMax = (xp >= 15000) ? "Maxed" : 15000 - xp;
+    
+    // Calculate progress within current level
+    const currentLevelXpRequirement = levelInfo.id > 1 ? Math.floor(levelInfo.val * 0.85) : 0;
+    const nextLevelXpRequirement = levelInfo.val;
+    const xpInCurrentLevel = Math.max(0, xp - currentLevelXpRequirement);
+    const xpNeededForLevel = nextLevelXpRequirement - currentLevelXpRequirement;
+    
+    let progressPercentage = 0;
+    if (xp >= 15000) {
+        progressPercentage = 100; // Max level
+    } else if (xpNeededForLevel > 0) {
+        progressPercentage = Math.min(100, (xpInCurrentLevel / xpNeededForLevel) * 100);
+    }
 
     return (
         <div className="skill-container">
@@ -27,13 +40,16 @@ const Skills = ({
             </p>
             <div className="skill-container__stats">
                 <div className="skill-container__stats-line">
-                    Current XP: {xp}
-                </div>
-                <div className="skill-container__stats-line">
-                    Level Up in: {xpToNextLevel}
-                </div>
-                <div className="skill-container__stats-line">
-                    Max level in: {xpToMax}
+                    <div className="skill-container__progress-bar">
+                        <div 
+                            className="skill-container__progress-fill"
+                            style={{
+                                width: `${progressPercentage}%`
+                            }}
+                        ></div>
+                    </div>
+                    {xpToNextLevel > 0 ? `XP to next level: ${xpToNextLevel}` : "Max Level Reached"}
+                    {/* {xp} / {levelInfo.val} */}
                 </div>
             </div>
             <img 
