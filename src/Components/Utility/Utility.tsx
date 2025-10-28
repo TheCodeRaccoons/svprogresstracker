@@ -12,23 +12,25 @@ import MonsterCat from '@utility/monsterCategorie.json' with { type: "json" };
 import Museum from '@utility/museum.json' with { type: "json" };
 import townSR from './TownSpecialReq.json' with { type: "json" };
 import QiSR from './QiSpecialReq.json' with { type: "json" };
-import type { 
-    cropsShippedType, 
-    experienceType, 
-    formatedFriendshipDataType, 
-    formatedMonsterDataType, 
+import type {
     friendshipDataType, 
-    gameLocationType, 
-    generalFormatedItemType, 
-    itemFoundType, 
+    gameLocationType,
     itemsType, 
-    itemType, 
-    maxMonoType, 
-    playerType, 
-    professionsType, 
+    itemType,
+    playerType,
     questType, 
     specialOrderType 
 } from 'types/savefile';
+import type { 
+    cropsShippedType, 
+    generalFormatedItemType, 
+    professionsType, 
+    maxMonoType, 
+    itemFoundType, 
+    experienceType, 
+    formatedFriendshipDataType,
+    formatedMonsterDataType
+} from 'types/displayDataTypes';
 import type { fullPlayerDataType, museumCollectionType } from 'types/displayDataTypes';
 
 //Gets the info from the farm hands as an array of the same type
