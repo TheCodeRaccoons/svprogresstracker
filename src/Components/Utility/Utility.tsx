@@ -97,7 +97,7 @@ const parseData = ({playerData, collectionStatus, specialRequests, availableSpec
         professions: GetProfessionData(playerData.professions.int) , //DONE?
         shippedItems: GetShippedItems(playerData.basicShipped) || [],//DONE
         cropsShipped: GetCropsAchievements(playerData.basicShipped?.item),//Refactored DONE
-        mineralsFound: GetArrayData(playerData.mineralsFound?.item) || [], //DONE
+        //mineralsFound: GetArrayData(playerData.mineralsFound?.item) || [], //DONE
         cookedItems: GetCookingData(playerData.recipesCooked, playerData.cookingRecipes.item) || [], //DONE
         fishCaught: GetFishes(playerData.fishCaught.item) || [], 
         tailoredItems: GetArrayDataTimeless(playerData.tailoredItems) || [],
@@ -144,6 +144,7 @@ const GetProfessionData = (professions: number[]): professionsType[] =>{
             }
         });
     }
+    console.log('Profession Data:', data);
     return data;
 }
 
