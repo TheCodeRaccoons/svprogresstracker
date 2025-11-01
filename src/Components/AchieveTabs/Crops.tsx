@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import type { cropsShippedType } from 'types/savefile';
+import type { cropsShippedType } from 'types/displayDataTypes';
 
 interface CropsShippedWrapperType {
     cropsShipped: cropsShippedType;

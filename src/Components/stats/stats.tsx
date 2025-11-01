@@ -38,7 +38,8 @@ const Stats = ({playerData, farmName, farmhandData}: formattedSaveFileType) => {
                 <Achievements 
                     cookedItems={p.cookedItems}
                     itemsCrafted={p.itemsCrafted}  
-                    cropsShipped={p.cropsShipped} 
+                    cropsShipped={p.cropsShipped}
+                    professions={p.professions}
                     fishCaught={p.fishCaught}
                     friendship={p.friendship}
                     monstersKilled={p.monstersKilled}
@@ -75,6 +76,7 @@ const Stats = ({playerData, farmName, farmhandData}: formattedSaveFileType) => {
                             <Achievements 
                                 cookedItems={playerData.cookedItems} 
                                 itemsCrafted={playerData.itemsCrafted}  
+                                professions={playerData.professions}
                                 cropsShipped={playerData.cropsShipped}  
                                 fishCaught={playerData.fishCaught}
                                 friendship={playerData.friendship}

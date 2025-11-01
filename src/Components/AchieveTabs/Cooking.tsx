@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import type { generalFormatedItemType } from 'types/savefile';
+import type { generalFormatedItemType } from 'types/displayDataTypes';
 
 interface dishesCookedType {
     cookedItems: generalFormatedItemType[];

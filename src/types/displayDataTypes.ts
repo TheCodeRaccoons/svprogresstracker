@@ -12,7 +12,7 @@ export type fullPlayerDataType = {
     professions: professionsType[];
     shippedItems: generalFormatedItemType[];
     cropsShipped: cropsShippedType;
-    mineralsFound: itemFoundType[];
+    mineralsFound?: itemFoundType[];
     cookedItems: generalFormatedItemType[];
     museumCollection: museumCollectionType;
     availableSpecialRequests: string[];

@@ -266,56 +266,6 @@ export type playerType = {
     fishCaught: itemType,
 }
 
-export type professionsType = {
-    id: number;
-    name: string;
-}
-
-export type cropsShippedType = {
-    hasMonoculture: boolean;
-    hasPolyculture: boolean;
-    mono_extras: generalFormatedItemType[];
-    poly_crops: generalFormatedItemType[];
-    maxMono: null | maxMonoType;
-};
-
-export type maxMonoType = {
-    name: string;
-    shipped: number;
-}
-
-export type generalFormatedItemType = {
-    id?: number;
-    image: string;
-    name: string;
-    link?: string;
-    knownDish?: boolean;
-    times?: number;
-    shipped?: number;
-    fished?: boolean;
-    found?: boolean;
-    inMuseum?: boolean;
-}
-
-export type formatedFriendshipDataType = {
-    name: string;
-    dateable: boolean;
-    points: number;
-    level: number;
-    lvlup: number;
-}
-export type formatedMonsterDataType = {
-    category: string;
-    goal: number;
-    images: monsterImageType[];
-    timesKilled: number;
-};
-
-type monsterImageType = {
-    img: string;
-    name: string;
-}
-
 type batType = {
     goal: number;
     monsters: string[];
@@ -341,11 +291,6 @@ type intArrayType = {
 
 type friendshipDataItemType = {
     item: friendshipDataType[]
-}
-
-export type itemFoundType = {
-    item: number | string,
-    timesFound: number
 }
 
 export type friendshipDataType = {
@@ -542,12 +487,3 @@ export type questType = {
     duration: string;
     questState: string;
 }
-
-export type experienceType = {
-    levelInfo: {
-        id: number;
-        val: number;
-    };
-    skill: string;
-    xp: number;
-};
