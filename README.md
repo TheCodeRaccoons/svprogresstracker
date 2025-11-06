@@ -42,8 +42,8 @@ Current status and roadmap
 - In progress / planned: Quests, Special Orders summaries, Grandpa's Evaluation view
 
 Follow the development
-- You can find news regarding the project here: <a href="https://www.thecoderaccoons.com/blog">follow development and news here</a>
-- Or check the project's story here <a href="https://www.thecoderaccoons.com/projects/stardew-valley-progress-tracker-legacy">follow development and news here</a>
+- You can find news regarding the project  <a href="https://www.thecoderaccoons.com/blog">here</a>
+- Or check the project's story <a href="https://www.thecoderaccoons.com/projects/stardew-valley-progress-tracker-legacy">here</a>
 
 Tech stack
 
