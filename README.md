@@ -41,6 +41,10 @@ Current status and roadmap
 - Implemented: Skills, Cooking, Crafting, Crops, Fishing, Friendship, Monsters, Shipping, Money, Museum
 - In progress / planned: Quests, Special Orders summaries, Grandpa's Evaluation view
 
+Follow the development
+- You can find news regarding the project here: <a href="https://www.thecoderaccoons.com/blog">follow development and news here</a>
+- Or check the project's story here <a href="https://www.thecoderaccoons.com/projects/stardew-valley-progress-tracker-legacy">follow development and news here</a>
+
 Tech stack
 
 - React 19 + TypeScript, Vite 6
