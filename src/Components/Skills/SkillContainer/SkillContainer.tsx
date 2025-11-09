@@ -18,9 +18,7 @@ const Skills = ({
 }: SkillProps) => {
     const currentLevel = (xp >= levelInfo.val) ? levelInfo.id : levelInfo.id - 1;
     const xpToNextLevel = (xp >= 15000) ? 0 : (levelInfo.val - xp);
-    const xpToMax = (xp >= 15000) ? "Maxed" : 15000 - xp;
     
-    // Calculate progress within current level
     const currentLevelXpRequirement = levelInfo.id > 1 ? Math.floor(levelInfo.val * 0.85) : 0;
     const nextLevelXpRequirement = levelInfo.val;
     const xpInCurrentLevel = Math.max(0, xp - currentLevelXpRequirement);
@@ -49,7 +47,6 @@ const Skills = ({
                         ></div>
                     </div>
                     {xpToNextLevel > 0 ? `${xpToNextLevel}XP to next level` : "Max Level Reached"}
-                    {/* {xp} / {levelInfo.val} */}
                 </div>
             </div>
             <img 
