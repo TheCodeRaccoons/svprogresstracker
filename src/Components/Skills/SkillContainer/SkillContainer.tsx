@@ -45,6 +45,7 @@ const Skills = ({
                     {Array.from({ length: 10 }).map((_, index) => (
                         <div
                             key={index}
+                            role="presentation"
                             className={`skill-container__level-block ${index === 4 || index === 9 ? 'lg' : 'sm'} ${currentLevel > index ? 'active' : ''}`}
                         />
                     ))}
