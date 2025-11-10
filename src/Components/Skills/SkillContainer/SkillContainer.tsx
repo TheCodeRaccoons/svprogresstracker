@@ -1,4 +1,5 @@
 import './SkillContainer.css';
+import {CombatMastery, ForagingMastery, FarmingMastery, MiningMastery, FishingMastery} from '@media/Masteries';
 
 type SkillProps = {
     skillImg: string;
@@ -17,10 +18,7 @@ const Skills = ({
     levelInfo
 }: SkillProps) => {
     const currentLevel = (xp >= levelInfo.val) ? levelInfo.id : levelInfo.id - 1;
-    const xpToNextLevel = (xp >= 15000) ? 0 : (levelInfo.val - xp);
-    const xpToMax = (xp >= 15000) ? "Maxed" : 15000 - xp;
     
-    // Calculate progress within current level
     const currentLevelXpRequirement = levelInfo.id > 1 ? Math.floor(levelInfo.val * 0.85) : 0;
     const nextLevelXpRequirement = levelInfo.val;
     const xpInCurrentLevel = Math.max(0, xp - currentLevelXpRequirement);
@@ -34,32 +32,28 @@ const Skills = ({
     }
 
     return (
-        <div className="skill-container">
-            <p className="skill-container__title">
-                {`${skillName} lvl ${currentLevel}`}
-            </p>
-            <div className="skill-container__stats">
-                <div className="skill-container__stats-line">
-                    <div className="skill-container__progress-bar">
-                        <div 
-                            className="skill-container__progress-fill"
-                            style={{
-                                width: `${progressPercentage}%`
-                            }}
-                        ></div>
-                    </div>
-                    {xpToNextLevel > 0 ? `${xpToNextLevel}XP to next level` : "Max Level Reached"}
-                    {/* {xp} / {levelInfo.val} */}
+    <div className="skill-container">
+            <div className='skill-container__item'>
+                <span>{`${skillName}`}</span>
+                <img 
+                    src={skillImg} 
+                    alt={skillName}
+                    title={`${skillName} - Level ${currentLevel}`}
+                    className='skill-container__icon'
+                />
+                <div className='skill-container__level-indicators' >
+                    {Array.from({ length: 10 }).map((_, index) => (
+                        <div
+                            key={index}
+                            role="presentation"
+                            className={`skill-container__level-block ${index === 4 || index === 9 ? 'lg' : 'sm'} ${currentLevel > index ? 'active' : ''}`}
+                        />
+                    ))}
                 </div>
+                <span className='skill-container__level-no'>{`${currentLevel}`}</span>
             </div>
-            <img 
-                src={skillImg} 
-                alt={skillName}
-                className="skill-container__icon"
-                title={`${skillName} - Level ${currentLevel}`}
-            />
         </div>
-    );  
+    )
 };
 
 export default Skills;
