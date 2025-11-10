@@ -1,0 +1,5 @@
+export { default as CombatMastery } from '@media/Masteries/Combat_Skill_Icon.png'
+export { default as FarmingMastery } from '@media/Masteries/Farming_Skill_Icon.png'
+export { default as ForagingMastery } from '@media/Masteries/Foraging_Skill_Icon.png'
+export { default as FishingMastery } from '@media/Masteries/Fishing_Skill_Icon.png'
+export { default as MiningMastery } from '@media/Masteries/Mining_Skill_Icon.png'
