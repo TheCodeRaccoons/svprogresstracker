@@ -24,24 +24,48 @@ const Collection = ({ museumCollection }: CollectionProps) => {
         setTotal(artifacts.length + minerals.length);
     };
 
+    const createCollectionItem = (item: any, i: number, type: string) => {
+        return (
+            <a href={`https://stardewvalleywiki.com/${item.image}`} target="blank" key={i}>
+                <img 
+                    key={i} 
+                    src={`https://stardew-tracker.s3.amazonaws.com/${type}/${item.image}.png`} 
+                    alt={item.name} 
+                    className={ (item.found) ? item.inMuseum ? "done" : "known": "" } 
+                    title={(item.found) ? (item.inMuseum) ? 
+                        `You have delivered ${item.name} to the museum` : 
+                        `You haven't delivered ${item.name} to the museum` : 
+                        `You haven't found ${item.name} yet`
+                    } 
+                />
+            </a>
+        );
+    };
+
     useEffect(() => {
         getTotalFound();
-    }, [museumCollection]);
+    }, []);
 
     return (
         <div className="progress-container">  
-            <span className="a-title"><h1>{`You've found ${totalFound} objects and delivered ${totalDelivered} / ${total} to the museum`}</h1></span>
+            <span className="a-title">
+                <h1>{`You've found ${totalFound} objects and delivered ${totalDelivered} / ${total} to the museum`}</h1>
+            </span>
             <br />
             <br />
             <h2>Museum Achievements</h2>
             <ul className="a-List"> 
-                <li>A Complete Collection: {(total === totalDelivered) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to deliver {total - totalDelivered} more items to get this achievement.</span> } </li>
+                <li>A Complete Collection: {(total === totalDelivered) ? 
+                    <span className="completed">You have this achievement</span> :
+                    <span className="pending">You need to deliver {total - totalDelivered} more items to get this achievement.</span>
+                    }
+                </li>
             </ul>
             <span className="a-title"><h1>Artifacts</h1></span>
-            {museumCollection.artifacts.map((item, i) => <a href={`https://stardewvalleywiki.com/${item.image}`} target="blank" key={i}><img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Artifacts/${item.image}.png`} alt={item.name} className={ (item.found) ? item.inMuseum ? "done" : "known": "" } title={(item.found) ? (item.inMuseum) ? `You have delivered ${item.name} to the museum` : `You haven't delivered ${item.name} to the museum` : `You haven't found ${item.name} yet`} ></img></a>)}
+            {museumCollection.artifacts.map((item, i) => createCollectionItem(item, i, "Artifacts"))}
     
             <span className="a-title"><h1>Minerals</h1></span>
-            {museumCollection.minerals.map((item, i) => <a href={`https://stardewvalleywiki.com/${item.image}`} target="blank" key={i}><img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Minerals/${item.image}.png`} alt={item.name} className={ (item.found) ? item.inMuseum ? "done" : "known" : "" } title={(item.found) ? (item.inMuseum) ? `You have delivered ${item.name} to the museum` : `You haven't delivered ${item.name} to the museum` : `You haven't found ${item.name} yet`} ></img></a>)}
+            {museumCollection.minerals.map((item, i) => createCollectionItem(item, i, "Minerals"))}
         </div>
     );
 };
