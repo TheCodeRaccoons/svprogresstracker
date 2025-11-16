@@ -1,17 +1,19 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';  
-import Food from '../AchieveTabs/Cooking'
-import Crafting from '../AchieveTabs/Crafting'
 import { TabCook, TabCraft, TabCrops, TabFishing, TabFriendship, TabGuild, TabItems, TabMoney, TabMuseum, TabQuests, TabGrandpa } from '@media/Tabs'
 import Star from '../../Media/Star.png'
-import Crops from '../AchieveTabs/Crops';
-import Fish from '../AchieveTabs/Fish';
-import Friendship from '../AchieveTabs/Friendship';
-import Monsters from '../AchieveTabs/Monsters';
-import Shipping from '../AchieveTabs/Shipping'
-import Earnings from '../AchieveTabs/moneyEarned'
-import Collection from '../AchieveTabs/Collection'
-import Quests from '../AchieveTabs/quests'
+import {
+    Collection, 
+    Earnings, 
+    Shipping, 
+    Monsters, 
+    Friendship, 
+    Fish, 
+    Cooking, 
+    Crafting, 
+    Crops, 
+    Quests
+} from '../AchieveTabs';
 import type { fullPlayerDataType } from 'types/displayDataTypes.js';
 
 const Achievements = ({
@@ -56,7 +58,7 @@ const Achievements = ({
                 </TabList>
             <TabPanel> 
                 <section className="achievement-container"> 
-                    <Food cookedItems={cookedItems}></Food>
+                    <Cooking cookedItems={cookedItems}></Cooking>
                 </section>
             </TabPanel> 
             <TabPanel> 
