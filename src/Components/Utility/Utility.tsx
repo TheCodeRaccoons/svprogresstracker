@@ -361,32 +361,56 @@ const GetMonsterQuests = (allMonsters: itemsType[], slimesKilled: number): forma
         })
         return(mData) 
 }
-const GetMCollection = (archeology: itemsType[], geology: itemsType[], currentCollection: itemsType[]) : museumCollectionType =>{
+const GetMCollection = 
+    (archeology: itemsType[], geology: itemsType[], currentCollection: itemsType[]) : museumCollectionType => {
 
     if(currentCollection === undefined || currentCollection.length === 0) return {artifacts: [], minerals: []};
 
-    //Get found Archeology
     let artifacts: generalFormatedItemType[] = [];
     let minerals: generalFormatedItemType[] = []
+    let _totalFound = 0;
+    let _totalDonated = 0;
 
     for(let collectionItem of Museum.collection) {
+        let alreadyDonated = currentCollection.filter(c => c.value.int === collectionItem.id).length > 0;
+        _totalDonated = alreadyDonated ? _totalDonated + 1 : _totalDonated;
         if( archeology && archeology.length > 0 && collectionItem.type === "artifact"){
+            let found = archeology.filter(a => a.key.int === collectionItem.id).length > 0;
+            _totalFound = found ? _totalFound + 1 : _totalFound;
+
             artifacts.push({
                 name: collectionItem.name,
                 image: GetImages(collectionItem.name),
-                found: (archeology && archeology.length > 0 && archeology.filter(a => a.key.int === collectionItem.id).length > 0),
-                inMuseum: (currentCollection.filter(c => c.value.int === collectionItem.id).length > 0)
+                found: found,
+                inMuseum: alreadyDonated
             })
         } else if(geology && geology.length > 0 && collectionItem.type === "mineral"){
+            let found = geology.filter(g => g.key.int === collectionItem.id).length > 0;
+            _totalFound = found ? _totalFound + 1 : _totalFound;
             minerals.push({
                 name: collectionItem.name,
                 image: GetImages(collectionItem.name),
-                found: (geology && geology.length > 0 && geology.filter(g => g.key.int === collectionItem.id).length > 0),
-                inMuseum: (currentCollection.filter(c => c.value.int === collectionItem.id).length > 0)
+                found: found,
+                inMuseum: alreadyDonated
             })
         }
     }
-    return {artifacts, minerals}  
+
+
+    let missingItemsText = (Museum.collection.length - _totalDonated > 0) ?
+        `You need to deliver ${Museum.collection.length - _totalDonated} more items to get this achievement.` :
+        undefined;
+
+    const museumCollection: museumCollectionType = {
+        totalFound: _totalFound,
+        totalDelivered: _totalDonated,
+        total: Museum.collection.length,
+        missingItemsText: missingItemsText,
+        artifacts,
+        minerals
+    }
+
+    return museumCollection  
 }
 
 const ValidateKnown = (k:itemsType[], name: string) => {
