@@ -44,6 +44,10 @@ export type professionsType = {
 }
 
 export type museumCollectionType = {
+    totalFound?: number;
+    totalDelivered?: number;
+    total?: number;
+    missingItemsText?: string | undefined;
     artifacts: generalFormatedItemType[];
     minerals: generalFormatedItemType[];
 }
