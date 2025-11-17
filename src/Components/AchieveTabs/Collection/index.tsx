@@ -1,29 +1,10 @@
-import React, { useState, useEffect } from 'react'
 import type { museumCollectionType } from 'types/displayDataTypes';
 
 interface CollectionProps {
     museumCollection: museumCollectionType;
 }
 
-const Collection = ({ museumCollection }: CollectionProps) => {
-    const [totalFound, setTotalFound] = useState(0);
-    const [totalDelivered, setTotalDelivered] = useState(0);
-    const [total, setTotal] = useState(0);
-
-    const getTotalFound = () => {
-        const artifacts = museumCollection.artifacts;
-        const minerals = museumCollection.minerals;
-
-        const totalArtFound = artifacts.reduce((accum, item) => (item.found) ? accum + 1 : accum, 0);
-        const totalMinFound = minerals.reduce((accum, item) => (item.found) ? accum + 1 : accum, 0);
-        const totalArtD = artifacts.reduce((accum, item) => (item.inMuseum) ? accum + 1 : accum, 0);
-        const totalMinD = minerals.reduce((accum, item) => (item.inMuseum) ? accum + 1 : accum, 0);
-
-        setTotalFound(totalArtFound + totalMinFound);
-        setTotalDelivered(totalArtD + totalMinD);
-        setTotal(artifacts.length + minerals.length);
-    };
-
+const Collection = ({ museumCollection: mc }: CollectionProps) => {
     const createCollectionItem = (item: any, i: number, type: string) => {
         return (
             <a href={`https://stardewvalleywiki.com/${item.image}`} target="blank" key={i}>
@@ -42,30 +23,28 @@ const Collection = ({ museumCollection }: CollectionProps) => {
         );
     };
 
-    useEffect(() => {
-        getTotalFound();
-    }, []);
-
     return (
         <div className="progress-container">  
             <span className="a-title">
-                <h1>{`You've found ${totalFound} objects and delivered ${totalDelivered} / ${total} to the museum`}</h1>
+                <h1>
+                    {`You've found ${mc.totalFound || 0} objects and delivered ${mc.totalDelivered || 0} / ${mc.total || 0} to the museum`}
+                </h1>
             </span>
             <br />
             <br />
             <h2>Museum Achievements</h2>
             <ul className="a-List"> 
-                <li>A Complete Collection: {(total === totalDelivered) ? 
+                <li>A Complete Collection: {(mc.missingItemsText === undefined) ? 
                     <span className="completed">You have this achievement</span> :
-                    <span className="pending">You need to deliver {total - totalDelivered} more items to get this achievement.</span>
+                    <span className="pending">{mc.missingItemsText}</span>
                     }
                 </li>
             </ul>
             <span className="a-title"><h1>Artifacts</h1></span>
-            {museumCollection.artifacts.map((item, i) => createCollectionItem(item, i, "Artifacts"))}
+            {mc.artifacts.map((item, i) => createCollectionItem(item, i, "Artifacts"))}
     
             <span className="a-title"><h1>Minerals</h1></span>
-            {museumCollection.minerals.map((item, i) => createCollectionItem(item, i, "Minerals"))}
+            {mc.minerals.map((item, i) => createCollectionItem(item, i, "Minerals"))}
         </div>
     );
 };
