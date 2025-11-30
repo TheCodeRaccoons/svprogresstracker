@@ -59,6 +59,12 @@ export type saveFileType = {
     gameVersionLabel: string,
     completedSpecialOrders: specialOrderType,
     availableSpecialOrders: specialOrderType,
+    farmhands: legacyFarmerType,
+}
+
+type legacyFarmerType = {
+    Farmer: playerType,
+    Farmers: playerType[],
 }
 
 export type specialOrderType = {
