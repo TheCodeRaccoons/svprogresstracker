@@ -77,7 +77,8 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
                 farmHands = [fileData.SaveGame.farmhands.Farmer];
             }
         }
-        let museumLocation: gameLocationType | undefined = fileData.SaveGame.locations.GameLocation.find((loc: gameLocationType) => {
+        let museumLocation: gameLocationType | undefined = 
+            fileData.SaveGame.locations.GameLocation.find((loc: gameLocationType) => {
             return loc.name === "ArchaeologyHouse";
         });
         if(!museumLocation) {
