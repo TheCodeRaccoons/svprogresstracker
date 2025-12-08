@@ -29,7 +29,8 @@ import type {
     itemFoundType, 
     experienceType, 
     formatedFriendshipDataType,
-    formatedMonsterDataType
+    formatedMonsterDataType,
+    cookingDataType
 } from 'types/displayDataTypes';
 import type { fullPlayerDataType, museumCollectionType } from 'types/displayDataTypes';
 
@@ -67,7 +68,12 @@ type getParsedUserDataType = Omit<getDetailedInfoType, 'playerData'> & {
 }
 
 //Calls the parser and creates an array of players depending on wether it is a single player or multiple
-const GetDetailedInfo = ({playerData , collectionStatus, specialRequests, availableSpecialRequests}: getDetailedInfoType) =>{ 
+const GetDetailedInfo = ({
+        playerData , 
+        collectionStatus, 
+        specialRequests, 
+        availableSpecialRequests
+    }: getDetailedInfoType) =>{ 
     let fullPlayerData: fullPlayerDataType[] = []
     if(Array.isArray(playerData)){
         playerData.forEach(p => { 
@@ -86,7 +92,12 @@ const GetDetailedInfo = ({playerData , collectionStatus, specialRequests, availa
 } 
     
 //Creates an object per player with the cleanup playerData.from the file
-const parseData = ({playerData, collectionStatus, specialRequests, availableSpecialRequests}: getParsedUserDataType) : fullPlayerDataType => { 
+const parseData = ({
+        playerData, 
+        collectionStatus, 
+        specialRequests, 
+        availableSpecialRequests
+    }: getParsedUserDataType) : fullPlayerDataType => { 
     //Not finished  
     console.log("Parsing data for:", playerData)
     let fullPlayerData : fullPlayerDataType = {
@@ -98,16 +109,24 @@ const parseData = ({playerData, collectionStatus, specialRequests, availableSpec
         shippedItems: GetShippedItems(playerData.basicShipped) || [],//DONE
         cropsShipped: GetCropsAchievements(playerData.basicShipped?.item),//Refactored DONE
         //mineralsFound: GetArrayData(playerData.mineralsFound?.item) || [], //DONE
-        cookedItems: GetCookingData(playerData.recipesCooked, playerData.cookingRecipes.item) || [], //DONE
+        cookingData: GetCookingData(playerData.recipesCooked, playerData.cookingRecipes.item) || [], //DONE
         fishCaught: GetFishes(playerData.fishCaught.item) || [], 
         tailoredItems: GetArrayDataTimeless(playerData.tailoredItems) || [],
         itemsCrafted: GetCraftingRecipes(playerData.craftingRecipes.item) || [],
         friendship: GetFriendshipData(playerData.friendshipData.item) || [],
-        monstersKilled: GetMonsterQuests(playerData.stats.specificMonstersKilled.item, playerData.stats.slimesKilled) || [],
-        museumCollection: GetMCollection(playerData.archaeologyFound.item, playerData.mineralsFound.item, collectionStatus) || {},
+        monstersKilled: 
+            GetMonsterQuests(playerData.stats.specificMonstersKilled.item, playerData.stats.slimesKilled) || [],
+        museumCollection: 
+            GetMCollection(playerData.archaeologyFound.item, playerData.mineralsFound.item, collectionStatus) || {},
         questsDone: playerData.stats.questsCompleted || 0,
-        specialRequests: specialRequests?.SpecialOrder ? GetSpecialRequests(specialRequests.SpecialOrder, townSR.Requests, true) : [],
-        availableSpecialRequests: specialRequests?.SpecialOrder ? GetSpecialRequests(specialRequests.SpecialOrder, townSR.Requests, false) : []
+        specialRequests: 
+            specialRequests?.SpecialOrder ?
+                GetSpecialRequests(specialRequests.SpecialOrder, townSR.Requests, true) 
+                : [],
+        availableSpecialRequests: 
+            specialRequests?.SpecialOrder ? 
+                GetSpecialRequests(specialRequests.SpecialOrder, townSR.Requests, false) 
+                : []
     }
 
     console.log(`%c Grandpa's eval for ${playerData.name}`, 'color: #7289DA') 
@@ -207,31 +226,46 @@ const GetShippedItems = (allShipped: itemType) :generalFormatedItemType[] => {
 }
 /* End of Shipping Related Achievements */
 
-const GetCookingData = (cooked: itemType, known: itemsType[]): generalFormatedItemType[] =>{
+const GetCookingData = (cooked: itemType, known: itemsType[]): cookingDataType =>{
     let data: generalFormatedItemType[] = [];
+    let knownRecipes = 0;
+    let alreadyCooked = 0;
     Dishes.Dishes.forEach(item => {
         let knownDish = ValidateKnown(known, NameTranslate(item.Name)) || false
+        let cookedTimes = GetCooked(cooked.item, item.id)
+        if(cookedTimes > 0) alreadyCooked++;
+        if(knownDish) knownRecipes++;
+        console.log('Dish:', item.Name, 'Known:', knownRecipes, 'CookedTimes:', alreadyCooked)
         let d = {
             name: NameTranslate(item.Name),
             id: item.id,
             image: GetImages(item.Name),
             link: item.link,
             knownDish: knownDish,
-            times: knownDish ? GetCooked(cooked.item, item.id) : 0
+            times: cookedTimes
         }
         data.push(d);
     })
-    console.log('Cooking Data:', data);
-    return data 
+    return { knownRecipes, alreadyCookedRecipes: alreadyCooked, cookedItems: data };
 }
 
 const GetCooked = (cookedItems:itemsType[], id: number): number => { 
-    let cooked = 0; 
+    let timesCooked = 0; 
     if(Array.isArray(cookedItems)){
-        let i = cookedItems.find(item => item.key.int === id) 
-        cooked = (i !== undefined) ? i.value.int : 0  
+        let i = cookedItems.find(item => {
+            if (item.key?.int === undefined){
+                if (item.key?.string !== undefined){
+                    return +item.key.string === id;
+                } else{
+                    return false;
+                }
+            } else {
+                return item.key.int === id
+            }
+        }) 
+        timesCooked = (i !== undefined) ? i.value.int : 0  
     }
-    return cooked;
+    return timesCooked;
 }
 
 const GetCraftingRecipes = (recipes: itemsType[]): generalFormatedItemType[] => {

@@ -4,9 +4,7 @@ import { GetDetailedInfo, GetFarmHands } from '@utility/Utility';
 import type { 
     gameLocationType, 
     itemsType, 
-    itemType, 
     playerType, 
-    saveFileType, 
     saveGameType, 
     specialOrderType 
 } from 'types/savefile.js';
@@ -62,12 +60,25 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
     };
 
     const getPlayerData = useCallback(() => { 
-        //getting players
-        console.log("Getting player data...")
+        //getting players 
         if(!fileData) return;
         let player = fileData.SaveGame.player;
-        let farmHands = GetFarmHands(fileData.SaveGame.locations.GameLocation); 
-        let museumLocation: gameLocationType | undefined = fileData.SaveGame.locations.GameLocation.find((loc: gameLocationType) => {
+        let farmHands: playerType[] = [];
+        const gameVersion = fileData.SaveGame.gameVersion;
+        const [major, minor] = gameVersion.split('.').map(Number);
+        if (major && minor && (major < 1 || (major >= 1 && minor < 5))) {
+            farmHands = GetFarmHands(fileData.SaveGame.locations.GameLocation); 
+        } else {
+            if(Array.isArray(fileData.SaveGame.farmhands)){
+                farmHands = [...fileData.SaveGame.farmhands.Farmers];
+            } else {
+                console.log("Legacy single farmhand detected")
+                console.log(fileData.SaveGame.farmhands)
+                farmHands = [fileData.SaveGame.farmhands.Farmer];
+            }
+        }
+        let museumLocation: gameLocationType | undefined = 
+            fileData.SaveGame.locations.GameLocation.find((loc: gameLocationType) => {
             return loc.name === "ArchaeologyHouse";
         });
         if(!museumLocation) {
