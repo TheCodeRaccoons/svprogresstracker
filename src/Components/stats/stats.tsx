@@ -36,7 +36,7 @@ const Stats = ({playerData, farmName, farmhandData}: formattedSaveFileType) => {
                     <img src={Rope} alt=""></img>
                 </div>
                 <Achievements 
-                    cookedItems={p.cookedItems}
+                    cookingData={p.cookingData}
                     itemsCrafted={p.itemsCrafted}  
                     cropsShipped={p.cropsShipped}
                     professions={p.professions}
@@ -74,7 +74,7 @@ const Stats = ({playerData, farmName, farmhandData}: formattedSaveFileType) => {
                                 <img src={Rope} alt=""></img>
                             </div> 
                             <Achievements 
-                                cookedItems={playerData.cookedItems} 
+                                cookingData={playerData.cookingData} 
                                 itemsCrafted={playerData.itemsCrafted}  
                                 professions={playerData.professions}
                                 cropsShipped={playerData.cropsShipped}  
