@@ -1,38 +1,79 @@
-import { useState, useEffect } from 'react'
-import type { generalFormatedItemType } from 'types/displayDataTypes';
+import type { cookingDataType } from 'types/displayDataTypes';
+import { Cook, SousChef, GourmetChef } from '@media/Achievements';
+import './Cooking.css';
 
-interface dishesCookedType {
-    cookedItems: generalFormatedItemType[];
-}
-
-const Food = ( {cookedItems} : dishesCookedType) => {
-    const [dishesCooked, setDishesCooked] = useState(0);
-    if(!cookedItems) return <div>No cooking data available.</div>;
-
-    const canMap = (cookedItems && cookedItems.length > 0);
-    console.log("Cooking data:", cookedItems);
-    useEffect(() => {  
-        const cookedCount = canMap ? cookedItems.map((num) => (num.times !== undefined && num.times > 0) ? 1 : 0).reduce((n: number, next: number) => n + next, 0) : 0;
-        setDishesCooked(cookedCount);
-    }, [cookedItems]);
-    const cookedCount = canMap ? cookedItems.map((num) => (num.times !== undefined && num.times > 0) ? 1 : 0).reduce((n: number, next: number) => n + next, 0) : 0;
-    const knownCount = canMap ? cookedItems.map((num) => (num.times !== undefined && num.times >= 0) ? 1 : 0).reduce((n: number, next: number) => n + next, 0) : 0;
-
+const Food = ( {cookedItems, knownRecipes, alreadyCookedRecipes} : cookingDataType) => {
     return ( 
         <div className="progress-container">   
-            <span className="a-title"><h1>You have cooked {cookedCount}, knowing {knownCount} out of {cookedItems.length} recipes</h1></span>
+            <span className="a-title">
+                <h2>
+                    Has cooked {alreadyCookedRecipes}, knowing {knownRecipes} out of 74 recipes
+                </h2>
+            </span>
             <br />
             <h2>Cooking Achievements</h2>
-            <ul className="a-List"> 
-                <li>Cook: {(dishesCooked >= 10) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to cook {10 - dishesCooked} more dishes to get this</span> } </li>
-                <li>Sous Chef:  {(dishesCooked >= 25) ? <span className="completed">You have this achievement</span> : <span className="pending"> You need to cook {25 - dishesCooked} more dishes to get this</span> }</li>
-                <li>Gourmet Chef: {(dishesCooked >= 74) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to cook {74 - dishesCooked} more dishes to get this</span> }</li>
-            </ul>
+            <div className="section-achievements">
+                <div className="achievement-item">
+                    <img 
+                        className={`${(alreadyCookedRecipes >= 10) ? 
+                        "achieved" : "pending"}`} 
+                        src={Cook}
+                        alt="Cook Achievement"
+                    />
+                    <div>
+                        <h3>Cook:</h3> 
+                        <p>Cook a total of 10 dishes</p>
+                    </div>
+                </div>
+                <div className="achievement-item">
+                    <img 
+                        className={`${(alreadyCookedRecipes >= 25) ? 
+                        "achieved" : "pending"}`} 
+                        src={SousChef}
+                        alt="Sous Chef Achievement"
+                    />
+                    <div>
+                        <h3>Sous Chef:</h3> 
+                        <p>Cook a total of 25 dishes</p>
+                    </div>
+                </div>
+                <div className="achievement-item">
+                    <img 
+                        className={`${(alreadyCookedRecipes >= 74) ? 
+                        "achieved" : "pending"}`} 
+                        src={GourmetChef}
+                        alt="Gourmet Chef Achievement"
+                    />
+                    <div>
+                        <h3>Gourmet Chef:</h3> 
+                        <p>Cook a total of 74 dishes</p>
+                    </div>
+                </div>
+            </div>
             <br />
-            { canMap ? 
-                cookedItems.map((d, i) => <a href={`https://stardewvalleywiki.com/${d.link}`} target="blank" key={i}><img src={`https://stardew-tracker.s3.amazonaws.com/Cooking/${d.image}.png`} alt={d.name} className={ (d.times !== undefined) ? ((d.times > 0) ? "done" : "known" ): "" } title={(d.times !== undefined) ? (d.times > 0) ? `Cooked ${d.name}  ${d.times} times` : `You haven't cooked ${d.name}` : `You don't know how to cook ${d.name}`} ></img></a>) 
-                : null
+            <div className="dishes-grid">
+            { cookedItems ? 
+                cookedItems.map((d, i) => 
+                    <a 
+                    href={`https://stardewvalleywiki.com/${d.link}`} 
+                    target="blank" 
+                    key={i}
+                    className="dish-item">
+                        <img 
+                            src={`https://stardew-tracker.s3.amazonaws.com/Cooking/${d.image}.png`} 
+                            alt={d.name} 
+                            className={ (d.times !== undefined) ? ((d.times > 0) ? "done" : "known" ): "" } 
+                            title={(d.times !== undefined) ? 
+                                (d.times > 0) ? `Cooked ${d.name}  ${d.times} times` 
+                                : `You haven't cooked ${d.name}` 
+                                : `You don't know how to cook ${d.name}`
+                            } >
+                        </img>
+                        <p className="times-cooked">x{d.times}</p>
+                    </a>) 
+                : <div>No cooking data available.</div>
             }
+            </div>
         </div>
     );
 };
