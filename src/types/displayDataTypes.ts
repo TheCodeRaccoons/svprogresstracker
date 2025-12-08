@@ -13,7 +13,7 @@ export type fullPlayerDataType = {
     shippedItems: generalFormatedItemType[];
     cropsShipped: cropsShippedType;
     mineralsFound?: itemFoundType[];
-    cookedItems: generalFormatedItemType[];
+    cookingData: cookingDataType;
     museumCollection: museumCollectionType;
     availableSpecialRequests: string[];
     fishCaught: generalFormatedItemType[];
@@ -24,6 +24,12 @@ export type fullPlayerDataType = {
     specialRequests: string[];
     tailoredItems: string[];
 };
+
+export type cookingDataType = {
+    knownRecipes: number;
+    alreadyCookedRecipes: number;
+    cookedItems: generalFormatedItemType[];
+}
 
 export type generalFormatedItemType = {
     id?: number;
