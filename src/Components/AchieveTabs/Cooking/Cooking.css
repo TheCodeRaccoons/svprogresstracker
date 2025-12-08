@@ -1,0 +1,48 @@
+.section-achievements {
+    display: flex;
+    align-items:start;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.dishes-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.dish-item {
+    display: block;
+    position: relative;
+}
+
+.dish-item .times-cooked {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    text-shadow: 2px 2px 2px #000;
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+}
+
+.achievement-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: bold;
+    max-width: 30%;
+}
+
+.section-achievements img {
+    width: 3rem !important;
+    height: 3rem !important;
+}
+
+.section-achievements img.achieved {
+    filter: grayscale(0) brightness(1) !important;
+}
+
+.section-achievements img.pending {
+    filter: grayscale(1) brightness(0.5) !important;
+}
