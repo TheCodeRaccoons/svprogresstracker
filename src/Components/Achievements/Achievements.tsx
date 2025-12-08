@@ -24,7 +24,7 @@ const Achievements = ({
     professions,
     shippedItems,
     cropsShipped,
-    cookedItems,
+    cookingData,
     museumCollection,
     availableSpecialRequests,
     fishCaught,
@@ -58,7 +58,7 @@ const Achievements = ({
                 </TabList>
             <TabPanel> 
                 <section className="achievement-container"> 
-                    <Cooking cookedItems={cookedItems}></Cooking>
+                    <Cooking {...cookingData} ></Cooking>
                 </section>
             </TabPanel> 
             <TabPanel> 
