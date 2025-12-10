@@ -28,7 +28,9 @@ const ItemWithCounter = ({
                 title={hoverDesc && hoverDesc}
                 >
             </img>
-            {!!times && <p className="item-times">x{times}</p>}
+            {times === undefined ? 
+            <p className="item-unknown">?</p> :
+            <p className="item-times"> x{times}</p> }
         </a>
     );
 }

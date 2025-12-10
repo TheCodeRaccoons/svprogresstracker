@@ -535,14 +535,24 @@ section.sv-container{
     position: relative;
 }
 
-.item-with-counter .item-times {
+.item-with-counter p {
     text-decoration: none;
     color: white;
     font-weight: bold;
     text-shadow: 2px 2px 2px #000;
+
+  &.item-times {
     position: absolute;
     bottom: 5px;
     right: 0;
+  }
+  &.item-unknown {
+    position: absolute;
+    bottom: 50%;
+    right: 50%;
+    transform: translateX(50%) translateY(40%);
+
+  }
 }
 
 .item-with-counter img {
@@ -556,7 +566,7 @@ section.sv-container{
       filter: grayscale(1) opacity(0.3) !important;
   }
   &.unknown {
-      filter: grayscale(1) brightness(0) !important;
+      filter: grayscale(1) brightness(0) opacity(0.3) !important;
   }
 }
 
