@@ -1,4 +1,4 @@
-
+import './styles/ItemWithCounter.css';
 type ItemWithCounterProps = {
     link: string;
     src: string;

@@ -1,3 +1,5 @@
+import "./styles/AchievementIte.css";
+
 type AchievementItemProps = {
     done: boolean;
     image: string;
