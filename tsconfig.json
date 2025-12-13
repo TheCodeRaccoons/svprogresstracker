@@ -47,8 +47,8 @@
     "paths": {
       "@components/*": ["Components/*"],
       "@media/*": ["Media/*"],
-      "@utility/*": ["Components/Utility/*"],
-      "@hooks/*": ["./Hooks/*"]
+      "@utility/*": ["Utility/*"],
+      "@hooks/*": ["Hooks/*"]
     },
   }
 }
