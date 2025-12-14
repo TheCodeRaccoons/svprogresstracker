@@ -56,6 +56,7 @@ export type generalFormatedItemType = {
     name: string;
     link?: string;
     knownDish?: boolean;
+    known?: boolean;
     times?: number;
     shipped?: number;
     fished?: boolean;
