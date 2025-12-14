@@ -1,6 +1,6 @@
 import Stats from '../stats/stats.js'
 import Viewer from '../Viewer/Viewer'
-import Logo from '@media/Logo.png';
+import Logo from '@media/logo.png';
 import fb from '@media/Social/fb.png'
 import kofi from '@media/Social/kofi.png'
 import twit from '@media/Social/twitter.png'
@@ -20,7 +20,6 @@ const Main = () => {
     const [globalFarmName, setFarmName] = useState("My Farm");
 
     const UpdatePlayerData = ({farmName, playerData, farmhandData}: formattedSaveFileType) => {
-        console.log("Player data received", playerData, farmhandData);
         if(!playerData) {
             console.error("No player data received in Main component");
             return;
