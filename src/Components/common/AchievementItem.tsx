@@ -22,7 +22,7 @@ const AchievementItem = ({
                 "achieved" : "pending"}`} 
                 src={image}
                 alt={`${achievementName}`}
-                title={achievementHoverDesc && achievementHoverDesc}
+                title={achievementHoverDesc}
             />
             <div>
                 <h3>{achievementName}:</h3> 

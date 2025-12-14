@@ -16,12 +16,14 @@ let CookingAchievements = [{
         goal: 25,
         image: SousChef,
         name: 'Cook',
+        done: false,
         description: 'Cook a total of 25 dishes',
         hoverDesc: ''
     },{
         goal: Dishes.Dishes.length,
         image: GourmetChef,
         name: 'Cook',
+        done: false,
         description: 'Cook All dishes',
         hoverDesc: ''
     }
