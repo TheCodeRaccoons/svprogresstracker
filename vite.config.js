@@ -14,6 +14,7 @@ export default defineConfig(({ mode }) => ({
       '@utility': path.resolve(__dirname, 'src/Utility'),
       '@hooks': path.resolve(__dirname, 'src/Hooks'),
     },
+    extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json']
   },
   build: {
     outDir: 'build',
