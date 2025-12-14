@@ -106,7 +106,6 @@ const parseData = ({
         availableSpecialRequests
     }: getParsedUserDataType) : fullPlayerDataType => { 
     //Not finished  
-    console.log("Parsing data for:", playerData)
     let fullPlayerData : fullPlayerDataType = {
         playerName: playerData.name || "Unknown",
         farmName: playerData.farmName, //TODO: Remove and make global if even needed
@@ -136,8 +135,8 @@ const parseData = ({
                 : []
     }
 
-    console.log(`%c Grandpa's eval for ${playerData.name}`, 'color: #7289DA') 
-    console.log("Player Data", fullPlayerData)
+    console.debug(`%c Grandpa's eval for ${playerData.name}`, 'color: #7289DA') 
+    console.debug("Player Data", fullPlayerData)
     return fullPlayerData;
 } 
 
@@ -170,7 +169,7 @@ const GetProfessionData = (professions: number[]): professionsType[] =>{
             }
         });
     }
-    console.log('Profession Data:', data);
+    console.debug('Profession Data:', data);
     return data;
 }
 

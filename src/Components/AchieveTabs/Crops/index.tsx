@@ -3,7 +3,6 @@ import type { cropsShippedType } from 'types/displayDataTypes';
 
 
 const Crops= ({poly_crops, mono_extras, achievements} : cropsShippedType) => {
-    console.log(achievements)
     return ( 
         <div className="progress-container">  
             <br />

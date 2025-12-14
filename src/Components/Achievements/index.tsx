@@ -48,8 +48,7 @@ const Achievements = ({
         {img: TabQuests, alt: "Quests"}, 
         {img: TabGrandpa, alt: "Grandpa's evaluation"}
     ];
-    console.log("Achievements:", fishCaught);
-    console.log("Professions in Achievements:", professions);
+
     return ( 
         <div className="file-container">
         <img className="star" alt="star" src={Star}></img>

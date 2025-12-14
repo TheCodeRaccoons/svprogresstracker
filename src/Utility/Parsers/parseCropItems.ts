@@ -61,7 +61,6 @@ export const GetCropsAchievements = (allShipped: itemsType[]) : cropsShippedType
                 `You have shipped at least 300 of ${maxMono.name}` : 
                 `You have shipped ${maxMono.shipped} out of 300 required for ${maxMono.name}, your most shipped crop`;
     }
-    console.log('CropsAchievements', CropsAchievements);
     return {
         achievements: CropsAchievements,
         poly_crops,
