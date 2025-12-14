@@ -43,17 +43,17 @@ const Main = () => {
             <div className="main-media">
                 <div className="cr rotated">
                     <div className="media-container">
-                        <a href="https://www.facebook.com/TheCodeRaccoons/" target="blank"><div className="media"><img src={twit} alt="twitter"/></div></a>
-                        <a href="https://ko-fi.com/thecoderaccon/" target="blank"><div className="media"><img src={kofi} alt="ko-fi"/></div></a>
-                        <a href="https://twitter.com/thecoderaccoons/" target="blank"><div className="media"><img src={fb} alt="facebook"/></div></a>
+                        <a href="https://www.facebook.com/TheCodeRaccoons/" target="_blank" ><div className="media"><img src={twit} alt="twitter"/></div></a>
+                        <a href="https://ko-fi.com/thecoderaccon/" target="_blank"><div className="media"><img src={kofi} alt="ko-fi"/></div></a>
+                        <a href="https://twitter.com/thecoderaccoons/" target="_blank"><div className="media"><img src={fb} alt="facebook"/></div></a>
                     </div>
                     <div> Code by TheCodeRaccoons</div>
                 </div>
                 <div className="oj rotated">
                     <div className="media-container">
-                        <a href="https://www.facebook.com/ookami.jime/" target="blank"><div className="media"><img src={twit} alt="twitter"/></div></a>
-                        <a href="https://ko-fi.com/ookamijime/" target="blank"><div className="media"><img src={kofi} alt="ko-fi"/></div></a>
-                        <a href="https://twitter.com/ookamijime/" target="blank"><div className="media"><img src={fb} alt="facebook"/></div></a>
+                        <a href="https://www.facebook.com/ookami.jime/" target="_blank"><div className="media"><img src={twit} alt="twitter"/></div></a>
+                        <a href="https://ko-fi.com/ookamijime/" target="_blank"><div className="media"><img src={kofi} alt="ko-fi"/></div></a>
+                        <a href="https://twitter.com/ookamijime/" target="_blank"><div className="media"><img src={fb} alt="facebook"/></div></a>
                     </div>
                     <div className="space-fix" > Design<br/> by Ookamijime</div>
                     </div>
@@ -81,9 +81,9 @@ const Main = () => {
             <div className="coright" > 
                 Source at GitHub, All <br /> 
                 "Stardew Valley" assets <br /> 
-                copyright <a  href="https://twitter.com/ConcernedApe" target="blank" >Concerned Ape</a>, 
+                copyright <a  href="https://twitter.com/ConcernedApe" target="_blank" >Concerned Ape</a>, 
                 <br /> other assets and site design <br /> made by 
-                <a  href="https://twitter.com/OokamiJime" target="blank" >Ookamijime</a></div>
+                <a  href="https://twitter.com/OokamiJime" target="_blank" >Ookamijime</a></div>
         </div>
     );
 }

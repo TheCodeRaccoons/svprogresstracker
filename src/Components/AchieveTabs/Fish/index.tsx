@@ -27,7 +27,7 @@ const Fish = ({ fishCaught }: FishProps) => {
                 <li>Master Angler : {(totalFished >= fishCaught.length) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to catch {fishCaught.length - totalFished} more fish to get this </span>}</li>
             </ul>
             <br />
-            {fishCaught.map((fish, i) => <a href={`https://stardewvalleywiki.com/${fish.image}`} target="blank" key={i}><img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Fishing/${fish.image}.png`} alt={fish.name} className={ (fish.fished) ? "done" : ""} title={(fish.fished) ? `You've caught  ${fish.name}` :  `You haven't fished ${fish.name}`} ></img></a>)}
+            {fishCaught.map((fish, i) => <a href={`https://stardewvalleywiki.com/${fish.image}`} target="_blank" rel="noreferrer" key={i}><img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Fishing/${fish.image}.png`} alt={fish.name} className={ (fish.fished) ? "done" : ""} title={(fish.fished) ? `You've caught  ${fish.name}` :  `You haven't fished ${fish.name}`} ></img></a>)}
 
         </div>
     );

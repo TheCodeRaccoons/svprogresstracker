@@ -17,15 +17,17 @@ const ItemWithCounter = ({
     times,
 }: ItemWithCounterProps) => {
     return (
-        <a 
+        <a
             href={link} 
-            target="blank"
+            target="_blank"
+            rel="noreferrer"
             className="item-with-counter">
+                
             <img 
                 src={src} 
                 alt={name} 
                 className={state} 
-                title={hoverDesc && hoverDesc}
+                title={hoverDesc}
                 >
             </img>
             {times === undefined ? 
