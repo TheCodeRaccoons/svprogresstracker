@@ -4,7 +4,6 @@ import { GetImages, ValidateKnown } from "./Utils";
 import type { achievementType, cookingDataType, generalFormatedItemType } from "types/displayDataTypes";
 import { Cook, SousChef, GourmetChef } from '@media/Achievements';
 
-
 let CookingAchievements = [{
         goal: 10,
         image: Cook,

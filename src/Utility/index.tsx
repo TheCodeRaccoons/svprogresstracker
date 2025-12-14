@@ -37,6 +37,9 @@ import type {
 } from 'types/displayDataTypes';
 import type { fullPlayerDataType, museumCollectionType } from 'types/displayDataTypes';
 import { GetCookingData } from './Parsers/parseCookingItems';
+import { GetCraftingRecipes } from './Parsers/parseCraftingItems';
+import { GetCropsAchievements } from './Parsers/parseCropItems';
+import { GetFishes } from './Parsers/parseFishItems';
 
 //Gets the info from the farm hands as an array of the same type
 const GetFarmHands = (locations: gameLocationType[]): playerType[] => {
@@ -103,7 +106,6 @@ const parseData = ({
         availableSpecialRequests
     }: getParsedUserDataType) : fullPlayerDataType => { 
     //Not finished  
-    console.log("Parsing data for:", playerData)
     let fullPlayerData : fullPlayerDataType = {
         playerName: playerData.name || "Unknown",
         farmName: playerData.farmName, //TODO: Remove and make global if even needed
@@ -114,7 +116,7 @@ const parseData = ({
         cropsShipped: GetCropsAchievements(playerData.basicShipped?.item),//Refactored DONE
         //mineralsFound: GetArrayData(playerData.mineralsFound?.item) || [], //DONE
         cookingData: GetCookingData(playerData.recipesCooked, playerData.cookingRecipes.item) || [], //DONE
-        fishCaught: GetFishes(playerData.fishCaught.item) || [], 
+        fishCaught: GetFishes(playerData.fishCaught.item), 
         tailoredItems: GetArrayDataTimeless(playerData.tailoredItems) || [],
         itemsCrafted: GetCraftingRecipes(playerData.craftingRecipes.item) || [],
         friendship: GetFriendshipData(playerData.friendshipData.item) || [],
@@ -133,8 +135,8 @@ const parseData = ({
                 : []
     }
 
-    console.log(`%c Grandpa's eval for ${playerData.name}`, 'color: #7289DA') 
-    console.log("Player Data", fullPlayerData)
+    console.debug(`%c Grandpa's eval for ${playerData.name}`, 'color: #7289DA') 
+    console.debug("Player Data", fullPlayerData)
     return fullPlayerData;
 } 
 
@@ -167,7 +169,7 @@ const GetProfessionData = (professions: number[]): professionsType[] =>{
             }
         });
     }
-    console.log('Profession Data:', data);
+    console.debug('Profession Data:', data);
     return data;
 }
 
@@ -229,88 +231,6 @@ const GetShippedItems = (allShipped: itemType) :generalFormatedItemType[] => {
     return data;
 }
 
-const GetCraftingRecipes = (recipes: itemsType[]): generalFormatedItemType[] => {
-    let data: generalFormatedItemType[] = []  
-    if(Array.isArray(recipes)) {
-        CraftingRec.recipes.forEach(item => {
-            let d = {
-                name: item,
-                image: GetImages(item),
-                times: recipes.find(i => i.key.string === item)?.value.int || 0,
-            }
-            data.push(d)
-        })
-    } 
-    return data 
-}
-
-/* Crop Related Achievements */
-const GetCropsAchievements = (allShipped: itemsType[]) : cropsShippedType => { 
-    const poly_crops: generalFormatedItemType[] = [] 
-    const mono_extras: generalFormatedItemType[] = []
-    let polycultureCount = 0;
-    let maxMono: maxMonoType = { name: "undefined", shipped: 0 };
-
-    ShipCrops.forEach(cropItem => {
-        const shippedCount = getShippedCount(allShipped, cropItem.id);
-        const cropData = createCropData(cropItem, shippedCount);
-
-        if (!maxMono || shippedCount > maxMono.shipped) {
-            maxMono = {
-                name: cropItem.name,
-                shipped: shippedCount
-            };
-        }
-
-        if (cropItem.isPolyCrop) {
-            if (shippedCount >= 15) polycultureCount++;
-            poly_crops.push(cropData);
-        } else {
-            mono_extras.push(cropData);
-        }
-    });
-
-    const cropsAchievements = {
-        hasPolyculture: polycultureCount === 28,
-        hasMonoculture: maxMono ? maxMono?.shipped >= 300 : false,
-        maxMono,
-        poly_crops,
-        mono_extras 
-    };
-
-    return cropsAchievements;
-}
-
-const getShippedCount = (allShipped: itemsType[], cropId: number): number => {
-    if (!allShipped?.length) return 0;
-    const shippedItem = allShipped.find(item => item.key.int === cropId);
-    return shippedItem?.value?.int || 0;
-};
-
-const createCropData = (cropItem: any, shippedCount: number): generalFormatedItemType => ({
-        name: cropItem.name,
-        image: GetImages(cropItem.name),
-        id: cropItem.id,
-        shipped: shippedCount
-    });
-
-/* End of Crop Related Achievements */
-
-const GetFishes = (allFished: itemsType[]) => { 
-    let data: generalFormatedItemType[] = []
-
-    Fishes.forEach(item => {
-        let d = {
-            name: item.name,
-            image: GetImages(item.name),
-            id: item.id,
-            fished: (Array.isArray(allFished)) ? (allFished.find(i => i.key.int === item.id ) !== undefined) : false
-        }
-        data.push(d)
-    }) 
-    
-    return  data
-}
 
 const GetFriendshipData = (allFriends: friendshipDataType[]): formatedFriendshipDataType[] => { 
     let data: formatedFriendshipDataType[] = []

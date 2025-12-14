@@ -5,7 +5,7 @@ type ItemWithCounterProps = {
     name: string;
     state: 'done' | 'known' | 'unknown';
     hoverDesc?: string;
-    times?: number | undefined;
+    times?: number | undefined | null;
 }
 
 const ItemWithCounter = ({
@@ -32,6 +32,7 @@ const ItemWithCounter = ({
             </img>
             {times === undefined ? 
             <p className="item-unknown">?</p> :
+            times === null ? null :
             <p className="item-times"> x{times}</p> }
         </a>
     );

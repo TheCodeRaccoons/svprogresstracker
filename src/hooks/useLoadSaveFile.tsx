@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { XMLParser } from 'fast-xml-parser';
-import { GetDetailedInfo, GetFarmHands } from '@utility/Utility';
+import { GetDetailedInfo, GetFarmHands } from '@utility/index';
 import type { 
     gameLocationType, 
     itemsType, 
@@ -65,16 +65,22 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
         let player = fileData.SaveGame.player;
         let farmHands: playerType[] = [];
         const gameVersion = fileData.SaveGame.gameVersion;
-        const [major, minor] = gameVersion.split('.').map(Number);
-        if (major && minor && (major < 1 || (major >= 1 && minor < 5))) {
+        console.debug("Current game version:", gameVersion);
+        const [major, minor, patch] = gameVersion.split('.').map(Number); 
+        if (major && minor && (major >= 1 && minor >= 5 )) {
+            console.debug("Using New farmhand data structure");
             farmHands = GetFarmHands(fileData.SaveGame.locations.GameLocation); 
         } else {
+            console.debug("Farmhands data:", fileData.SaveGame.farmhands);
             if(Array.isArray(fileData.SaveGame.farmhands)){
                 farmHands = [...fileData.SaveGame.farmhands.Farmers];
-            } else {
-                console.log("Legacy single farmhand detected")
-                console.log(fileData.SaveGame.farmhands)
+            } else if (fileData.SaveGame.farmhands && fileData.SaveGame.farmhands.Farmer) {
+                console.debug("Legacy single farmhand detected")
+                console.debug(fileData.SaveGame.farmhands) 
                 farmHands = [fileData.SaveGame.farmhands.Farmer];
+            } else {
+                console.debug("Using legacy farmhands data structure ???");
+                farmHands = GetFarmHands(fileData.SaveGame.locations.GameLocation); 
             }
         }
         let museumLocation: gameLocationType | undefined = 
@@ -103,7 +109,6 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
             })
         }
 
-        console.log("Players:", players)
         setPlayerData(players)
     }, [fileData])
 
@@ -112,8 +117,6 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
         if(collection.museumPieces.item && collection.museumPieces.item !== undefined && collection.museumPieces.item.length > 0){
             museumPieces = [...collection.museumPieces.item]
         }
-        // console.log(museumPieces)
-
         return (museumPieces.length > 0) ? [...museumPieces] : [] 
     }
 

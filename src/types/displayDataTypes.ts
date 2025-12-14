@@ -16,14 +16,22 @@ export type fullPlayerDataType = {
     cookingData: cookingDataType;
     museumCollection: museumCollectionType;
     availableSpecialRequests: string[];
-    fishCaught: generalFormatedItemType[];
+    fishCaught: fishCaughtType;
     friendship: formatedFriendshipDataType[];
-    itemsCrafted: generalFormatedItemType[];
+    itemsCrafted: itemsCraftedType;
     monstersKilled: formatedMonsterDataType[];
     questsDone: number;
     specialRequests: string[];
     tailoredItems: string[];
 };
+
+export type itemsCraftedType = {
+    knownItems: number;
+    alreadyCraftedItems: number;
+    craftedItems: generalFormatedItemType[];
+    totalRecipes: number;
+    achievements?: achievementType[];
+}
 
 export type cookingDataType = {
     knownRecipes: number;
@@ -32,6 +40,20 @@ export type cookingDataType = {
     totalRecipes: number;
     achievements?: achievementType[];
 }
+
+export type cropsShippedType = {
+    achievements?: achievementType[];
+    mono_extras: generalFormatedItemType[];
+    poly_crops: generalFormatedItemType[];
+};
+
+export type fishCaughtType = {
+    fishCaught: number;
+    catchedFish: generalFormatedItemType[];
+    total: number;
+    achievements?: achievementType[];
+}
+
 export type achievementType = {
         done: boolean,
         goal: number,
@@ -47,6 +69,7 @@ export type generalFormatedItemType = {
     name: string;
     link?: string;
     knownDish?: boolean;
+    known?: boolean;
     times?: number;
     shipped?: number;
     fished?: boolean;
@@ -67,14 +90,6 @@ export type museumCollectionType = {
     artifacts: generalFormatedItemType[];
     minerals: generalFormatedItemType[];
 }
-
-export type cropsShippedType = {
-    hasMonoculture: boolean;
-    hasPolyculture: boolean;
-    mono_extras: generalFormatedItemType[];
-    poly_crops: generalFormatedItemType[];
-    maxMono: null | maxMonoType;
-};
 
 export type maxMonoType = {
     name: string;

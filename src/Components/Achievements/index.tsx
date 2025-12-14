@@ -48,13 +48,17 @@ const Achievements = ({
         {img: TabQuests, alt: "Quests"}, 
         {img: TabGrandpa, alt: "Grandpa's evaluation"}
     ];
-    console.log("Professions in Achievements:", professions);
+
     return ( 
         <div className="file-container">
         <img className="star" alt="star" src={Star}></img>
             <Tabs>
                 <TabList className="achievement">                       
-                    {TabImg.map((img, i) => <Tab key={i}> <img src={img.img} alt={img.alt} title={img.alt} className="tab-ico"></img></Tab>)}
+                    {TabImg.map((img, i) => 
+                        <Tab key={i}>
+                            <img src={img.img} alt={img.alt} title={img.alt} className="tab-ico" />
+                        </Tab>
+                    )}
                 </TabList>
             <TabPanel> 
                 <section className="achievement-container"> 
@@ -63,17 +67,17 @@ const Achievements = ({
             </TabPanel> 
             <TabPanel> 
                 <section className="achievement-container">  
-                    <Crafting itemsCrafted={itemsCrafted}></Crafting>
+                    <Crafting {...itemsCrafted}></Crafting>
                 </section>
             </TabPanel> 
             <TabPanel> 
                 <section className="achievement-container">
-                    <Crops cropsShipped={cropsShipped} />
+                    <Crops {...cropsShipped} />
                 </section>
             </TabPanel> 
             <TabPanel> 
                 <section className="achievement-container">
-                    <Fish fishCaught={fishCaught} />
+                    <Fish {...fishCaught} />
                 </section>
             </TabPanel> 
             <TabPanel> 

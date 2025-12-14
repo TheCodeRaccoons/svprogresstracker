@@ -1,8 +1,12 @@
 
 
 .item-with-counter {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
+    width: 2.5rem !important;
+    height: 2.5rem !important;
 }
 
 .item-with-counter p {
@@ -13,7 +17,7 @@
 
     &.item-times {
         position: absolute;
-        bottom: 5px;
+        bottom: 0rem;
         right: 0;
     }
     &.item-unknown {
@@ -26,8 +30,8 @@
 }
 
 .item-with-counter img {
-    width: 2.5rem !important;
-    height: 2.5rem !important;
+    width: auto !important; ;
+    height: 100% !important; ;
 
     &.done {
         filter: grayscale(0) brightness(1) !important;
