@@ -15,8 +15,6 @@ import {
 import Rope from '@media/Rope.png'
 import type { formattedSaveFileType } from 'types/displayDataTypes';
 
-
-
 const Stats = ({playerData, farmName, farmhandData}: formattedSaveFileType) => {
     const [globalFarmName] = useState(farmName || "My Farm");
     const [junimos] = useState([
@@ -34,7 +32,6 @@ const Stats = ({playerData, farmName, farmhandData}: formattedSaveFileType) => {
             <img src={junimos[i + 1]} alt="player nametag"></img> {item.playerName}
         </Tab>
     );
-    
     const playerStats = farmhandData.map((p, i) => (
         <TabPanel key={i}>
             <section className="wrapper">
