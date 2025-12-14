@@ -1,0 +1,12 @@
+export {default as Dishes} from './Dishes.json' with { type: "json" };
+export {default as CraftingRec} from './CraftingRecipes.json' with { type: "json" };
+export {default as ProfNames} from './professions.json' with { type: "json" };
+export {default as Levels} from './levels.json' with { type: "json" };
+export {default as ShipItems} from './shippingItems.json' with { type: "json" };
+export {default as ShipCrops} from './shippingCrops.json' with { type: "json" };
+export {default as Fishes} from './fishes.json' with { type: "json" };
+export {default as Friendship} from './friendship.json' with { type: "json" };
+export {default as MonsterCat} from './monsterCategorie.json' with { type: "json" };
+export {default as Museum} from './museum.json' with { type: "json" };
+export {default as townSR} from './TownSpecialReq.json' with { type: "json" };
+export {default as QiSR} from './QiSpecialReq.json' with { type: "json" };

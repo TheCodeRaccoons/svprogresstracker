@@ -29,6 +29,16 @@ export type cookingDataType = {
     knownRecipes: number;
     alreadyCookedRecipes: number;
     cookedItems: generalFormatedItemType[];
+    totalRecipes: number;
+    achievements?: achievementType[];
+}
+export type achievementType = {
+        done: boolean,
+        goal: number,
+        image: string,
+        name: string,
+        description: string,
+        hoverDesc: string,
 }
 
 export type generalFormatedItemType = {

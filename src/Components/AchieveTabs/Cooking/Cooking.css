@@ -25,24 +25,3 @@
     bottom: 5px;
     right: 0;
 }
-
-.achievement-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: bold;
-    max-width: 30%;
-}
-
-.section-achievements img {
-    width: 3rem !important;
-    height: 3rem !important;
-}
-
-.section-achievements img.achieved {
-    filter: grayscale(0) brightness(1) !important;
-}
-
-.section-achievements img.pending {
-    filter: grayscale(1) brightness(0.5) !important;
-}
