@@ -36,7 +36,6 @@ export const GetCookingData = (cooked: itemType, known: itemsType[]): cookingDat
         let cookedTimes = GetCooked(cooked.item, item.id)
         if(cookedTimes > 0) alreadyCooked++;
         if(knownDish) knownRecipes++;
-        console.log('Dish:', item.Name, 'Known:', knownRecipes, 'CookedTimes:', alreadyCooked)
         let d = {
             name: translateDishNames(item.Name),
             id: item.id,
