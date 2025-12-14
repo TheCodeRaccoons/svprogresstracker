@@ -1,4 +1,4 @@
-import "./styles/AchievementIte.css";
+import "./styles/AchievementItem.css";
 
 type AchievementItemProps = {
     done: boolean;
