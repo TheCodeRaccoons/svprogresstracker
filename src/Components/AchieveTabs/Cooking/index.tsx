@@ -3,7 +3,6 @@ import './Cooking.css';
 import { AchievementItem,ItemWithCounter } from '@components/common';
 
 const Food = ( {cookedItems, knownRecipes, alreadyCookedRecipes, totalRecipes, achievements} : cookingDataType) => {
-    console.log('a', achievements)
     return ( 
         <div className="progress-container">   
             <span className="a-title">
