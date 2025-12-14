@@ -1,53 +1,52 @@
-import React, { useState, useEffect } from 'react'
+import { AchievementItem, ItemWithCounter } from "@components/common";
+import type { itemsCraftedType } from "types/displayDataTypes";
 
-interface CraftingItem {
-    times?: number;
-    name: string;
-    image: string;
-}
-
-interface CraftingProps {
-    itemsCrafted: CraftingItem[];
-}
-
-const Crafting: React.FC<CraftingProps> = ({ itemsCrafted }) => {
-    const [totalCrafted, setTotalCrafted] = useState(0);
-
-    const getCraftedItems = (items: CraftingItem[]) => {
-        return items.map((num) => (num.times !== undefined && num.times > 0 && num.name !== "Wedding Ring") ? 1 : 0).reduce((n: number, next: number) => next + n, 0);
-    };
-
-    useEffect(() => {
-        setTotalCrafted(getCraftedItems(itemsCrafted));
-    }, [itemsCrafted]);
-
-    const craftedCount = itemsCrafted.map((num) => (num.times !== undefined && num.times > 0) ? 1 : 0).reduce((n: number, next: number) => next + n, 0);
-    const knownCount = itemsCrafted.map((num) => (num.times !== undefined && num.times >= 0) ? 1 : 0).reduce((n: number, next: number) => next + n, 0);
-
+const Crafting = ({ 
+        knownItems,
+        alreadyCraftedItems,
+        craftedItems,
+        totalRecipes,
+        achievements }: itemsCraftedType) => {
     return (
-        <div className="progress-container"> 
-            <span className="a-title"><h1>has crafted {craftedCount} and knows {knownCount} of {itemsCrafted.length} recipes.</h1></span>
+        <div className="progress-container">
+            <span className="a-title">
+                <h2>
+                    has crafted {alreadyCraftedItems} and knows {knownItems} of {totalRecipes} recipes.
+                </h2>
+            </span>
             <br />
             <h2>Crafting Achievements</h2>
-            <ul className="a-List"> 
-                <li>D.I.Y.: {(totalCrafted >= 15) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to craft {15 - totalCrafted} more items to get this</span> } </li>
-                <li>Artisan: {(totalCrafted >= 30) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to craft {30 - totalCrafted} more items to get this </span>}</li>
-                <li>Craft Master: {(totalCrafted >= 104) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to craft {104 - totalCrafted} more items to get this </span>}</li>
-            </ul>
+            <div className="section-achievements">
+                {achievements && achievements.map((ach, i) => (
+                    <AchievementItem 
+                        key={i}
+                        done={ach.done}
+                        image={ach.image}
+                        achievementName={ach.name}
+                        achievementDesc={ach.description}
+                        achievementHoverDesc={ach.hoverDesc}
+                    />))}
+            </div>
             <br />
-            {itemsCrafted.map((item, i) => (
-            <a href={`https://stardewvalleywiki.com/${item.image}`} 
-                target="_blank" 
-                rel="noreferrer" 
-                key={i}>
-                <img 
-                key={i} 
-                src={`https://stardew-tracker.s3.amazonaws.com/Crafting/${item.image}.png`} 
-                alt={item.name} 
-                className={(item.times !== undefined) ? ((item.times > 0) ? "done" : "known") : "" } 
-                title={(item.times !== undefined) ? ((item.times > 0) ? `You have crafted "${item.name}" ${item.times} Times` : `You haven't crafted any ${item.name} yet`) : `You don't know how to craft ${item.name} yet`}>
-                </img>
-            </a>))}
+            
+            <div className="item-grid">
+            { craftedItems ? 
+                craftedItems.map((d, i) =>
+                    <ItemWithCounter
+                        key={i}
+                        link={`https://stardewvalleywiki.com/${d.image}`}
+                        src={`https://stardew-tracker.s3.amazonaws.com/Crafting/${d.image}.png`}
+                        name={d.name}
+                        state={ (d.known) ? ((d.times && d.times > 0) ? "done" : "known" ): "unknown" }
+                        hoverDesc={(d.known) ? 
+                                    (d.times && d.times > 0) ? `Crafted ${d.name}  ${d.times} times` 
+                                    : `You haven't crafted ${d.name}` 
+                                    : `You don't know how to craft ${d.name}`}
+                        times={d.known ? d.times : undefined}
+                    />)
+                    : <div>No crafting data available.</div>
+            }
+            </div>
         </div>
     );
 };
