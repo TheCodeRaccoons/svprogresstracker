@@ -1,5 +1,5 @@
 import React from 'react'; 
-import Main from './Components/Main/Main'
+import Main from './Components/Main/Main.tsx'
 import './App.css'
 import './Components/tabs-css/tabs.css'
 import { Route, Routes } from "react-router-dom";

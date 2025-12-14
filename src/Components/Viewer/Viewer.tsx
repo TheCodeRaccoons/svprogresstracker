@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import Junimo6 from '@media/Junimo6.png';
-import useLoadSaveFile from '@hooks/useLoadSaveFile';
+import useLoadSaveFile from '@hooks/useLoadSaveFile.tsx'; 
 
 interface ViewerProps {
     UpdatePlayerData: (playerData: any) => void;

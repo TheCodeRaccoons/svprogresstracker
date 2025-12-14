@@ -1,7 +1,7 @@
 import { CraftingRec } from "@utility/JSON"
 import type { achievementType, generalFormatedItemType, itemsCraftedType } from "types/displayDataTypes"
 import type { itemsType } from "types/savefile"
-import { GetImages, ValidateKnown } from "./Utils"
+import { GetImages, ValidateKnown } from "./Utils.ts"
 import { DIY, Artisan, MasterCraft } from "@media/Achievements";
 
 let CraftingAchievements = [{

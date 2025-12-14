@@ -1,5 +1,5 @@
 import Stats from '../stats/stats.js'
-import Viewer from '../Viewer/Viewer'
+import Viewer from '../Viewer/Viewer.tsx'
 import Logo from '@media/logo.png';
 import fb from '@media/Social/fb.png'
 import kofi from '@media/Social/kofi.png'
