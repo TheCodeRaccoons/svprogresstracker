@@ -9,8 +9,9 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
+      '@components': path.resolve(__dirname, 'src/Components'),
       '@media': path.resolve(__dirname, 'src/Media'),
-      '@utility': path.resolve(__dirname, 'src/Components/Utility'),
+      '@utility': path.resolve(__dirname, 'src/Utility'),
       '@hooks': path.resolve(__dirname, 'src/Hooks'),
     },
   },

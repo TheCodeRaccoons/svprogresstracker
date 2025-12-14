@@ -1,0 +1,20 @@
+.achievement-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: bold;
+    max-width: 30%;
+}
+
+.achievement-item img {
+    width: 3rem !important;
+    height: 3rem !important;
+}
+
+.achievement-item img.achieved {
+    filter: grayscale(0) brightness(1) !important;
+}
+
+.achievement-item img.pending {
+    filter: grayscale(1) brightness(0.5) !important;
+}

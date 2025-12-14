@@ -1,17 +1,20 @@
 /* eslint-disable no-loop-func */
 
-import Dishes from './Dishes.json' with { type: "json" };
-import CraftingRec from '@utility/CraftingRecipes.json' with { type: "json" };
-import ProfNames from '@utility/professions.json' with { type: "json" };
-import Levels from '@utility/levels.json' with { type: "json" };
-import ShipItems from '@utility/shippingItems.json' with { type: "json" };
-import ShipCrops from '@utility/shippingCrops.json' with { type: "json" };
-import Fishes from '@utility/fishes.json' with { type: "json" };
-import Friendship from '@utility/friendship.json' with { type: "json" };
-import MonsterCat from '@utility/monsterCategorie.json' with { type: "json" };
-import Museum from '@utility/museum.json' with { type: "json" };
-import townSR from './TownSpecialReq.json' with { type: "json" };
-import QiSR from './QiSpecialReq.json' with { type: "json" };
+import {
+    Dishes,
+    CraftingRec,
+    ProfNames,
+    Levels,
+    ShipItems,
+    ShipCrops,
+    Fishes,
+    Friendship,
+    MonsterCat,
+    Museum,
+    townSR,
+    QiSR
+} from './JSON';
+
 import type {
     friendshipDataType, 
     gameLocationType,
@@ -33,6 +36,7 @@ import type {
     cookingDataType
 } from 'types/displayDataTypes';
 import type { fullPlayerDataType, museumCollectionType } from 'types/displayDataTypes';
+import { GetCookingData } from './Parsers/parseCookingItems';
 
 //Gets the info from the farm hands as an array of the same type
 const GetFarmHands = (locations: gameLocationType[]): playerType[] => {
@@ -223,49 +227,6 @@ const GetShippedItems = (allShipped: itemType) :generalFormatedItemType[] => {
         data.push(d);
     }) 
     return data;
-}
-/* End of Shipping Related Achievements */
-
-const GetCookingData = (cooked: itemType, known: itemsType[]): cookingDataType =>{
-    let data: generalFormatedItemType[] = [];
-    let knownRecipes = 0;
-    let alreadyCooked = 0;
-    Dishes.Dishes.forEach(item => {
-        let knownDish = ValidateKnown(known, NameTranslate(item.Name)) || false
-        let cookedTimes = GetCooked(cooked.item, item.id)
-        if(cookedTimes > 0) alreadyCooked++;
-        if(knownDish) knownRecipes++;
-        console.log('Dish:', item.Name, 'Known:', knownRecipes, 'CookedTimes:', alreadyCooked)
-        let d = {
-            name: NameTranslate(item.Name),
-            id: item.id,
-            image: GetImages(item.Name),
-            link: item.link,
-            knownDish: knownDish,
-            times: cookedTimes
-        }
-        data.push(d);
-    })
-    return { knownRecipes, alreadyCookedRecipes: alreadyCooked, cookedItems: data };
-}
-
-const GetCooked = (cookedItems:itemsType[], id: number): number => { 
-    let timesCooked = 0; 
-    if(Array.isArray(cookedItems)){
-        let i = cookedItems.find(item => {
-            if (item.key?.int === undefined){
-                if (item.key?.string !== undefined){
-                    return +item.key.string === id;
-                } else{
-                    return false;
-                }
-            } else {
-                return item.key.int === id
-            }
-        }) 
-        timesCooked = (i !== undefined) ? i.value.int : 0  
-    }
-    return timesCooked;
 }
 
 const GetCraftingRecipes = (recipes: itemsType[]): generalFormatedItemType[] => {

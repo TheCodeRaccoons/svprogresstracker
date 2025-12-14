@@ -36,7 +36,10 @@ const Crafting: React.FC<CraftingProps> = ({ itemsCrafted }) => {
             </ul>
             <br />
             {itemsCrafted.map((item, i) => (
-            <a href={`https://stardewvalleywiki.com/${item.image}`} target="blank" key={i}>
+            <a href={`https://stardewvalleywiki.com/${item.image}`} 
+                target="_blank" 
+                rel="noreferrer" 
+                key={i}>
                 <img 
                 key={i} 
                 src={`https://stardew-tracker.s3.amazonaws.com/Crafting/${item.image}.png`} 
