@@ -2,7 +2,7 @@ import type { cookingDataType } from 'types/displayDataTypes';
 import './Cooking.css';
 import { AchievementItem,ItemWithCounter } from '@components/common';
 
-const Food = ( {cookedItems, knownRecipes, alreadyCookedRecipes, totalRecipes, achievements} : cookingDataType) => {
+const Cooking = ( {cookedItems, knownRecipes, alreadyCookedRecipes, totalRecipes, achievements} : cookingDataType) => {
     return ( 
         <div className="progress-container">   
             <span className="a-title">
@@ -46,4 +46,4 @@ const Food = ( {cookedItems, knownRecipes, alreadyCookedRecipes, totalRecipes, a
     );
 };
 
-export default Food;
+export default Cooking;
