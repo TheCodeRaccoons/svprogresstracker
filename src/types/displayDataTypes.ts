@@ -18,12 +18,20 @@ export type fullPlayerDataType = {
     availableSpecialRequests: string[];
     fishCaught: generalFormatedItemType[];
     friendship: formatedFriendshipDataType[];
-    itemsCrafted: generalFormatedItemType[];
+    itemsCrafted: itemsCraftedType;
     monstersKilled: formatedMonsterDataType[];
     questsDone: number;
     specialRequests: string[];
     tailoredItems: string[];
 };
+
+export type itemsCraftedType = {
+    knownItems: number;
+    alreadyCraftedItems: number;
+    craftedItems: generalFormatedItemType[];
+    totalRecipes: number;
+    achievements?: achievementType[];
+}
 
 export type cookingDataType = {
     knownRecipes: number;
@@ -32,6 +40,7 @@ export type cookingDataType = {
     totalRecipes: number;
     achievements?: achievementType[];
 }
+
 export type achievementType = {
         done: boolean,
         goal: number,
