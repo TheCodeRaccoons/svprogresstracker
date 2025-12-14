@@ -41,6 +41,12 @@ export type cookingDataType = {
     achievements?: achievementType[];
 }
 
+export type cropsShippedType = {
+    achievements?: achievementType[];
+    mono_extras: generalFormatedItemType[];
+    poly_crops: generalFormatedItemType[];
+};
+
 export type achievementType = {
         done: boolean,
         goal: number,
@@ -77,14 +83,6 @@ export type museumCollectionType = {
     artifacts: generalFormatedItemType[];
     minerals: generalFormatedItemType[];
 }
-
-export type cropsShippedType = {
-    hasMonoculture: boolean;
-    hasPolyculture: boolean;
-    mono_extras: generalFormatedItemType[];
-    poly_crops: generalFormatedItemType[];
-    maxMono: null | maxMonoType;
-};
 
 export type maxMonoType = {
     name: string;
