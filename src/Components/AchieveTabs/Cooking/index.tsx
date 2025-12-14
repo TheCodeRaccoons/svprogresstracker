@@ -24,7 +24,7 @@ const Cooking = ( {cookedItems, knownRecipes, alreadyCookedRecipes, totalRecipes
                     />))}
             </div>
             <br />
-            <div className="dishes-grid">
+            <div className="item-grid">
             { cookedItems ? 
                 cookedItems.map((d, i) =>
                     <ItemWithCounter
