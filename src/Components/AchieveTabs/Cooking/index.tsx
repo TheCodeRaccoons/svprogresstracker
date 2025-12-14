@@ -29,6 +29,7 @@ const Food = ( {cookedItems, knownRecipes, alreadyCookedRecipes, totalRecipes, a
             { cookedItems ? 
                 cookedItems.map((d, i) =>
                     <ItemWithCounter
+                        key={i}
                         link={`https://stardewvalleywiki.com/${d.link}`}
                         src={`https://stardew-tracker.s3.amazonaws.com/Cooking/${d.image}.png`}
                         name={d.name}
