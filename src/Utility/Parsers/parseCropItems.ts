@@ -1,7 +1,7 @@
 import { CraftingRec, ShipCrops } from "@utility/JSON"
 import type { achievementType, cropsShippedType, generalFormatedItemType, itemsCraftedType, maxMonoType } from "types/displayDataTypes"
 import type { itemsType } from "types/savefile"
-import { GetImages, ValidateKnown } from "./Utils"
+import { GetImages, ValidateKnown } from "./Utils.ts"
 import { Monoculture, Polyculture } from "@media/Achievements";
 
 let CropsAchievements = [{

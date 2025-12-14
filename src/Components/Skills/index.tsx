@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import SkillContainer from './SkillContainer/SkillContainer'
+import SkillContainer from './SkillContainer/SkillContainer.tsx'
 import {Farming, Mining, Foraging, Fishing, Combat} from '@media/Skills'
 import type { experienceType } from 'types/displayDataTypes'
 import './Skills.css'
