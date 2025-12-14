@@ -48,6 +48,7 @@ const Achievements = ({
         {img: TabQuests, alt: "Quests"}, 
         {img: TabGrandpa, alt: "Grandpa's evaluation"}
     ];
+    console.log("Achievements:", fishCaught);
     console.log("Professions in Achievements:", professions);
     return ( 
         <div className="file-container">
@@ -77,7 +78,7 @@ const Achievements = ({
             </TabPanel> 
             <TabPanel> 
                 <section className="achievement-container">
-                    <Fish fishCaught={fishCaught} />
+                    <Fish {...fishCaught} />
                 </section>
             </TabPanel> 
             <TabPanel> 

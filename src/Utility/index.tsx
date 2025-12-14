@@ -39,6 +39,7 @@ import type { fullPlayerDataType, museumCollectionType } from 'types/displayData
 import { GetCookingData } from './Parsers/parseCookingItems';
 import { GetCraftingRecipes } from './Parsers/parseCraftingItems';
 import { GetCropsAchievements } from './Parsers/parseCropItems';
+import { GetFishes } from './Parsers/parseFishItems';
 
 //Gets the info from the farm hands as an array of the same type
 const GetFarmHands = (locations: gameLocationType[]): playerType[] => {
@@ -116,7 +117,7 @@ const parseData = ({
         cropsShipped: GetCropsAchievements(playerData.basicShipped?.item),//Refactored DONE
         //mineralsFound: GetArrayData(playerData.mineralsFound?.item) || [], //DONE
         cookingData: GetCookingData(playerData.recipesCooked, playerData.cookingRecipes.item) || [], //DONE
-        fishCaught: GetFishes(playerData.fishCaught.item) || [], 
+        fishCaught: GetFishes(playerData.fishCaught.item), 
         tailoredItems: GetArrayDataTimeless(playerData.tailoredItems) || [],
         itemsCrafted: GetCraftingRecipes(playerData.craftingRecipes.item) || [],
         friendship: GetFriendshipData(playerData.friendshipData.item) || [],
@@ -231,23 +232,6 @@ const GetShippedItems = (allShipped: itemType) :generalFormatedItemType[] => {
     return data;
 }
 
-/* End of Crop Related Achievements */
-
-const GetFishes = (allFished: itemsType[]) => { 
-    let data: generalFormatedItemType[] = []
-
-    Fishes.forEach(item => {
-        let d = {
-            name: item.name,
-            image: GetImages(item.name),
-            id: item.id,
-            fished: (Array.isArray(allFished)) ? (allFished.find(i => i.key.int === item.id ) !== undefined) : false
-        }
-        data.push(d)
-    }) 
-    
-    return  data
-}
 
 const GetFriendshipData = (allFriends: friendshipDataType[]): formatedFriendshipDataType[] => { 
     let data: formatedFriendshipDataType[] = []

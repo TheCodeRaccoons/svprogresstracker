@@ -1,34 +1,50 @@
-import React, { useState, useEffect } from 'react'
-import type { generalFormatedItemType } from 'types/displayDataTypes';
+import { AchievementItem, ItemWithCounter } from '@components/common';
+import type { fishCaughtType } from 'types/displayDataTypes';
 
-interface FishProps {
-    fishCaught: generalFormatedItemType[];
-}
-
-const Fish = ({ fishCaught }: FishProps) => {
-    const [totalFished, setTotalFished] = useState(0);
-
-    const getCraftedItems = (items: generalFormatedItemType[]) => {
-        return items.map((num) => (num.fished) ? 1 : 0).reduce((n: number, next: number) => next + n, 0);
-    };
-    
-    useEffect(() => {  
-        setTotalFished(getCraftedItems(fishCaught));
-    }, [fishCaught]);
+const Fish = ({ 
+    fishCaught,
+    catchedFish,
+    total,
+    achievements }: fishCaughtType) => {
 
     return ( 
         <div className="progress-container">  
-            <span className="a-title"><h1>{ `You've fished ${totalFished} out of ${fishCaught.length}`}</h1></span>
+            <span className="a-title">
+                <h2>
+                    Has fished {fishCaught} out of {total}.
+                </h2>
+            </span>
             <br />
             <h2>Fishing Achievements</h2>
-            <ul className="a-List"> 
-                <li>Fisherman: {(totalFished >= 10) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to catch {15 - totalFished} more fish to get this</span> } </li>
-                <li>Ol' Mariner: {(totalFished >= 24) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to catch {30 - totalFished} more fish to get this </span>}</li>
-                <li>Master Angler : {(totalFished >= fishCaught.length) ? <span className="completed">You have this achievement</span> : <span className="pending">You need to catch {fishCaught.length - totalFished} more fish to get this </span>}</li>
-            </ul>
+            
+            <div className="section-achievements">
+                {achievements && achievements.map((ach, i) => (
+                    <AchievementItem 
+                        key={i}
+                        done={ach.done}
+                        image={ach.image}
+                        achievementName={ach.name}
+                        achievementDesc={ach.description}
+                        achievementHoverDesc={ach.hoverDesc}
+                    />))}
+            </div>
             <br />
-            {fishCaught.map((fish, i) => <a href={`https://stardewvalleywiki.com/${fish.image}`} target="_blank" rel="noreferrer" key={i}><img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Fishing/${fish.image}.png`} alt={fish.name} className={ (fish.fished) ? "done" : ""} title={(fish.fished) ? `You've caught  ${fish.name}` :  `You haven't fished ${fish.name}`} ></img></a>)}
-
+            <div className="item-grid">
+                { catchedFish ? 
+                    catchedFish.map((d, i) =>
+                        <ItemWithCounter
+                            key={i}
+                            link={`https://stardewvalleywiki.com/${d.link}`}
+                            src={`https://stardew-tracker.s3.amazonaws.com/Fishing/${d.image}.png`}
+                            name={d.name}
+                            state={ (d.fished) ? "done" : "unknown" }
+                            hoverDesc={(d.fished) ? `Has caught ${d.name}` 
+                                        : `You haven't caught ${d.name}`}
+                            times={d.fished ? null : undefined}
+                        />)
+                        : <div>No fishing data available.</div>
+                }
+            </div>
         </div>
     );
 };

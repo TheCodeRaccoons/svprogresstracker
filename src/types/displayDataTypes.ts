@@ -16,7 +16,7 @@ export type fullPlayerDataType = {
     cookingData: cookingDataType;
     museumCollection: museumCollectionType;
     availableSpecialRequests: string[];
-    fishCaught: generalFormatedItemType[];
+    fishCaught: fishCaughtType;
     friendship: formatedFriendshipDataType[];
     itemsCrafted: itemsCraftedType;
     monstersKilled: formatedMonsterDataType[];
@@ -46,6 +46,13 @@ export type cropsShippedType = {
     mono_extras: generalFormatedItemType[];
     poly_crops: generalFormatedItemType[];
 };
+
+export type fishCaughtType = {
+    fishCaught: number;
+    catchedFish: generalFormatedItemType[];
+    total: number;
+    achievements?: achievementType[];
+}
 
 export type achievementType = {
         done: boolean,
