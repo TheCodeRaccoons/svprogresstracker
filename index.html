@@ -4,10 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SV Tracker</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="favicon.ico" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Stardew Valley Progress Tracker",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web",
+        "url": "https://thecoderaccoons.github.io/svprogresstracker/",
+        "creator": {
+          "@type": "Organization",
+          "name": "The Code Raccoons",
+          "url": "https://www.thecoderaccoons.com/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "The Code Raccoons",
+          "url": "https://www.thecoderaccoons.com/"
+        },
+        "inLanguage": "en",
+        "description": "A web app to track your progress in Stardew Valley.",
+        "potentialAction": {
+          "@type": "UseAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://thecoderaccoons.github.io/svprogresstracker/"
+          }
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
-  <script type="module" src="/src/index.tsx"></script>
+  <script type="module" src="src/index.tsx"></script>
   </body>
 </html>
