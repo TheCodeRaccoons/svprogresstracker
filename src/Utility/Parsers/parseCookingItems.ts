@@ -1,7 +1,31 @@
 import type { itemsType, itemType } from "types/savefile";
 import { Dishes } from "../JSON";
 import { GetImages, ValidateKnown } from "./Utils";
-import type { cookingDataType, generalFormatedItemType } from "types/displayDataTypes";
+import type { achievementType, cookingDataType, generalFormatedItemType } from "types/displayDataTypes";
+import { Cook, SousChef, GourmetChef } from '@media/Achievements';
+
+
+let CookingAchievements = [{
+        goal: 10,
+        image: Cook,
+        name: 'Cook',
+        done: false,
+        description: 'Cook a total of 10 dishes',
+        hoverDesc: ''
+    },{
+        goal: 25,
+        image: SousChef,
+        name: 'Cook',
+        description: 'Cook a total of 25 dishes',
+        hoverDesc: ''
+    },{
+        goal: Dishes.Dishes.length,
+        image: GourmetChef,
+        name: 'Cook',
+        description: 'Cook All dishes',
+        hoverDesc: ''
+    }
+];
 
 export const GetCookingData = (cooked: itemType, known: itemsType[]): cookingDataType =>{
     let data: generalFormatedItemType[] = [];
@@ -23,7 +47,26 @@ export const GetCookingData = (cooked: itemType, known: itemsType[]): cookingDat
         }
         data.push(d);
     })
-    return { knownRecipes, alreadyCookedRecipes: alreadyCooked, cookedItems: data };
+    const totalRecipes = Dishes.Dishes.length;
+    return { 
+        knownRecipes, 
+        alreadyCookedRecipes: alreadyCooked, 
+        cookedItems: data, 
+        achievements: GetAchievementData(alreadyCooked), 
+        totalRecipes };
+}
+
+const GetAchievementData = (alreadyCooked: number) : achievementType[] =>  {
+    let achievements = CookingAchievements.map(ach => {
+        return {
+            ...ach,
+            done: alreadyCooked >= ach.goal,
+            hoverDesc: alreadyCooked >= ach.goal ? 
+                'Achievement unlocked!' : 
+                `You need to cook ${ach.goal - alreadyCooked} more dishes to unlock this achievement.`
+        }
+    });
+    return achievements;
 }
 
 const GetCooked = (cookedItems:itemsType[], id: number): number => { 
