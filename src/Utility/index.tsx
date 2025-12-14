@@ -37,6 +37,7 @@ import type {
 } from 'types/displayDataTypes';
 import type { fullPlayerDataType, museumCollectionType } from 'types/displayDataTypes';
 import { GetCookingData } from './Parsers/parseCookingItems';
+import { GetCraftingRecipes } from './Parsers/parseCraftingItems';
 
 //Gets the info from the farm hands as an array of the same type
 const GetFarmHands = (locations: gameLocationType[]): playerType[] => {
@@ -227,21 +228,6 @@ const GetShippedItems = (allShipped: itemType) :generalFormatedItemType[] => {
         data.push(d);
     }) 
     return data;
-}
-
-const GetCraftingRecipes = (recipes: itemsType[]): generalFormatedItemType[] => {
-    let data: generalFormatedItemType[] = []  
-    if(Array.isArray(recipes)) {
-        CraftingRec.recipes.forEach(item => {
-            let d = {
-                name: item,
-                image: GetImages(item),
-                times: recipes.find(i => i.key.string === item)?.value.int || 0,
-            }
-            data.push(d)
-        })
-    } 
-    return data 
 }
 
 /* Crop Related Achievements */
