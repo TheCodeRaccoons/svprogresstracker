@@ -24,16 +24,13 @@ import type {
     questType, 
     specialOrderType 
 } from 'types/savefile';
-import type { 
-    cropsShippedType, 
+import type {
     generalFormatedItemType, 
     professionsType, 
-    maxMonoType, 
     itemFoundType, 
     experienceType, 
     formatedFriendshipDataType,
     formatedMonsterDataType,
-    cookingDataType
 } from 'types/displayDataTypes';
 import type { fullPlayerDataType, museumCollectionType } from 'types/displayDataTypes';
 import { GetCookingData } from './Parsers/parseCookingItems';
