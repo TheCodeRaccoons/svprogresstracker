@@ -69,20 +69,20 @@ const GetAchievementData = (alreadyCooked: number) : achievementType[] =>  {
     return achievements;
 }
 
-const GetCooked = (cookedItems:itemsType[], id: number): number => { 
+const GetCooked = (cookedItems:itemsType[], id: number | string): number => { 
     let timesCooked = 0; 
     if(Array.isArray(cookedItems)){
         let i = cookedItems.find(item => {
             if (item.key?.int === undefined){
                 if (item.key?.string !== undefined){
-                    return +item.key.string === id;
+                    return item.key.string === id;
                 } else{
                     return false;
                 }
             } else {
                 return item.key.int === id
             }
-        }) 
+        })
         timesCooked = (i !== undefined) ? i.value.int : 0  
     }
     return timesCooked;

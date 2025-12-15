@@ -27,7 +27,6 @@ export const GetCropsAchievements = (allShipped: itemsType[]) : cropsShippedType
     const mono_extras: generalFormatedItemType[] = []
     let polycultureCount = 0;
     let maxMono: maxMonoType = { name: "undefined", shipped: 0 };
-
     ShipCrops.forEach(cropItem => {
         const shippedCount = getShippedCount(allShipped, cropItem.id);
         const cropData = createCropData(cropItem, shippedCount);
@@ -70,7 +69,7 @@ export const GetCropsAchievements = (allShipped: itemsType[]) : cropsShippedType
 
 const getShippedCount = (allShipped: itemsType[], cropId: number): number => {
     if (!allShipped?.length) return 0;
-    const shippedItem = allShipped.find(item => item.key.int === cropId);
+    const shippedItem = allShipped.find(item => item.key.int === cropId || item.key.string === cropId);
     return shippedItem?.value?.int || 0;
 };
 

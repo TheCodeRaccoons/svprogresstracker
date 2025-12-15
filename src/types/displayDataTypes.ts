@@ -64,7 +64,7 @@ export type achievementType = {
 }
 
 export type generalFormatedItemType = {
-    id?: number;
+    id?: number | string;
     image: string;
     name: string;
     link?: string;
