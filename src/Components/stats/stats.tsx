@@ -58,7 +58,6 @@ const Stats = ({playerData, farmName, farmhandData}: formattedSaveFileType) => {
             </section> 
         </TabPanel>
     ));
-    console.log("Rendering Stats component with playerData:", playerData, "experience:", playerData.experience);
     return ( 
         <div className="file-container">  
             <div className="farmName"><h2>Farm: {globalFarmName}</h2></div> 
