@@ -37,6 +37,7 @@ import { GetCookingData } from './Parsers/parseCookingItems';
 import { GetCraftingRecipes } from './Parsers/parseCraftingItems';
 import { GetCropsAchievements } from './Parsers/parseCropItems';
 import { GetFishes } from './Parsers/parseFishItems';
+import { GetFriendshipData } from './Parsers/parseRelationshipData';
 
 //Gets the info from the farm hands as an array of the same type
 const GetFarmHands = (locations: gameLocationType[]): playerType[] => {
@@ -228,27 +229,6 @@ const GetShippedItems = (allShipped: itemType) :generalFormatedItemType[] => {
     return data;
 }
 
-
-const GetFriendshipData = (allFriends: friendshipDataType[]): formatedFriendshipDataType[] => { 
-    let data: formatedFriendshipDataType[] = []
-    if(Array.isArray(allFriends)){
-        allFriends.forEach(i => {
-            if(Friendship.includes(i.key.string)){
-                let level = Math.trunc(i.value.Friendship.Points / 250)
-                let d = {
-                    name: i.key.string, 
-                    dateable: GetDateableNPC(i.key.string),
-                    points: i.value.Friendship.Points,
-                    level: level,
-                    lvlup: 250 - (i.value.Friendship.Points - (level * 250))
-                } 
-                data.push(d); 
-            } 
-        })
-    }
-    return data
-}
-
 const GetMonsterQuests = (allMonsters: itemsType[], slimesKilled: number): formatedMonsterDataType[] => {
 
     if(!allMonsters || allMonsters.length === 0) return [];
@@ -363,15 +343,6 @@ const NameTranslate = (name: string): string => {
     };
     
     return nameMap[name] || name;
-}
-
-const GetDateableNPC = (name: string): boolean => {
-    const dateableNPCs = new Set([
-        "Abigail", "Alex", "Elliott", "Emily", "Haley", "Harvey",
-        "Leah", "Maru", "Penny", "Sam", "Sebastian", "Shane"
-    ]);
-    
-    return dateableNPCs.has(name);
 }
 
 const GetArrayData = (arr: itemsType[]) =>{
