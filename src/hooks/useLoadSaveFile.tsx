@@ -66,23 +66,18 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
         let farmHands: playerType[] = [];
         const gameVersion = fileData.SaveGame.gameVersion;
         console.debug("Current game version:", gameVersion);
-        const [major, minor, patch] = gameVersion.split('.').map(Number); 
-        if (major && minor && (major >= 1 && minor >= 5 )) {
-            console.debug("Using New farmhand data structure");
-            farmHands = GetFarmHands(fileData.SaveGame.locations.GameLocation); 
+        // const [major, minor, patch] = gameVersion.split('.').map(Number); 
+ 
+        if(Array.isArray(fileData.SaveGame.farmhands)){
+            console.debug("Single farmhand detected")
+            farmHands = [...fileData.SaveGame.farmhands.Farmers];
+        } else if (fileData.SaveGame.farmhands && fileData.SaveGame.farmhands.Farmer) {
+            console.debug("Legacy single farmhand detected")
+            farmHands = [fileData.SaveGame.farmhands.Farmer];
         } else {
-            console.debug("Farmhands data:", fileData.SaveGame.farmhands);
-            if(Array.isArray(fileData.SaveGame.farmhands)){
-                farmHands = [...fileData.SaveGame.farmhands.Farmers];
-            } else if (fileData.SaveGame.farmhands && fileData.SaveGame.farmhands.Farmer) {
-                console.debug("Legacy single farmhand detected")
-                console.debug(fileData.SaveGame.farmhands) 
-                farmHands = [fileData.SaveGame.farmhands.Farmer];
-            } else {
-                console.debug("Using legacy farmhands data structure ???");
-                farmHands = GetFarmHands(fileData.SaveGame.locations.GameLocation); 
-            }
-        }
+            console.debug("Using farmhands data from locations");
+            farmHands = GetFarmHands(fileData.SaveGame.locations.GameLocation); 
+        } 
         let museumLocation: gameLocationType | undefined = 
             fileData.SaveGame.locations.GameLocation.find((loc: gameLocationType) => {
             return loc.name === "ArchaeologyHouse";
