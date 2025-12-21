@@ -1,0 +1,40 @@
+.npc-data{
+    width: 6.25rem;
+    height: 9.375rem;
+    margin: auto;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center; 
+    padding-top: 1.25rem;
+}
+.section-achievements {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.npc-grid {
+    display: flex;
+    align-items: start;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-top: 1.25rem;
+}
+
+.npc-data .friendship {
+    margin: auto;
+    width: 5.625rem;
+    cursor: pointer; 
+}
+.npc-data .heart-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.heart-ico {
+    width: 1.25rem;
+}
+

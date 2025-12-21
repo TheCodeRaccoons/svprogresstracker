@@ -17,7 +17,7 @@ export type fullPlayerDataType = {
     museumCollection: museumCollectionType;
     availableSpecialRequests: string[];
     fishCaught: fishCaughtType;
-    friendship: formatedFriendshipDataType[];
+    friendship: friendshipType;
     itemsCrafted: itemsCraftedType;
     monstersKilled: formatedMonsterDataType[];
     questsDone: number;
@@ -54,6 +54,11 @@ export type fishCaughtType = {
     achievements?: achievementType[];
 }
 
+export type friendshipType = {
+    friendship: formatedFriendshipDataType[];
+    achievements?: achievementType[];
+}
+
 export type achievementType = {
         done: boolean,
         goal: number,
@@ -64,7 +69,7 @@ export type achievementType = {
 }
 
 export type generalFormatedItemType = {
-    id?: number;
+    id?: number | string;
     image: string;
     name: string;
     link?: string;

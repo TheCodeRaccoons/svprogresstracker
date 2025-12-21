@@ -32,9 +32,12 @@ export const GetFishes = (allFished: itemsType[]) => {
     const totalFishes = Fishes.length;
     let data: generalFormatedItemType[] = []
     let fishCaught = 0;
-
     Fishes.forEach(item => {
-        let caught = (Array.isArray(allFished)) ? (allFished.find(i => i.key.int === item.id ) !== undefined) : false
+        let caught = (Array.isArray(allFished)) ? 
+            (allFished.find(i => i.key.int === item.id || 
+                i.key.string === item.id || 
+                (i.key.string && typeof i.key.string === "string" && 
+                    parseInt(i.key.string.replace('(O)','')) === item.id)) !== undefined) : false
         if(caught) fishCaught++;
         let d = {
             name: item.name,

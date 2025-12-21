@@ -324,7 +324,7 @@ export type itemType = {
 export type itemsType = {
     key: {
             int?: number
-            string?: string
+            string?: string | number
         },
     value: {
         int: number,

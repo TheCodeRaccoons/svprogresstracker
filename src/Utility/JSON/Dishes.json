@@ -78,5 +78,6 @@
     {"Name":"Mango Sticky Rice", "id":905, "link":"Mango_Sticky_Rice"},
     {"Name":"Poi", "id":906, "link":"Poi"},
     {"Name":"Tropical Curry", "id":907, "link":"Tropical_Curry"},
-    {"Name":"Squid Ink Ravioli", "id":733, "link":"Squid_Ink_Ravioli"}
+    {"Name":"Squid Ink Ravioli", "id":733, "link":"Squid_Ink_Ravioli"},
+    {"Name":"Moss Soup", "id":"MossSoup", "link":""}
 ]}
