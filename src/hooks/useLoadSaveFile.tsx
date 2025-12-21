@@ -67,7 +67,7 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
         const gameVersion = fileData.SaveGame.gameVersion;
         console.debug("Current game version:", gameVersion);
         // const [major, minor, patch] = gameVersion.split('.').map(Number); 
- 
+
         if(Array.isArray(fileData.SaveGame.farmhands)){
             console.debug("Single farmhand detected")
             farmHands = [...fileData.SaveGame.farmhands.Farmers];
