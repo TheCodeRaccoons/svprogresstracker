@@ -28,3 +28,7 @@ export const GetImages = (name: string): string => {
         return name.split(" ").join("_").replace(/['":]/g, "");
     }
 }
+
+export const getCompletedAchievements = (achievements: number[], achievementId: number) => {
+    return achievements.includes(achievementId);
+}

@@ -19,7 +19,7 @@ export type fullPlayerDataType = {
     fishCaught: fishCaughtType;
     friendship: friendshipType;
     itemsCrafted: itemsCraftedType;
-    monstersKilled: formatedMonsterDataType[];
+    monstersKilled: monsterDataType;
     questsDone: number;
     specialRequests: string[];
     tailoredItems: string[];
@@ -51,6 +51,11 @@ export type fishCaughtType = {
     fishCaught: number;
     catchedFish: generalFormatedItemType[];
     total: number;
+    achievements?: achievementType[];
+}
+
+export type monsterDataType = {
+    monsterData: formatedMonsterDataType[];
     achievements?: achievementType[];
 }
 

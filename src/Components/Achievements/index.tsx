@@ -87,7 +87,7 @@ const Achievements = ({
             </TabPanel> 
             <TabPanel> 
                 <section className="achievement-container">
-                    <Monsters monstersKilled={monstersKilled}/>
+                    <Monsters {...monstersKilled}/>
                 </section>
             </TabPanel> 
             <TabPanel> 

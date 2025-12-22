@@ -22,7 +22,7 @@ const Friendship = ({ friendship, achievements }: friendshipType) => {
     return ( 
         <div className="progress-container-flex">    
             <h2>Friendship Achievements</h2>
-                <div className="section-achievements">
+            <div className="section-achievements">
                 {achievements && achievements.map((ach, i) => (
                     <AchievementItem 
                         key={i}
