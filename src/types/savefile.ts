@@ -119,6 +119,10 @@ type buildingIndoorsType = {
     farmhand: playerType | null,
 }
 
+type numberArrayType = {
+    int: number[]
+}
+
 export type playerType = {
     name: string,
     forceOneTileWide: boolean,
@@ -142,7 +146,7 @@ export type playerType = {
     furnitureOwned: string,
     activeDialogueEvents: string,
     secretNotesSeen: string,
-    achievements: string,
+    achievements: numberArrayType,
     specialBigCraftables: string,
     mailForTomorrow: string,
     mailbox: string,
@@ -439,7 +443,12 @@ type statsType = {
     ItemsShipped: number,
     SeedsSown: number,
     IndividualMoneyEarned: number,
-    specificMonstersKilled: specificMonstersKilledType
+    specificMonstersKilled: specificMonstersKilledType,
+    Values: statValueType,
+}
+
+export type statValueType = {
+    item: itemsType[]
 }
 
 type specificMonstersKilledType = {

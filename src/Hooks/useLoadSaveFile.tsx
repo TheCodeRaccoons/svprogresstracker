@@ -9,6 +9,7 @@ import type {
     specialOrderType 
 } from 'types/savefile.js';
 import type { formattedSaveFileType } from 'types/displayDataTypes';
+import { parseRarecrows } from '@utility/rarecrow-test';
 
 export interface UseLoadSaveFileResult {
     playerData: any;
@@ -62,6 +63,8 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
     const getPlayerData = useCallback(() => { 
         //getting players 
         if(!fileData) return;
+        console.log(fileData)		
+
         let player = fileData.SaveGame.player;
         let farmHands: playerType[] = [];
         const gameVersion = fileData.SaveGame.gameVersion;
@@ -86,6 +89,7 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
             setError("Couldn't find museum collection data");
             return;
         }
+
         let collectionStatus = GetCollection(museumLocation)
         let specialRequests: specialOrderType = fileData.SaveGame.completedSpecialOrders;
         let availableSpecialRequests: specialOrderType = fileData.SaveGame.availableSpecialOrders;
@@ -103,6 +107,8 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
                 availableSpecialRequests: availableSpecialRequests
             })
         }
+        const parsedRarecrows = parseRarecrows('xsi', fileData.SaveGame, players);
+        console.log("Parsed Rarecrows:", parsedRarecrows);
 
         setPlayerData(players)
     }, [fileData])
