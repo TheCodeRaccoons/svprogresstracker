@@ -1,14 +1,9 @@
 /* eslint-disable no-loop-func */
 
 import {
-    Dishes,
-    CraftingRec,
     ProfNames,
     Levels,
     ShipItems,
-    ShipCrops,
-    Fishes,
-    Friendship,
     MonsterCat,
     Museum,
     townSR,
@@ -16,20 +11,19 @@ import {
 } from './JSON';
 
 import type {
-    friendshipDataType, 
     gameLocationType,
     itemsType, 
     itemType,
     playerType,
     questType, 
-    specialOrderType 
+    specialOrderType, 
+    statValueType
 } from 'types/savefile';
 import type {
     generalFormatedItemType, 
     professionsType, 
     itemFoundType, 
-    experienceType, 
-    formatedFriendshipDataType,
+    experienceType,
     formatedMonsterDataType,
 } from 'types/displayDataTypes';
 import type { fullPlayerDataType, museumCollectionType } from 'types/displayDataTypes';
@@ -38,6 +32,7 @@ import { GetCraftingRecipes } from './Parsers/parseCraftingItems';
 import { GetCropsAchievements } from './Parsers/parseCropItems';
 import { GetFishes } from './Parsers/parseFishItems';
 import { GetFriendshipData } from './Parsers/parseRelationshipData';
+import { GetMonsterQuests } from './Parsers/parseMonsterGoals';
 
 //Gets the info from the farm hands as an array of the same type
 const GetFarmHands = (locations: gameLocationType[]): playerType[] => {
@@ -104,6 +99,14 @@ const parseData = ({
         availableSpecialRequests
     }: getParsedUserDataType) : fullPlayerDataType => { 
     //Not finished  
+    console.debug(`%c Parsing data for ${playerData.name}`, 'color: #43B581')
+    console.log("Raw Player Data", playerData)
+    let SlimesKilled = 
+        playerData.stats.slimesKilled && typeof playerData.stats.slimesKilled === "number" ?
+            playerData.stats.slimesKilled :
+            getSlimesKilled(playerData.stats.Values);
+
+    console.log('sk', SlimesKilled);
     let fullPlayerData : fullPlayerDataType = {
         playerName: playerData.name || "Unknown",
         farmName: playerData.farmName, //TODO: Remove and make global if even needed
@@ -118,8 +121,11 @@ const parseData = ({
         tailoredItems: GetArrayDataTimeless(playerData.tailoredItems) || [],
         itemsCrafted: GetCraftingRecipes(playerData.craftingRecipes.item) || [],
         friendship: GetFriendshipData(playerData.friendshipData.item) || [],
-        monstersKilled: 
-            GetMonsterQuests(playerData.stats.specificMonstersKilled.item, playerData.stats.slimesKilled) || [],
+        monstersKilled: GetMonsterQuests(
+            playerData.stats.specificMonstersKilled.item,
+            SlimesKilled,
+            playerData.achievements?.int || []
+        ) || [],
         museumCollection: 
             GetMCollection(playerData.archaeologyFound.item, playerData.mineralsFound.item, collectionStatus) || {},
         questsDone: playerData.stats.questsCompleted || 0,
@@ -138,6 +144,17 @@ const parseData = ({
     return fullPlayerData;
 } 
 
+const getSlimesKilled = (Values: statValueType) => {
+    console.log('Values', Values);
+    let slimesKilled = 0;
+        Values.item.forEach(stat => {
+        if(stat.key.string === "slimesKilled"){
+            slimesKilled = stat.value.int;
+        }
+    }
+    );
+    return slimesKilled;
+}
 /* XP Data */
 const GetXpInfo = (xp: number[]): experienceType[] => {
     const SKILLS = ["Farming", "Fishing", "Foraging", "Mining", "Combat"]
@@ -229,30 +246,30 @@ const GetShippedItems = (allShipped: itemType) :generalFormatedItemType[] => {
     return data;
 }
 
-const GetMonsterQuests = (allMonsters: itemsType[], slimesKilled: number): formatedMonsterDataType[] => {
+// const GetMonsterQuests = (allMonsters: itemsType[], slimesKilled: number): formatedMonsterDataType[] => {
 
-    if(!allMonsters || allMonsters.length === 0) return [];
+//     if(!allMonsters || allMonsters.length === 0) return [];
 
-        let mData: formatedMonsterDataType[] = []
-        let sum = 0;
-        MonsterCat.monsters.forEach(category => {
-            sum = 0;
-            category.monsters.forEach(_category => {
-                let monster = allMonsters.find(m => m.key.string === _category);
-                sum += monster ? monster.value.int : 0
-            })
-            mData.push({
-                category: category.name,
-                goal: category.goal,
-                timesKilled: (category.name === "Slimes") ? slimesKilled : sum,
-                images: category.monsters.map(m => {
-                    let d = {name: m, img: GetImages(m)}
-                    return d
-                })
-            })
-        })
-        return(mData) 
-}
+//         let mData: formatedMonsterDataType[] = []
+//         let sum = 0;
+//         MonsterCat.monsters.forEach(category => {
+//             sum = 0;
+//             category.monsters.forEach(_category => {
+//                 let monster = allMonsters.find(m => m.key.string === _category);
+//                 sum += monster ? monster.value.int : 0
+//             })
+//             mData.push({
+//                 category: category.name,
+//                 goal: category.goal,
+//                 timesKilled: (category.name === "Slimes") ? slimesKilled : sum,
+//                 images: category.monsters.map(m => {
+//                     let d = {name: m, img: GetImages(m)}
+//                     return d
+//                 })
+//             })
+//         })
+//         return(mData) 
+// }
 const GetMCollection = 
     (archeology: itemsType[], geology: itemsType[], currentCollection: itemsType[]) : museumCollectionType => {
 
@@ -305,13 +322,6 @@ const GetMCollection =
     return museumCollection  
 }
 
-const ValidateKnown = (k:itemsType[], name: string) => {
-    if(Array.isArray(k)){
-        let known = k.find(item => item.key.string === name) 
-        return known ? true : false
-    }
-}
-
 /* Utility methods*/
 const GetImages = (name: string): string => {
     const imageMap: { [key: string]: string } = {
@@ -330,19 +340,6 @@ const GetImages = (name: string): string => {
     };
     
     return imageMap[name] || name.split(" ").join("_").replace(/['":]/g, "");
-}
-
-const NameTranslate = (name: string): string => {
-    const nameMap: { [key: string]: string } = {
-        "Cheese Cauliflower": "Cheese Cauli.",
-        "Cookie": "Cookies",
-        "Cranberry Sauce": "Cran. Sauce",
-        "Dish O' The Sea": "Dish o' The Sea",
-        "Eggplant Parmesan": "Eggplant Parm.",
-        "Vegetable Medley": "Vegetable Stew"
-    };
-    
-    return nameMap[name] || name;
 }
 
 const GetArrayData = (arr: itemsType[]) =>{
