@@ -90,7 +90,7 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
             return;
         }
 
-        let collectionStatus = GetCollection(museumLocation)
+        let collectionStatus = museumLocation?.museumPieces?.item || [];
         let specialRequests: specialOrderType = fileData.SaveGame.completedSpecialOrders;
         let availableSpecialRequests: specialOrderType = fileData.SaveGame.availableSpecialOrders;
         let players = {
@@ -112,14 +112,6 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
 
         setPlayerData(players)
     }, [fileData])
-
-    const GetCollection = (collection: gameLocationType) => { 
-        let museumPieces: itemsType[] | [] = []
-        if(collection.museumPieces.item && collection.museumPieces.item !== undefined && collection.museumPieces.item.length > 0){
-            museumPieces = [...collection.museumPieces.item]
-        }
-        return (museumPieces.length > 0) ? [...museumPieces] : [] 
-    }
 
     return {
         playerData,
