@@ -3,7 +3,6 @@
 import {
     ProfNames,
     Levels,
-    ShipItems,
     Museum,
     townSR,
     QiSR
@@ -16,24 +15,24 @@ import type {
     playerType,
     questType, 
     specialOrderType, 
-    statValueType
 } from 'types/savefile';
 import type {
     generalFormatedItemType, 
-    professionsType, 
-    itemFoundType, 
+    professionsType,
     experienceType,
-    formatedMonsterDataType,
 } from 'types/displayDataTypes';
 import type { fullPlayerDataType, museumCollectionType } from 'types/displayDataTypes';
-import { GetCookingData } from './Parsers/parseCookingItems';
-import { GetCraftingRecipes } from './Parsers/parseCraftingItems';
-import { GetCropsAchievements } from './Parsers/parseCropItems';
-import { GetFishes } from './Parsers/parseFishItems';
-import { GetFriendshipData } from './Parsers/parseRelationshipData';
-import { GetMonsterQuests } from './Parsers/parseMonsterGoals';
-import { GetShippedItems } from './Parsers/parseShippedItems';
-import { getEarningAchievements } from './Parsers/parseEarningsAchievements';
+import { 
+    cookingParser, 
+    craftingParser, 
+    cropsParser, 
+    earningsParser, 
+    fishParser, 
+    friendshipParser, 
+    monstersParser, 
+    shippingParser 
+} from './Parsers';
+
 
 //Gets the info from the farm hands as an array of the same type
 const GetFarmHands = (locations: gameLocationType[]): playerType[] => {
@@ -106,17 +105,17 @@ const parseData = ({
         playerName: playerData.name || "Unknown",
         farmName: playerData.farmName, //TODO: Remove and make global if even needed
         experience: GetXpInfo(playerData.experiencePoints.int), //DONE
-        moneyEarned: getEarningAchievements(playerData.totalMoneyEarned || 0), //DONE
+        moneyEarned: earningsParser(playerData.totalMoneyEarned || 0), //DONE
         professions: GetProfessionData(playerData.professions.int) , //DONE?
-        shippedItems: GetShippedItems(playerData.basicShipped),//DONE
-        cropsShipped: GetCropsAchievements(playerData.basicShipped?.item),//Refactored DONE
+        shippedItems: shippingParser(playerData.basicShipped),//DONE
+        cropsShipped: cropsParser(playerData.basicShipped?.item),//Refactored DONE
         //mineralsFound: GetArrayData(playerData.mineralsFound?.item) || [], //DONE
-        cookingData: GetCookingData(playerData.recipesCooked, playerData.cookingRecipes.item) || [], //DONE
-        fishCaught: GetFishes(playerData.fishCaught.item), 
+        cookingData: cookingParser(playerData.recipesCooked, playerData.cookingRecipes.item) || [], //DONE
+        fishCaught: fishParser(playerData.fishCaught.item), 
         tailoredItems: GetArrayDataTimeless(playerData.tailoredItems) || [],
-        itemsCrafted: GetCraftingRecipes(playerData.craftingRecipes.item) || [],
-        friendship: GetFriendshipData(playerData.friendshipData.item) || [],
-        monstersKilled: GetMonsterQuests(
+        itemsCrafted: craftingParser(playerData.craftingRecipes.item) || [],
+        friendship: friendshipParser(playerData.friendshipData.item) || [],
+        monstersKilled: monstersParser(
             playerData.stats.specificMonstersKilled.item,
             playerData.achievements?.int || []
         ) || [],
@@ -210,25 +209,6 @@ const GetProfession = (id: number): string => {
 }
 /* End of Profession Data */
 
-/* Shipping Related Achievements */
-// const GetShippedItems = (allShipped: itemType) :generalFormatedItemType[] => { 
-//     let data: generalFormatedItemType[] = []
-//     if(!allShipped?.item || allShipped?.item.length === 0) return data;
-//     //Parses the shipped info
-//     let shipped =  allShipped.item.map( val => {return {id: val.key.int, times: val.value.int}})
-
-//     ShipItems.shipping.forEach(item => {
-//         let d = {
-//             name: item.item_name,
-//             image: GetImages(item.item_name),
-//             id: item.item_id,
-//             shipped: (shipped && shipped.length > 0 ? shipped.find(i => i.id === item.item_id )?.times || 0 : 0)
-//         }
-//         data.push(d);
-//     }) 
-//     return data;
-// }
-
 const GetMCollection = 
     (archeology: itemsType[], geology: itemsType[], currentCollection: itemsType[]) : museumCollectionType => {
 
@@ -299,20 +279,6 @@ const GetImages = (name: string): string => {
     };
     
     return imageMap[name] || name.split(" ").join("_").replace(/['":]/g, "");
-}
-
-const GetArrayData = (arr: itemsType[]) =>{
-    let data: itemFoundType[] = [];
-    if(Array.isArray(arr)){
-        arr.forEach(item => {
-            let d: itemFoundType = {
-                item: (item.key.int) ? item.key.int : item.key.string || 0,
-                timesFound: item.value.int || 0
-            }
-            data = [...data, d]
-        });
-    }
-    return data;
 }
 
 const GetArrayDataTimeless = (arr: itemType) =>{
