@@ -10,7 +10,7 @@ export type fullPlayerDataType = {
     experience: experienceType[];
     moneyEarned: number;
     professions: professionsType[];
-    shippedItems: generalFormatedItemType[];
+    shippedItems: shippedItemsType;
     cropsShipped: cropsShippedType;
     mineralsFound?: itemFoundType[];
     cookingData: cookingDataType;
@@ -61,6 +61,13 @@ export type monsterDataType = {
 
 export type friendshipType = {
     friendship: formatedFriendshipDataType[];
+    achievements?: achievementType[];
+}
+
+export type shippedItemsType = {
+    shippedItems: generalFormatedItemType[];
+    totalShipped: number;
+    totalItems: number;
     achievements?: achievementType[];
 }
 
