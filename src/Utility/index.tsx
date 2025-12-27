@@ -4,7 +4,6 @@ import {
     ProfNames,
     Levels,
     ShipItems,
-    MonsterCat,
     Museum,
     townSR,
     QiSR
@@ -33,6 +32,7 @@ import { GetCropsAchievements } from './Parsers/parseCropItems';
 import { GetFishes } from './Parsers/parseFishItems';
 import { GetFriendshipData } from './Parsers/parseRelationshipData';
 import { GetMonsterQuests } from './Parsers/parseMonsterGoals';
+import { GetShippedItems } from './Parsers/parseShippedItems';
 
 //Gets the info from the farm hands as an array of the same type
 const GetFarmHands = (locations: gameLocationType[]): playerType[] => {
@@ -100,20 +100,14 @@ const parseData = ({
     }: getParsedUserDataType) : fullPlayerDataType => { 
     //Not finished  
     console.debug(`%c Parsing data for ${playerData.name}`, 'color: #43B581')
-    console.log("Raw Player Data", playerData)
-    let SlimesKilled = 
-        playerData.stats.slimesKilled && typeof playerData.stats.slimesKilled === "number" ?
-            playerData.stats.slimesKilled :
-            getSlimesKilled(playerData.stats.Values);
-
-    console.log('sk', SlimesKilled);
+    console.log(`Raw Player Data ${playerData.name}`, playerData) 
     let fullPlayerData : fullPlayerDataType = {
         playerName: playerData.name || "Unknown",
         farmName: playerData.farmName, //TODO: Remove and make global if even needed
         experience: GetXpInfo(playerData.experiencePoints.int), //DONE
         moneyEarned: playerData.totalMoneyEarned || 0, //DONE
         professions: GetProfessionData(playerData.professions.int) , //DONE?
-        shippedItems: GetShippedItems(playerData.basicShipped) || [],//DONE
+        shippedItems: GetShippedItems(playerData.basicShipped),//DONE
         cropsShipped: GetCropsAchievements(playerData.basicShipped?.item),//Refactored DONE
         //mineralsFound: GetArrayData(playerData.mineralsFound?.item) || [], //DONE
         cookingData: GetCookingData(playerData.recipesCooked, playerData.cookingRecipes.item) || [], //DONE
@@ -123,7 +117,6 @@ const parseData = ({
         friendship: GetFriendshipData(playerData.friendshipData.item) || [],
         monstersKilled: GetMonsterQuests(
             playerData.stats.specificMonstersKilled.item,
-            SlimesKilled,
             playerData.achievements?.int || []
         ) || [],
         museumCollection: 
@@ -144,17 +137,6 @@ const parseData = ({
     return fullPlayerData;
 } 
 
-const getSlimesKilled = (Values: statValueType) => {
-    console.log('Values', Values);
-    let slimesKilled = 0;
-        Values.item.forEach(stat => {
-        if(stat.key.string === "slimesKilled"){
-            slimesKilled = stat.value.int;
-        }
-    }
-    );
-    return slimesKilled;
-}
 /* XP Data */
 const GetXpInfo = (xp: number[]): experienceType[] => {
     const SKILLS = ["Farming", "Fishing", "Foraging", "Mining", "Combat"]
@@ -228,48 +210,24 @@ const GetProfession = (id: number): string => {
 /* End of Profession Data */
 
 /* Shipping Related Achievements */
-const GetShippedItems = (allShipped: itemType) :generalFormatedItemType[] => { 
-    let data: generalFormatedItemType[] = []
-    if(!allShipped?.item || allShipped?.item.length === 0) return data;
-    //Parses the shipped info
-    let shipped =  allShipped.item.map( val => {return {id: val.key.int, times: val.value.int}})
+// const GetShippedItems = (allShipped: itemType) :generalFormatedItemType[] => { 
+//     let data: generalFormatedItemType[] = []
+//     if(!allShipped?.item || allShipped?.item.length === 0) return data;
+//     //Parses the shipped info
+//     let shipped =  allShipped.item.map( val => {return {id: val.key.int, times: val.value.int}})
 
-    ShipItems.shipping.forEach(item => {
-        let d = {
-            name: item.item_name,
-            image: GetImages(item.item_name),
-            id: item.item_id,
-            shipped: (shipped && shipped.length > 0 ? shipped.find(i => i.id === item.item_id )?.times || 0 : 0)
-        }
-        data.push(d);
-    }) 
-    return data;
-}
-
-// const GetMonsterQuests = (allMonsters: itemsType[], slimesKilled: number): formatedMonsterDataType[] => {
-
-//     if(!allMonsters || allMonsters.length === 0) return [];
-
-//         let mData: formatedMonsterDataType[] = []
-//         let sum = 0;
-//         MonsterCat.monsters.forEach(category => {
-//             sum = 0;
-//             category.monsters.forEach(_category => {
-//                 let monster = allMonsters.find(m => m.key.string === _category);
-//                 sum += monster ? monster.value.int : 0
-//             })
-//             mData.push({
-//                 category: category.name,
-//                 goal: category.goal,
-//                 timesKilled: (category.name === "Slimes") ? slimesKilled : sum,
-//                 images: category.monsters.map(m => {
-//                     let d = {name: m, img: GetImages(m)}
-//                     return d
-//                 })
-//             })
-//         })
-//         return(mData) 
+//     ShipItems.shipping.forEach(item => {
+//         let d = {
+//             name: item.item_name,
+//             image: GetImages(item.item_name),
+//             id: item.item_id,
+//             shipped: (shipped && shipped.length > 0 ? shipped.find(i => i.id === item.item_id )?.times || 0 : 0)
+//         }
+//         data.push(d);
+//     }) 
+//     return data;
 // }
+
 const GetMCollection = 
     (archeology: itemsType[], geology: itemsType[], currentCollection: itemsType[]) : museumCollectionType => {
 
