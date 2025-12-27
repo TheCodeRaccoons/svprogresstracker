@@ -1,22 +1,23 @@
-import React from 'react'
+import { AchievementItem } from "@components/common";
+import type { moneyEarnedType } from "types/displayDataTypes";
 
-interface EarningsProps {
-    moneyEarned: number;
-}
-
-const Earnings: React.FC<EarningsProps> = ({ moneyEarned }) => {
+const Earnings = ( {totalEarned, achievements}: moneyEarnedType ) => {
     return ( 
         <div className="progress-container">   
-            <span className="a-title"><h1>You have earned a total of ${moneyEarned}.</h1></span>
+            <span className="a-title"><h1>You have earned a total of ${totalEarned}.</h1></span>
             <br />
             <h2>Total earnings Achievements</h2>
-            <ul className="a-List"> 
-                <li>Greenhorn: {(moneyEarned >= 15000) ? <span className="completed">You have this achievement</span> : <span className="pending">You need {15000 - moneyEarned} more gold to get this achievement.</span> } </li>
-                <li>Cowpoke: {(moneyEarned >= 50000) ? <span className="completed">You have this achievement</span> : <span className="pending">You need {50000 - moneyEarned} more gold to get this achievement.</span> } </li>
-                <li>Homesteader: {(moneyEarned >= 250000) ? <span className="completed">You have this achievement</span> : <span className="pending">You need {250000 - moneyEarned} more gold to get this achievement.</span> } </li>
-                <li>Millionaire: {(moneyEarned >= 1000000) ? <span className="completed">You have this achievement</span> : <span className="pending">You need {1000000 - moneyEarned} more gold to get this achievement.</span> } </li>
-                <li>Legend: {(moneyEarned >= 10000000) ? <span className="completed">You have this achievement</span> : <span className="pending">You need {10000000 - moneyEarned} more gold to get this achievement.</span> } </li>
-            </ul>
+            <div className="section-achievements">
+                {achievements && achievements.map((ach, i) => (
+                    <AchievementItem 
+                        key={i}
+                        done={ach.done}
+                        image={ach.image}
+                        achievementName={ach.name}
+                        achievementDesc={ach.description}
+                        achievementHoverDesc={ach.hoverDesc}
+                    />))}
+            </div>
         </div>
     );
 };

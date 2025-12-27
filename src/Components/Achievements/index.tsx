@@ -1,4 +1,3 @@
-import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';  
 import { TabCook, TabCraft, TabCrops, TabFishing, TabFriendship, TabGuild, TabItems, TabMoney, TabMuseum, TabQuests, TabGrandpa } from '@media/Tabs'
 import Star from '../../Media/Star.png'
@@ -97,7 +96,7 @@ const Achievements = ({
             </TabPanel> 
             <TabPanel> 
                 <section className="achievement-container">
-                    <Earnings moneyEarned={moneyEarned}/>
+                    <Earnings {...moneyEarned}/>
                 </section>
             </TabPanel> 
             <TabPanel> 
