@@ -1,51 +1,74 @@
+import { AchievementItem, ItemWithCounter } from '@components/common';
 import type { museumCollectionType } from 'types/displayDataTypes';
 
-interface CollectionProps {
-    museumCollection: museumCollectionType;
-}
-
-const Collection = ({ museumCollection: mc }: CollectionProps) => {
-    const createCollectionItem = (item: any, i: number, type: string) => {
-        return (
-            <a href={`https://stardewvalleywiki.com/${item.image}`} 
-            target="_blank" rel="noreferrer" key={i}>
-                <img 
-                    key={i} 
-                    src={`https://stardew-tracker.s3.amazonaws.com/${type}/${item.image}.png`} 
-                    alt={item.name} 
-                    className={ (item.found) ? item.inMuseum ? "done" : "known": "" } 
-                    title={(item.found) ? (item.inMuseum) ? 
-                        `You have delivered ${item.name} to the museum` : 
-                        `You haven't delivered ${item.name} to the museum` : 
-                        `You haven't found ${item.name} yet`
-                    } 
-                />
-            </a>
-        );
-    };
+const Collection = ({ 
+    totalFound, 
+    totalDelivered, 
+    total,
+    artifacts,
+    minerals,
+    achievements }: museumCollectionType) => {
 
     return (
         <div className="progress-container">  
             <span className="a-title">
-                <h1>
-                    {`You've found ${mc.totalFound || 0} objects and delivered ${mc.totalDelivered || 0} / ${mc.total || 0} to the museum`}
-                </h1>
+                <h2>
+                    {`Has found ${totalFound || 0} items and donated ${totalDelivered || 0} / ${total || 0} to the museum`}
+                </h2>
             </span>
             <br />
             <br />
             <h2>Museum Achievements</h2>
-            <ul className="a-List"> 
-                <li>A Complete Collection: {(mc.missingItemsText === undefined) ? 
-                    <span className="completed">You have this achievement</span> :
-                    <span className="pending">{mc.missingItemsText}</span>
-                    }
-                </li>
-            </ul>
+            <div className="section-achievements">
+                {achievements && achievements.map((ach, i) => (
+                    <AchievementItem 
+                        key={i}
+                        done={ach.done}
+                        image={ach.image}
+                        achievementName={ach.name}
+                        achievementDesc={ach.description}
+                        achievementHoverDesc={ach.hoverDesc}
+                    />))}
+            </div>
             <span className="a-title"><h1>Artifacts</h1></span>
-            {mc.artifacts.map((item, i) => createCollectionItem(item, i, "Artifacts"))}
+            <div className="item-grid">
+                { artifacts ? 
+                    artifacts.map((artifact, i) =>
+                        <ItemWithCounter
+                            key={i}
+                            link={`https://stardewvalleywiki.com/${artifact.name}`}
+                            src={`https://stardew-tracker.s3.amazonaws.com/Artifacts/${artifact.image}.png`}
+                            name={artifact.name}
+                            state={ (artifact.found) ? artifact.inMuseum ? "done" : "known" : "unknown" }
+                            hoverDesc={(artifact.found) ? 
+                                        (artifact.inMuseum ) ? `Already donated ${artifact.name}` 
+                                        : `You haven't donated ${artifact.name}` 
+                                        : `You haven't found ${artifact.name}`} 
+                            times={artifact.found ? null : undefined}
+                        />)
+                        : <div>No cooking data available.</div>
+                }
+            </div>
     
             <span className="a-title"><h1>Minerals</h1></span>
-            {mc.minerals.map((item, i) => createCollectionItem(item, i, "Minerals"))}
+            <div className="item-grid">
+                { minerals ? 
+                    minerals.map((mineral, i) =>
+                        <ItemWithCounter
+                            key={i}
+                            link={`https://stardewvalleywiki.com/${mineral.name}`}
+                            src={`https://stardew-tracker.s3.amazonaws.com/Minerals/${mineral.image}.png`}
+                            name={mineral.name}
+                            state={ (mineral.found) ? mineral.inMuseum ? "done" : "known" : "unknown" }
+                            hoverDesc={(mineral.found) ? 
+                                        (mineral.inMuseum ) ? `Already donated ${mineral.name}` 
+                                        : `You haven't donated ${mineral.name}` 
+                                        : `You haven't found ${mineral.name}`}
+                            times={mineral.found ? null : undefined}
+                        />)
+                        : <div>No cooking data available.</div>
+                }
+            </div>
         </div>
     );
 };
