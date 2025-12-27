@@ -92,7 +92,7 @@ const Achievements = ({
             </TabPanel> 
             <TabPanel> 
                 <section className="achievement-container">
-                    <Shipping shippedItems={shippedItems}/>
+                    <Shipping {...shippedItems}/>
                 </section>
             </TabPanel> 
             <TabPanel> 
