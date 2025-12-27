@@ -17,6 +17,8 @@ import type { formattedSaveFileType } from 'types/displayDataTypes';
 
 const Stats = ({playerData, farmName, farmhandData}: formattedSaveFileType) => {
     const [globalFarmName] = useState(farmName || "My Farm");
+    // Preserve inner Achievements tab across player switches
+    const [achievementsTabIndex, setAchievementsTabIndex] = useState(0);
     const [junimos] = useState([
     Junimo1,
     Junimo2,
@@ -40,21 +42,11 @@ const Stats = ({playerData, farmName, farmhandData}: formattedSaveFileType) => {
                     <img src={Rope} alt=""></img>
                     <img src={Rope} alt=""></img>
                 </div>
-                <Achievements 
-                    cookingData={p.cookingData}
-                    itemsCrafted={p.itemsCrafted}  
-                    cropsShipped={p.cropsShipped}
-                    professions={p.professions}
-                    fishCaught={p.fishCaught}
-                    friendship={p.friendship}
-                    monstersKilled={p.monstersKilled}
-                    shippedItems={p.shippedItems}
-                    moneyEarned={p.moneyEarned}
-                    museumCollection={p.museumCollection}
-                    questsDone={p.questsDone}
-                    specialRequests={p.specialRequests}
-                    //availableSpecialRequests={p.availableSpecialRequests}
-                ></Achievements>
+                <Achievements
+                    {...p}
+                    achievementsTabIndex={achievementsTabIndex}
+                    onAchievementsTabSelect={setAchievementsTabIndex}
+                />
             </section> 
         </TabPanel>
     ));
@@ -77,21 +69,11 @@ const Stats = ({playerData, farmName, farmhandData}: formattedSaveFileType) => {
                                 <img src={Rope} alt=""></img>
                                 <img src={Rope} alt=""></img>
                             </div> 
-                            <Achievements 
-                                cookingData={playerData.cookingData} 
-                                itemsCrafted={playerData.itemsCrafted}  
-                                professions={playerData.professions}
-                                cropsShipped={playerData.cropsShipped}  
-                                fishCaught={playerData.fishCaught}
-                                friendship={playerData.friendship}
-                                monstersKilled={playerData.monstersKilled}
-                                shippedItems={playerData.shippedItems}
-                                moneyEarned={playerData.moneyEarned}
-                                museumCollection={playerData.museumCollection}
-                                questsDone={playerData.questsDone}
-                                specialRequests={playerData.specialRequests}
-                                //pendingSpecialReq={playerData.pendingSpecialRequests}
-                            ></Achievements> 
+                            <Achievements
+                                {...playerData}
+                                achievementsTabIndex={achievementsTabIndex}
+                                onAchievementsTabSelect={setAchievementsTabIndex}
+                            />
                             </>
                         </section>
                     </TabPanel>

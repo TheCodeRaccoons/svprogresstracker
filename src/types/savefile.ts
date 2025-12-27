@@ -332,6 +332,7 @@ export type itemsType = {
         },
     value: {
         int: number,
+        string?: string | number,
         ArrayOfInt?: {
             int: number[]
         }

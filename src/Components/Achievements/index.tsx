@@ -1,19 +1,35 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';  
-import { TabCook, TabCraft, TabCrops, TabFishing, TabFriendship, TabGuild, TabItems, TabMoney, TabMuseum, TabQuests, TabGrandpa } from '@media/Tabs'
+import {
+    TabCook,
+    TabCraft,
+    TabCrops,
+    TabFishing,
+    TabFriendship,
+    TabGuild,
+    TabItems,
+    TabMoney,
+    TabMuseum,
+    TabQuests,
+    TabGrandpa,
+} from '@media/Tabs'
 import Star from '../../Media/Star.png'
 import {
-    Collection, 
-    Earnings, 
-    Shipping, 
-    Monsters, 
-    Friendship, 
-    Fish, 
-    Cooking, 
-    Crafting, 
-    Crops, 
-    Quests
+    Collection,
+    Earnings,
+    Shipping,
+    Monsters,
+    Friendship,
+    Fish,
+    Cooking,
+    Crafting,
+    Crops,
 } from '../AchieveTabs';
 import type { fullPlayerDataType } from 'types/displayDataTypes.js';
+
+type ControlledTabsProps = {
+    achievementsTabIndex?: number;
+    onAchievementsTabSelect?: (index: number) => void;
+};
 
 const Achievements = ({
     playerName,
@@ -33,7 +49,9 @@ const Achievements = ({
     questsDone,
     specialRequests,
     tailoredItems,
-    }: fullPlayerDataType ) => {
+    achievementsTabIndex,
+    onAchievementsTabSelect,
+    }: fullPlayerDataType & ControlledTabsProps ) => {
     const TabImg = [
         {img: TabCook, alt: "Cooking"}, 
         {img: TabCraft, alt: "Crafting"}, 
@@ -48,10 +66,15 @@ const Achievements = ({
         {img: TabGrandpa, alt: "Grandpa's evaluation"}
     ];
 
+    const tabsProps =
+        typeof achievementsTabIndex === 'number' && typeof onAchievementsTabSelect === 'function'
+            ? { selectedIndex: achievementsTabIndex, onSelect: onAchievementsTabSelect }
+            : {};
+
     return ( 
         <div className="file-container">
         <img className="star" alt="star" src={Star}></img>
-            <Tabs>
+            <Tabs {...tabsProps}>
                 <TabList className="achievement">                       
                     {TabImg.map((img, i) => 
                         <Tab key={i}>
@@ -101,19 +124,10 @@ const Achievements = ({
             </TabPanel> 
             <TabPanel> 
                 <section className="achievement-container">
-                    <Collection museumCollection={museumCollection} />
+                    <Collection {...museumCollection} />
                 </section>
             </TabPanel> 
-            {/* <TabPanel> 
-                <section className="achievement-container"> 
-                    <Quests questsDone={questsDone} specialReq={specialRequests} pendingSpecialReq={pendingSpecialReq} />
-                </section>
-            </TabPanel>
-            <TabPanel> 
-                <section className="achievement-container"> 
-                    <Quests questsDone={questsDone} specialReq={specialRequests} pendingSpecialReq={pendingSpecialReq} />
-                </section>
-            </TabPanel> */}
+            {/* Additional panels (e.g., Quests) can be added here when needed */}
             </Tabs>
         </div>
     );

@@ -6,5 +6,5 @@ export {GetFriendshipData as friendshipParser} from './parseRelationshipData';
 export {GetMonsterQuests as monstersParser} from './parseMonsterGoals';
 export {GetShippedItems as shippingParser} from './parseShippedItems';
 export {getEarningAchievements as earningsParser} from './parseEarningsAchievements';
-// export {GetMuseumCollectionData as museumCollectionParser} from './';
+export {GetMuseumCollection as museumCollectionParser} from './parseMuseumCollection';
 // export {GetQuestsData as questsParser} from './parseQuestsItems';
