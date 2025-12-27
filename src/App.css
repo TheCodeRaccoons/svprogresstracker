@@ -337,6 +337,7 @@ section.sv-container{
   display: flex;
   font-size: 1.5rem;
   text-align: center;
+  padding-bottom: 0.5rem;
 }
 .a-title-big{ 
   width: 100%;
