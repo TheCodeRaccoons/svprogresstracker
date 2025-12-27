@@ -33,6 +33,7 @@ import { GetFishes } from './Parsers/parseFishItems';
 import { GetFriendshipData } from './Parsers/parseRelationshipData';
 import { GetMonsterQuests } from './Parsers/parseMonsterGoals';
 import { GetShippedItems } from './Parsers/parseShippedItems';
+import { getEarningAchievements } from './Parsers/parseEarningsAchievements';
 
 //Gets the info from the farm hands as an array of the same type
 const GetFarmHands = (locations: gameLocationType[]): playerType[] => {
@@ -105,7 +106,7 @@ const parseData = ({
         playerName: playerData.name || "Unknown",
         farmName: playerData.farmName, //TODO: Remove and make global if even needed
         experience: GetXpInfo(playerData.experiencePoints.int), //DONE
-        moneyEarned: playerData.totalMoneyEarned || 0, //DONE
+        moneyEarned: getEarningAchievements(playerData.totalMoneyEarned || 0), //DONE
         professions: GetProfessionData(playerData.professions.int) , //DONE?
         shippedItems: GetShippedItems(playerData.basicShipped),//DONE
         cropsShipped: GetCropsAchievements(playerData.basicShipped?.item),//Refactored DONE
