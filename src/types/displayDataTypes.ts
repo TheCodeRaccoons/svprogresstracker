@@ -8,7 +8,7 @@ export type fullPlayerDataType = {
     playerName: string;
     farmName: string;
     experience: experienceType[];
-    moneyEarned: number;
+    moneyEarned: moneyEarnedType;
     professions: professionsType[];
     shippedItems: shippedItemsType;
     cropsShipped: cropsShippedType;
@@ -78,6 +78,11 @@ export type achievementType = {
         name: string,
         description: string,
         hoverDesc: string,
+}
+
+export type moneyEarnedType = {
+    totalEarned: number;
+    achievements: achievementType[];
 }
 
 export type generalFormatedItemType = {
