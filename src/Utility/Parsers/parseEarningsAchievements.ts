@@ -1,7 +1,7 @@
-import type { achievementType, moneyEarnedType } from "types/displayDataTypes"
+import type { moneyEarnedType } from "types/displayDataTypes"
 import { Cowpoke, Greenhorn, Homesteader, Legend, Millionaire } from "@media/Achievements";
 
-let CraftingAchievements = [{
+let earningAchievements = [{
         goal: 15000,
         image: Greenhorn,
         name: 'Greenhorn',
@@ -40,7 +40,7 @@ let CraftingAchievements = [{
 ];
 
 export const getEarningAchievements = (moneyEarned: number) : moneyEarnedType => { 
-    let achievements = CraftingAchievements.map(ach => {
+    let achievements = earningAchievements.map(ach => {
         return {
             ...ach,
             done: moneyEarned >= ach.goal,
