@@ -40,15 +40,13 @@ let MonsterAchievements = [{
 ];
 
 export const GetMonsterQuests = (
-    allMonsters: itemsType[], 
-    slimesKilled: number, 
+    allMonsters: itemsType[],
     achievements?: number[]
 ): monsterDataType => {
     console.log('achieved', achievements);
     if(!allMonsters || allMonsters.length === 0) return { monsterData: [], achievements: [] };
     let mData: formatedMonsterDataType[] = [];
     let sum = 0;
-    console.log('slimesKilled', slimesKilled);
     MonsterCat.monsters.forEach(category => {
         sum = 0;
         category.monsters.forEach(_category => {
