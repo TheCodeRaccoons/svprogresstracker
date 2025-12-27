@@ -1,21 +1,13 @@
-import { AchievementItem } from "@components/common";
+import { AchievementItem, ItemWithCounter } from "@components/common";
 import type { monsterDataType } from "types/displayDataTypes";
 
 const Monsters = ({ monsterData, achievements } :monsterDataType) => {
-    // const getQuestData = (monsters: MonsterData) => {
-    //     return(
-    //             <li key={monsters.goal}>
-    //                 <span className="goal-mg">{monsters.images.map((image, i) =><a href={`https://stardewvalleywiki.com/${image.img}`} target="_blank" rel="noreferrer" key={i}> <img key={i} src={`https://stardew-tracker.s3.amazonaws.com/Monsters/${image.img}.png`} className="done" title={image.name} alt={image.name} width="21px" ></img> </a>) }</span>
-    //     {monsters.category}: {(monsters.timesKilled >= monsters.goal) ?  <span className="completed"> {monsters.timesKilled} / {monsters.goal}</span> : <span className="pending"> {monsters.timesKilled} / {monsters.goal}</span> } 
-    //             </li>    
-    //     );
-    // };
-    console.log('monsterData', monsterData);
-
     return ( 
         <div className="progress-container-flex">  
             <br />
-            <h2>Monster Erradication Achievements</h2> 
+            <span className="a-title">
+                <h2>Monster Erradication Achievements</h2> 
+            </span>
             <div className="section-achievements">
                 {achievements && achievements.map((ach, i) => (
                     <AchievementItem 
@@ -27,15 +19,26 @@ const Monsters = ({ monsterData, achievements } :monsterDataType) => {
                         achievementHoverDesc={ach.hoverDesc}
                     />))}
             </div>
-        <span className="a-title"><h1>Monster Eradication Goals</h1></span>
-            <br /> 
-            <br />
-            {/* <ul className="m-List"> 
-                { monstersKilled.slice(0, 5).map( m => getQuestData(m))} 
-            </ul>
-            <ul className="m-List">
-                { monstersKilled.slice(5).map( m => getQuestData(m))} 
-            </ul>  */}
+            <span className="a-title">
+                <h2>Monster Eradication Goals</h2>
+            </span>
+            <br />  
+            <div className="item-grid">
+                {monsterData && monsterData.map((monster, i) =>
+                    <ItemWithCounter 
+                        key={monster.category}
+                        link={`https://stardewvalleywiki.com/Monsters#${monster.category.replace(/\s+/g, '_')}`}
+                        src={`https://stardew-tracker.s3.amazonaws.com/Monsters/${monster?.images[0]?.img || ''}.png`}
+                        name={monster.category}
+                        state={ (monster.timesKilled >= monster.goal) ? "done" : "known" }
+                        hoverDesc={ (monster.timesKilled >= monster.goal) ? 
+                                    `You have completed the ${monster.category} monster eradication goal!` 
+                                    : `You have killed ${monster.timesKilled} out of ${monster.goal} required.` }
+                        times={monster.timesKilled >= 0 ? monster.timesKilled : 0}
+                        {...monster} 
+                    />)
+                }
+            </div>
         </div>
     );
 };

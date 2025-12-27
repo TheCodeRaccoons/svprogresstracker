@@ -8,9 +8,9 @@ export type fullPlayerDataType = {
     playerName: string;
     farmName: string;
     experience: experienceType[];
-    moneyEarned: number;
+    moneyEarned: moneyEarnedType;
     professions: professionsType[];
-    shippedItems: generalFormatedItemType[];
+    shippedItems: shippedItemsType;
     cropsShipped: cropsShippedType;
     mineralsFound?: itemFoundType[];
     cookingData: cookingDataType;
@@ -64,6 +64,13 @@ export type friendshipType = {
     achievements?: achievementType[];
 }
 
+export type shippedItemsType = {
+    shippedItems: generalFormatedItemType[];
+    totalShipped: number;
+    totalItems: number;
+    achievements?: achievementType[];
+}
+
 export type achievementType = {
         done: boolean,
         goal: number,
@@ -71,6 +78,11 @@ export type achievementType = {
         name: string,
         description: string,
         hoverDesc: string,
+}
+
+export type moneyEarnedType = {
+    totalEarned: number;
+    achievements: achievementType[];
 }
 
 export type generalFormatedItemType = {
