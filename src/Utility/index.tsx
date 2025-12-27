@@ -30,6 +30,7 @@ import {
     fishParser, 
     friendshipParser, 
     monstersParser, 
+    museumCollectionParser, 
     shippingParser 
 } from './Parsers';
 
@@ -99,8 +100,6 @@ const parseData = ({
         availableSpecialRequests
     }: getParsedUserDataType) : fullPlayerDataType => { 
     //Not finished  
-    console.debug(`%c Parsing data for ${playerData.name}`, 'color: #43B581')
-    console.log(`Raw Player Data ${playerData.name}`, playerData) 
     let fullPlayerData : fullPlayerDataType = {
         playerName: playerData.name || "Unknown",
         farmName: playerData.farmName, //TODO: Remove and make global if even needed
@@ -119,8 +118,11 @@ const parseData = ({
             playerData.stats.specificMonstersKilled.item,
             playerData.achievements?.int || []
         ) || [],
-        museumCollection: 
-            GetMCollection(playerData.archaeologyFound.item, playerData.mineralsFound.item, collectionStatus) || {},
+        museumCollection: museumCollectionParser({
+            archeology: playerData.archaeologyFound.item, 
+            geology: playerData.mineralsFound.item, 
+            currentCollection: collectionStatus
+        }),
         questsDone: playerData.stats.questsCompleted || 0,
         specialRequests: 
             specialRequests?.SpecialOrder ?
@@ -208,78 +210,6 @@ const GetProfession = (id: number): string => {
     return professionMap[id] || "";
 }
 /* End of Profession Data */
-
-const GetMCollection = 
-    (archeology: itemsType[], geology: itemsType[], currentCollection: itemsType[]) : museumCollectionType => {
-
-    if(currentCollection === undefined || currentCollection.length === 0) return {artifacts: [], minerals: []};
-
-    let artifacts: generalFormatedItemType[] = [];
-    let minerals: generalFormatedItemType[] = []
-    let _totalFound = 0;
-    let _totalDonated = 0;
-
-    for(let collectionItem of Museum.collection) {
-        let alreadyDonated = currentCollection.filter(c => c.value.int === collectionItem.id).length > 0;
-        _totalDonated = alreadyDonated ? _totalDonated + 1 : _totalDonated;
-        if( archeology && archeology.length > 0 && collectionItem.type === "artifact"){
-            let found = archeology.filter(a => a.key.int === collectionItem.id).length > 0;
-            _totalFound = found ? _totalFound + 1 : _totalFound;
-
-            artifacts.push({
-                name: collectionItem.name,
-                image: GetImages(collectionItem.name),
-                found: found,
-                inMuseum: alreadyDonated
-            })
-        } else if(geology && geology.length > 0 && collectionItem.type === "mineral"){
-            let found = geology.filter(g => g.key.int === collectionItem.id).length > 0;
-            _totalFound = found ? _totalFound + 1 : _totalFound;
-            minerals.push({
-                name: collectionItem.name,
-                image: GetImages(collectionItem.name),
-                found: found,
-                inMuseum: alreadyDonated
-            })
-        }
-    }
-
-
-    let missingItemsText = (Museum.collection.length - _totalDonated > 0) ?
-        `You need to deliver ${Museum.collection.length - _totalDonated} more items to get this achievement.` :
-        undefined;
-
-    const museumCollection: museumCollectionType = {
-        totalFound: _totalFound,
-        totalDelivered: _totalDonated,
-        total: Museum.collection.length,
-        missingItemsText: missingItemsText,
-        artifacts,
-        minerals
-    }
-
-    return museumCollection  
-}
-
-/* Utility methods*/
-const GetImages = (name: string): string => {
-    const imageMap: { [key: string]: string } = {
-        "Wild Seeds (Sp)": "Spring_Seeds",
-        "Wild Seeds (Su)": "Summer_Seeds",
-        "Wild Seeds (Fa)": "Fall_Seeds",
-        "Wild Seeds (Wi)": "Winter_Seeds",
-        "Transmute (Fe)": "Iron_Bar",
-        "Transmute (Au)": "Gold_Bar",
-        "Oil Of Garlic": "Oil_of_Garlic",
-        "Egg (brown)": "Brown_Egg",
-        "Egg (white)": "Egg",
-        "Large Egg (white)": "Large_Egg",
-        "Large Egg (brown)": "Large_Brown_Egg",
-        "L. Goat Milk": "Large_Goat_Milk"
-    };
-    
-    return imageMap[name] || name.split(" ").join("_").replace(/['":]/g, "");
-}
 
 const GetArrayDataTimeless = (arr: itemType) =>{
     let data: string[] = [];
