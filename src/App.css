@@ -10,8 +10,8 @@ In case we want to use px, vw, em, ch or anything other than rem on the site we 
 is only setting the global base font size for the rem to work over.
 */
   html { font-size: var(--global-base-font-size--desktop); }
-  @media screen and (min-width:1920px) { html { font-size: var(--global-base-font-size--desktop-xl) } }
-  @media screen and (max-width:1919px) { html { font-size: var(--global-base-font-size--desktop) } }
+  @media screen and (min-width:2048px) { html { font-size: var(--global-base-font-size--desktop-xl) } }
+  @media screen and (max-width:2048px) { html { font-size: var(--global-base-font-size--desktop) } }
   @media screen and (max-width:991px) { html { font-size: var(--global-base-font-size--tablet) } }
   @media screen and (max-width:479px) { html { font-size: var(--global-base-font-size--mobile) } }
 
@@ -515,6 +515,5 @@ section.sv-container{
   .adds{
     display: none;
     margin: 0 0.125rem;
-  } 
-
+  }
 } 

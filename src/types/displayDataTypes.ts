@@ -9,7 +9,6 @@ export type fullPlayerDataType = {
     farmName: string;
     experience: experienceType[];
     moneyEarned: moneyEarnedType;
-    professions: professionsType[];
     shippedItems: shippedItemsType;
     cropsShipped: cropsShippedType;
     mineralsFound?: itemFoundType[];
@@ -102,6 +101,9 @@ export type generalFormatedItemType = {
 export type professionsType = {
     id: number;
     name: string;
+    type: string;
+    level: number;
+    description?: string;
 }
 
 export type museumCollectionType = {
@@ -128,6 +130,7 @@ export type experienceType = {
         id: number;
         val: number;
     };
+    selectedProfession?: professionsType[];
     skill: string;
     xp: number;
 };
