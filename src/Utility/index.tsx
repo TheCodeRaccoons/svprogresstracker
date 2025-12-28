@@ -1,9 +1,6 @@
 /* eslint-disable no-loop-func */
 
 import {
-    ProfNames,
-    Levels,
-    Museum,
     townSR,
     QiSR
 } from './JSON';
@@ -16,12 +13,7 @@ import type {
     questType, 
     specialOrderType, 
 } from 'types/savefile';
-import type {
-    generalFormatedItemType, 
-    professionsType,
-    experienceType,
-} from 'types/displayDataTypes';
-import type { fullPlayerDataType, museumCollectionType } from 'types/displayDataTypes';
+import type { fullPlayerDataType } from 'types/displayDataTypes';
 import { 
     cookingParser, 
     craftingParser, 
@@ -31,7 +23,8 @@ import {
     friendshipParser, 
     monstersParser, 
     museumCollectionParser, 
-    shippingParser 
+    shippingParser,
+    professionsParser
 } from './Parsers';
 
 
@@ -103,12 +96,10 @@ const parseData = ({
     let fullPlayerData : fullPlayerDataType = {
         playerName: playerData.name || "Unknown",
         farmName: playerData.farmName, //TODO: Remove and make global if even needed
-        experience: GetXpInfo(playerData.experiencePoints.int), //DONE
+        experience: professionsParser(playerData.experiencePoints.int, playerData.professions.int), //DONE
         moneyEarned: earningsParser(playerData.totalMoneyEarned || 0), //DONE
-        professions: GetProfessionData(playerData.professions.int) , //DONE?
         shippedItems: shippingParser(playerData.basicShipped),//DONE
         cropsShipped: cropsParser(playerData.basicShipped?.item),//Refactored DONE
-        //mineralsFound: GetArrayData(playerData.mineralsFound?.item) || [], //DONE
         cookingData: cookingParser(playerData.recipesCooked, playerData.cookingRecipes.item) || [], //DONE
         fishCaught: fishParser(playerData.fishCaught.item), 
         tailoredItems: GetArrayDataTimeless(playerData.tailoredItems) || [],
@@ -138,78 +129,6 @@ const parseData = ({
     console.debug("Player Data", fullPlayerData)
     return fullPlayerData;
 } 
-
-/* XP Data */
-const GetXpInfo = (xp: number[]): experienceType[] => {
-    const SKILLS = ["Farming", "Fishing", "Foraging", "Mining", "Combat"]
-
-    let skillLevelData: experienceType[] = [] 
-    xp.forEach((_skill, id) => {
-        if (SKILLS[id] !== undefined){
-            skillLevelData.push({
-                skill:  SKILLS[id] || "Unknown",
-                xp: _skill,
-                levelInfo: Levels.find((level) => level.val >= _skill) || { id: 10, val: 15000 }
-            })
-        }
-    })
-    return skillLevelData
-}
-/* End of XP Data */
-/* Profession Data */
-
-const GetProfessionData = (professions: number[]): professionsType[] =>{
-    let data: professionsType[] = []; 
-    if(Array.isArray(professions)){ 
-        professions.forEach(item => {
-            let d = ProfNames.professions.find( p  => p.id === item)
-            if (d !== undefined) {
-                data = [...data, d]
-            }
-        });
-    }
-    console.debug('Profession Data:', data);
-    return data;
-}
-
-//TODO: generate json file for professions and implement in the profession tab
-const GetProfession = (id: number): string => {
-    const professionMap: { [key: number]: string } = {
-        0: "Rancher",
-        1: "Tiller",
-        2: "Coopmaster",
-        3: "Shepherd",
-        4: "Artisan",
-        5: "Agriculturist",
-        6: "Fisher",
-        7: "Trapper",
-        8: "Angler",
-        9: "Pirate",
-        10: "Mariner",
-        11: "Luremaster",
-        12: "Forester",
-        13: "Gatherer",
-        14: "Lumberjack",
-        15: "Tapper",
-        16: "Botanist",
-        17: "Tracker",
-        18: "Miner",
-        19: "Geologist",
-        20: "Blacksmith",
-        21: "Prospector",
-        22: "Excavator",
-        23: "Gemologist",
-        24: "Fighter",
-        25: "Scout",
-        26: "Brute",
-        27: "Defender",
-        28: "Acrobat",
-        29: "Desperado"
-    };
-    
-    return professionMap[id] || "";
-}
-/* End of Profession Data */
 
 const GetArrayDataTimeless = (arr: itemType) =>{
     let data: string[] = [];

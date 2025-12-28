@@ -1,93 +1,183 @@
 {
     "professions": [{
         "id": 0,
-        "name": "Rancher"
+        "name": "Rancher",
+        "type": "Farming",
+        "level": 5,
+        "description": "Animal products worth 20% more."
     }, {
         "id": 1,
-        "name": "Tiller"
+        "name": "Tiller",
+        "type": "Farming",
+        "level": 5,
+        "description": "Crops worth 10% more."
     }, {
         "id": 2,
-        "name": "Coopmaster"
+        "name": "Coopmaster",
+        "type": "Farming",
+        "level": 10,
+        "description": "Befriend coop animals quicker. Incubation time (for Incubator, Ostrich Incubator, and Slime Incubator) cut in half"
     }, {
         "id": 3,
-        "name": "Shepherd"
+        "name": "Shepherd",
+        "type": "Farming",
+        "level": 10,
+        "description": "Befriend barn animals quicker. Sheep produce wool faster."
     }, {
         "id": 4,
-        "name": "Artisan"
+        "name": "Artisan",
+        "type": "Farming",
+        "level": 10,
+        "description": "Artisan goods (wine, cheese, oil, etc.) worth 40% more."
     }, {
         "id": 5,
-        "name": "Agriculturist"
+        "name": "Agriculturist",
+        "type": "Farming",
+        "level": 10,
+        "description": "All crops grow 10% faster."
     }, {
         "id": 6,
-        "name": "Fisher"
+        "name": "Fisher",
+        "type": "Fishing",
+        "level": 5,
+        "description": "Fish worth 25% more."
     }, {
         "id": 7,
-        "name": "Trapper"
+        "name": "Trapper",
+        "type": "Fishing",
+        "level": 5,
+        "description": "Resources required to craft crab pots reduced."
     }, {
         "id": 8,
-        "name": "Angler"
+        "name": "Angler",
+        "type": "Fishing",
+        "level": 10,
+        "description": "Fish worth 50% more."
     }, {
         "id": 9,
-        "name": "Pirate"
+        "name": "Pirate",
+        "type": "Fishing",
+        "level": 10,
+        "description": "Chance to find treasure doubled."
     }, {
         "id": 10,
-        "name": "Mariner"
+        "name": "Mariner",
+        "type": "Fishing",
+        "level": 10,
+        "description": "Crab pots no longer produce junk items."
     }, {
         "id": 11,
-        "name": "Luremaster"
+        "name": "Luremaster",
+        "type": "Fishing",
+        "level": 10,
+        "description": "Crab pots no longer require bait."
     }, {
         "id": 12,
-        "name": "Forester"
+        "name": "Forester",
+        "type": "Foraging",
+        "level": 5,
+        "description": "Trees drop 25% more wood."
     }, {
         "id": 13,
-        "name": "Gatherer"
+        "name": "Gatherer",
+        "type": "Foraging",
+        "level": 5,
+        "description": "Chance for double harvest of foraged items."
     }, {
         "id": 14,
-        "name": "Lumberjack"
+        "name": "Lumberjack",
+        "type": "Foraging",
+        "level": 10,
+        "description": "All trees have a chance to drop hardwood."
     }, {
         "id": 15,
-        "name": "Tapper"
+        "name": "Tapper",
+        "type": "Foraging",
+        "level": 10,
+        "description": "Syrups worth 25% more."
     }, {
         "id": 16,
-        "name": "Botanist"
+        "name": "Botanist",
+        "type": "Foraging",
+        "level": 10,
+        "description": "Foraged items are always highest quality."
     }, {
         "id": 17,
-        "name": "Tracker"
+        "name": "Tracker",
+        "type": "Foraging",
+        "level": 10,
+        "description": "Location of forageable items revealed."
     }, {
         "id": 18,
-        "name": "Miner"
+        "name": "Miner",
+        "type": "Mining",
+        "level": 5,
+        "description": "+1 ore per vein."
     }, {
         "id": 19,
-        "name": "Geologist"
+        "name": "Geologist",
+        "type": "Mining",
+        "level": 5,
+        "description": "Chance for gems to appear in pairs."
     }, {
         "id": 20,
-        "name": "Blacksmith"
+        "name": "Blacksmith",
+        "type": "Mining",
+        "level": 10,
+        "description": "Metal bars worth 50% more."
     }, {
         "id": 21,
-        "name": "Prospector"
+        "name": "Prospector",
+        "type": "Mining",
+        "level": 10,
+        "description": "Chance to find coal doubled."
     }, {
         "id": 22,
-        "name": "Excavator"
+        "name": "Excavator",
+        "type": "Mining",
+        "level": 10,
+        "description": "Chance to find geodes doubled."
     }, {
         "id": 23,
-        "name": "Gemologist"
+        "name": "Gemologist",
+        "type": "Mining",
+        "level": 10,
+        "description": "Gems worth 30% more."
     }, {
         "id": 24,
-        "name": "Fighter"
+        "name": "Fighter",
+        "type": "Combat",
+        "level": 5,
+        "description": "All attacks deal 10% more damage.(+15 HP)"
     }, {
         "id": 25,
-        "name": "Scout"
+        "name": "Scout",
+        "type": "Combat",
+        "level": 5,
+        "description": "Critical strike chance increased by 50%. (+0 HP)"
     }, {
         "id": 26,
-        "name": "Brute"
+        "name": "Brute",
+        "type": "Combat",
+        "level": 10,
+        "description": "Deal 15% more damage."
     }, {
         "id": 27,
-        "name": "Defender"
+        "name": "Defender",
+        "type": "Combat",
+        "level": 10,
+        "description": "+25 HP."
     }, {
         "id": 28,
-        "name": "Acrobat"
+        "name": "Acrobat",
+        "type": "Combat",
+        "level": 10,
+        "description": "Cooldown on special moves cut in half."
     }, {
         "id": 29,
-        "name": "Desperado"
+        "name": "Desperado",
+        "type": "Combat",
+        "level": 10,
+        "description": "Critical strikes are deadlier. (2x Critical strike damage)"
     }]
 }
