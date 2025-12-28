@@ -96,6 +96,7 @@
 
 .skill-container__level-block.lg {
     width: 3rem;
+    cursor: help;
     &.active {
         background-color: #FFA301;
         box-shadow: var(--active-box-shadow);
