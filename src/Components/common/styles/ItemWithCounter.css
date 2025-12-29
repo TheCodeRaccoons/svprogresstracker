@@ -7,6 +7,12 @@
     position: relative;
     width: 2.5rem !important;
     height: 2.5rem !important;
+    transition: transform 150ms ease-in-out;
+    cursor: pointer ;
+}
+
+.item-with-counter:hover {
+    transform: scale(1.15);
 }
 
 .item-with-counter p {
