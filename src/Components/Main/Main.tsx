@@ -7,8 +7,9 @@ import twit from '@media/Social/twitter.png'
 import Window4 from '@media/Windows/Window4.png'
 import Loader from '@media/loader.gif'
 import AdComponent from '../adsense/adComponent.js'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { formattedSaveFileType, fullPlayerDataType } from 'types/displayDataTypes.js';
+import useLoadSaveFile from '@hooks/useLoadSaveFile';
 //TODO: enable ads
 //import AdSense from 'react-adsense';
 
@@ -19,24 +20,41 @@ const Main = () => {
     const [farmhands, setFarmhands] = useState<fullPlayerDataType[]>([]);
     const [globalFarmName, setFarmName] = useState("My Farm");
 
-    const UpdatePlayerData = ({farmName, playerData, farmhandData}: formattedSaveFileType) => {
-        if(!playerData) {
+    const { playerData: parsedData, isLoading, error, selectFile } = useLoadSaveFile();
+
+    const handleFileChange = (file: File) => {
+        setShowLoader(true);
+        selectFile(file);
+    };
+
+    const UpdatePlayerData = ({ farmName, playerData, farmhandData }: formattedSaveFileType) => {
+        if (!playerData) {
             console.error("No player data received in Main component");
             return;
         }
         setHasData(true);
         setShowLoader(false);
-        setFarmName(farmName ? playerData.farmName : "My Farm");
+        setFarmName(farmName ?? playerData.farmName ?? "My Farm");
         setFarmhands(farmhandData);
         setPlayerData(playerData);
-    }
+    };
+
+    useEffect(() => {
+        if (parsedData) {
+            UpdatePlayerData({
+                farmName: parsedData.playerData?.farmName,
+                playerData: parsedData.playerData,
+                farmhandData: parsedData.farmhandData,
+            });
+        }
+    }, [parsedData]);
 
     return (
         <div >
             {showLoader && (
             <div className='loader loader-active'>
                 <img src={Loader} alt="Loader"></img>
-                <h1>Loading...</h1>
+                <p>Loading...</p>
             </div>)}
 
             <div className="main-media">
@@ -71,7 +89,7 @@ const Main = () => {
                     {
                         hasData ? 
                             <Stats farmName={globalFarmName} playerData={playerData} farmhandData={farmhands} /> : 
-                            <Viewer UpdatePlayerData={UpdatePlayerData} />
+                            <Viewer onFileChange={handleFileChange} isLoading={isLoading || showLoader} error={error || null} />
                     }
                 </div>
                 <div className="adds"> 

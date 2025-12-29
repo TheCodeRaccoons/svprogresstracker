@@ -501,7 +501,7 @@ section.sv-container{
 
 
 /*Mid Screens*/
-@media only screen and (max-width: 1280px){
+/* @media only screen and (max-width: 1280px){
   .title h1,
   .filepath{
     font-size: 1.25rem;
@@ -516,4 +516,9 @@ section.sv-container{
     display: none;
     margin: 0 0.125rem;
   }
-} 
+}  */
+
+.react-tabs__tab:focus:after {
+  box-shadow: none;
+  background: none;
+}
