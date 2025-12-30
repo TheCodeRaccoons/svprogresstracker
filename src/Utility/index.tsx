@@ -1,5 +1,3 @@
-/* eslint-disable no-loop-func */
-
 import {
     townSR,
     QiSR

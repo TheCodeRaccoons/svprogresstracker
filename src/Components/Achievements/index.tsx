@@ -36,7 +36,6 @@ const Achievements = ({
     farmName,
     experience,
     moneyEarned,
-    professions,
     shippedItems,
     cropsShipped,
     cookingData,

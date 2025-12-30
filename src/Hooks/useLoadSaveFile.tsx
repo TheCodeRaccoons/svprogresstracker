@@ -2,8 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { XMLParser } from 'fast-xml-parser';
 import { GetDetailedInfo, GetFarmHands } from '@utility/index';
 import type { 
-    gameLocationType, 
-    itemsType, 
+    gameLocationType,
     playerType, 
     saveGameType, 
     specialOrderType 
@@ -29,7 +28,7 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
         if (fileData) {
             getPlayerData();
         }
-    }, [fileData]);
+    });
 
     const selectFile = (file: File) => {
         setIsLoading(true);
