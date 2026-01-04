@@ -7,7 +7,7 @@ function findRarecrowsInObject(obj: any, path: string = ""): any[] {
 
 	// Check if this object itself is a rarecrow
 	if (obj.name === "Rarecrow" && obj.parentSheetIndex) {
-        console.log(`%c Found Rarecrow at path: ${path} 
+        console.debug(`%c Found Rarecrow at path: ${path} 
             with parentSheetIndex: ${obj.parentSheetIndex}, full data: ${JSON.stringify(obj)}`, 'color: #00FF00');
 		rarecrows.push({
 			...obj,
