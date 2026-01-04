@@ -35,6 +35,7 @@ const Viewer = ({ onFileChange, isLoading, error }: ViewerProps) => {
                         type="file"
                         onChange={handleFileChange}
                     />
+                    <p className='error-message'>{error}</p>
                 </div>
             </div>
             <div id="Players"></div>

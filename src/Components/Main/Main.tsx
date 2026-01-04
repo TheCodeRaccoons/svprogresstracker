@@ -25,6 +25,12 @@ const Main = () => {
         selectFile(file);
     };
 
+    useEffect(() => {
+        if (error) {
+            setShowLoader(false);
+        }
+    }, [error]);
+
     const UpdatePlayerData = ({ farmName, playerData, farmhandData }: formattedSaveFileType) => {
         if (!playerData) {
             console.error("No player data received in Main component");
@@ -63,9 +69,13 @@ const Main = () => {
             </div>
             <section className="sv-container">
                 <div className="main-container"> 
-                    { hasData ? 
-                        <Stats farmName={globalFarmName} playerData={playerData} farmhandData={farmhands} /> : 
-                        <Viewer onFileChange={handleFileChange} isLoading={isLoading || showLoader} error={error || null} />
+                    { hasData && !error ? 
+                        <Stats farmName={globalFarmName} playerData={playerData} farmhandData={farmhands} />
+                        : <Viewer 
+                            onFileChange={handleFileChange} 
+                            isLoading={isLoading || showLoader} 
+                            error={error || null} 
+                        />
                     }
                 </div>
             </section>
