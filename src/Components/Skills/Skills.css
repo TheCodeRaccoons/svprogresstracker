@@ -20,11 +20,38 @@
 }
 
 .skill-info{  
-    width: 100%;
-    height: 400px;
+    width: 75%;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
     gap: 1rem;
+}
+
+/*Portrait area*/
+.character-area{
+    width: 20%;
+    height: 100%;
+    min-height: 16rem;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.character-portrait {
+    font-size: 2.25rem;
+    width: 100%;
+    min-height: 16rem;
+    color:wheat; 
+    padding: 0; 
+    border-image: url('../../Media/Windows/Window5.png') 16 16 16 16 fill stretch;
+    border-style: solid;
+    image-rendering: pixelated;
+    border-width: 35px;    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

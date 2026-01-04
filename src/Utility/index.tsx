@@ -22,7 +22,8 @@ import {
     monstersParser, 
     museumCollectionParser, 
     shippingParser,
-    professionsParser
+    professionsParser,
+    masteryParser
 } from './Parsers';
 
 
@@ -51,8 +52,7 @@ const GetFarmHands = (locations: gameLocationType[]): playerType[] => {
 type getDetailedInfoType = {
     playerData: playerType[],
     collectionStatus: itemsType[],
-    specialRequests: specialOrderType ,
-    availableSpecialRequests: specialOrderType
+    specialRequests: specialOrderType
 }
 
 type getParsedUserDataType = Omit<getDetailedInfoType, 'playerData'> & {
@@ -63,8 +63,7 @@ type getParsedUserDataType = Omit<getDetailedInfoType, 'playerData'> & {
 const GetDetailedInfo = ({
         playerData , 
         collectionStatus, 
-        specialRequests, 
-        availableSpecialRequests
+        specialRequests
     }: getDetailedInfoType) =>{ 
     let fullPlayerData: fullPlayerDataType[] = []
     if(Array.isArray(playerData)){
@@ -72,7 +71,7 @@ const GetDetailedInfo = ({
             let playerFull: fullPlayerDataType
             = {
                 //...p, 
-                ...parseData({playerData: p, collectionStatus, specialRequests, availableSpecialRequests})
+                ...parseData({playerData: p, collectionStatus, specialRequests})
             }
             
             if(playerFull !== null)
@@ -87,8 +86,7 @@ const GetDetailedInfo = ({
 const parseData = ({
         playerData, 
         collectionStatus, 
-        specialRequests, 
-        availableSpecialRequests
+        specialRequests
     }: getParsedUserDataType) : fullPlayerDataType => { 
     //Not finished  
     let fullPlayerData : fullPlayerDataType = {
@@ -117,10 +115,8 @@ const parseData = ({
             specialRequests?.SpecialOrder ?
                 GetSpecialRequests(specialRequests.SpecialOrder, townSR.Requests, true) 
                 : [],
-        availableSpecialRequests: 
-            specialRequests?.SpecialOrder ? 
-                GetSpecialRequests(specialRequests.SpecialOrder, townSR.Requests, false) 
-                : []
+        skillMastery: playerData.stats?.Values ? 
+            masteryParser(playerData.stats?.Values.item) : []
     }
 
     console.debug(`%c Grandpa's eval for ${playerData.name}`, 'color: #7289DA') 

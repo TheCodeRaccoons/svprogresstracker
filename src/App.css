@@ -28,7 +28,7 @@ html{
   background-size: cover;
   height: 100%;
 }
- 
+
 @font-face {
   font-family: pixelFont;
   src: url(./Media/fonts/rainyhearts.ttf);

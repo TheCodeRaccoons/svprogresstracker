@@ -14,7 +14,6 @@ export type fullPlayerDataType = {
     mineralsFound?: itemFoundType[];
     cookingData: cookingDataType;
     museumCollection: museumCollectionType;
-    availableSpecialRequests: string[];
     fishCaught: fishCaughtType;
     friendship: friendshipType;
     itemsCrafted: itemsCraftedType;
@@ -22,6 +21,12 @@ export type fullPlayerDataType = {
     questsDone: number;
     specialRequests: string[];
     tailoredItems: string[];
+    skillMastery?: skillMasteryType[];
+};
+
+export type skillMasteryType = {
+    mastery: string;
+    achieved: number;
 };
 
 export type itemsCraftedType = {

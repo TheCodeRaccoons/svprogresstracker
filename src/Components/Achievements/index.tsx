@@ -40,7 +40,6 @@ const Achievements = ({
     cropsShipped,
     cookingData,
     museumCollection,
-    availableSpecialRequests,
     fishCaught,
     friendship,
     itemsCrafted,

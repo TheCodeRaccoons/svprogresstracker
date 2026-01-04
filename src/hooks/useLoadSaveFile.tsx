@@ -66,13 +66,10 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
             // const [major, minor, patch] = gameVersion.split('.').map(Number); 
 
             if(Array.isArray(fileData.SaveGame.farmhands)){
-                console.debug("Single farmhand detected")
                 farmHands = [...fileData.SaveGame.farmhands.Farmers];
             } else if (fileData.SaveGame.farmhands && fileData.SaveGame.farmhands.Farmer) {
-                console.debug("Legacy single farmhand detected")
                 farmHands = [fileData.SaveGame.farmhands.Farmer];
             } else {
-                console.debug("Using farmhands data from locations");
                 farmHands = GetFarmHands(fileData.SaveGame.locations.GameLocation); 
             } 
             let museumLocation: gameLocationType | undefined = 
@@ -83,26 +80,24 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
                 setError("Couldn't find museum collection data");
                 return;
             }
-
+            //remove available as they are just the currently available ones not like global or anythig
+            console.log('done', fileData.SaveGame.completedSpecialOrders)
             let collectionStatus = museumLocation?.museumPieces?.item || [];
             let specialRequests: specialOrderType = fileData.SaveGame.completedSpecialOrders;
-            let availableSpecialRequests: specialOrderType = fileData.SaveGame.availableSpecialOrders;
             let players = {
                 playerData: GetDetailedInfo({
                     playerData: [player],
                     collectionStatus: collectionStatus,
-                    specialRequests: specialRequests,
-                    availableSpecialRequests: availableSpecialRequests
+                    specialRequests: specialRequests
                 })[0] || null,
                 farmhandData: GetDetailedInfo({
                     playerData: farmHands,
                     collectionStatus: collectionStatus,
-                    specialRequests: specialRequests,
-                    availableSpecialRequests: availableSpecialRequests
+                    specialRequests: specialRequests
                 })
             }
-            const parsedRarecrows = parseRarecrows('xsi', fileData.SaveGame, players);
-            console.log("Parsed Rarecrows:", parsedRarecrows);
+            // const parsedRarecrows = parseRarecrows('xsi', fileData.SaveGame, players);
+            // console.log("Parsed Rarecrows:", parsedRarecrows);
 
             setPlayerData(players)
         } catch (err: Error | any) { 

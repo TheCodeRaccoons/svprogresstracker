@@ -11,8 +11,10 @@ const Skills = ({ experience }: SkillsProps) => {
     const skillImg =[Farming, Fishing, Foraging, Mining, Combat];
         return (
             <section className="stats-container"> 
-                <div>
-                    
+                <div className='character-area'>
+                    <div className="character-portrait">
+
+                    </div>
                 </div>
                 <div className="skill-info">
                     {experience.map((item, i: number) => (i === 5) ? "" :  
