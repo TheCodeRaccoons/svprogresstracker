@@ -16,12 +16,6 @@ export const GetMuseumCollection = ({
     let minerals: generalFormatedItemType[] = []
     let _totalFound = 0;
     let _totalDonated = currentCollection.length || 0;
-    console.group("Museum Collection Parser");
-    console.log("Parsing Museum Collection Data");
-    console.log("Current Collection:", currentCollection);
-    console.log("Archeology Items:", archeology);
-    console.log("Geology Items:", geology);
-    console.groupEnd();
     
 let MuseumAchievements = [{
         goal: Museum.collection.length,

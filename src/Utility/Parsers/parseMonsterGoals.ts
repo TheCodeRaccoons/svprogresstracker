@@ -43,7 +43,6 @@ export const GetMonsterQuests = (
     allMonsters: itemsType[],
     achievements?: number[]
 ): monsterDataType => {
-    console.log('achieved', achievements);
     if(!allMonsters || allMonsters.length === 0) return { monsterData: [], achievements: [] };
     let mData: formatedMonsterDataType[] = [];
     let sum = 0;
@@ -71,8 +70,6 @@ export const GetMonsterQuests = (
             done: done
         }
     });
-    console.log("Monster Achievements:", achievementsCompleted);
-    console.log("Monster Data:", mData);
 
     return { monsterData: mData, achievements: achievementsCompleted};
 }

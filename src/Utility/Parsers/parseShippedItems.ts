@@ -15,8 +15,6 @@ let CraftingAchievements = [{
 ];
 
 export const GetShippedItems = (allShipped: itemType) : shippedItemsType => { 
-    console.log('Parsing shipped items data...');
-    console.log(allShipped);
     let shippedItems: generalFormatedItemType[] = []
     let totalShipped = 0;
     if(!allShipped?.item || allShipped?.item.length === 0) {
