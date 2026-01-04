@@ -8,4 +8,5 @@ export {GetShippedItems as shippingParser} from './parseShippedItems';
 export {getEarningAchievements as earningsParser} from './parseEarningsAchievements';
 export {GetMuseumCollection as museumCollectionParser} from './parseMuseumCollection';
 export {GetProfessionData as professionsParser} from './parseSkillInfo';
+export {GetMasteryData as masteryParser} from './parseMasteryData';
 // export {GetQuestsData as questsParser} from './parseQuestsItems';
