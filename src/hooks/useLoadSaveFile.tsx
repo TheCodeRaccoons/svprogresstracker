@@ -54,56 +54,55 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
     };
 
     const getPlayerData = useCallback(() => { 
-        //getting players 
-        if(!fileData) return;
-        console.log(fileData)		
+        try { 
+            setError(null);
+            if(!fileData) return;
+            console.log(fileData)		
 
-        let player = fileData.SaveGame.player;
-        let farmHands: playerType[] = [];
-        const gameVersion = fileData.SaveGame.gameVersion;
-        console.debug("Current game version:", gameVersion);
-        // const [major, minor, patch] = gameVersion.split('.').map(Number); 
+            let player = fileData.SaveGame.player;
+            let farmHands: playerType[] = [];
+            const gameVersion = fileData.SaveGame.gameVersion;
+            console.debug("Current game version:", gameVersion);
+            // const [major, minor, patch] = gameVersion.split('.').map(Number); 
 
-        if(Array.isArray(fileData.SaveGame.farmhands)){
-            console.debug("Single farmhand detected")
-            farmHands = [...fileData.SaveGame.farmhands.Farmers];
-        } else if (fileData.SaveGame.farmhands && fileData.SaveGame.farmhands.Farmer) {
-            console.debug("Legacy single farmhand detected")
-            farmHands = [fileData.SaveGame.farmhands.Farmer];
-        } else {
-            console.debug("Using farmhands data from locations");
-            farmHands = GetFarmHands(fileData.SaveGame.locations.GameLocation); 
-        } 
-        let museumLocation: gameLocationType | undefined = 
-            fileData.SaveGame.locations.GameLocation.find((loc: gameLocationType) => {
-            return loc.name === "ArchaeologyHouse";
-        });
-        if(!museumLocation) {
-            setError("Couldn't find museum collection data");
-            return;
+            if(Array.isArray(fileData.SaveGame.farmhands)){
+                farmHands = [...fileData.SaveGame.farmhands.Farmers];
+            } else if (fileData.SaveGame.farmhands && fileData.SaveGame.farmhands.Farmer) {
+                farmHands = [fileData.SaveGame.farmhands.Farmer];
+            } else {
+                farmHands = GetFarmHands(fileData.SaveGame.locations.GameLocation); 
+            } 
+            let museumLocation: gameLocationType | undefined = 
+                fileData.SaveGame.locations.GameLocation.find((loc: gameLocationType) => {
+                return loc.name === "ArchaeologyHouse";
+            });
+            if(!museumLocation) {
+                setError("Couldn't find museum collection data");
+                return;
+            }
+            //remove available as they are just the currently available ones not like global or anythig
+            console.log('done', fileData.SaveGame.completedSpecialOrders)
+            let collectionStatus = museumLocation?.museumPieces?.item || [];
+            let specialRequests: specialOrderType = fileData.SaveGame.completedSpecialOrders;
+            let players = {
+                playerData: GetDetailedInfo({
+                    playerData: [player],
+                    collectionStatus: collectionStatus,
+                    specialRequests: specialRequests
+                })[0] || null,
+                farmhandData: GetDetailedInfo({
+                    playerData: farmHands,
+                    collectionStatus: collectionStatus,
+                    specialRequests: specialRequests
+                })
+            }
+            // const parsedRarecrows = parseRarecrows('xsi', fileData.SaveGame, players);
+            // console.log("Parsed Rarecrows:", parsedRarecrows);
+
+            setPlayerData(players)
+        } catch (err: Error | any) { 
+            setError(`There was an error getting the player data from the save file. Error: ${err.message}`);
         }
-
-        let collectionStatus = museumLocation?.museumPieces?.item || [];
-        let specialRequests: specialOrderType = fileData.SaveGame.completedSpecialOrders;
-        let availableSpecialRequests: specialOrderType = fileData.SaveGame.availableSpecialOrders;
-        let players = {
-            playerData: GetDetailedInfo({
-                playerData: [player],
-                collectionStatus: collectionStatus,
-                specialRequests: specialRequests,
-                availableSpecialRequests: availableSpecialRequests
-            })[0] || null,
-            farmhandData: GetDetailedInfo({
-                playerData: farmHands,
-                collectionStatus: collectionStatus,
-                specialRequests: specialRequests,
-                availableSpecialRequests: availableSpecialRequests
-            })
-        }
-        const parsedRarecrows = parseRarecrows('xsi', fileData.SaveGame, players);
-        console.log("Parsed Rarecrows:", parsedRarecrows);
-
-        setPlayerData(players)
     }, [fileData])
 
     useEffect(() => {

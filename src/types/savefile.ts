@@ -58,7 +58,6 @@ export type saveFileType = {
     gameVersion: string,
     gameVersionLabel: string,
     completedSpecialOrders: specialOrderType,
-    availableSpecialOrders: specialOrderType,
     farmhands: legacyFarmerType,
 }
 
@@ -332,6 +331,7 @@ export type itemsType = {
         },
     value: {
         int: number,
+        unsignedInt?: number,
         string?: string | number,
         ArrayOfInt?: {
             int: number[]

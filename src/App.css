@@ -28,7 +28,7 @@ html{
   background-size: cover;
   height: 100%;
 }
- 
+
 @font-face {
   font-family: pixelFont;
   src: url(./Media/fonts/rainyhearts.ttf);
@@ -302,6 +302,12 @@ section.sv-container{
   color: red;
 }
 
+.error-message {
+  color: red;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
 
 /*Misc*/
 .ropes{ 

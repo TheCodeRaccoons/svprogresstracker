@@ -10,3 +10,4 @@ export {default as MonsterCat} from './monsterCategorie.json' with { type: "json
 export {default as Museum} from './museum.json' with { type: "json" };
 export {default as townSR} from './TownSpecialReq.json' with { type: "json" };
 export {default as QiSR} from './QiSpecialReq.json' with { type: "json" };
+export {default as MasteryKeys} from './mastery.json' with { type: "json" };
