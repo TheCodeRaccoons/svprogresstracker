@@ -2,9 +2,6 @@
 import Stats from '../stats/stats.js'
 import Viewer from '../Viewer/Viewer.tsx'
 import Logo from '@media/logo.png';
-import fb from '@media/Social/fb.png'
-import kofi from '@media/Social/kofi.png'
-import twit from '@media/Social/twitter.png'
 import Window4 from '@media/Windows/Window4.png'
 import Loader from '@media/loader.gif'
 import AdComponent from '../adsense/adComponent.js'
@@ -73,12 +70,12 @@ const Main = () => {
                 </div>
             </section>
             <div className="copyright" > 
-                Built by 
-                <a href="https://thecoderaccoons.com" rel="me" target="_blank" > TheCodeRaccoons </a>. 
-                All "Stardew Valley" assets copyright 
-                <a href="https://twitter.com/ConcernedApe" target="_blank" > Concerned Ape</a>, 
-                other assets and site design made by 
-                <a href="https://jimenafdz.webflow.io/" rel="me" target="_blank" > Ookamijime</a>
+                Built by&nbsp;
+                <a href="https://thecoderaccoons.com" rel="me" target="_blank" >TheCodeRaccoons</a>. 
+                &nbsp;All "Stardew Valley" assets copyright&nbsp;
+                <a href="https://twitter.com/ConcernedApe" target="_blank" >Concerned Ape</a>, 
+                &nbsp;other assets and site design made by&nbsp;
+                <a href="https://jimenafdz.webflow.io/" rel="me" target="_blank" >Ookamijime</a>
             </div>
         </div>
     );

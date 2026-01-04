@@ -24,12 +24,6 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
     const [error, setError] = useState<string | null>(null);
     const [playerData, setPlayerData] = useState<formattedSaveFileType | null>(null);
 
-    useEffect(() => {
-        if (fileData) {
-            getPlayerData();
-        }
-    });
-
     const selectFile = (file: File) => {
         setIsLoading(true);
         setError(null);
@@ -111,6 +105,12 @@ const useLoadSaveFile = (): UseLoadSaveFileResult => {
 
         setPlayerData(players)
     }, [fileData])
+
+    useEffect(() => {
+        if (fileData) {
+            getPlayerData();
+        }
+    }, [fileData, getPlayerData]);
 
     return {
         playerData,
